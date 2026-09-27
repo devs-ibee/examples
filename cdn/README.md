@@ -28,8 +28,10 @@ export IBEE_WORKSPACE_ID="<workspace-id>"
 export IBEE_BUCKET_NAME="<public-bucket>"
 export IBEE_DOMAIN="app.example.com"   # optional
 
-python3 main.py
-bash cli.sh
+python3 main.py      # Python SDK
+npx tsx index.ts     # TypeScript SDK
+bash cli.sh          # ibee CLI
+bash api.sh          # curl and jq
 ```
 
 ## Cache policies and purging

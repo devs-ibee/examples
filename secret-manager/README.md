@@ -21,9 +21,10 @@ Keep application secrets out of code: store them in a Secret Manager store, upda
 export IBEE_TOKEN="ibee_prod_key_..."
 export IBEE_WORKSPACE_ID="<workspace-id>"
 
-python3 main.py
-npx tsx index.ts
-bash cli.sh
+python3 main.py      # Python SDK
+npx tsx index.ts     # TypeScript SDK
+bash cli.sh          # ibee CLI
+bash api.sh          # curl and jq
 ```
 
 The examples generate random placeholder values. In real use, read secret values from a file or your terminal, never from source code.

@@ -23,8 +23,10 @@ export IBEE_WORKSPACE_ID="<workspace-id>"
 export IBEE_VM_ID="<vm-id>"
 export IBEE_SITE_ID="<site-id>"
 
-python3 main.py
-bash cli.sh
+python3 main.py      # Python SDK
+npx tsx index.ts     # TypeScript SDK
+bash cli.sh          # ibee CLI
+bash api.sh          # curl and jq
 ```
 
 ## Use the volume inside the VM

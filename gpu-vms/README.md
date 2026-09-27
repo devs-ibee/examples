@@ -20,7 +20,11 @@ Create a GPU VM from a priced GPU plan and a GPU-compatible image, wait for it t
 ```bash
 export IBEE_TOKEN="ibee_prod_key_..."
 export IBEE_WORKSPACE_ID="<workspace-id>"
-python3 main.py
+
+python3 main.py                  # full lifecycle with the Python SDK
+npx tsx index.ts                 # full lifecycle with the TypeScript SDK
+bash api.sh                      # full lifecycle with curl and jq
+IBEE_VM_ID=<gpu-vm-id> bash cli.sh   # GPU plans and day-2 operations with the ibee CLI
 ```
 
 GPU VMs support the same power, resize, volume, snapshot, and backup operations as Cloud VMs through the `gpu_vms` client (`ibee gpus ...` in the CLI). The [Cloud VMs](../cloud-vms/) example explains `billing_catalog`, `public_ip_action`, and idempotency keys, which work the same way here.

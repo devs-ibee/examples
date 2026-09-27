@@ -23,9 +23,10 @@ export IBEE_TOKEN="ibee_prod_key_..."
 export IBEE_WORKSPACE_ID="<workspace-id>"
 export IBEE_VM_ID="<vm-id>"
 
-python3 main.py
-npx tsx index.ts
-bash cli.sh
+python3 main.py      # Python SDK
+npx tsx index.ts     # TypeScript SDK
+bash cli.sh          # ibee CLI
+bash api.sh          # curl and jq
 ```
 
 ## Connectivity options

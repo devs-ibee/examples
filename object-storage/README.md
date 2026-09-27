@@ -4,7 +4,7 @@ Create a bucket and a least-privilege S3 access key, then use any S3-compatible 
 
 ## What it does
 
-- `main.py`, `index.ts`, and `cli.sh` create a private bucket and an access key that can read and write objects in that bucket only, then revoke the key and delete the bucket. Set `KEEP=1` to keep both.
+- `main.py`, `index.ts`, `cli.sh`, and `api.sh` create a private bucket and an access key that can read and write objects in that bucket only, then revoke the key and delete the bucket. Set `KEEP=1` to keep both.
 - `s3_quickstart.py` uploads, lists, shares with a presigned URL, and downloads objects with boto3.
 - `mount-filesystem.sh` mounts a bucket as a local directory with s3fs.
 
@@ -20,7 +20,10 @@ Create a bucket and a least-privilege S3 access key, then use any S3-compatible 
 export IBEE_TOKEN="ibee_prod_key_..."
 export IBEE_WORKSPACE_ID="<workspace-id>"
 
-python3 main.py      # or: npx tsx index.ts, or: bash cli.sh
+python3 main.py      # Python SDK
+npx tsx index.ts     # TypeScript SDK
+bash cli.sh          # ibee CLI
+bash api.sh          # curl and jq
 ```
 
 Then use the printed access key with S3 tools:

@@ -23,10 +23,12 @@ export IBEE_TOKEN="ibee_prod_key_..."
 export IBEE_WORKSPACE_ID="<workspace-id>"
 export IBEE_VM_ID="<vm-id>"
 
-python3 main.py                                  # read-only checks and a console session
-RESIZE=1 python3 main.py                         # also resize to the next plan
+python3 main.py                  # read-only checks and a console session
+RESIZE=1 python3 main.py         # also resize to the next plan
 IBEE_SSH_PUBLIC_KEY="$(cat ~/.ssh/id_ed25519.pub)" python3 main.py
-bash cli.sh                                      # the same operations with the ibee CLI
+npx tsx index.ts                 # the same with the TypeScript SDK
+bash cli.sh                      # the same with the ibee CLI
+bash api.sh                      # the same with curl and jq
 ```
 
 The console URL grants access to the VM. Do not log it or share it; it expires after a few minutes.

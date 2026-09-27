@@ -24,9 +24,10 @@ export IBEE_WORKSPACE_ID="<workspace-id>"
 export IBEE_VM_ID="<vm-id>"
 export IBEE_ADMIN_CIDR="198.51.100.7/32"
 
-python3 main.py
-npx tsx index.ts
-bash cli.sh
+python3 main.py      # Python SDK
+npx tsx index.ts     # TypeScript SDK
+bash cli.sh          # ibee CLI
+bash api.sh          # curl and jq
 ```
 
 Create all rules before attaching a group, so the VM never runs with a partial rule set. Each rule has a `direction` (`ingress` or `egress`), a `protocol` (`tcp`, `udp`, `icmp`, or `any`), a port range, a list of `remote_targets` in CIDR form, an `action` (`allow` or `drop`), and an optional `priority`.

@@ -22,8 +22,10 @@ export IBEE_TOKEN="ibee_prod_key_..."
 export IBEE_WORKSPACE_ID="<workspace-id>"
 export IBEE_BACKEND_IPS="203.0.113.10,203.0.113.11"
 
-python3 main.py
-bash cli.sh
+python3 main.py      # Python SDK
+npx tsx index.ts     # TypeScript SDK
+bash cli.sh          # ibee CLI
+bash api.sh          # curl and jq
 ```
 
 ## Options

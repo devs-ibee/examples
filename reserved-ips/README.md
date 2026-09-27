@@ -26,8 +26,10 @@ export IBEE_VM_ID="<vm-id>"
 export IBEE_VPC_ID="<vpc-id>"
 export IBEE_SUBNET_ID="<subnet-id>"
 
-python3 main.py
-bash cli.sh
+python3 main.py      # Python SDK
+npx tsx index.ts     # TypeScript SDK
+bash cli.sh          # ibee CLI
+bash api.sh          # curl and jq
 ```
 
 When you delete a VM that has an automatically assigned public IP, `{"public_ip_action": "reserve"}` converts that address into a Reserved IP instead of releasing it. See the [Cloud VMs example](../cloud-vms/).
