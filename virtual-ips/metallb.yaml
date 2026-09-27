@@ -1,0 +1,43 @@
+# MetalLB configuration for an IBEE Virtual IP.
+#
+# Replace 10.44.0.50 with the address you reserved (IBEE_VIRTUAL_IP) and label
+# the announcer nodes you authorized:
+#   kubectl label node <node> ibee.ai/vip-announcer=true
+# Requires MetalLB 0.14 or later.
+apiVersion: metallb.io/v1beta1
+kind: IPAddressPool
+metadata:
+  name: ibee-virtual-ip
+  namespace: metallb-system
+spec:
+  addresses:
+    - 10.44.0.50/32
+  autoAssign: false
+---
+apiVersion: metallb.io/v1beta1
+kind: L2Advertisement
+metadata:
+  name: ibee-virtual-ip
+  namespace: metallb-system
+spec:
+  ipAddressPools:
+    - ibee-virtual-ip
+  # Announce only from the nodes listed in announcer_vm_ids.
+  nodeSelectors:
+    - matchLabels:
+        ibee.ai/vip-announcer: "true"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: web
+  annotations:
+    metallb.io/loadBalancerIPs: 10.44.0.50
+spec:
+  type: LoadBalancer
+  selector:
+    app: web
+  ports:
+    - name: http
+      port: 80
+      targetPort: 8080

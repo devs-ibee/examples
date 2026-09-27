@@ -1,0 +1,17 @@
+{
+  "name": "ibee-examples",
+  "private": true,
+  "description": "TypeScript examples for the IBEE public API. Run one with: npx tsx <folder>/index.ts",
+  "type": "module",
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "ibee-sdk": "^0.3.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.6.0"
+  }
+}
