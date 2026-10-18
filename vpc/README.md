@@ -1,40 +1,17 @@
-# VPC and NAT gateway
+# VPC
 
-Put a VM on a private network with outbound internet through a managed NAT gateway, and publish one port (SSH) through NAT port forwarding.
-
-## What it does
-
-1. Creates a VPC with `nat_gateway` connectivity and the CIDR `10.44.0.0/22`. The NAT gateway is created with the VPC.
-2. Creates the subnet `10.44.0.0/24`.
-3. Attaches the VM (`IBEE_VM_ID`) to the subnet with NAT connectivity. The platform assigns the next free private address.
-4. Forwards port 2222 on the NAT gateway's public IP to port 22 on the VM.
-5. Removes everything in reverse order. Set `KEEP=1` to keep the network.
-
-## Requirements
-
-- An API token with `network.read` and `network.write`.
-- A Cloud VM (`IBEE_VM_ID`) at the same site as the VPC (`IBEE_SITE_ID`, or the first available networking site).
-- The NAT gateway is billed while it exists.
-
-## Run it
+Create a private network with one subnet, attach a VM to it, then detach the VM and delete the subnet and the VPC.
 
 ```bash
-export IBEE_TOKEN="ibee_prod_key_..."
-export IBEE_WORKSPACE_ID="<workspace-id>"
-export IBEE_VM_ID="<vm-id>"
+export IBEE_SITE_ID=...   # a networking site: ibee vpcs sites
+export IBEE_VM_ID=...     # a VM at that site
 
 python3 main.py      # Python SDK
 npx tsx index.ts     # TypeScript SDK
 bash cli.sh          # ibee CLI
-bash api.sh          # curl and jq
 ```
 
-## Connectivity options
+- `connectivity` on attach is `private` (the default), `nat` or `public_ip`.
+- For managed outbound NAT, create the VPC with `connectivity_type="nat_gateway"` (`--connectivity nat_gateway`); NAT gateways and port forwarding have their own calls (`ibee vpcs nat`, `ibee vpcs forwarding`).
 
-| `connectivity` when attaching a VM | Result |
-|---|---|
-| `private` | Private address only; no internet access |
-| `nat` | Private address with outbound internet through the VPC's NAT gateway (requires a `nat_gateway` VPC) |
-| `public_ip` | Private address plus a dedicated public IP; pass `reserved_public_ip_id` to use a [Reserved IP](../reserved-ips/) |
-
-To pick a specific private address for a Kubernetes load balancer, see [Virtual IPs](../virtual-ips/).
+Token scopes: `network.read`, `network.write`.

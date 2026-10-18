@@ -1,82 +1,37 @@
-/**
- * Block Storage: create a volume, attach it to a VM, grow it, detach, and delete.
- *
- * Requires: npm install ibee-sdk
- * Run:      npx tsx block-storage/index.ts
- * Environment: IBEE_TOKEN, IBEE_WORKSPACE_ID, IBEE_VM_ID, IBEE_SITE_ID,
- *              optional IBEE_BLOCK_SKU, IBEE_ENV=dev, KEEP=1
- */
-import { randomUUID } from "node:crypto";
-import { Ibee, IbeeEnvironment } from "ibee-sdk";
+// Create a Block Storage volume, attach it to a Cloud VM, detach it, and delete it.
+import { Ibee } from "ibee-sdk";
 
-const workspaceId = process.env.IBEE_WORKSPACE_ID!;
-const vmId = process.env.IBEE_VM_ID!;
-const client = new Ibee({
-  token: process.env.IBEE_TOKEN!,
-  environment: process.env.IBEE_ENV === "dev" ? IbeeEnvironment.DEVELOPMENT : IbeeEnvironment.DEFAULT,
-});
+const ibee = new Ibee(); // reads IBEE_TOKEN, IBEE_WORKSPACE_ID and IBEE_ENV
+const vm_id = process.env.IBEE_VM_ID!;
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
-const TERMINAL = new Set(["succeeded", "failed", "cancelled", "timed_out"]);
 
-/** Poll an asynchronous VM operation until it finishes. */
-async function waitFor(operationId: string) {
+/** Poll a VM operation until it finishes. */
+async function wait({ operation_id }: { operation_id: string }) {
   for (;;) {
-    const op = await client.operations.get({ workspaceId, operationId });
-    if (TERMINAL.has(op.status)) {
-      if (op.status !== "succeeded") throw new Error(`${op.action} ${op.status}: ${op.error_message}`);
-      console.log(`  ${op.action}: succeeded`);
-      return op;
+    const op = await ibee.cloudVms.getComputeOperation({ operation_id });
+    if (["succeeded", "failed", "cancelled", "timed_out"].includes(op.status)) {
+      return console.log(`${op.action}: ${op.status} ${op.error_message ?? ""}`);
     }
-    await sleep(10_000);
-  }
-}
-
-async function waitForVolume(volumeId: string, states = ["ready", "in-use"]) {
-  for (let attempt = 0; attempt < 180; attempt++) {
-    const volume = await client.blockStorage.getVolume({ workspaceId, volumeId });
-    if (states.includes(volume.state)) return volume;
-    if (volume.state === "error") throw new Error(`volume ${volumeId} is in error`);
     await sleep(5_000);
   }
-  throw new Error(`volume ${volumeId} did not become ${states.join(" or ")}`);
 }
 
-// 1. Create a volume at the VM's site.
-const created = await client.blockStorage.createVolume({
-  workspaceId,
-  name: `example-data-${randomUUID().slice(0, 6)}`,
+const created = await ibee.blockStorage.createBlockVolume({
+  name: "example-data",
   size_gb: 20,
-  site_id: process.env.IBEE_SITE_ID!,
-  sku_code: process.env.IBEE_BLOCK_SKU || undefined,
-  volume_class: "balanced",
+  site_id: process.env.IBEE_SITE_ID!, // the VM's site
+  sku_code: process.env.IBEE_BLOCK_SKU!,
 });
-const volumeId = created.volume.id;
-let volume = await waitForVolume(volumeId);
-console.log(`Volume ${volume.name} (${volumeId}) is ${volume.state}, ${volume.size_gb} GB`);
-
-// 2. Attach it to the VM.
-await waitFor((await client.cloudVms.attachVolume({ workspaceId, vmId, request: { volume_id: volumeId } })).operation_id);
-await client.cloudVms.acknowledgeMountGuidance({ workspaceId, vmId, volumeId });
-console.log("Attached. Format and mount it inside the VM (see README.md).");
-
-// 3. Grow the volume. Shrinking is not supported.
-await client.blockStorage.resizeVolume({
-  workspaceId,
-  volumeId,
-  request: { new_size_gb: 30, vm_state: "running", allow_online: true },
-});
-volume = await waitForVolume(volumeId);
-console.log(`Resized to ${volume.size_gb} GB. Run resize2fs inside the VM to use the space.`);
-
-// 4. Unmount inside the VM first, then detach and delete.
-if (process.env.KEEP !== "1") {
-  const detach = await client.cloudVms.detachVolume({
-    workspaceId,
-    vmId,
-    request: { volume_id: volumeId, confirm_unmounted: true },
-  });
-  await waitFor(detach.operation_id);
-  await waitForVolume(volumeId, ["ready"]);
-  await client.blockStorage.deleteVolume({ workspaceId, volumeId });
-  console.log(`Deleted ${volumeId}`);
+const volume_id = created.volume.id;
+let volume = await ibee.blockStorage.getBlockVolume({ volume_id });
+while (volume.state !== "ready") {
+  await sleep(5_000);
+  volume = await ibee.blockStorage.getBlockVolume({ volume_id });
 }
+console.log(`Volume ${volume.name} is ${volume.state}, ${volume.size_gb} GB`);
+
+await wait(await ibee.cloudVms.attachCloudVmVolume({ vm_id, body: { volume_id } }));
+// Format and mount it inside the VM now (see README.md). Unmount before detaching.
+await wait(await ibee.cloudVms.detachCloudVmVolume({ vm_id, body: { volume_id, confirm_unmounted: true } }));
+
+await ibee.blockStorage.deleteBlockVolume({ volume_id });
