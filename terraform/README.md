@@ -11,22 +11,7 @@ Small configurations for the IBEE Terraform provider. Each folder is independent
 
 ## Install the provider
 
-The 0.5.0 provider is not on the Terraform Registry yet. Build it from its branch (Go and Terraform 1.11 or later) and point Terraform at it:
-
-```bash
-git clone -b feat/0.5.0-thin https://github.com/devs-ibee/terraform-provider-ibee.git
-(cd terraform-provider-ibee && go build -o bin/terraform-provider-ibee .)
-
-cat > "$HOME/.terraformrc-ibee" <<CONFIG
-provider_installation {
-  dev_overrides { "devs-ibee/ibee" = "$PWD/terraform-provider-ibee/bin" }
-  direct {}
-}
-CONFIG
-export TF_CLI_CONFIG_FILE="$HOME/.terraformrc-ibee"
-```
-
-With the override, skip `terraform init`.
+Each setup pins `devs-ibee/ibee` to `~> 0.5.0` from the Terraform Registry, so `terraform init` installs it (Terraform 1.11 or later).
 
 ## Run
 
@@ -34,6 +19,7 @@ With the override, skip `terraform init`.
 export IBEE_TOKEN="ibee_prod_key_..." IBEE_WORKSPACE_ID="<workspace-id>"
 
 cd web-app
+terraform init
 terraform apply -var site_id=... -var plan_id=... -var template_id=...
 terraform destroy -var site_id=... -var plan_id=... -var template_id=...
 ```

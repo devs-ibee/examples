@@ -23,18 +23,12 @@ Portal only, with no public API yet: Virtual IPs, Bare Metal, SSH keys, ISOs, Em
 
 ## Install
 
-The examples use the 0.5.0 clients. They are not published yet, so install them from their branches:
-
 ```bash
-pip install "ibee @ git+https://github.com/devs-ibee/ibee-python@feat/0.5.0" \
-            "ibee-cli @ git+https://github.com/devs-ibee/ibee-cli@feat/0.5.0" boto3
-
-git clone -b feat/0.5.0 https://github.com/devs-ibee/ibee-typescript.git ../ibee-typescript
-(cd ../ibee-typescript && npm ci && npm run build && npm pack)
-npm install --no-save ../ibee-typescript/ibee-sdk-0.5.0.tgz
+pip install ibee ibee-cli boto3    # or: pip install -r requirements.txt
+npm install                        # ibee-sdk, tsx and TypeScript from package.json
 ```
 
-Once 0.5.0 is on PyPI and npm, use `pip install -r requirements.txt` and `npm install`. For Terraform, see [terraform/](terraform/).
+For Terraform, see [terraform/](terraform/).
 
 ## Configure
 
