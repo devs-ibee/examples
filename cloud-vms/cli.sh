@@ -1,20 +1,10 @@
 #!/usr/bin/env bash
-# Day-2 operations on an existing Cloud VM with the ibee CLI.
-#
-# Requires: pip install ibee-cli
-# Environment: IBEE_TOKEN, IBEE_WORKSPACE_ID, IBEE_VM_ID, optional IBEE_ENV=dev
+# Create a Cloud VM, read it, and delete it with the ibee CLI.
 set -euo pipefail
 
-VM_ID="$IBEE_VM_ID"
+VM_ID=$(ibee --json vms create example-vm \
+  --site-id "$IBEE_SITE_ID" --plan-id "$IBEE_PLAN_ID" --template-id "$IBEE_TEMPLATE_ID" \
+  --billing-term HOURLY --wait | jq -r .vm_id)
 
-ibee vms list
 ibee vms get "$VM_ID"
-ibee vms metrics "$VM_ID"
-ibee vms events "$VM_ID"
-
-# Power actions return an operation; --wait polls it until it finishes.
-ibee vms stop "$VM_ID" --wait
-ibee vms start "$VM_ID" --wait
-
-# A short-lived browser console URL. Treat it like a password.
-ibee --json console create "$VM_ID" --vm-type cloud | jq -r .connect_url
+ibee vms delete "$VM_ID" --release-public-ip --yes --wait

@@ -1,22 +1,13 @@
 #!/usr/bin/env bash
-# Block Storage with the ibee CLI: create, attach to a VM, grow, detach, delete.
-#
-# Requires: pip install ibee-cli, jq
-# Environment: IBEE_TOKEN, IBEE_WORKSPACE_ID, IBEE_VM_ID, IBEE_SITE_ID, optional IBEE_ENV=dev
+# Create a Block Storage volume, attach it to a Cloud VM, detach it, and delete it with the ibee CLI.
 set -euo pipefail
 
-VM_ID="$IBEE_VM_ID"
+VOLUME_ID=$(ibee --json block-storage create example-data --size-gb 20 \
+  --site-id "$IBEE_SITE_ID" --sku-code "$IBEE_BLOCK_SKU" | jq -r .volume.id)
+until [[ $(ibee --json block-storage get "$VOLUME_ID" | jq -r .state) == ready ]]; do sleep 5; done
 
-VOLUME_ID=$(ibee --json block-storage create "example-data-$RANDOM" \
-  --size-gb 20 --site-id "$IBEE_SITE_ID" --class balanced | jq -r .volume.id)
-ibee block-storage get "$VOLUME_ID"
+ibee vms volume-attach "$IBEE_VM_ID" "$VOLUME_ID" --wait
+# Format and mount it inside the VM now (see README.md). Unmount before detaching.
+ibee vms volume-detach "$IBEE_VM_ID" "$VOLUME_ID" --confirm-unmounted --yes --wait
 
-ibee vms volume-attach "$VM_ID" "$VOLUME_ID" --wait
-ibee vms mount-guidance-acknowledge "$VM_ID" "$VOLUME_ID"
-
-ibee block-storage resize "$VOLUME_ID" --new-size-gb 30 --allow-online --vm-state running
-ibee block-storage list
-
-# Unmount the filesystem inside the VM before detaching.
-ibee vms volume-detach "$VM_ID" "$VOLUME_ID" --confirm-unmounted --yes --wait
 ibee block-storage delete "$VOLUME_ID" --yes

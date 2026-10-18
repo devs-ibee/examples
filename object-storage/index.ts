@@ -1,46 +1,27 @@
-/**
- * Object Storage: a private bucket plus an access key scoped to that bucket.
- *
- * Requires: npm install ibee-sdk
- * Run:      npx tsx object-storage/index.ts
- * Environment: IBEE_TOKEN, IBEE_WORKSPACE_ID, optional IBEE_ENV=dev,
- *              IBEE_STORAGE_REGION (default in-south-2), IBEE_BUCKET_NAME, KEEP=1
- */
-import { randomUUID } from "node:crypto";
-import { Ibee, IbeeEnvironment } from "ibee-sdk";
+// Create a private bucket and an S3 access key for it, then delete both.
+import { Ibee } from "ibee-sdk";
 
-const workspaceId = process.env.IBEE_WORKSPACE_ID!;
-const client = new Ibee({
-  token: process.env.IBEE_TOKEN!,
-  environment: process.env.IBEE_ENV === "dev" ? IbeeEnvironment.DEVELOPMENT : IbeeEnvironment.DEFAULT,
+const ibee = new Ibee(); // reads IBEE_TOKEN, IBEE_WORKSPACE_ID and IBEE_ENV
+const storage = ibee.objectStorage;
+
+const bucket = await storage.createBucket({
+  name: process.env.IBEE_BUCKET_NAME!,
+  region: process.env.IBEE_STORAGE_REGION!,
 });
+console.log(`Bucket ${bucket.name} in ${bucket.region}`);
 
-// 1. A private bucket.
-const bucketName = process.env.IBEE_BUCKET_NAME ?? `example-${randomUUID().slice(0, 8)}`;
-const bucket = await client.objectStorage.createBucket({
-  workspaceId,
-  name: bucketName,
-  region: process.env.IBEE_STORAGE_REGION ?? "in-south-2",
-  isPublic: false,
-  tags: ["example"],
+// An access key that can read and write objects in this bucket only.
+const key = await storage.createS3Credential({
+  name: `${bucket.name}-app`,
+  permission_type: "object_rw",
+  bucket_scope: "specific",
+  allowed_buckets: [bucket.name],
 });
-console.log(`Bucket ${bucketName} in ${bucket.region}`);
+console.log(`Access key ${key.access_key_id} (the secret key is shown only once)`);
 
-// 2. An access key that can only read and write objects in this bucket.
-const key = await client.objectStorage.createS3Credential({
-  workspaceId,
-  name: `${bucketName}-app`,
-  permissionType: "object_rw",
-  bucketScope: "specific",
-  allowedBuckets: [bucketName],
-});
-console.log(`Access key ID:     ${key.access_key_id}`);
-console.log(`Secret access key: ${key.secret_access_key}   (shown only once; store it now)`);
-console.log(`S3 endpoint:       https://${workspaceId}.blob.ibeestorage.com`);
-
-// 3. Clean up. A bucket must be empty before it can be deleted.
-if (process.env.KEEP !== "1") {
-  await client.objectStorage.revokeS3Credential({ workspaceId, accessKeyId: key.access_key_id });
-  await client.objectStorage.deleteBucket({ workspaceId, bucketName });
-  console.log("Revoked the access key and deleted the bucket");
+for (const item of (await storage.listBuckets()).buckets ?? []) {
+  console.log(`  ${item.name}  ${item.object_count} objects`);
 }
+
+await storage.revokeS3Credential({ access_key_id: key.access_key_id });
+await storage.deleteBucket({ bucket_name: bucket.name }); // a bucket must be empty to delete it

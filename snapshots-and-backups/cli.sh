@@ -1,16 +1,11 @@
 #!/usr/bin/env bash
-# Scheduled backups, an on-demand backup, a snapshot, and recovery points with the ibee CLI.
-#
-# Requires: pip install ibee-cli
-# Environment: IBEE_TOKEN, IBEE_WORKSPACE_ID, IBEE_VM_ID, optional IBEE_ENV=dev
+# Snapshot a Cloud VM, list its recovery points, and delete the snapshot with the ibee CLI.
 set -euo pipefail
 
-VM_ID="$IBEE_VM_ID"
+CATALOG=$(jq -nc --arg id "$IBEE_SNAPSHOT_SKU_ID" --arg code "$IBEE_SNAPSHOT_SKU_CODE" '{sku_id: $id, sku_code: $code}')
+SNAPSHOT_ID=$(ibee --json vms snapshots create "$IBEE_VM_ID" before-upgrade --mode root_only \
+  --billing-catalog "$CATALOG" | jq -r .snapshot_set_id)
 
-ibee vms backup-policy enable "$VM_ID" --frequency daily --timezone UTC --hour 20 --retention-days 7
-ibee vms backup-policy get "$VM_ID"
-ibee vms backups create "$VM_ID" --reason "before upgrade"
-ibee vms snapshots create "$VM_ID" "before-upgrade-$(date +%Y%m%d)" --mode root_only
-
-ibee vms backups list "$VM_ID" --limit 10
-ibee vms snapshots list "$VM_ID" --limit 10
+ibee vms snapshots list "$IBEE_VM_ID"
+ibee vms backups list "$IBEE_VM_ID"
+ibee vms snapshots delete "$SNAPSHOT_ID" --yes

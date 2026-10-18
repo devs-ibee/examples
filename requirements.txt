@@ -1,6 +1,3 @@
-# Python examples
-ibee>=0.3.0,<0.4.0
-# CLI examples (installs the `ibee` command)
-ibee-cli>=0.3.0,<0.4.0
-# S3-compatible Object Storage examples
+ibee>=0.5.0,<0.6.0
+ibee-cli>=0.5.0,<0.6.0
 boto3>=1.34
