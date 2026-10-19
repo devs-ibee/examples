@@ -53,6 +53,7 @@ Most examples create billable resources for a few minutes and delete them at the
 ## Docs
 
 - [Product docs](https://ibee.ai/docs) and [API reference](https://ibee.ai/docs/api-reference)
+- The `curl` calls in `api.sh` files are checked in CI against the public API contract in [contract/ibee-cloud.yaml](contract/ibee-cloud.yaml)
 - [Python SDK](https://github.com/devs-ibee/ibee-python), [TypeScript SDK](https://github.com/devs-ibee/ibee-typescript), [CLI](https://github.com/devs-ibee/ibee-cli), [Terraform provider](https://github.com/devs-ibee/terraform-provider-ibee)
 
 [Open an issue](https://github.com/devs-ibee/examples/issues) for questions or requests. Pull requests are welcome.
