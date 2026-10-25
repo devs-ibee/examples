@@ -1,0 +1,309 @@
+# ibee | Documentation
+
+## Instructions for AI Agents
+
+- For clean Markdown of any page, append `.md` to the page URL
+- For section-specific indexes, append `/llms.txt` to any section URL
+- For the full text of every page in one file, fetch https://ibee.ai/docs/llms-full.txt
+- For AI client integration (Claude Code, Cursor, etc.), connect to the MCP server at https://ibee.ai/docs/_mcp/server
+- The OpenAPI specification is at https://ibee.ai/docs/openapi.yaml (also .json); the authored copy with full metadata is https://raw.githubusercontent.com/devs-ibee/examples/main/contract/ibee-cloud.yaml
+
+## Docs
+
+- [Infrastructure, engineered for builders.](https://ibee.ai/docs.md)
+- [Sign Up](https://ibee.ai/docs/getting-started/account-setup/sign-up.md): Create your IBEE Solutions account — register with your email, verify it, set a password, and log in to the portal.
+- [Create an Organization](https://ibee.ai/docs/getting-started/account-setup/create-an-organization.md): Create an IBEE Solutions organization to manage resources, billing, and team members. Learn about country restrictions, geo-detection, currency assignment, tax invoices, and GST verification for Indian businesses.
+- [Restricted Countries](https://ibee.ai/docs/getting-started/account-setup/restricted-countries.md): IBEE Solutions does not offer services in certain countries due to U.S. export-control and trade-sanction regulations. Review the full list of restricted countries and the 26 countries where IBEE Solutions operates.
+- [Verify Your Identity](https://ibee.ai/docs/getting-started/account-setup/verify-your-identity.md): Complete identity verification (KYC) to unlock all IBEE Solutions services. Indian users verify with Aadhaar via Digilocker. International users verify with a government-issued ID and selfie.
+- [Account Security](https://ibee.ai/docs/getting-started/account-setup/account-security.md): Protect your IBEE Solutions login — turn on two-factor authentication with an authenticator app, change your password, review your login history, and reset a forgotten password.
+- [Add Billing](https://ibee.ai/docs/getting-started/account-setup/add-billing.md): Set up billing for your IBEE Solutions organization — purchase prepaid credits (online payment in India, card in other countries), redeem promo codes, save a card, upload TDS certificates, and apply for Invoice Billing.
+- [Dashboard & Navigation](https://ibee.ai/docs/getting-started/overview/dashboard-navigation.md): Navigate the IBEE Solutions portal — select an organization, browse workspaces, switch between them, and access resources, billing, and settings from the sidebar.
+- [Regions & Locations](https://ibee.ai/docs/getting-started/overview/regions-and-locations.md): Where IBEE Solutions runs — data center locations, region codes, and availability for compute, storage, and networking resources.
+- [First resource](https://ibee.ai/docs/getting-started/overview/first-resource.md): Launch your first IBEE Solutions resource — a Cloud VM — in under 5 minutes.
+- [Bare Metal Servers](https://ibee.ai/docs/infrastructure/bare-metal.md): Dedicated physical servers on IBEE Solutions with full hardware access — browse the Dell hardware catalog in the portal and talk to sales to order.
+- [Provision a server](https://ibee.ai/docs/infrastructure/bare-metal/provision-a-server.md): Order a bare metal server on IBEE Solutions — review the hardware catalog in the portal, then talk to sales to configure, price, and provision it.
+- [GPU VMs](https://ibee.ai/docs/infrastructure/gpu-vms.md): GPU-backed virtual machines on IBEE Solutions for AI inference, training, rendering, and other accelerated workloads — deployed and managed like Cloud VMs, with per-GPU metrics.
+- [Create a GPU VM in the portal](https://ibee.ai/docs/infrastructure/gpu-vms/create-a-gpu-vm.md): Deploy a GPU-enabled virtual machine on IBEE Solutions for AI, ML, rendering, and compute-intensive workloads.
+- [Cloud VMs](https://ibee.ai/docs/infrastructure/cloud-vms.md): Launch and manage virtual machines on IBEE Solutions — flexible compute for web apps, APIs, backends, databases, and dev environments.
+- [Create a VM](https://ibee.ai/docs/infrastructure/cloud-vms/create-a-vm.md): Deploy one or more Cloud VMs on IBEE Solutions — choose a location, plan, operating system, SSH keys, network, billing term, and hostname, then click Deploy.
+- [Launch your first VM](https://ibee.ai/docs/infrastructure/cloud-vms/launch-your-first-vm.md): A 5-minute quickstart for deploying your first IBEE Solutions VM from the portal or the ibee CLI.
+- [Instance types](https://ibee.ai/docs/infrastructure/cloud-vms/instance-types.md): Choose the right Cloud VM instance type based on CPU, memory, disk, and workload profile.
+- [OS images](https://ibee.ai/docs/infrastructure/cloud-vms/os-images.md): Pick an operating system template for your Cloud VM, or boot from an ISO, snapshot, or backup — and find the credentials to sign in.
+- [Custom images](https://ibee.ai/docs/infrastructure/cloud-vms/custom-images.md): Boot a Cloud VM from your own ISO, a snapshot, or a backup recovery point.
+- [Resize a VM](https://ibee.ai/docs/infrastructure/cloud-vms/resize-a-vm.md): Move a Cloud VM to a different plan — upgrade CPU, RAM, and disk, or downgrade CPU and RAM — without rebuilding.
+- [Power actions](https://ibee.ai/docs/infrastructure/cloud-vms/power-actions.md): Start, stop, reboot, and delete IBEE Solutions VMs safely, and what to use while browser console access is unavailable.
+- [Networking for VMs](https://ibee.ai/docs/infrastructure/cloud-vms/networking-for-v-ms.md): How public IPs, VPCs, NAT, Reserved IPs, firewall groups, and bandwidth work for IBEE Solutions VMs.
+- [Attach volumes](https://ibee.ai/docs/infrastructure/cloud-vms/attach-volumes.md): Add Block Storage volumes to a Cloud VM and mount them inside the guest.
+- [Monitoring](https://ibee.ai/docs/infrastructure/cloud-vms/monitoring.md): Track CPU, memory, disk, and network metrics for your Cloud VM, and find its recent operations in Activity logs.
+- [Object Storage](https://ibee.ai/docs/infrastructure/object-storage.md): IBEE Object Storage is a scalable, S3-compatible storage service for files, media, backups, and application assets. Works with any S3-compatible SDK or tool.
+- [Core Concepts](https://ibee.ai/docs/infrastructure/object-storage/core-concepts.md): Core building blocks of IBEE Object Storage — buckets, objects, regions, endpoints, and access.
+- [Upload Your First Object](https://ibee.ai/docs/infrastructure/object-storage/upload-your-first-object.md): Create your first bucket, generate API credentials, and upload an object — using the IBEE Solutions portal and an S3-compatible client.
+- [Buckets](https://ibee.ai/docs/infrastructure/object-storage/buckets.md): Containers for objects in IBEE Object Storage. Create buckets, configure settings, and manage their lifecycle.
+- [Bucket Policies](https://ibee.ai/docs/infrastructure/object-storage/buckets/bucket-policies.md): Control bucket access in IBEE Object Storage — toggle public access, scope API credential permissions to specific buckets, and use bucket-level access controls.
+- [Lifecycle Management](https://ibee.ai/docs/infrastructure/object-storage/buckets/lifecycle-management.md): Create lifecycle rules in IBEE Object Storage to automatically delete objects after a set number of days or on a date.
+- [CORS](https://ibee.ai/docs/infrastructure/object-storage/buckets/cors.md): Configure CORS rules on an IBEE Object Storage bucket to allow browser applications to access your files. Set allowed origins, HTTP methods, and headers.
+- [Custom Domains](https://ibee.ai/docs/infrastructure/object-storage/buckets/custom-domains.md): Serve IBEE Object Storage bucket content from your own domain by adding a CNAME record and verifying your hostname in the bucket settings.
+- [Event Notifications](https://ibee.ai/docs/infrastructure/object-storage/buckets/event-notifications.md): Configure webhook notifications on an IBEE Object Storage bucket to receive POST requests when objects are uploaded. Filter by prefix or suffix to target specific files.
+- [Objects](https://ibee.ai/docs/infrastructure/object-storage/objects.md): Upload, download, list, and delete objects in IBEE Object Storage buckets — from the portal or any S3-compatible client.
+- [Object Locking](https://ibee.ai/docs/infrastructure/object-storage/objects/object-locking.md): Mark objects as immutable for compliance, ransomware protection, or regulatory holds. Object Lock is a permanent bucket setting in IBEE Object Storage.
+- [Presigned URLs](https://ibee.ai/docs/infrastructure/object-storage/objects/presigned-urls.md): Generate time-limited URLs for uploading or downloading IBEE Object Storage objects without sharing your credentials.
+- [Mount a Bucket as a Filesystem](https://ibee.ai/docs/infrastructure/object-storage/mount-a-bucket-as-a-filesystem.md): Access an IBEE Object Storage bucket as a local directory using s3fs or rclone, so tools that expect POSIX paths can read and write objects.
+- [Metrics](https://ibee.ai/docs/infrastructure/object-storage/metrics.md): Monitor bucket usage, object counts, storage operations, and bandwidth from the IBEE Solutions portal — both at the organization level and per bucket.
+- [API Credentials](https://ibee.ai/docs/infrastructure/object-storage/api-tokens.md): S3 credentials for IBEE Object Storage. Create credentials from the API Tokens page to access buckets via AWS CLI, rclone, and S3-compatible tools.
+- [Hosting Static Sites and SPAs on Object Storage](https://ibee.ai/docs/infrastructure/object-storage/static-site-hosting.md): Complete guide to hosting static websites and single-page applications (React, Vue, Angular) on IBEE Object Storage with CDN, custom domains, and HTTPS.
+- [CDN Integration](https://ibee.ai/docs/infrastructure/object-storage/cdn-integration.md): Front an IBEE Object Storage bucket with the IBEE CDN to cache and deliver content globally with low latency.
+- [Pricing](https://ibee.ai/docs/infrastructure/object-storage/pricing.md): IBEE Object Storage pricing — storage, internet egress, API operation classes, included monthly usage, rate limits, and billing examples.
+- [Limits](https://ibee.ai/docs/infrastructure/object-storage/limits.md): Hard limits for IBEE Object Storage — storage per bucket, object size, upload size, API rate limits, bucket naming rules, and free tier caps. Limits in GiB and TiB are base-2.
+- [Block Storage](https://ibee.ai/docs/infrastructure/block-storage.md): Persistent NVMe volumes you can attach to IBEE Solutions servers — create, attach, mount, detach, and delete block storage volumes.
+- [Create a volume](https://ibee.ai/docs/infrastructure/block-storage/create-a-volume.md): Provision a new NVMe block storage volume on IBEE Solutions — pick storage type, location, size, and a label — then resize or delete it.
+- [Attach and detach a volume](https://ibee.ai/docs/infrastructure/block-storage/attach-and-detach-a-volume.md): Attach a Block Storage volume to an IBEE Solutions server, mount it inside the guest, and safely detach when you're done.
+- [Container Registry](https://ibee.ai/docs/infrastructure/container-registry.md): Store Docker and OCI images in private or public registries, push and pull with registry access tokens, and review vulnerability and SBOM data for every image.
+- [Load Balancers](https://ibee.ai/docs/network-security/load-balancer.md): Distribute traffic across multiple backends with L4 and L7 load balancers on IBEE Solutions — health checks, routing algorithms, and TLS termination.
+- [Create a load balancer](https://ibee.ai/docs/network-security/load-balancer/create-a-load-balancer.md): Create an L4 or L7 load balancer on IBEE Solutions — choose a protocol, add backends, set the routing algorithm, and configure health checks.
+- [Algorithms](https://ibee.ai/docs/network-security/load-balancer/algorithms.md): Choose how an IBEE Solutions load balancer distributes requests — round robin, least request, random, or consistent hash — and when to combine them with weights and sticky sessions.
+- [Health checks](https://ibee.ai/docs/network-security/load-balancer/health-checks.md): Configure active HTTP, HTTPS, or TCP health checks on an IBEE Solutions load balancer so traffic only reaches healthy backends.
+- [SSL and TLS termination](https://ibee.ai/docs/network-security/load-balancer/ssl-and-tls-termination.md): Terminate HTTPS at an IBEE Solutions L7 load balancer with a managed certificate, or pass TLS through untouched on L4 for end-to-end encryption.
+- [Attach VMs](https://ibee.ai/docs/network-security/load-balancer/attach-v-ms.md): Point an IBEE Solutions load balancer at your Cloud VMs or GPU VMs by adding them as IP or hostname backends.
+- [CDN](https://ibee.ai/docs/network-security/cdn.md): Distribute content globally with IBEE CDN. Cache an Object Storage bucket at edge locations for low-latency delivery, with automatic SSL, custom domains, purging, and traffic metrics.
+- [Firewall as a Service](https://ibee.ai/docs/network-security/firewalls.md): Create reusable firewall groups with inbound rules to control traffic to your Cloud VMs and GPU VMs.
+- [Create firewall rules](https://ibee.ai/docs/network-security/firewalls/create-firewall-rules.md): Add inbound firewall rules to control which traffic reaches your IBEE Solutions VMs.
+- [VPC](https://ibee.ai/docs/network-security/vpc-ip-management.md): Create isolated private networks, subnets, NAT gateways, port forwarding rules, and VM attachments on IBEE Solutions.
+- [Reserved IPs](https://ibee.ai/docs/network-security/vpc-ip-management/reserved-ips.md): Reserve portable public IPv4 addresses and attach them to VMs, NAT gateways, and Virtual IPs.
+- [Virtual IPs](https://ibee.ai/docs/network-security/vpc-ip-management/virtual-ips.md): Reserve a specific private IP inside a VPC subnet for MetalLB and Kubernetes LoadBalancer services, announced by nodes you authorize.
+- [VM backups](https://ibee.ai/docs/tools/backups.md): Protect Cloud VMs with scheduled, automated backups of the root disk and attached volumes.
+- [Enable backups](https://ibee.ai/docs/tools/backups/enable-backups.md): Turn on automated backups for a Cloud VM and choose a daily or weekly schedule.
+- [Restore from backup](https://ibee.ai/docs/tools/backups/restore-from-backup.md): Recover a Cloud VM from an automated backup recovery point — in place, into a new VM, or one disk at a time.
+- [Backup pricing](https://ibee.ai/docs/tools/backups/backup-pricing.md): How automated backup storage is billed, sized, and retained on IBEE Solutions.
+- [VM snapshots](https://ibee.ai/docs/tools/snapshots.md): Capture on-demand recovery points for IBEE Solutions VMs and restore in place or into a new VM.
+- [Create a snapshot](https://ibee.ai/docs/tools/snapshots/create-a-snapshot.md): Capture a manual recovery point of a Cloud VM — root disk plus optional data volumes.
+- [Restore a snapshot](https://ibee.ai/docs/tools/snapshots/restore-a-snapshot.md): Roll back a Cloud VM, create a new VM, or restore a single disk from a snapshot recovery point.
+- [ISOs](https://ibee.ai/docs/tools/is-os.md): Add custom ISO images to your IBEE Solutions organization from a remote URL, attach them to VMs, and choose them when deploying.
+- [SSH Keys](https://ibee.ai/docs/tools/ssh-keys.md): Create or import SSH keys in an IBEE Solutions workspace so you can log in to your VMs without a password.
+- [API Tokens](https://ibee.ai/docs/tools/api-tokens.md): Create and manage organization-level API tokens for the IBEE public API, scoped to the entire organization or specific workspaces, and S3 credentials for Object Storage.
+- [Secret Manager](https://ibee.ai/docs/tools/secret-manager.md): Store API keys, passwords, and other sensitive values in IBEE Solutions Secret Manager — versioned secrets grouped in stores, with AppRole and Kubernetes access for your apps.
+- [Email Service](https://ibee.ai/docs/tools/email-service.md): Send transactional email from your own domain over an HTTPS API. Add your domain's email authentication records, register sender addresses, send with an API key, and track delivery with emails, logs, metrics, suppressions, and signed webhooks.
+- [Platform Fundamentals](https://ibee.ai/docs/platform-fundamentals.md): Learn the core concepts that shape how IBEE Solutions resources are organized, secured, and billed.
+- [Organizations and tenancy model](https://ibee.ai/docs/platform-fundamentals/organizations-and-tenancy-model.md): Understand organizations, workspaces, ownership boundaries, and how tenancy works in IBEE Solutions.
+- [Organization Settings](https://ibee.ai/docs/platform-fundamentals/organization-settings.md): View and edit your IBEE Solutions organization's details — name, type, legal name, billing address, and tax information (GST, VAT, or sales tax) — from the Organization Details page.
+- [Team Members & Access Roles](https://ibee.ai/docs/platform-fundamentals/team-members-access-roles.md): Invite team members to your IBEE Solutions organization, assign access roles (Admin, Technical, Collaborator, Billing), and control workspace-level permissions.
+- [Activity logs](https://ibee.ai/docs/platform-fundamentals/activity-logs.md): Review who did what across your IBEE Solutions organization — search, filter by service, workspace, status, and time range, open an event's details, and export the results as CSV.
+- [Billing and usage](https://ibee.ai/docs/platform-fundamentals/billing-and-usage.md): Learn how billing works in IBEE Solutions — prepaid wallet credits or Invoice Billing, the billing summary, usage charts, invoices, billing checks before creation, and plan limits.
+- [Limits & Quotas](https://ibee.ai/docs/platform-fundamentals/limits-and-quotas.md): Compare IBEE Solutions plans, monthly spend thresholds, and resource allowances, see your usage against them, and learn how to request a plan change.
+- [Support](https://ibee.ai/docs/support.md): Get help from IBEE Solutions — open a Technical Support request from the portal Support Center, find organization and billing settings, and track every request in one place.
+- [Contact Support](https://ibee.ai/docs/support/contact-support.md): Get help from IBEE Solutions support — technical requests, billing queries, account issues, abuse reports, and sales inquiries via the portal or email.
+- [Create a Support Request](https://ibee.ai/docs/support/create-a-request.md): Submit a Technical Support request from the IBEE Solutions portal. Pick a product and resource, describe your issue, set priority, attach screenshots, and track the request through resolution.
+
+## API Reference
+
+- [Introduction](https://ibee.ai/docs/api-reference/introduction.md): Overview of the IBEE Solutions public API.
+- [Authentication](https://ibee.ai/docs/api-reference/authentication.md): Learn how to create API tokens and authenticate your requests.
+- [Rate limits](https://ibee.ai/docs/api-reference/rate-limits.md): Understand API request limits and how to handle them.
+- [SDKs](https://ibee.ai/docs/api-reference/sdk-overview.md): Official Python and TypeScript SDKs for the IBEE Solutions API.
+- [CLI](https://ibee.ai/docs/api-reference/cli.md): Manage compute, networking, storage, and secrets from your terminal.
+- [Terraform](https://ibee.ai/docs/api-reference/terraform.md): Install the IBEE Terraform provider, authenticate to a workspace, and manage infrastructure as code.
+- [Examples](https://ibee.ai/docs/api-reference/examples.md): Short, runnable examples for IBEE products with the Python SDK, TypeScript SDK, CLI, and Terraform provider.
+- [List secret stores](https://ibee.ai/docs/api-reference/secret-store/list-secret-stores.md)
+- [Create secret store](https://ibee.ai/docs/api-reference/secret-store/create-secret-store.md)
+- [Get secret store](https://ibee.ai/docs/api-reference/secret-store/get-secret-store.md)
+- [Update secret store](https://ibee.ai/docs/api-reference/secret-store/update-secret-store.md)
+- [Archive secret store](https://ibee.ai/docs/api-reference/secret-store/archive-secret-store.md)
+- [Unarchive secret store](https://ibee.ai/docs/api-reference/secret-store/unarchive-secret-store.md)
+- [Permanently delete secret store](https://ibee.ai/docs/api-reference/secret-store/permanently-delete-secret-store.md)
+- [List secrets](https://ibee.ai/docs/api-reference/secret-store/list-secrets.md)
+- [Create secret](https://ibee.ai/docs/api-reference/secret-store/create-secret.md)
+- [Batch-create secrets](https://ibee.ai/docs/api-reference/secret-store/batch-create-secrets.md)
+- [Get secret metadata](https://ibee.ai/docs/api-reference/secret-store/get-secret.md)
+- [Delete secret](https://ibee.ai/docs/api-reference/secret-store/delete-secret.md)
+- [Get secret value](https://ibee.ai/docs/api-reference/secret-store/get-secret-value.md)
+- [Replace secret value](https://ibee.ai/docs/api-reference/secret-store/update-secret-value.md)
+- [Patch secret value](https://ibee.ai/docs/api-reference/secret-store/patch-secret-value.md)
+- [Undelete secret versions](https://ibee.ai/docs/api-reference/secret-store/undelete-secret.md)
+- [Destroy secret versions](https://ibee.ai/docs/api-reference/secret-store/destroy-secret-versions.md)
+- [Permanently delete secret](https://ibee.ai/docs/api-reference/secret-store/permanently-delete-secret.md)
+- [List secret versions](https://ibee.ai/docs/api-reference/secret-store/list-secret-versions.md)
+- [Get secret version](https://ibee.ai/docs/api-reference/secret-store/get-secret-version.md)
+- [Roll back secret value](https://ibee.ai/docs/api-reference/secret-store/rollback-secret.md)
+- [List application identities](https://ibee.ai/docs/api-reference/secret-store/list-secret-identities.md)
+- [Create application identity](https://ibee.ai/docs/api-reference/secret-store/create-secret-identity.md)
+- [Get application identity](https://ibee.ai/docs/api-reference/secret-store/get-secret-identity.md)
+- [Delete application identity](https://ibee.ai/docs/api-reference/secret-store/delete-secret-identity.md)
+- [Update application identity](https://ibee.ai/docs/api-reference/secret-store/update-secret-identity.md)
+- [Disable application identity](https://ibee.ai/docs/api-reference/secret-store/disable-secret-identity.md)
+- [Enable application identity](https://ibee.ai/docs/api-reference/secret-store/enable-secret-identity.md)
+- [Get application identity access details](https://ibee.ai/docs/api-reference/secret-store/get-secret-identity-access.md)
+- [Rotate AppRole secret ID](https://ibee.ai/docs/api-reference/secret-store/rotate-secret-identity-secret-id.md)
+- [Revoke application identity sessions](https://ibee.ai/docs/api-reference/secret-store/revoke-secret-identity-sessions.md)
+- [List application identity scopes](https://ibee.ai/docs/api-reference/secret-store/list-secret-identity-scopes.md)
+- [Add application identity scope](https://ibee.ai/docs/api-reference/secret-store/create-secret-identity-scope.md)
+- [Delete application identity scope](https://ibee.ai/docs/api-reference/secret-store/delete-secret-identity-scope.md)
+- [Update application identity scope](https://ibee.ai/docs/api-reference/secret-store/update-secret-identity-scope.md)
+- [List buckets](https://ibee.ai/docs/api-reference/object-storage/list-buckets.md)
+- [Create bucket](https://ibee.ai/docs/api-reference/object-storage/create-bucket.md)
+- [Get bucket](https://ibee.ai/docs/api-reference/object-storage/get-bucket.md)
+- [Delete bucket](https://ibee.ai/docs/api-reference/object-storage/delete-bucket.md)
+- [Update bucket settings](https://ibee.ai/docs/api-reference/object-storage/update-bucket.md)
+- [List S3 credentials](https://ibee.ai/docs/api-reference/object-storage/list-s-3-credentials.md)
+- [Create S3 credential](https://ibee.ai/docs/api-reference/object-storage/create-s-3-credential.md)
+- [Get S3 credential](https://ibee.ai/docs/api-reference/object-storage/get-s-3-credential.md)
+- [Revoke S3 credential](https://ibee.ai/docs/api-reference/object-storage/revoke-s-3-credential.md)
+- [List VPC-enabled sites](https://ibee.ai/docs/api-reference/vpcs/list-networking-sites.md)
+- [List VPCs](https://ibee.ai/docs/api-reference/vpcs/list-vpcs.md)
+- [Create a VPC](https://ibee.ai/docs/api-reference/vpcs/create-vpc.md)
+- [Get a VPC](https://ibee.ai/docs/api-reference/vpcs/get-vpc.md)
+- [Delete a VPC](https://ibee.ai/docs/api-reference/vpcs/delete-vpc.md)
+- [Update a VPC](https://ibee.ai/docs/api-reference/vpcs/update-vpc.md)
+- [List VPC subnets](https://ibee.ai/docs/api-reference/vpcs/list-vpc-subnets.md)
+- [Create a VPC subnet](https://ibee.ai/docs/api-reference/vpcs/create-vpc-subnet.md)
+- [Get a VPC subnet](https://ibee.ai/docs/api-reference/vpcs/get-vpc-subnet.md)
+- [Delete a VPC subnet](https://ibee.ai/docs/api-reference/vpcs/delete-vpc-subnet.md)
+- [Update a VPC subnet](https://ibee.ai/docs/api-reference/vpcs/update-vpc-subnet.md)
+- [List nodes attached to a VPC](https://ibee.ai/docs/api-reference/vpcs/list-vpc-nodes.md)
+- [Attach a node to a VPC](https://ibee.ai/docs/api-reference/vpcs/attach-vpc-node.md)
+- [Detach a node from a VPC](https://ibee.ai/docs/api-reference/vpcs/detach-vpc-node.md)
+- [List NAT gateways](https://ibee.ai/docs/api-reference/vpcs/list-nat-gateways.md)
+- [Create a NAT gateway](https://ibee.ai/docs/api-reference/vpcs/create-nat-gateway.md)
+- [Delete a NAT gateway](https://ibee.ai/docs/api-reference/vpcs/delete-nat-gateway.md)
+- [List NAT port-forwarding rules](https://ibee.ai/docs/api-reference/vpcs/list-nat-port-forwarding-rules.md)
+- [Create a NAT port-forwarding rule](https://ibee.ai/docs/api-reference/vpcs/create-nat-port-forwarding-rule.md)
+- [Delete a NAT port-forwarding rule](https://ibee.ai/docs/api-reference/vpcs/delete-nat-port-forwarding-rule.md)
+- [Update a NAT port-forwarding rule](https://ibee.ai/docs/api-reference/vpcs/update-nat-port-forwarding-rule.md)
+- [List Reserved IPs](https://ibee.ai/docs/api-reference/reserved-ips/list-reserved-ips.md)
+- [Reserve a public IP](https://ibee.ai/docs/api-reference/reserved-ips/reserve-ip.md)
+- [Get a Reserved IP](https://ibee.ai/docs/api-reference/reserved-ips/get-reserved-ip.md)
+- [Release a Reserved IP](https://ibee.ai/docs/api-reference/reserved-ips/release-reserved-ip.md)
+- [Update a Reserved IP](https://ibee.ai/docs/api-reference/reserved-ips/update-reserved-ip.md)
+- [Attach a Reserved IP](https://ibee.ai/docs/api-reference/reserved-ips/attach-reserved-ip.md)
+- [Detach a Reserved IP](https://ibee.ai/docs/api-reference/reserved-ips/detach-reserved-ip.md)
+- [Move a Reserved IP](https://ibee.ai/docs/api-reference/reserved-ips/move-reserved-ip.md)
+- [List firewall groups](https://ibee.ai/docs/api-reference/firewalls/list-firewall-groups.md)
+- [Create a firewall group](https://ibee.ai/docs/api-reference/firewalls/create-firewall-group.md)
+- [Get a firewall group](https://ibee.ai/docs/api-reference/firewalls/get-firewall-group.md)
+- [Delete a firewall group](https://ibee.ai/docs/api-reference/firewalls/delete-firewall-group.md)
+- [Add a firewall rule](https://ibee.ai/docs/api-reference/firewalls/create-firewall-rule.md)
+- [Delete a firewall rule](https://ibee.ai/docs/api-reference/firewalls/delete-firewall-rule.md)
+- [Update a firewall rule](https://ibee.ai/docs/api-reference/firewalls/update-firewall-rule.md)
+- [List firewall group attachments](https://ibee.ai/docs/api-reference/firewalls/list-firewall-group-attachments.md)
+- [Attach a VM to a firewall group](https://ibee.ai/docs/api-reference/firewalls/attach-firewall-group.md)
+- [Detach a VM from a firewall group](https://ibee.ai/docs/api-reference/firewalls/detach-firewall-group.md)
+- [List load balancers](https://ibee.ai/docs/api-reference/load-balancers/list-load-balancers.md)
+- [Create an L4 load balancer](https://ibee.ai/docs/api-reference/load-balancers/create-l-4-load-balancer.md)
+- [Create an L7 load balancer](https://ibee.ai/docs/api-reference/load-balancers/create-l-7-load-balancer.md)
+- [Get a load balancer](https://ibee.ai/docs/api-reference/load-balancers/get-load-balancer.md)
+- [Delete a load balancer](https://ibee.ai/docs/api-reference/load-balancers/delete-load-balancer.md)
+- [Update an L4 load balancer](https://ibee.ai/docs/api-reference/load-balancers/update-l-4-load-balancer.md)
+- [Update an L7 load balancer](https://ibee.ai/docs/api-reference/load-balancers/update-l-7-load-balancer.md)
+- [Get load balancer status](https://ibee.ai/docs/api-reference/load-balancers/get-load-balancer-status.md)
+- [List compute sites](https://ibee.ai/docs/api-reference/compute-catalog/list-compute-sites.md)
+- [List compute plans](https://ibee.ai/docs/api-reference/compute-catalog/list-compute-plans.md)
+- [List compute images](https://ibee.ai/docs/api-reference/compute-catalog/list-compute-images.md)
+- [List cloud VMs](https://ibee.ai/docs/api-reference/cloud-vms/list-cloud-vms.md)
+- [Create a cloud VM](https://ibee.ai/docs/api-reference/cloud-vms/create-cloud-vm.md)
+- [Get a cloud VM](https://ibee.ai/docs/api-reference/cloud-vms/get-cloud-vm.md)
+- [Delete a cloud VM](https://ibee.ai/docs/api-reference/cloud-vms/delete-cloud-vm.md)
+- [Start a cloud VM](https://ibee.ai/docs/api-reference/cloud-vms/start-cloud-vm.md)
+- [Stop a cloud VM](https://ibee.ai/docs/api-reference/cloud-vms/stop-cloud-vm.md)
+- [Reboot a cloud VM](https://ibee.ai/docs/api-reference/cloud-vms/reboot-cloud-vm.md)
+- [Get cloud VM metrics](https://ibee.ai/docs/api-reference/cloud-vms/get-cloud-vm-metrics.md)
+- [Update cloud VM access settings](https://ibee.ai/docs/api-reference/cloud-vms/update-cloud-vm-access.md)
+- [Precheck a cloud VM resize](https://ibee.ai/docs/api-reference/cloud-vms/precheck-cloud-vm-resize.md)
+- [Resize a cloud VM](https://ibee.ai/docs/api-reference/cloud-vms/resize-cloud-vm.md)
+- [Resize a cloud VM plan](https://ibee.ai/docs/api-reference/cloud-vms/resize-cloud-vm-plan.md)
+- [Resize a cloud VM root disk](https://ibee.ai/docs/api-reference/cloud-vms/resize-cloud-vm-root-disk.md)
+- [Attach a volume to a cloud VM](https://ibee.ai/docs/api-reference/cloud-vms/attach-cloud-vm-volume.md)
+- [Detach a volume from a cloud VM](https://ibee.ai/docs/api-reference/cloud-vms/detach-cloud-vm-volume.md)
+- [Acknowledge cloud VM mount guidance](https://ibee.ai/docs/api-reference/cloud-vms/acknowledge-cloud-vm-mount-guidance.md)
+- [List cloud VM events](https://ibee.ai/docs/api-reference/cloud-vms/list-cloud-vm-events.md)
+- [Get cloud VM metric timeseries](https://ibee.ai/docs/api-reference/cloud-vms/get-cloud-vm-metrics-timeseries.md)
+- [Get cloud VM monthly bandwidth](https://ibee.ai/docs/api-reference/cloud-vms/get-cloud-vm-bandwidth.md)
+- [List cloud VM snapshots](https://ibee.ai/docs/api-reference/cloud-vms/list-cloud-vm-snapshots.md)
+- [Create a cloud VM snapshot](https://ibee.ai/docs/api-reference/cloud-vms/create-cloud-vm-snapshot.md)
+- [Restore a cloud VM snapshot](https://ibee.ai/docs/api-reference/cloud-vms/restore-cloud-vm-snapshot.md)
+- [Get a cloud VM snapshot](https://ibee.ai/docs/api-reference/cloud-vms/get-cloud-vm-snapshot.md)
+- [Delete a cloud VM snapshot](https://ibee.ai/docs/api-reference/cloud-vms/delete-cloud-vm-snapshot.md)
+- [Get a cloud VM snapshot restore](https://ibee.ai/docs/api-reference/cloud-vms/get-cloud-vm-snapshot-restore.md)
+- [Get a cloud VM backup policy](https://ibee.ai/docs/api-reference/cloud-vms/get-cloud-vm-backup-policy.md)
+- [Update a cloud VM backup policy](https://ibee.ai/docs/api-reference/cloud-vms/update-cloud-vm-backup-policy.md)
+- [Enable cloud VM backups](https://ibee.ai/docs/api-reference/cloud-vms/enable-cloud-vm-backups.md)
+- [Disable cloud VM backups](https://ibee.ai/docs/api-reference/cloud-vms/disable-cloud-vm-backups.md)
+- [Reschedule a cloud VM backup](https://ibee.ai/docs/api-reference/cloud-vms/reschedule-cloud-vm-backup.md)
+- [List cloud VM recovery points](https://ibee.ai/docs/api-reference/cloud-vms/list-cloud-vm-backup-runs.md)
+- [Run a cloud VM backup](https://ibee.ai/docs/api-reference/cloud-vms/create-cloud-vm-backup-run.md)
+- [Restore a cloud VM backup](https://ibee.ai/docs/api-reference/cloud-vms/restore-cloud-vm-backup.md)
+- [Get a cloud VM backup run](https://ibee.ai/docs/api-reference/cloud-vms/get-cloud-vm-backup-run.md)
+- [Get a cloud VM backup restore](https://ibee.ai/docs/api-reference/cloud-vms/get-cloud-vm-backup-restore.md)
+- [Get operation status](https://ibee.ai/docs/api-reference/cloud-vms/get-compute-operation.md)
+- [List GPU VMs](https://ibee.ai/docs/api-reference/gpu-vms/list-gpu-vms.md)
+- [Create a GPU VM](https://ibee.ai/docs/api-reference/gpu-vms/create-gpu-vm.md)
+- [Get a GPU VM](https://ibee.ai/docs/api-reference/gpu-vms/get-gpu-vm.md)
+- [Delete a GPU VM](https://ibee.ai/docs/api-reference/gpu-vms/delete-gpu-vm.md)
+- [Start a GPU VM](https://ibee.ai/docs/api-reference/gpu-vms/start-gpu-vm.md)
+- [Stop a GPU VM](https://ibee.ai/docs/api-reference/gpu-vms/stop-gpu-vm.md)
+- [Reboot a GPU VM](https://ibee.ai/docs/api-reference/gpu-vms/reboot-gpu-vm.md)
+- [Get GPU VM metrics](https://ibee.ai/docs/api-reference/gpu-vms/get-gpu-vm-metrics.md)
+- [Update GPU VM access settings](https://ibee.ai/docs/api-reference/gpu-vms/update-gpu-vm-access.md)
+- [Precheck a GPU VM resize](https://ibee.ai/docs/api-reference/gpu-vms/precheck-gpu-vm-resize.md)
+- [Resize a GPU VM](https://ibee.ai/docs/api-reference/gpu-vms/resize-gpu-vm.md)
+- [Resize a GPU VM plan](https://ibee.ai/docs/api-reference/gpu-vms/resize-gpu-vm-plan.md)
+- [Resize a GPU VM root disk](https://ibee.ai/docs/api-reference/gpu-vms/resize-gpu-vm-root-disk.md)
+- [Attach a volume to a GPU VM](https://ibee.ai/docs/api-reference/gpu-vms/attach-gpu-vm-volume.md)
+- [Detach a volume from a GPU VM](https://ibee.ai/docs/api-reference/gpu-vms/detach-gpu-vm-volume.md)
+- [Acknowledge GPU VM mount guidance](https://ibee.ai/docs/api-reference/gpu-vms/acknowledge-gpu-vm-mount-guidance.md)
+- [List GPU VM events](https://ibee.ai/docs/api-reference/gpu-vms/list-gpu-vm-events.md)
+- [Get GPU VM metric timeseries](https://ibee.ai/docs/api-reference/gpu-vms/get-gpu-vm-metrics-timeseries.md)
+- [Get GPU VM monthly bandwidth](https://ibee.ai/docs/api-reference/gpu-vms/get-gpu-vm-bandwidth.md)
+- [List GPU VM snapshots](https://ibee.ai/docs/api-reference/gpu-vms/list-gpu-vm-snapshots.md)
+- [Create a GPU VM snapshot](https://ibee.ai/docs/api-reference/gpu-vms/create-gpu-vm-snapshot.md)
+- [Restore a GPU VM snapshot](https://ibee.ai/docs/api-reference/gpu-vms/restore-gpu-vm-snapshot.md)
+- [Get a GPU VM snapshot](https://ibee.ai/docs/api-reference/gpu-vms/get-gpu-vm-snapshot.md)
+- [Delete a GPU VM snapshot](https://ibee.ai/docs/api-reference/gpu-vms/delete-gpu-vm-snapshot.md)
+- [Get a GPU VM snapshot restore](https://ibee.ai/docs/api-reference/gpu-vms/get-gpu-vm-snapshot-restore.md)
+- [Get a GPU VM backup policy](https://ibee.ai/docs/api-reference/gpu-vms/get-gpu-vm-backup-policy.md)
+- [Update a GPU VM backup policy](https://ibee.ai/docs/api-reference/gpu-vms/update-gpu-vm-backup-policy.md)
+- [Enable GPU VM backups](https://ibee.ai/docs/api-reference/gpu-vms/enable-gpu-vm-backups.md)
+- [Disable GPU VM backups](https://ibee.ai/docs/api-reference/gpu-vms/disable-gpu-vm-backups.md)
+- [Reschedule a GPU VM backup](https://ibee.ai/docs/api-reference/gpu-vms/reschedule-gpu-vm-backup.md)
+- [List GPU VM recovery points](https://ibee.ai/docs/api-reference/gpu-vms/list-gpu-vm-backup-runs.md)
+- [Run a GPU VM backup](https://ibee.ai/docs/api-reference/gpu-vms/create-gpu-vm-backup-run.md)
+- [Restore a GPU VM backup](https://ibee.ai/docs/api-reference/gpu-vms/restore-gpu-vm-backup.md)
+- [Get a GPU VM backup run](https://ibee.ai/docs/api-reference/gpu-vms/get-gpu-vm-backup-run.md)
+- [Get a GPU VM backup restore](https://ibee.ai/docs/api-reference/gpu-vms/get-gpu-vm-backup-restore.md)
+- [Create a VM console session](https://ibee.ai/docs/api-reference/vm-console/create-vm-console-session.md)
+- [Get a VM console session](https://ibee.ai/docs/api-reference/vm-console/get-vm-console-session.md)
+- [Close a VM console session](https://ibee.ai/docs/api-reference/vm-console/close-vm-console-session.md)
+- [Check resource billing eligibility](https://ibee.ai/docs/api-reference/billing/check-resource-eligibility.md)
+- [List block-storage volumes](https://ibee.ai/docs/api-reference/block-storage/list-block-volumes.md)
+- [Create block-storage volume](https://ibee.ai/docs/api-reference/block-storage/create-block-volume.md)
+- [Get block-storage volume](https://ibee.ai/docs/api-reference/block-storage/get-block-volume.md)
+- [Delete block-storage volume](https://ibee.ai/docs/api-reference/block-storage/delete-block-volume.md)
+- [List block-volume operations](https://ibee.ai/docs/api-reference/block-storage/list-block-volume-operations.md)
+- [Attach block-storage volume](https://ibee.ai/docs/api-reference/block-storage/attach-block-volume.md)
+- [Detach block-storage volume](https://ibee.ai/docs/api-reference/block-storage/detach-block-volume.md)
+- [Resize block-storage volume](https://ibee.ai/docs/api-reference/block-storage/resize-block-volume.md)
+- [Generate CDN object URL](https://ibee.ai/docs/api-reference/cdn/generate-cdn-url.md)
+- [List CDN distributions](https://ibee.ai/docs/api-reference/cdn/list-cdn-distributions.md)
+- [Create CDN distribution](https://ibee.ai/docs/api-reference/cdn/create-cdn-distribution.md)
+- [Get CDN distribution](https://ibee.ai/docs/api-reference/cdn/get-cdn-distribution.md)
+- [Delete CDN distribution](https://ibee.ai/docs/api-reference/cdn/delete-cdn-distribution.md)
+- [Update CDN distribution](https://ibee.ai/docs/api-reference/cdn/update-cdn-distribution.md)
+- [Get static website configuration](https://ibee.ai/docs/api-reference/cdn/get-cdn-website-config.md)
+- [Enable or update static website configuration](https://ibee.ai/docs/api-reference/cdn/update-cdn-website-config.md)
+- [Disable static website configuration](https://ibee.ai/docs/api-reference/cdn/delete-cdn-website-config.md)
+- [List CDN custom domains](https://ibee.ai/docs/api-reference/cdn/list-cdn-custom-domains.md)
+- [Add CDN custom domain](https://ibee.ai/docs/api-reference/cdn/create-cdn-custom-domain.md)
+- [Get CDN custom domain](https://ibee.ai/docs/api-reference/cdn/get-cdn-custom-domain.md)
+- [Remove CDN custom domain](https://ibee.ai/docs/api-reference/cdn/delete-cdn-custom-domain.md)
+- [Verify CDN custom domain](https://ibee.ai/docs/api-reference/cdn/verify-cdn-custom-domain.md)
+- [Purge CDN cache](https://ibee.ai/docs/api-reference/cdn/purge-cdn-cache.md)
+
+## Changelog
+
+- [Changelog](https://ibee.ai/docs/changelog.md): Product updates, fixes, and security notices for IBEE Cloud — compute, GPU VMs, storage, networking, the API, and the CLI.
+- [October 19, 2026](https://ibee.ai/docs/2026-10-19-public-api-contract-0-4-0.md)
+- [May 1, 2026](https://ibee.ai/docs/2026-05-01-cve-2026-31431-mitigation.md)
+
+## OpenAPI Specification
+
+- [OpenAPI JSON](https://ibee.ai/docs/openapi.json)
+- [OpenAPI YAML](https://ibee.ai/docs/openapi.yaml)
+- [Authored OpenAPI YAML with info and tag descriptions](https://raw.githubusercontent.com/devs-ibee/examples/main/contract/ibee-cloud.yaml)
+- [API catalog (RFC 9727)](\1/.well-known/api-catalog)
