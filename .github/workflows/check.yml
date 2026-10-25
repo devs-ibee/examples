@@ -35,9 +35,18 @@ jobs:
       - name: Shell scripts parse
         run: find . -name '*.sh' -not -path './node_modules/*' -print0 | xargs -0 -n1 bash -n
 
+      # A branch that needs an unreleased ibee-sdk is checked against the ibee-typescript
+      # branch of the same name when there is one (as the CLI's CI does with ibee-python).
       - name: TypeScript examples type-check
+        env:
+          SDK_REF: ${{ github.head_ref || github.ref_name }}
         run: |
           npm ci
+          if [ "$SDK_REF" != main ] && git ls-remote --exit-code --heads https://github.com/devs-ibee/ibee-typescript.git "$SDK_REF" > /dev/null; then
+            git clone --quiet --depth 1 --branch "$SDK_REF" https://github.com/devs-ibee/ibee-typescript.git "$RUNNER_TEMP/ibee-typescript"
+            (cd "$RUNNER_TEMP/ibee-typescript" && npm ci && npm run build)
+            npm install --no-save "$RUNNER_TEMP/ibee-typescript"
+          fi
           npx tsc --noEmit
 
       - name: Terraform is formatted

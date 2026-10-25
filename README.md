@@ -17,9 +17,9 @@ Short, runnable examples for [IBEE](https://ibee.ai) cloud products with the Pyt
 | [Firewalls](firewalls/) | ✓ | ✓ | ✓ | [web-app](terraform/web-app/) |
 | [Load Balancers](load-balancers/) | ✓ | ✓ | ✓ | [web-app](terraform/web-app/) |
 | [Secret Manager](secret-manager/) | ✓ | ✓ | ✓ | [storage-and-secrets](terraform/storage-and-secrets/) |
-| [Container Registry](container-registry/) | Docker | | | |
+| [Container Registry](container-registry/) (also Docker) | ✓ | ✓ | ✓ | |
 
-Portal only, with no public API yet: Virtual IPs, Bare Metal, SSH keys, ISOs, Email, and creating Container Registries and their tokens.
+Portal only, with no public API yet: Virtual IPs, Bare Metal, SSH keys, ISOs and Email.
 
 ## Install
 

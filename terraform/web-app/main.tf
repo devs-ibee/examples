@@ -3,7 +3,7 @@
 terraform {
   required_version = ">= 1.11.0"
   required_providers {
-    ibee = { source = "devs-ibee/ibee", version = "~> 0.5.0" }
+    ibee = { source = "devs-ibee/ibee", version = "~> 0.7.0" }
   }
 }
 
@@ -43,6 +43,10 @@ resource "ibee_cloud_vm" "web" {
   os_distro        = var.os_distro
   billing_interval = "HOURLY"
   ssh_key_ids      = var.ssh_key_ids
+
+  # The API refuses to delete a VM with an automatically assigned public IP
+  # unless the caller chooses; the provider has no default. "reserve" keeps it.
+  delete_public_ip_action = "release"
 }
 
 resource "ibee_firewall_group" "web" {
