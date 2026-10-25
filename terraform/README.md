@@ -11,7 +11,7 @@ Small configurations for the IBEE Terraform provider. Each folder is independent
 
 ## Install the provider
 
-Each setup pins `devs-ibee/ibee` to `~> 0.5.0` from the Terraform Registry, so `terraform init` installs it (Terraform 1.11 or later).
+Each setup pins `devs-ibee/ibee` to `~> 0.7.0` from the Terraform Registry, so `terraform init` installs it (Terraform 1.11 or later).
 
 ## Run
 
@@ -26,7 +26,7 @@ terraform destroy -var site_id=... -var plan_id=... -var template_id=...
 
 - Changing `plan_id` on a VM resizes it in place; the API refuses changes it cannot make.
 - `billing_interval` is the plan's billing term to buy. Set it explicitly; changing it replaces the VM.
-- Destroying a VM releases its automatic public IP. Set `delete_public_ip_action = "reserve"` to keep it as a Reserved IP.
+- A VM with an automatically assigned public IP cannot be destroyed until `delete_public_ip_action` is set: the API answers 400 and the provider (0.7.0) has no default. The sample sets `release`; set `reserve` to keep the address as a Reserved IP (it may continue billing).
 - Buckets must be empty before they can be destroyed.
 - The generated S3 secret key is stored in Terraform state; use an encrypted state backend.
 
