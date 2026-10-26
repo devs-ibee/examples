@@ -10474,15 +10474,15 @@ curl -X POST https://api.ibee.ai/v1/compute/cloud-vms?workspace_id=907479 \
 Everything in this reference is also available as data, for code generators
 and AI agents:
 
-| What                                                                                                             | Where                                                                                                                                                        |
-| ---------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| OpenAPI 3.1 specification, as served by the docs                                                                 | [openapi.yaml](https://ibee.ai/docs/openapi.yaml) · [openapi.json](https://ibee.ai/docs/openapi.json)                                                        |
-| The authored specification, with the API title, version, introduction and tag descriptions the served copy omits | [contract/ibee-cloud.yaml](https://raw.githubusercontent.com/devs-ibee/examples/main/contract/ibee-cloud.yaml) in the public `devs-ibee/examples` repository |
-| API catalog ([RFC 9727](https://www.rfc-editor.org/rfc/rfc9727))                                                 | [/.well-known/api-catalog](https://ibee.ai/.well-known/api-catalog)                                                                                          |
-| Index of every docs page, one line each                                                                          | [/docs/llms.txt](https://ibee.ai/docs/llms.txt)                                                                                                              |
-| Full text of every docs page in one file                                                                         | [/docs/llms-full.txt](https://ibee.ai/docs/llms-full.txt)                                                                                                    |
-| Markdown of any page                                                                                             | append `.md` to its URL, for example [create-cloud-vm.md](https://ibee.ai/docs/api-reference/cloud-vms/create-cloud-vm.md)                                   |
-| MCP server for AI clients (Claude Code, Cursor and others)                                                       | `https://ibee.ai/docs/_mcp/server`                                                                                                                           |
+| What                                                                                                             | Where                                                                                                                      |
+| ---------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| OpenAPI 3.1 specification, as served by the docs                                                                 | [openapi.yaml](https://ibee.ai/docs/openapi.yaml) · [openapi.json](https://ibee.ai/docs/openapi.json)                      |
+| The complete specification, with the API title, version, introduction and tag descriptions the served copy omits | [/docs/openapi/ibee-cloud.yaml](https://ibee.ai/docs/openapi/ibee-cloud.yaml)                                              |
+| API catalog ([RFC 9727](https://www.rfc-editor.org/rfc/rfc9727))                                                 | [/.well-known/api-catalog](https://ibee.ai/.well-known/api-catalog)                                                        |
+| Index of every docs page, one line each                                                                          | [/docs/llms.txt](https://ibee.ai/docs/llms.txt)                                                                            |
+| Full text of every docs page in one file                                                                         | [/docs/llms-full.txt](https://ibee.ai/docs/llms-full.txt)                                                                  |
+| Markdown of any page                                                                                             | append `.md` to its URL, for example [create-cloud-vm.md](https://ibee.ai/docs/api-reference/cloud-vms/create-cloud-vm.md) |
+| MCP server for AI clients (Claude Code, Cursor and others)                                                       | `https://ibee.ai/docs/_mcp/server`                                                                                         |
 
 ```bash
 claude mcp add --transport http ibee-docs https://ibee.ai/docs/_mcp/server
