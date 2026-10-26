@@ -6,7 +6,7 @@
 - For section-specific indexes, append `/llms.txt` to any section URL
 - For the full text of every page in one file, fetch https://ibee.ai/docs/llms-full.txt
 - For AI client integration (Claude Code, Cursor, etc.), connect to the MCP server at https://ibee.ai/docs/_mcp/server
-- The OpenAPI specification is at https://ibee.ai/docs/openapi.yaml (also .json); the authored copy with full metadata is https://raw.githubusercontent.com/devs-ibee/examples/main/contract/ibee-cloud.yaml
+- The OpenAPI specification is at https://ibee.ai/docs/openapi.yaml (also .json); the authored copy with full metadata is https://ibee.ai/docs/openapi/ibee-cloud.yaml
 
 ## Docs
 
@@ -32,7 +32,7 @@
 - [Custom images](https://ibee.ai/docs/infrastructure/cloud-vms/custom-images.md): Boot a Cloud VM from your own ISO, a snapshot, or a backup recovery point.
 - [Resize a VM](https://ibee.ai/docs/infrastructure/cloud-vms/resize-a-vm.md): Move a Cloud VM to a different plan — upgrade CPU, RAM, and disk, or downgrade CPU and RAM — without rebuilding.
 - [Power actions](https://ibee.ai/docs/infrastructure/cloud-vms/power-actions.md): Start, stop, reboot, and delete IBEE Solutions VMs safely, and what to use while browser console access is unavailable.
-- [Networking for VMs](https://ibee.ai/docs/infrastructure/cloud-vms/networking-for-v-ms.md): How public IPs, VPCs, NAT, Reserved IPs, firewall groups, and bandwidth work for IBEE Solutions VMs.
+- [Networking for VMs](https://ibee.ai/docs/infrastructure/cloud-vms/networking-for-vms.md): How public IPs, VPCs, NAT, Reserved IPs, firewall groups, and bandwidth work for IBEE Solutions VMs.
 - [Attach volumes](https://ibee.ai/docs/infrastructure/cloud-vms/attach-volumes.md): Add Block Storage volumes to a Cloud VM and mount them inside the guest.
 - [Monitoring](https://ibee.ai/docs/infrastructure/cloud-vms/monitoring.md): Track CPU, memory, disk, and network metrics for your Cloud VM, and find its recent operations in Activity logs.
 - [Object Storage](https://ibee.ai/docs/infrastructure/object-storage.md): IBEE Object Storage is a scalable, S3-compatible storage service for files, media, backups, and application assets. Works with any S3-compatible SDK or tool.
@@ -63,7 +63,7 @@
 - [Algorithms](https://ibee.ai/docs/network-security/load-balancer/algorithms.md): Choose how an IBEE Solutions load balancer distributes requests — round robin, least request, random, or consistent hash — and when to combine them with weights and sticky sessions.
 - [Health checks](https://ibee.ai/docs/network-security/load-balancer/health-checks.md): Configure active HTTP, HTTPS, or TCP health checks on an IBEE Solutions load balancer so traffic only reaches healthy backends.
 - [SSL and TLS termination](https://ibee.ai/docs/network-security/load-balancer/ssl-and-tls-termination.md): Terminate HTTPS at an IBEE Solutions L7 load balancer with a managed certificate, or pass TLS through untouched on L4 for end-to-end encryption.
-- [Attach VMs](https://ibee.ai/docs/network-security/load-balancer/attach-v-ms.md): Point an IBEE Solutions load balancer at your Cloud VMs or GPU VMs by adding them as IP or hostname backends.
+- [Attach VMs](https://ibee.ai/docs/network-security/load-balancer/attach-vms.md): Point an IBEE Solutions load balancer at your Cloud VMs or GPU VMs by adding them as IP or hostname backends.
 - [CDN](https://ibee.ai/docs/network-security/cdn.md): Distribute content globally with IBEE CDN. Cache an Object Storage bucket at edge locations for low-latency delivery, with automatic SSL, custom domains, purging, and traffic metrics.
 - [Firewall as a Service](https://ibee.ai/docs/network-security/firewalls.md): Create reusable firewall groups with inbound rules to control traffic to your Cloud VMs and GPU VMs.
 - [Create firewall rules](https://ibee.ai/docs/network-security/firewalls/create-firewall-rules.md): Add inbound firewall rules to control which traffic reaches your IBEE Solutions VMs.
@@ -77,7 +77,7 @@
 - [VM snapshots](https://ibee.ai/docs/tools/snapshots.md): Capture on-demand recovery points for IBEE Solutions VMs and restore in place or into a new VM.
 - [Create a snapshot](https://ibee.ai/docs/tools/snapshots/create-a-snapshot.md): Capture a manual recovery point of a Cloud VM — root disk plus optional data volumes.
 - [Restore a snapshot](https://ibee.ai/docs/tools/snapshots/restore-a-snapshot.md): Roll back a Cloud VM, create a new VM, or restore a single disk from a snapshot recovery point.
-- [ISOs](https://ibee.ai/docs/tools/is-os.md): Add custom ISO images to your IBEE Solutions organization from a remote URL, attach them to VMs, and choose them when deploying.
+- [ISOs](https://ibee.ai/docs/tools/isos.md): Add custom ISO images to your IBEE Solutions organization from a remote URL, attach them to VMs, and choose them when deploying.
 - [SSH Keys](https://ibee.ai/docs/tools/ssh-keys.md): Create or import SSH keys in an IBEE Solutions workspace so you can log in to your VMs without a password.
 - [API Tokens](https://ibee.ai/docs/tools/api-tokens.md): Create and manage organization-level API tokens for the IBEE public API, scoped to the entire organization or specific workspaces, and S3 credentials for Object Storage.
 - [Secret Manager](https://ibee.ai/docs/tools/secret-manager.md): Store API keys, passwords, and other sensitive values in IBEE Solutions Secret Manager — versioned secrets grouped in stores, with AppRole and Kubernetes access for your apps.
@@ -294,10 +294,38 @@
 - [Remove CDN custom domain](https://ibee.ai/docs/api-reference/cdn/delete-cdn-custom-domain.md)
 - [Verify CDN custom domain](https://ibee.ai/docs/api-reference/cdn/verify-cdn-custom-domain.md)
 - [Purge CDN cache](https://ibee.ai/docs/api-reference/cdn/purge-cdn-cache.md)
+- [Check registry name availability](https://ibee.ai/docs/api-reference/container-registry/check-container-registry-name-availability.md)
+- [List registries](https://ibee.ai/docs/api-reference/container-registry/list-container-registries.md)
+- [Create registry](https://ibee.ai/docs/api-reference/container-registry/create-container-registry.md)
+- [Get registry](https://ibee.ai/docs/api-reference/container-registry/get-container-registry.md)
+- [Delete registry](https://ibee.ai/docs/api-reference/container-registry/delete-container-registry.md)
+- [Change registry visibility](https://ibee.ai/docs/api-reference/container-registry/update-container-registry-visibility.md)
+- [Retry registry provisioning](https://ibee.ai/docs/api-reference/container-registry/retry-container-registry-provisioning.md)
+- [Empty registry](https://ibee.ai/docs/api-reference/container-registry/empty-container-registry.md)
+- [Get registry storage plan](https://ibee.ai/docs/api-reference/container-registry/get-container-registry-package.md)
+- [Upgrade registry storage plan](https://ibee.ai/docs/api-reference/container-registry/upgrade-container-registry-package.md)
+- [List registry access tokens](https://ibee.ai/docs/api-reference/container-registry/list-container-registry-access-tokens.md)
+- [Create registry access token](https://ibee.ai/docs/api-reference/container-registry/create-container-registry-access-token.md)
+- [Rotate registry access token](https://ibee.ai/docs/api-reference/container-registry/rotate-container-registry-access-token.md)
+- [Revoke registry access token](https://ibee.ai/docs/api-reference/container-registry/revoke-container-registry-access-token.md)
+- [List repositories](https://ibee.ai/docs/api-reference/container-registry/list-container-registry-repositories.md)
+- [Delete repository](https://ibee.ai/docs/api-reference/container-registry/delete-container-registry-repository.md)
+- [List artifacts](https://ibee.ai/docs/api-reference/container-registry/list-container-registry-artifacts.md)
+- [Delete artifact](https://ibee.ai/docs/api-reference/container-registry/delete-container-registry-artifact.md)
+- [Rescan artifact](https://ibee.ai/docs/api-reference/container-registry/scan-container-registry-artifact.md)
+- [Get registry security settings](https://ibee.ai/docs/api-reference/container-registry/get-container-registry-security-settings.md)
+- [Update registry security settings](https://ibee.ai/docs/api-reference/container-registry/update-container-registry-security-settings.md)
+- [Get vulnerability summary](https://ibee.ai/docs/api-reference/container-registry/get-container-registry-vulnerability-summary.md)
+- [List vulnerabilities](https://ibee.ai/docs/api-reference/container-registry/list-container-registry-vulnerabilities.md)
+- [List SBOMs](https://ibee.ai/docs/api-reference/container-registry/list-container-registry-sboms.md)
+- [Get SBOM](https://ibee.ai/docs/api-reference/container-registry/get-container-registry-sbom.md)
+- [Download SBOM](https://ibee.ai/docs/api-reference/container-registry/download-container-registry-sbom.md)
+- [Get registry metrics](https://ibee.ai/docs/api-reference/container-registry/get-container-registry-metrics.md)
 
 ## Changelog
 
 - [Changelog](https://ibee.ai/docs/changelog.md): Product updates, fixes, and security notices for IBEE Cloud — compute, GPU VMs, storage, networking, the API, and the CLI.
+- [October 20, 2026](https://ibee.ai/docs/2026-10-20-public-api-contract-0-5-0.md)
 - [October 19, 2026](https://ibee.ai/docs/2026-10-19-public-api-contract-0-4-0.md)
 - [May 1, 2026](https://ibee.ai/docs/2026-05-01-cve-2026-31431-mitigation.md)
 
@@ -305,5 +333,5 @@
 
 - [OpenAPI JSON](https://ibee.ai/docs/openapi.json)
 - [OpenAPI YAML](https://ibee.ai/docs/openapi.yaml)
-- [Authored OpenAPI YAML with info and tag descriptions](https://raw.githubusercontent.com/devs-ibee/examples/main/contract/ibee-cloud.yaml)
+- [Authored OpenAPI YAML with info and tag descriptions](https://ibee.ai/docs/openapi/ibee-cloud.yaml)
 - [API catalog (RFC 9727)](\1/.well-known/api-catalog)
