@@ -84229,6 +84229,7 @@ dataTask.resume()
 title: Changelog
 url: https://ibee.ai/docs/changelog
 description: Product updates, fixes, and security notices for IBEE Cloud — compute, GPU VMs, storage, networking, the API, and the CLI.
+last_updated: 2026-10-20
 ---
 
 # Changelog
