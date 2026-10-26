@@ -5,6 +5,7 @@
 ---
 title: Infrastructure, engineered for builders.
 url: https://ibee.ai/docs
+last_updated: 2026-07-12
 ---
 
 # Infrastructure, engineered for builders.
@@ -104,6 +105,7 @@ Talk to us about enterprise plans.
 title: Sign Up
 url: https://ibee.ai/docs/getting-started/account-setup/sign-up
 description: Create your IBEE Solutions account — register with your email, verify it, set a password, and log in to the portal.
+last_updated: 2026-09-28
 ---
 
 # Sign Up
@@ -197,6 +199,7 @@ Disable browser extensions that block Cloudflare scripts and reload the page.
 title: Create an Organization
 url: https://ibee.ai/docs/getting-started/account-setup/create-an-organization
 description: Create an IBEE Solutions organization to manage resources, billing, and team members. Learn about country restrictions, geo-detection, currency assignment, tax invoices, and GST verification for Indian businesses.
+last_updated: 2026-09-28
 ---
 
 # Create an Organization
@@ -343,6 +346,7 @@ Ensure you are entering a valid, active 15-character GSTIN. Inactive or cancelle
 title: Restricted Countries
 url: https://ibee.ai/docs/getting-started/account-setup/restricted-countries
 description: IBEE Solutions does not offer services in certain countries due to U.S. export-control and trade-sanction regulations. Review the full list of restricted countries and the 26 countries where IBEE Solutions operates.
+last_updated: 2026-07-08
 ---
 
 # Restricted Countries
@@ -439,6 +443,7 @@ If your country is not listed above and is not restricted, you may still be able
 title: Verify Your Identity
 url: https://ibee.ai/docs/getting-started/account-setup/verify-your-identity
 description: Complete identity verification (KYC) to unlock all IBEE Solutions services. Indian users verify with Aadhaar via Digilocker. International users verify with a government-issued ID and selfie.
+last_updated: 2026-09-28
 ---
 
 # Verify Your Identity
@@ -527,6 +532,7 @@ The portal polls for up to 60 seconds after submission. If your status does not 
 title: Account Security
 url: https://ibee.ai/docs/getting-started/account-setup/account-security
 description: Protect your IBEE Solutions login — turn on two-factor authentication with an authenticator app, change your password, review your login history, and reset a forgotten password.
+last_updated: 2026-10-19
 ---
 
 # Account Security
@@ -638,6 +644,7 @@ If the reset link has expired, the page shows **Request a new reset link**. Clic
 title: Add Billing
 url: https://ibee.ai/docs/getting-started/account-setup/add-billing
 description: Set up billing for your IBEE Solutions organization — purchase prepaid credits (online payment in India, card in other countries), redeem promo codes, save a card, upload TDS certificates, and apply for Invoice Billing.
+last_updated: 2026-10-19
 ---
 
 # Add Billing
@@ -759,6 +766,7 @@ Before creating a billable resource, the platform checks your organization's bil
 title: Dashboard & Navigation
 url: https://ibee.ai/docs/getting-started/overview/dashboard-navigation
 description: Navigate the IBEE Solutions portal — select an organization, browse workspaces, switch between them, and access resources, billing, and settings from the sidebar.
+last_updated: 2026-10-19
 ---
 
 # Dashboard & Navigation
@@ -880,6 +888,7 @@ Organization-level pages (Billing, Team, API Tokens, Activity Logs) are accessib
 title: Regions & Locations
 url: https://ibee.ai/docs/getting-started/overview/regions-and-locations
 description: Where IBEE Solutions runs — data center locations, region codes, and availability for compute, storage, and networking resources.
+last_updated: 2026-09-28
 ---
 
 # Regions & Locations
@@ -921,6 +930,7 @@ Pick the region closest to your end users or workload:
 title: First resource
 url: https://ibee.ai/docs/getting-started/overview/first-resource
 description: Launch your first IBEE Solutions resource — a Cloud VM — in under 5 minutes.
+last_updated: 2026-09-28
 ---
 
 # First resource
@@ -980,6 +990,7 @@ ssh ubuntu@<public-ip>
 title: Bare Metal Servers
 url: https://ibee.ai/docs/infrastructure/bare-metal
 description: Dedicated physical servers on IBEE Solutions with full hardware access — browse the Dell hardware catalog in the portal and talk to sales to order.
+last_updated: 2026-09-28
 ---
 
 # Bare Metal Servers
@@ -1029,6 +1040,7 @@ Pricing is monthly in INR, plus 18% GST. The portal doesn't show bare metal pric
 title: Provision a server
 url: https://ibee.ai/docs/infrastructure/bare-metal/provision-a-server
 description: Order a bare metal server on IBEE Solutions — review the hardware catalog in the portal, then talk to sales to configure, price, and provision it.
+last_updated: 2026-09-28
 ---
 
 # Provision a server
@@ -1091,6 +1103,7 @@ The catalog shows standard ranges. Custom hardware is available on request — c
 title: GPU VMs
 url: https://ibee.ai/docs/infrastructure/gpu-vms
 description: GPU-backed virtual machines on IBEE Solutions for AI inference, training, rendering, and other accelerated workloads — deployed and managed like Cloud VMs, with per-GPU metrics.
+last_updated: 2026-10-26
 ---
 
 # GPU VMs
@@ -1166,6 +1179,7 @@ If the agent goes offline or setup fails, the tab explains why and offers **Repa
 title: Create a GPU VM in the portal
 url: https://ibee.ai/docs/infrastructure/gpu-vms/create-a-gpu-vm
 description: Deploy a GPU-enabled virtual machine on IBEE Solutions for AI, ML, rendering, and compute-intensive workloads.
+last_updated: 2026-10-26
 ---
 
 # Create a GPU VM in the portal
@@ -1302,6 +1316,7 @@ Wait a few minutes. If the status does not update, contact [IBEE support](/docs/
 title: Cloud VMs
 url: https://ibee.ai/docs/infrastructure/cloud-vms
 description: Launch and manage virtual machines on IBEE Solutions — flexible compute for web apps, APIs, backends, databases, and dev environments.
+last_updated: 2026-10-26
 ---
 
 # Cloud VMs
@@ -1381,6 +1396,7 @@ See [Regions and locations](/docs/getting-started/overview/regions-and-locations
 title: Create a VM
 url: https://ibee.ai/docs/infrastructure/cloud-vms/create-a-vm
 description: Deploy one or more Cloud VMs on IBEE Solutions — choose a location, plan, operating system, SSH keys, network, billing term, and hostname, then click Deploy.
+last_updated: 2026-10-26
 ---
 
 # Create a VM
@@ -1611,6 +1627,7 @@ Wait a few minutes. If the status does not update, contact [IBEE support](/docs/
 title: Launch your first VM
 url: https://ibee.ai/docs/infrastructure/cloud-vms/launch-your-first-vm
 description: A 5-minute quickstart for deploying your first IBEE Solutions VM from the portal or the ibee CLI.
+last_updated: 2026-10-19
 ---
 
 # Launch your first VM
@@ -1852,6 +1869,7 @@ Set `IBEE_TOKEN` and `IBEE_WORKSPACE_ID`, or pass the global `--token` and
 title: Instance types
 url: https://ibee.ai/docs/infrastructure/cloud-vms/instance-types
 description: Choose the right Cloud VM instance type based on CPU, memory, disk, and workload profile.
+last_updated: 2026-10-26
 ---
 
 # Instance types
@@ -1949,6 +1967,7 @@ You can move a VM to a different plan from **Settings → Change Plan**. The VM 
 title: OS images
 url: https://ibee.ai/docs/infrastructure/cloud-vms/os-images
 description: Pick an operating system template for your Cloud VM, or boot from an ISO, snapshot, or backup — and find the credentials to sign in.
+last_updated: 2026-10-26
 ---
 
 # OS images
@@ -2024,6 +2043,7 @@ For non-template installs:
 title: Custom images
 url: https://ibee.ai/docs/infrastructure/cloud-vms/custom-images
 description: Boot a Cloud VM from your own ISO, a snapshot, or a backup recovery point.
+last_updated: 2026-10-26
 ---
 
 # Custom images
@@ -2108,6 +2128,7 @@ If any of these are missing, the VM may boot but be unreachable, or fail to come
 title: Resize a VM
 url: https://ibee.ai/docs/infrastructure/cloud-vms/resize-a-vm
 description: Move a Cloud VM to a different plan — upgrade CPU, RAM, and disk, or downgrade CPU and RAM — without rebuilding.
+last_updated: 2026-10-19
 ---
 
 # Resize a VM
@@ -2237,6 +2258,7 @@ Run the `growpart` / `resize2fs` commands above. Some images don't auto-extend o
 title: Power actions
 url: https://ibee.ai/docs/infrastructure/cloud-vms/power-actions
 description: Start, stop, reboot, and delete IBEE Solutions VMs safely, and what to use while browser console access is unavailable.
+last_updated: 2026-10-19
 ---
 
 # Power actions
@@ -2370,6 +2392,7 @@ Browser console access isn't available yet. Check **Overview → Connection Deta
 title: Networking for VMs
 url: https://ibee.ai/docs/infrastructure/cloud-vms/networking-for-vms
 description: How public IPs, VPCs, NAT, Reserved IPs, firewall groups, and bandwidth work for IBEE Solutions VMs.
+last_updated: 2026-10-19
 ---
 
 # Networking for VMs
@@ -2512,6 +2535,7 @@ The chart smooths over its time range. Switch to **30m** for short-window detail
 title: Attach volumes
 url: https://ibee.ai/docs/infrastructure/cloud-vms/attach-volumes
 description: Add Block Storage volumes to a Cloud VM and mount them inside the guest.
+last_updated: 2026-10-19
 ---
 
 # Attach volumes
@@ -2620,6 +2644,7 @@ The platform restores the volume but doesn't mount it inside the guest. Use the 
 title: Monitoring
 url: https://ibee.ai/docs/infrastructure/cloud-vms/monitoring
 description: Track CPU, memory, disk, and network metrics for your Cloud VM, and find its recent operations in Activity logs.
+last_updated: 2026-10-19
 ---
 
 # Monitoring
@@ -2698,6 +2723,7 @@ The same metrics are in the public API (GPU VMs use the same paths under `/compu
 title: Object Storage
 url: https://ibee.ai/docs/infrastructure/object-storage
 description: IBEE Object Storage is a scalable, S3-compatible storage service for files, media, backups, and application assets. Works with any S3-compatible SDK or tool.
+last_updated: 2026-10-19
 ---
 
 # Object Storage
@@ -2775,6 +2801,7 @@ Track usage, objects, and bandwidth — organization-wide and per bucket.
 title: Core Concepts
 url: https://ibee.ai/docs/infrastructure/object-storage/core-concepts
 description: Core building blocks of IBEE Object Storage — buckets, objects, regions, endpoints, and access.
+last_updated: 2026-10-19
 ---
 
 # Core Concepts
@@ -2860,6 +2887,7 @@ These bucket-level settings control how objects can be read, written, and kept:
 title: Upload Your First Object
 url: https://ibee.ai/docs/infrastructure/object-storage/upload-your-first-object
 description: Create your first bucket, generate API credentials, and upload an object — using the IBEE Solutions portal and an S3-compatible client.
+last_updated: 2026-10-19
 ---
 
 # Upload Your First Object
@@ -2981,6 +3009,7 @@ Use a bucket like a local directory with `s3fs` or `rclone`.
 title: Buckets
 url: https://ibee.ai/docs/infrastructure/object-storage/buckets
 description: Containers for objects in IBEE Object Storage. Create buckets, configure settings, and manage their lifecycle.
+last_updated: 2026-10-19
 ---
 
 # Buckets
@@ -3181,6 +3210,7 @@ Bucket operations in the public API: `GET /object-storage/buckets`, `POST /objec
 title: Bucket Policies
 url: https://ibee.ai/docs/infrastructure/object-storage/buckets/bucket-policies
 description: Control bucket access in IBEE Object Storage — toggle public access, scope API credential permissions to specific buckets, and use bucket-level access controls.
+last_updated: 2026-09-28
 ---
 
 # Bucket Policies
@@ -3281,6 +3311,7 @@ This is the bucket-level access boundary: a credential scoped to bucket `A` cann
 title: Lifecycle Management
 url: https://ibee.ai/docs/infrastructure/object-storage/buckets/lifecycle-management
 description: Create lifecycle rules in IBEE Object Storage to automatically delete objects after a set number of days or on a date.
+last_updated: 2026-10-19
 ---
 
 # Lifecycle Management
@@ -3357,6 +3388,7 @@ If the **Prefix filter** field is empty, the rule applies to all objects in the 
 title: CORS
 url: https://ibee.ai/docs/infrastructure/object-storage/buckets/cors
 description: Configure CORS rules on an IBEE Object Storage bucket to allow browser applications to access your files. Set allowed origins, HTTP methods, and headers.
+last_updated: 2026-10-19
 ---
 
 # CORS
@@ -3457,6 +3489,7 @@ If your app sends custom headers, add them explicitly or use `*` to allow all he
 title: Custom Domains
 url: https://ibee.ai/docs/infrastructure/object-storage/buckets/custom-domains
 description: Serve IBEE Object Storage bucket content from your own domain by adding a CNAME record and verifying your hostname in the bucket settings.
+last_updated: 2026-09-28
 ---
 
 # Custom Domains
@@ -3555,6 +3588,7 @@ The bucket is not public. Enable Public Access first — see [Bucket policies �
 title: Event Notifications
 url: https://ibee.ai/docs/infrastructure/object-storage/buckets/event-notifications
 description: Configure webhook notifications on an IBEE Object Storage bucket to receive POST requests when objects are uploaded. Filter by prefix or suffix to target specific files.
+last_updated: 2026-10-19
 ---
 
 # Event Notifications
@@ -3646,6 +3680,7 @@ Check that the correct event types (**Creation** and/or **Deletion**) are select
 title: Objects
 url: https://ibee.ai/docs/infrastructure/object-storage/objects
 description: Upload, download, list, and delete objects in IBEE Object Storage buckets — from the portal or any S3-compatible client.
+last_updated: 2026-10-19
 ---
 
 # Objects
@@ -3803,6 +3838,7 @@ The portal upload limit is 300 MB per file. Use an [S3-compatible client](#uploa
 title: Object Locking
 url: https://ibee.ai/docs/infrastructure/object-storage/objects/object-locking
 description: Mark objects as immutable for compliance, ransomware protection, or regulatory holds. Object Lock is a permanent bucket setting in IBEE Object Storage.
+last_updated: 2026-10-19
 ---
 
 # Object Locking
@@ -3912,6 +3948,7 @@ Objects under legal hold can't be deleted from the portal — the delete button 
 title: Presigned URLs
 url: https://ibee.ai/docs/infrastructure/object-storage/objects/presigned-urls
 description: Generate time-limited URLs for uploading or downloading IBEE Object Storage objects without sharing your credentials.
+last_updated: 2026-09-28
 ---
 
 # Presigned URLs
@@ -4065,6 +4102,7 @@ print(post)  # url + fields
 title: Mount a Bucket as a Filesystem
 url: https://ibee.ai/docs/infrastructure/object-storage/mount-a-bucket-as-a-filesystem
 description: Access an IBEE Object Storage bucket as a local directory using s3fs or rclone, so tools that expect POSIX paths can read and write objects.
+last_updated: 2026-09-28
 ---
 
 # Mount a Bucket as a Filesystem
@@ -4191,6 +4229,7 @@ rclone sync ./local-dir ibee:my-bucket/remote-dir
 title: Metrics
 url: https://ibee.ai/docs/infrastructure/object-storage/metrics
 description: Monitor bucket usage, object counts, storage operations, and bandwidth from the IBEE Solutions portal — both at the organization level and per bucket.
+last_updated: 2026-10-19
 ---
 
 # Metrics
@@ -4260,6 +4299,7 @@ The General tab also shows two read-only fields:
 title: API Credentials
 url: https://ibee.ai/docs/infrastructure/object-storage/api-tokens
 description: S3 credentials for IBEE Object Storage. Create credentials from the API Tokens page to access buckets via AWS CLI, rclone, and S3-compatible tools.
+last_updated: 2026-10-19
 ---
 
 # API Credentials
@@ -4329,6 +4369,7 @@ endpoint = https://WORKSPACE-ID.blob.ibeestorage.com
 title: Hosting Static Sites and SPAs on Object Storage
 url: https://ibee.ai/docs/infrastructure/object-storage/static-site-hosting
 description: Complete guide to hosting static websites and single-page applications (React, Vue, Angular) on IBEE Object Storage with CDN, custom domains, and HTTPS.
+last_updated: 2026-10-19
 ---
 
 # Hosting Static Sites and SPAs on Object Storage
@@ -4489,6 +4530,7 @@ Configure CORS on the API or the bucket ([CORS](/docs/infrastructure/object-stor
 title: CDN Integration
 url: https://ibee.ai/docs/infrastructure/object-storage/cdn-integration
 description: Front an IBEE Object Storage bucket with the IBEE CDN to cache and deliver content globally with low latency.
+last_updated: 2026-10-19
 ---
 
 # CDN Integration
@@ -4554,6 +4596,7 @@ See [Network & Security → CDN](/docs/network-security/cdn#choose-a-cache-polic
 title: Pricing
 url: https://ibee.ai/docs/infrastructure/object-storage/pricing
 description: IBEE Object Storage pricing — storage, internet egress, API operation classes, included monthly usage, rate limits, and billing examples.
+last_updated: 2026-09-28
 ---
 
 # Pricing
@@ -4720,6 +4763,7 @@ Ingress is free but subject to fair-use protections and abuse prevention control
 title: Limits
 url: https://ibee.ai/docs/infrastructure/object-storage/limits
 description: Hard limits for IBEE Object Storage — storage per bucket, object size, upload size, API rate limits, bucket naming rules, and free tier caps. Limits in GiB and TiB are base-2.
+last_updated: 2026-09-28
 ---
 
 # Limits
@@ -4797,6 +4841,7 @@ To request an increase to any limit, [contact support](/docs/support/contact-sup
 title: Block Storage
 url: https://ibee.ai/docs/infrastructure/block-storage
 description: Persistent NVMe volumes you can attach to IBEE Solutions servers — create, attach, mount, detach, and delete block storage volumes.
+last_updated: 2026-10-19
 ---
 
 # Block Storage
@@ -4862,6 +4907,7 @@ You can increase a volume's size later, from the volume's page — see [Resize a
 title: Create a volume
 url: https://ibee.ai/docs/infrastructure/block-storage/create-a-volume
 description: Provision a new NVMe block storage volume on IBEE Solutions — pick storage type, location, size, and a label — then resize or delete it.
+last_updated: 2026-10-19
 ---
 
 # Create a volume
@@ -5036,6 +5082,7 @@ Refresh the page. If the volume does not reach **Ready** within a few minutes, c
 title: Attach and detach a volume
 url: https://ibee.ai/docs/infrastructure/block-storage/attach-and-detach-a-volume
 description: Attach a Block Storage volume to an IBEE Solutions server, mount it inside the guest, and safely detach when you're done.
+last_updated: 2026-10-19
 ---
 
 # Attach and detach a volume
@@ -5255,6 +5302,7 @@ The volume is still in use by the guest. Run `sudo lsof /mnt/data` to find proce
 title: Container Registry
 url: https://ibee.ai/docs/infrastructure/container-registry
 description: Store Docker and OCI images in private or public registries, push and pull with registry access tokens, and review vulnerability and SBOM data for every image.
+last_updated: 2026-10-20
 ---
 
 # Container Registry
@@ -5510,6 +5558,7 @@ Things to know:
 title: Load Balancers
 url: https://ibee.ai/docs/network-security/load-balancer
 description: Distribute traffic across multiple backends with L4 and L7 load balancers on IBEE Solutions — health checks, routing algorithms, and TLS termination.
+last_updated: 2026-10-26
 ---
 
 # Load Balancers
@@ -5560,6 +5609,7 @@ The portal does not support editing a load balancer after creation. To change ba
 title: Create a load balancer
 url: https://ibee.ai/docs/network-security/load-balancer/create-a-load-balancer
 description: Create an L4 or L7 load balancer on IBEE Solutions — choose a protocol, add backends, set the routing algorithm, and configure health checks.
+last_updated: 2026-10-26
 ---
 
 # Create a load balancer
@@ -5686,6 +5736,7 @@ The portal cannot edit a load balancer in place. Delete the load balancer and cr
 title: Algorithms
 url: https://ibee.ai/docs/network-security/load-balancer/algorithms
 description: Choose how an IBEE Solutions load balancer distributes requests — round robin, least request, random, or consistent hash — and when to combine them with weights and sticky sessions.
+last_updated: 2026-10-26
 ---
 
 # Algorithms
@@ -5729,6 +5780,7 @@ Weights are set when you create the load balancer. The portal cannot edit a load
 title: Health checks
 url: https://ibee.ai/docs/network-security/load-balancer/health-checks
 description: Configure active HTTP, HTTPS, or TCP health checks on an IBEE Solutions load balancer so traffic only reaches healthy backends.
+last_updated: 2026-10-19
 ---
 
 # Health checks
@@ -5775,6 +5827,7 @@ With the defaults, a failing backend is removed after roughly 30 seconds (3 fail
 title: SSL and TLS termination
 url: https://ibee.ai/docs/network-security/load-balancer/ssl-and-tls-termination
 description: Terminate HTTPS at an IBEE Solutions L7 load balancer with a managed certificate, or pass TLS through untouched on L4 for end-to-end encryption.
+last_updated: 2026-10-19
 ---
 
 # SSL and TLS termination
@@ -5825,6 +5878,7 @@ The portal has no custom domain field. Through the API, you can set `custom_doma
 title: Attach VMs
 url: https://ibee.ai/docs/network-security/load-balancer/attach-vms
 description: Point an IBEE Solutions load balancer at your Cloud VMs or GPU VMs by adding them as IP or hostname backends.
+last_updated: 2026-10-26
 ---
 
 # Attach VMs
@@ -5880,6 +5934,7 @@ Unhealthy VMs are removed from rotation automatically by [health checks](/docs/n
 title: CDN
 url: https://ibee.ai/docs/network-security/cdn
 description: Distribute content globally with IBEE CDN. Cache an Object Storage bucket at edge locations for low-latency delivery, with automatic SSL, custom domains, purging, and traffic metrics.
+last_updated: 2026-10-19
 ---
 
 # CDN
@@ -6056,6 +6111,7 @@ The public API covers distributions (`GET /cdn/distributions`, `POST /cdn/distri
 title: Firewall as a Service
 url: https://ibee.ai/docs/network-security/firewalls
 description: Create reusable firewall groups with inbound rules to control traffic to your Cloud VMs and GPU VMs.
+last_updated: 2026-10-19
 ---
 
 # Firewall as a Service
@@ -6160,6 +6216,7 @@ In the API, a rule's `action` is `allow` or `drop` (the portal's **accept** is `
 title: Create firewall rules
 url: https://ibee.ai/docs/network-security/firewalls/create-firewall-rules
 description: Add inbound firewall rules to control which traffic reaches your IBEE Solutions VMs.
+last_updated: 2026-09-28
 ---
 
 # Create firewall rules
@@ -6257,6 +6314,7 @@ Enter valid CIDR notation (e.g. `10.0.0.0/8`) or a single IP address. At least o
 title: VPC
 url: https://ibee.ai/docs/network-security/vpc-ip-management
 description: Create isolated private networks, subnets, NAT gateways, port forwarding rules, and VM attachments on IBEE Solutions.
+last_updated: 2026-10-26
 ---
 
 # VPC
@@ -6549,6 +6607,7 @@ dependencies remain.
 title: Reserved IPs
 url: https://ibee.ai/docs/network-security/vpc-ip-management/reserved-ips
 description: Reserve portable public IPv4 addresses and attach them to VMs, NAT gateways, and Virtual IPs.
+last_updated: 2026-10-26
 ---
 
 # Reserved IPs
@@ -6696,6 +6755,7 @@ have no API operation; use the portal.
 title: Virtual IPs
 url: https://ibee.ai/docs/network-security/vpc-ip-management/virtual-ips
 description: Reserve a specific private IP inside a VPC subnet for MetalLB and Kubernetes LoadBalancer services, announced by nodes you authorize.
+last_updated: 2026-10-26
 ---
 
 # Virtual IPs
@@ -6866,6 +6926,7 @@ curl -X DELETE \
 title: VM backups
 url: https://ibee.ai/docs/tools/backups
 description: Protect Cloud VMs with scheduled, automated backups of the root disk and attached volumes.
+last_updated: 2026-10-19
 ---
 
 # VM backups
@@ -7001,6 +7062,7 @@ Enable and run-now require a `billing_catalog` with the backup storage SKU; no p
 title: Enable backups
 url: https://ibee.ai/docs/tools/backups/enable-backups
 description: Turn on automated backups for a Cloud VM and choose a daily or weekly schedule.
+last_updated: 2026-10-19
 ---
 
 # Enable backups
@@ -7082,6 +7144,7 @@ If you attach a new volume midway through a week, it's included starting from th
 title: Restore from backup
 url: https://ibee.ai/docs/tools/backups/restore-from-backup
 description: Recover a Cloud VM from an automated backup recovery point — in place, into a new VM, or one disk at a time.
+last_updated: 2026-10-19
 ---
 
 # Restore from backup
@@ -7181,6 +7244,7 @@ The volume is attached but unmounted. Run the **Mount Instructions** from the re
 title: Backup pricing
 url: https://ibee.ai/docs/tools/backups/backup-pricing
 description: How automated backup storage is billed, sized, and retained on IBEE Solutions.
+last_updated: 2026-10-19
 ---
 
 # Backup pricing
@@ -7262,6 +7326,7 @@ Recovery storage rolls up to your account-level usage view. To see per-VM detail
 title: VM snapshots
 url: https://ibee.ai/docs/tools/snapshots
 description: Capture on-demand recovery points for IBEE Solutions VMs and restore in place or into a new VM.
+last_updated: 2026-10-19
 ---
 
 # VM snapshots
@@ -7399,6 +7464,7 @@ Create requires a `billing_catalog` with the snapshot storage SKU; no public ope
 title: Create a snapshot
 url: https://ibee.ai/docs/tools/snapshots/create-a-snapshot
 description: Capture a manual recovery point of a Cloud VM — root disk plus optional data volumes.
+last_updated: 2026-10-19
 ---
 
 # Create a snapshot
@@ -7501,6 +7567,7 @@ The VM has no attached data volumes. Either switch to **Root volume only** or at
 title: Restore a snapshot
 url: https://ibee.ai/docs/tools/snapshots/restore-a-snapshot
 description: Roll back a Cloud VM, create a new VM, or restore a single disk from a snapshot recovery point.
+last_updated: 2026-10-19
 ---
 
 # Restore a snapshot
@@ -7611,6 +7678,7 @@ Take a snapshot of the current state first, then redo the restore against the co
 title: ISOs
 url: https://ibee.ai/docs/tools/isos
 description: Add custom ISO images to your IBEE Solutions organization from a remote URL, attach them to VMs, and choose them when deploying.
+last_updated: 2026-10-19
 ---
 
 # ISOs
@@ -7752,6 +7820,7 @@ Detach it from its VM first.
 title: SSH Keys
 url: https://ibee.ai/docs/tools/ssh-keys
 description: Create or import SSH keys in an IBEE Solutions workspace so you can log in to your VMs without a password.
+last_updated: 2026-10-19
 ---
 
 # SSH Keys
@@ -7910,6 +7979,7 @@ The private key can't be downloaded again. Delete the key and create a new key p
 title: API Tokens
 url: https://ibee.ai/docs/tools/api-tokens
 description: Create and manage organization-level API tokens for the IBEE public API, scoped to the entire organization or specific workspaces, and S3 credentials for Object Storage.
+last_updated: 2026-10-19
 ---
 
 # API Tokens
@@ -8101,6 +8171,7 @@ Verify you are using:
 title: Secret Manager
 url: https://ibee.ai/docs/tools/secret-manager
 description: Store API keys, passwords, and other sensitive values in IBEE Solutions Secret Manager — versioned secrets grouped in stores, with AppRole and Kubernetes access for your apps.
+last_updated: 2026-10-19
 ---
 
 # Secret Manager
@@ -8221,6 +8292,7 @@ From the store detail **Actions** menu:
 title: Email Service
 url: https://ibee.ai/docs/tools/email-service
 description: Send transactional email from your own domain over an HTTPS API. Add your domain's email authentication records, register sender addresses, send with an API key, and track delivery with emails, logs, metrics, suppressions, and signed webhooks.
+last_updated: 2026-10-19
 ---
 
 # Email Service
@@ -8761,6 +8833,7 @@ Keep your bounce and complaint rates low. The **Overview** tiles show the target
 title: Platform Fundamentals
 url: https://ibee.ai/docs/platform-fundamentals
 description: Learn the core concepts that shape how IBEE Solutions resources are organized, secured, and billed.
+last_updated: 2026-08-09
 ---
 
 # Platform Fundamentals
@@ -8825,6 +8898,7 @@ ibee --help
 title: Organizations and tenancy model
 url: https://ibee.ai/docs/platform-fundamentals/organizations-and-tenancy-model
 description: Understand organizations, workspaces, ownership boundaries, and how tenancy works in IBEE Solutions.
+last_updated: 2026-10-19
 ---
 
 # Organizations and tenancy model
@@ -8908,6 +8982,7 @@ Before creating any billable resource, the portal asks Billing whether the organ
 title: Organization Settings
 url: https://ibee.ai/docs/platform-fundamentals/organization-settings
 description: View and edit your IBEE Solutions organization's details — name, type, legal name, billing address, and tax information (GST, VAT, or sales tax) — from the Organization Details page.
+last_updated: 2026-10-19
 ---
 
 # Organization Settings
@@ -8990,6 +9065,7 @@ To take an address off the list, click **Remove** on its row. Only members who c
 title: Team Members & Access Roles
 url: https://ibee.ai/docs/platform-fundamentals/team-members-access-roles
 description: Invite team members to your IBEE Solutions organization, assign access roles (Admin, Technical, Collaborator, Billing), and control workspace-level permissions.
+last_updated: 2026-09-28
 ---
 
 # Team Members & Access Roles
@@ -9188,6 +9264,7 @@ No. Billing members see only billing pages (Summary, Usage, Invoices, Payment Me
 title: Activity logs
 url: https://ibee.ai/docs/platform-fundamentals/activity-logs
 description: Review who did what across your IBEE Solutions organization — search, filter by service, workspace, status, and time range, open an event's details, and export the results as CSV.
+last_updated: 2026-10-19
 ---
 
 # Activity logs
@@ -9274,6 +9351,7 @@ Your role does not include activity access — Billing members cannot view it. A
 title: Billing and usage
 url: https://ibee.ai/docs/platform-fundamentals/billing-and-usage
 description: Learn how billing works in IBEE Solutions — prepaid wallet credits or Invoice Billing, the billing summary, usage charts, invoices, billing checks before creation, and plan limits.
+last_updated: 2026-10-19
 ---
 
 # Billing and usage
@@ -9384,6 +9462,7 @@ Click **Go to billing** to pay (shown to members who can open billing), or **Con
 title: Limits & Quotas
 url: https://ibee.ai/docs/platform-fundamentals/limits-and-quotas
 description: Compare IBEE Solutions plans, monthly spend thresholds, and resource allowances, see your usage against them, and learn how to request a plan change.
+last_updated: 2026-10-19
 ---
 
 # Limits & Quotas
@@ -9971,6 +10050,7 @@ To own more organizations, use the [organization limit request](#request-more-or
 title: Support
 url: https://ibee.ai/docs/support
 description: Get help from IBEE Solutions — open a Technical Support request from the portal Support Center, find organization and billing settings, and track every request in one place.
+last_updated: 2026-10-19
 ---
 
 # Support
@@ -10065,6 +10145,7 @@ You set the priority when you submit a request. Higher-priority requests are rev
 title: Contact Support
 url: https://ibee.ai/docs/support/contact-support
 description: Get help from IBEE Solutions support — technical requests, billing queries, account issues, abuse reports, and sales inquiries via the portal or email.
+last_updated: 2026-09-28
 ---
 
 # Contact Support
@@ -10128,6 +10209,7 @@ Requests can be filtered by **Status**, **Priority**, and time range.
 title: Create a Support Request
 url: https://ibee.ai/docs/support/create-a-request
 description: Submit a Technical Support request from the IBEE Solutions portal. Pick a product and resource, describe your issue, set priority, attach screenshots, and track the request through resolution.
+last_updated: 2026-09-28
 ---
 
 # Create a Support Request
@@ -10294,6 +10376,7 @@ You can't reply to a request that is **Resolved** or **Closed**. Open it and cli
 title: Introduction
 url: https://ibee.ai/docs/api-reference/introduction
 description: Overview of the IBEE Solutions public API.
+last_updated: 2026-10-26
 ---
 
 # Introduction
@@ -10500,6 +10583,7 @@ claude mcp add --transport http ibee-docs https://ibee.ai/docs/_mcp/server
 title: Authentication
 url: https://ibee.ai/docs/api-reference/authentication
 description: Learn how to create API tokens and authenticate your requests.
+last_updated: 2026-10-20
 ---
 
 # Authentication
@@ -10606,6 +10690,7 @@ other statuses.
 title: Rate limits
 url: https://ibee.ai/docs/api-reference/rate-limits
 description: Understand API request limits and how to handle them.
+last_updated: 2026-10-19
 ---
 
 # Rate limits
@@ -10646,6 +10731,7 @@ If your integration needs higher rate limits, contact [IBEE support](https://ibe
 title: SDKs
 url: https://ibee.ai/docs/api-reference/sdk-overview
 description: Official Python and TypeScript SDKs for the IBEE Solutions API.
+last_updated: 2026-10-19
 ---
 
 # SDKs
@@ -10835,6 +10921,7 @@ See also the [CLI](/docs/api-reference/cli), the
 title: CLI
 url: https://ibee.ai/docs/api-reference/cli
 description: Manage compute, networking, storage, and secrets from your terminal.
+last_updated: 2026-10-19
 ---
 
 # CLI
@@ -10984,6 +11071,7 @@ for the full list.
 title: Terraform
 url: https://ibee.ai/docs/api-reference/terraform
 description: Install the IBEE Terraform provider, authenticate to a workspace, and manage infrastructure as code.
+last_updated: 2026-10-19
 ---
 
 # Terraform
@@ -11103,6 +11191,7 @@ for details.
 title: Examples
 url: https://ibee.ai/docs/api-reference/examples
 description: Short, runnable examples for IBEE products with the Python SDK, TypeScript SDK, CLI, and Terraform provider.
+last_updated: 2026-10-19
 ---
 
 # Examples
@@ -11217,6 +11306,7 @@ managed in the portal and have no public API yet.
 ---
 title: List secret stores
 url: https://ibee.ai/docs/api-reference/secret-store/list-secret-stores
+last_updated: 2026-10-25
 ---
 
 # List secret stores
@@ -11485,6 +11575,7 @@ dataTask.resume()
 ---
 title: Create secret store
 url: https://ibee.ai/docs/api-reference/secret-store/create-secret-store
+last_updated: 2026-10-25
 ---
 
 # Create secret store
@@ -11816,6 +11907,7 @@ dataTask.resume()
 ---
 title: Get secret store
 url: https://ibee.ai/docs/api-reference/secret-store/get-secret-store
+last_updated: 2026-10-25
 ---
 
 # Get secret store
@@ -12082,6 +12174,7 @@ dataTask.resume()
 ---
 title: Update secret store
 url: https://ibee.ai/docs/api-reference/secret-store/update-secret-store
+last_updated: 2026-10-25
 ---
 
 # Update secret store
@@ -12426,6 +12519,7 @@ dataTask.resume()
 ---
 title: Archive secret store
 url: https://ibee.ai/docs/api-reference/secret-store/archive-secret-store
+last_updated: 2026-10-25
 ---
 
 # Archive secret store
@@ -12704,6 +12798,7 @@ dataTask.resume()
 ---
 title: Unarchive secret store
 url: https://ibee.ai/docs/api-reference/secret-store/unarchive-secret-store
+last_updated: 2026-10-25
 ---
 
 # Unarchive secret store
@@ -12982,6 +13077,7 @@ dataTask.resume()
 ---
 title: Permanently delete secret store
 url: https://ibee.ai/docs/api-reference/secret-store/permanently-delete-secret-store
+last_updated: 2026-10-25
 ---
 
 # Permanently delete secret store
@@ -13244,6 +13340,7 @@ dataTask.resume()
 ---
 title: List secrets
 url: https://ibee.ai/docs/api-reference/secret-store/list-secrets
+last_updated: 2026-10-25
 ---
 
 # List secrets
@@ -13529,6 +13626,7 @@ dataTask.resume()
 ---
 title: Create secret
 url: https://ibee.ai/docs/api-reference/secret-store/create-secret
+last_updated: 2026-10-25
 ---
 
 # Create secret
@@ -13889,6 +13987,7 @@ dataTask.resume()
 ---
 title: Batch-create secrets
 url: https://ibee.ai/docs/api-reference/secret-store/batch-create-secrets
+last_updated: 2026-10-25
 ---
 
 # Batch-create secrets
@@ -14282,6 +14381,7 @@ dataTask.resume()
 ---
 title: Get secret metadata
 url: https://ibee.ai/docs/api-reference/secret-store/get-secret
+last_updated: 2026-10-25
 ---
 
 # Get secret metadata
@@ -14548,6 +14648,7 @@ dataTask.resume()
 ---
 title: Delete secret
 url: https://ibee.ai/docs/api-reference/secret-store/delete-secret
+last_updated: 2026-10-25
 ---
 
 # Delete secret
@@ -14826,6 +14927,7 @@ dataTask.resume()
 ---
 title: Get secret value
 url: https://ibee.ai/docs/api-reference/secret-store/get-secret-value
+last_updated: 2026-10-25
 ---
 
 # Get secret value
@@ -15086,6 +15188,7 @@ dataTask.resume()
 ---
 title: Replace secret value
 url: https://ibee.ai/docs/api-reference/secret-store/update-secret-value
+last_updated: 2026-10-25
 ---
 
 # Replace secret value
@@ -15412,6 +15515,7 @@ dataTask.resume()
 ---
 title: Patch secret value
 url: https://ibee.ai/docs/api-reference/secret-store/patch-secret-value
+last_updated: 2026-10-25
 ---
 
 # Patch secret value
@@ -15737,6 +15841,7 @@ dataTask.resume()
 ---
 title: Undelete secret versions
 url: https://ibee.ai/docs/api-reference/secret-store/undelete-secret
+last_updated: 2026-10-25
 ---
 
 # Undelete secret versions
@@ -16076,6 +16181,7 @@ dataTask.resume()
 ---
 title: Destroy secret versions
 url: https://ibee.ai/docs/api-reference/secret-store/destroy-secret-versions
+last_updated: 2026-10-25
 ---
 
 # Destroy secret versions
@@ -16399,6 +16505,7 @@ dataTask.resume()
 ---
 title: Permanently delete secret
 url: https://ibee.ai/docs/api-reference/secret-store/permanently-delete-secret
+last_updated: 2026-10-25
 ---
 
 # Permanently delete secret
@@ -16661,6 +16768,7 @@ dataTask.resume()
 ---
 title: List secret versions
 url: https://ibee.ai/docs/api-reference/secret-store/list-secret-versions
+last_updated: 2026-10-25
 ---
 
 # List secret versions
@@ -16927,6 +17035,7 @@ dataTask.resume()
 ---
 title: Get secret version
 url: https://ibee.ai/docs/api-reference/secret-store/get-secret-version
+last_updated: 2026-10-25
 ---
 
 # Get secret version
@@ -17186,6 +17295,7 @@ dataTask.resume()
 ---
 title: Roll back secret value
 url: https://ibee.ai/docs/api-reference/secret-store/rollback-secret
+last_updated: 2026-10-25
 ---
 
 # Roll back secret value
@@ -17515,6 +17625,7 @@ dataTask.resume()
 ---
 title: List application identities
 url: https://ibee.ai/docs/api-reference/secret-store/list-secret-identities
+last_updated: 2026-10-25
 ---
 
 # List application identities
@@ -17801,6 +17912,7 @@ dataTask.resume()
 ---
 title: Create application identity
 url: https://ibee.ai/docs/api-reference/secret-store/create-secret-identity
+last_updated: 2026-10-25
 ---
 
 # Create application identity
@@ -18170,6 +18282,7 @@ dataTask.resume()
 ---
 title: Get application identity
 url: https://ibee.ai/docs/api-reference/secret-store/get-secret-identity
+last_updated: 2026-10-25
 ---
 
 # Get application identity
@@ -18444,6 +18557,7 @@ dataTask.resume()
 ---
 title: Delete application identity
 url: https://ibee.ai/docs/api-reference/secret-store/delete-secret-identity
+last_updated: 2026-10-25
 ---
 
 # Delete application identity
@@ -18706,6 +18820,7 @@ dataTask.resume()
 ---
 title: Update application identity
 url: https://ibee.ai/docs/api-reference/secret-store/update-secret-identity
+last_updated: 2026-10-25
 ---
 
 # Update application identity
@@ -19050,6 +19165,7 @@ dataTask.resume()
 ---
 title: Disable application identity
 url: https://ibee.ai/docs/api-reference/secret-store/disable-secret-identity
+last_updated: 2026-10-25
 ---
 
 # Disable application identity
@@ -19336,6 +19452,7 @@ dataTask.resume()
 ---
 title: Enable application identity
 url: https://ibee.ai/docs/api-reference/secret-store/enable-secret-identity
+last_updated: 2026-10-25
 ---
 
 # Enable application identity
@@ -19622,6 +19739,7 @@ dataTask.resume()
 ---
 title: Get application identity access details
 url: https://ibee.ai/docs/api-reference/secret-store/get-secret-identity-access
+last_updated: 2026-10-25
 ---
 
 # Get application identity access details
@@ -19898,6 +20016,7 @@ dataTask.resume()
 ---
 title: Rotate AppRole secret ID
 url: https://ibee.ai/docs/api-reference/secret-store/rotate-secret-identity-secret-id
+last_updated: 2026-10-25
 ---
 
 # Rotate AppRole secret ID
@@ -20174,6 +20293,7 @@ dataTask.resume()
 ---
 title: Revoke application identity sessions
 url: https://ibee.ai/docs/api-reference/secret-store/revoke-secret-identity-sessions
+last_updated: 2026-10-25
 ---
 
 # Revoke application identity sessions
@@ -20436,6 +20556,7 @@ dataTask.resume()
 ---
 title: List application identity scopes
 url: https://ibee.ai/docs/api-reference/secret-store/list-secret-identity-scopes
+last_updated: 2026-10-25
 ---
 
 # List application identity scopes
@@ -20718,6 +20839,7 @@ dataTask.resume()
 ---
 title: Add application identity scope
 url: https://ibee.ai/docs/api-reference/secret-store/create-secret-identity-scope
+last_updated: 2026-10-25
 ---
 
 # Add application identity scope
@@ -21074,6 +21196,7 @@ dataTask.resume()
 ---
 title: Delete application identity scope
 url: https://ibee.ai/docs/api-reference/secret-store/delete-secret-identity-scope
+last_updated: 2026-10-25
 ---
 
 # Delete application identity scope
@@ -21336,6 +21459,7 @@ dataTask.resume()
 ---
 title: Update application identity scope
 url: https://ibee.ai/docs/api-reference/secret-store/update-secret-identity-scope
+last_updated: 2026-10-25
 ---
 
 # Update application identity scope
@@ -21687,6 +21811,7 @@ dataTask.resume()
 ---
 title: List buckets
 url: https://ibee.ai/docs/api-reference/object-storage/list-buckets
+last_updated: 2026-10-25
 ---
 
 # List buckets
@@ -21957,6 +22082,7 @@ dataTask.resume()
 ---
 title: Create bucket
 url: https://ibee.ai/docs/api-reference/object-storage/create-bucket
+last_updated: 2026-10-25
 ---
 
 # Create bucket
@@ -22314,6 +22440,7 @@ dataTask.resume()
 ---
 title: Get bucket
 url: https://ibee.ai/docs/api-reference/object-storage/get-bucket
+last_updated: 2026-10-25
 ---
 
 # Get bucket
@@ -22585,6 +22712,7 @@ dataTask.resume()
 ---
 title: Delete bucket
 url: https://ibee.ai/docs/api-reference/object-storage/delete-bucket
+last_updated: 2026-10-25
 ---
 
 # Delete bucket
@@ -22846,6 +22974,7 @@ dataTask.resume()
 ---
 title: Update bucket settings
 url: https://ibee.ai/docs/api-reference/object-storage/update-bucket
+last_updated: 2026-10-25
 ---
 
 # Update bucket settings
@@ -23186,6 +23315,7 @@ dataTask.resume()
 ---
 title: List S3 credentials
 url: https://ibee.ai/docs/api-reference/object-storage/list-s-3-credentials
+last_updated: 2026-10-25
 ---
 
 # List S3 credentials
@@ -23439,6 +23569,7 @@ dataTask.resume()
 ---
 title: Create S3 credential
 url: https://ibee.ai/docs/api-reference/object-storage/create-s-3-credential
+last_updated: 2026-10-25
 ---
 
 # Create S3 credential
@@ -23777,6 +23908,7 @@ dataTask.resume()
 ---
 title: Get S3 credential
 url: https://ibee.ai/docs/api-reference/object-storage/get-s-3-credential
+last_updated: 2026-10-25
 ---
 
 # Get S3 credential
@@ -24037,6 +24169,7 @@ dataTask.resume()
 ---
 title: Revoke S3 credential
 url: https://ibee.ai/docs/api-reference/object-storage/revoke-s-3-credential
+last_updated: 2026-10-25
 ---
 
 # Revoke S3 credential
@@ -24300,6 +24433,7 @@ dataTask.resume()
 ---
 title: List VPC-enabled sites
 url: https://ibee.ai/docs/api-reference/vpcs/list-networking-sites
+last_updated: 2026-10-25
 ---
 
 # List VPC-enabled sites
@@ -24546,6 +24680,7 @@ dataTask.resume()
 ---
 title: List VPCs
 url: https://ibee.ai/docs/api-reference/vpcs/list-vpcs
+last_updated: 2026-10-25
 ---
 
 # List VPCs
@@ -24835,6 +24970,7 @@ dataTask.resume()
 ---
 title: Create a VPC
 url: https://ibee.ai/docs/api-reference/vpcs/create-vpc
+last_updated: 2026-10-25
 ---
 
 # Create a VPC
@@ -25320,6 +25456,7 @@ dataTask.resume()
 ---
 title: Get a VPC
 url: https://ibee.ai/docs/api-reference/vpcs/get-vpc
+last_updated: 2026-10-25
 ---
 
 # Get a VPC
@@ -25723,6 +25860,7 @@ dataTask.resume()
 ---
 title: Delete a VPC
 url: https://ibee.ai/docs/api-reference/vpcs/delete-vpc
+last_updated: 2026-10-25
 ---
 
 # Delete a VPC
@@ -25986,6 +26124,7 @@ dataTask.resume()
 ---
 title: Update a VPC
 url: https://ibee.ai/docs/api-reference/vpcs/update-vpc
+last_updated: 2026-10-25
 ---
 
 # Update a VPC
@@ -26479,6 +26618,7 @@ dataTask.resume()
 ---
 title: List VPC subnets
 url: https://ibee.ai/docs/api-reference/vpcs/list-vpc-subnets
+last_updated: 2026-10-25
 ---
 
 # List VPC subnets
@@ -26763,6 +26903,7 @@ dataTask.resume()
 ---
 title: Create a VPC subnet
 url: https://ibee.ai/docs/api-reference/vpcs/create-vpc-subnet
+last_updated: 2026-10-25
 ---
 
 # Create a VPC subnet
@@ -27124,6 +27265,7 @@ dataTask.resume()
 ---
 title: Get a VPC subnet
 url: https://ibee.ai/docs/api-reference/vpcs/get-vpc-subnet
+last_updated: 2026-10-25
 ---
 
 # Get a VPC subnet
@@ -27402,6 +27544,7 @@ dataTask.resume()
 ---
 title: Delete a VPC subnet
 url: https://ibee.ai/docs/api-reference/vpcs/delete-vpc-subnet
+last_updated: 2026-10-25
 ---
 
 # Delete a VPC subnet
@@ -27667,6 +27810,7 @@ dataTask.resume()
 ---
 title: Update a VPC subnet
 url: https://ibee.ai/docs/api-reference/vpcs/update-vpc-subnet
+last_updated: 2026-10-25
 ---
 
 # Update a VPC subnet
@@ -28027,6 +28171,7 @@ dataTask.resume()
 ---
 title: List nodes attached to a VPC
 url: https://ibee.ai/docs/api-reference/vpcs/list-vpc-nodes
+last_updated: 2026-10-25
 ---
 
 # List nodes attached to a VPC
@@ -28303,6 +28448,7 @@ dataTask.resume()
 ---
 title: Attach a node to a VPC
 url: https://ibee.ai/docs/api-reference/vpcs/attach-vpc-node
+last_updated: 2026-10-25
 ---
 
 # Attach a node to a VPC
@@ -28676,6 +28822,7 @@ dataTask.resume()
 ---
 title: Detach a node from a VPC
 url: https://ibee.ai/docs/api-reference/vpcs/detach-vpc-node
+last_updated: 2026-10-25
 ---
 
 # Detach a node from a VPC
@@ -28929,6 +29076,7 @@ dataTask.resume()
 ---
 title: List NAT gateways
 url: https://ibee.ai/docs/api-reference/vpcs/list-nat-gateways
+last_updated: 2026-10-25
 ---
 
 # List NAT gateways
@@ -29211,6 +29359,7 @@ dataTask.resume()
 ---
 title: Create a NAT gateway
 url: https://ibee.ai/docs/api-reference/vpcs/create-nat-gateway
+last_updated: 2026-10-25
 ---
 
 # Create a NAT gateway
@@ -29600,6 +29749,7 @@ dataTask.resume()
 ---
 title: Delete a NAT gateway
 url: https://ibee.ai/docs/api-reference/vpcs/delete-nat-gateway
+last_updated: 2026-10-25
 ---
 
 # Delete a NAT gateway
@@ -29865,6 +30015,7 @@ dataTask.resume()
 ---
 title: List NAT port-forwarding rules
 url: https://ibee.ai/docs/api-reference/vpcs/list-nat-port-forwarding-rules
+last_updated: 2026-10-25
 ---
 
 # List NAT port-forwarding rules
@@ -30158,6 +30309,7 @@ dataTask.resume()
 ---
 title: Create a NAT port-forwarding rule
 url: https://ibee.ai/docs/api-reference/vpcs/create-nat-port-forwarding-rule
+last_updated: 2026-10-25
 ---
 
 # Create a NAT port-forwarding rule
@@ -30547,6 +30699,7 @@ dataTask.resume()
 ---
 title: Delete a NAT port-forwarding rule
 url: https://ibee.ai/docs/api-reference/vpcs/delete-nat-port-forwarding-rule
+last_updated: 2026-10-25
 ---
 
 # Delete a NAT port-forwarding rule
@@ -30802,6 +30955,7 @@ dataTask.resume()
 ---
 title: Update a NAT port-forwarding rule
 url: https://ibee.ai/docs/api-reference/vpcs/update-nat-port-forwarding-rule
+last_updated: 2026-10-25
 ---
 
 # Update a NAT port-forwarding rule
@@ -31185,6 +31339,7 @@ dataTask.resume()
 ---
 title: List Reserved IPs
 url: https://ibee.ai/docs/api-reference/reserved-ips/list-reserved-ips
+last_updated: 2026-10-25
 ---
 
 # List Reserved IPs
@@ -31455,6 +31610,7 @@ dataTask.resume()
 ---
 title: Reserve a public IP
 url: https://ibee.ai/docs/api-reference/reserved-ips/reserve-ip
+last_updated: 2026-10-25
 ---
 
 # Reserve a public IP
@@ -31810,6 +31966,7 @@ dataTask.resume()
 ---
 title: Get a Reserved IP
 url: https://ibee.ai/docs/api-reference/reserved-ips/get-reserved-ip
+last_updated: 2026-10-25
 ---
 
 # Get a Reserved IP
@@ -32088,6 +32245,7 @@ dataTask.resume()
 ---
 title: Release a Reserved IP
 url: https://ibee.ai/docs/api-reference/reserved-ips/release-reserved-ip
+last_updated: 2026-10-25
 ---
 
 # Release a Reserved IP
@@ -32351,6 +32509,7 @@ dataTask.resume()
 ---
 title: Update a Reserved IP
 url: https://ibee.ai/docs/api-reference/reserved-ips/update-reserved-ip
+last_updated: 2026-10-25
 ---
 
 # Update a Reserved IP
@@ -32707,6 +32866,7 @@ dataTask.resume()
 ---
 title: Attach a Reserved IP
 url: https://ibee.ai/docs/api-reference/reserved-ips/attach-reserved-ip
+last_updated: 2026-10-25
 ---
 
 # Attach a Reserved IP
@@ -33068,6 +33228,7 @@ dataTask.resume()
 ---
 title: Detach a Reserved IP
 url: https://ibee.ai/docs/api-reference/reserved-ips/detach-reserved-ip
+last_updated: 2026-10-25
 ---
 
 # Detach a Reserved IP
@@ -33358,6 +33519,7 @@ dataTask.resume()
 ---
 title: Move a Reserved IP
 url: https://ibee.ai/docs/api-reference/reserved-ips/move-reserved-ip
+last_updated: 2026-10-25
 ---
 
 # Move a Reserved IP
@@ -33719,6 +33881,7 @@ dataTask.resume()
 ---
 title: List firewall groups
 url: https://ibee.ai/docs/api-reference/firewalls/list-firewall-groups
+last_updated: 2026-10-25
 ---
 
 # List firewall groups
@@ -34020,6 +34183,7 @@ dataTask.resume()
 ---
 title: Create a firewall group
 url: https://ibee.ai/docs/api-reference/firewalls/create-firewall-group
+last_updated: 2026-10-25
 ---
 
 # Create a firewall group
@@ -34394,6 +34558,7 @@ dataTask.resume()
 ---
 title: Get a firewall group
 url: https://ibee.ai/docs/api-reference/firewalls/get-firewall-group
+last_updated: 2026-10-25
 ---
 
 # Get a firewall group
@@ -34702,6 +34867,7 @@ dataTask.resume()
 ---
 title: Delete a firewall group
 url: https://ibee.ai/docs/api-reference/firewalls/delete-firewall-group
+last_updated: 2026-10-25
 ---
 
 # Delete a firewall group
@@ -34965,6 +35131,7 @@ dataTask.resume()
 ---
 title: Add a firewall rule
 url: https://ibee.ai/docs/api-reference/firewalls/create-firewall-rule
+last_updated: 2026-10-25
 ---
 
 # Add a firewall rule
@@ -35360,6 +35527,7 @@ dataTask.resume()
 ---
 title: Delete a firewall rule
 url: https://ibee.ai/docs/api-reference/firewalls/delete-firewall-rule
+last_updated: 2026-10-25
 ---
 
 # Delete a firewall rule
@@ -35682,6 +35850,7 @@ dataTask.resume()
 ---
 title: Update a firewall rule
 url: https://ibee.ai/docs/api-reference/firewalls/update-firewall-rule
+last_updated: 2026-10-25
 ---
 
 # Update a firewall rule
@@ -36080,6 +36249,7 @@ dataTask.resume()
 ---
 title: List firewall group attachments
 url: https://ibee.ai/docs/api-reference/firewalls/list-firewall-group-attachments
+last_updated: 2026-10-25
 ---
 
 # List firewall group attachments
@@ -36341,6 +36511,7 @@ dataTask.resume()
 ---
 title: Attach a VM to a firewall group
 url: https://ibee.ai/docs/api-reference/firewalls/attach-firewall-group
+last_updated: 2026-10-25
 ---
 
 # Attach a VM to a firewall group
@@ -36718,6 +36889,7 @@ dataTask.resume()
 ---
 title: Detach a VM from a firewall group
 url: https://ibee.ai/docs/api-reference/firewalls/detach-firewall-group
+last_updated: 2026-10-25
 ---
 
 # Detach a VM from a firewall group
@@ -37040,6 +37212,7 @@ dataTask.resume()
 ---
 title: List load balancers
 url: https://ibee.ai/docs/api-reference/load-balancers/list-load-balancers
+last_updated: 2026-10-25
 ---
 
 # List load balancers
@@ -37366,6 +37539,7 @@ dataTask.resume()
 ---
 title: Create an L4 load balancer
 url: https://ibee.ai/docs/api-reference/load-balancers/create-l-4-load-balancer
+last_updated: 2026-10-25
 ---
 
 # Create an L4 load balancer
@@ -37824,6 +37998,7 @@ dataTask.resume()
 ---
 title: Create an L7 load balancer
 url: https://ibee.ai/docs/api-reference/load-balancers/create-l-7-load-balancer
+last_updated: 2026-10-25
 ---
 
 # Create an L7 load balancer
@@ -38290,6 +38465,7 @@ dataTask.resume()
 ---
 title: Get a load balancer
 url: https://ibee.ai/docs/api-reference/load-balancers/get-load-balancer
+last_updated: 2026-10-25
 ---
 
 # Get a load balancer
@@ -38617,6 +38793,7 @@ dataTask.resume()
 ---
 title: Delete a load balancer
 url: https://ibee.ai/docs/api-reference/load-balancers/delete-load-balancer
+last_updated: 2026-10-25
 ---
 
 # Delete a load balancer
@@ -38868,6 +39045,7 @@ dataTask.resume()
 ---
 title: Update an L4 load balancer
 url: https://ibee.ai/docs/api-reference/load-balancers/update-l-4-load-balancer
+last_updated: 2026-10-25
 ---
 
 # Update an L4 load balancer
@@ -39325,6 +39503,7 @@ dataTask.resume()
 ---
 title: Update an L7 load balancer
 url: https://ibee.ai/docs/api-reference/load-balancers/update-l-7-load-balancer
+last_updated: 2026-10-25
 ---
 
 # Update an L7 load balancer
@@ -39790,6 +39969,7 @@ dataTask.resume()
 ---
 title: Get load balancer status
 url: https://ibee.ai/docs/api-reference/load-balancers/get-load-balancer-status
+last_updated: 2026-10-25
 ---
 
 # Get load balancer status
@@ -40066,6 +40246,7 @@ dataTask.resume()
 ---
 title: List compute sites
 url: https://ibee.ai/docs/api-reference/compute-catalog/list-compute-sites
+last_updated: 2026-10-25
 ---
 
 # List compute sites
@@ -40322,6 +40503,7 @@ dataTask.resume()
 ---
 title: List compute plans
 url: https://ibee.ai/docs/api-reference/compute-catalog/list-compute-plans
+last_updated: 2026-10-25
 ---
 
 # List compute plans
@@ -40643,6 +40825,7 @@ dataTask.resume()
 ---
 title: List compute images
 url: https://ibee.ai/docs/api-reference/compute-catalog/list-compute-images
+last_updated: 2026-10-25
 ---
 
 # List compute images
@@ -40943,6 +41126,7 @@ dataTask.resume()
 ---
 title: List cloud VMs
 url: https://ibee.ai/docs/api-reference/cloud-vms/list-cloud-vms
+last_updated: 2026-10-25
 ---
 
 # List cloud VMs
@@ -41214,6 +41398,7 @@ dataTask.resume()
 ---
 title: Create a cloud VM
 url: https://ibee.ai/docs/api-reference/cloud-vms/create-cloud-vm
+last_updated: 2026-10-25
 ---
 
 # Create a cloud VM
@@ -41614,6 +41799,7 @@ dataTask.resume()
 ---
 title: Get a cloud VM
 url: https://ibee.ai/docs/api-reference/cloud-vms/get-cloud-vm
+last_updated: 2026-10-25
 ---
 
 # Get a cloud VM
@@ -41892,6 +42078,7 @@ dataTask.resume()
 ---
 title: Delete a cloud VM
 url: https://ibee.ai/docs/api-reference/cloud-vms/delete-cloud-vm
+last_updated: 2026-10-25
 ---
 
 # Delete a cloud VM
@@ -42268,6 +42455,7 @@ dataTask.resume()
 ---
 title: Start a cloud VM
 url: https://ibee.ai/docs/api-reference/cloud-vms/start-cloud-vm
+last_updated: 2026-10-25
 ---
 
 # Start a cloud VM
@@ -42608,6 +42796,7 @@ dataTask.resume()
 ---
 title: Stop a cloud VM
 url: https://ibee.ai/docs/api-reference/cloud-vms/stop-cloud-vm
+last_updated: 2026-10-25
 ---
 
 # Stop a cloud VM
@@ -42948,6 +43137,7 @@ dataTask.resume()
 ---
 title: Reboot a cloud VM
 url: https://ibee.ai/docs/api-reference/cloud-vms/reboot-cloud-vm
+last_updated: 2026-10-25
 ---
 
 # Reboot a cloud VM
@@ -43288,6 +43478,7 @@ dataTask.resume()
 ---
 title: Get cloud VM metrics
 url: https://ibee.ai/docs/api-reference/cloud-vms/get-cloud-vm-metrics
+last_updated: 2026-10-25
 ---
 
 # Get cloud VM metrics
@@ -43577,6 +43768,7 @@ dataTask.resume()
 ---
 title: Update cloud VM access settings
 url: https://ibee.ai/docs/api-reference/cloud-vms/update-cloud-vm-access
+last_updated: 2026-10-25
 ---
 
 # Update cloud VM access settings
@@ -43954,6 +44146,7 @@ dataTask.resume()
 ---
 title: Precheck a cloud VM resize
 url: https://ibee.ai/docs/api-reference/cloud-vms/precheck-cloud-vm-resize
+last_updated: 2026-10-25
 ---
 
 # Precheck a cloud VM resize
@@ -44333,6 +44526,7 @@ dataTask.resume()
 ---
 title: Resize a cloud VM
 url: https://ibee.ai/docs/api-reference/cloud-vms/resize-cloud-vm
+last_updated: 2026-10-25
 ---
 
 # Resize a cloud VM
@@ -44696,6 +44890,7 @@ dataTask.resume()
 ---
 title: Resize a cloud VM plan
 url: https://ibee.ai/docs/api-reference/cloud-vms/resize-cloud-vm-plan
+last_updated: 2026-10-25
 ---
 
 # Resize a cloud VM plan
@@ -45085,6 +45280,7 @@ dataTask.resume()
 ---
 title: Resize a cloud VM root disk
 url: https://ibee.ai/docs/api-reference/cloud-vms/resize-cloud-vm-root-disk
+last_updated: 2026-10-25
 ---
 
 # Resize a cloud VM root disk
@@ -45464,6 +45660,7 @@ dataTask.resume()
 ---
 title: Attach a volume to a cloud VM
 url: https://ibee.ai/docs/api-reference/cloud-vms/attach-cloud-vm-volume
+last_updated: 2026-10-25
 ---
 
 # Attach a volume to a cloud VM
@@ -45864,6 +46061,7 @@ dataTask.resume()
 ---
 title: Detach a volume from a cloud VM
 url: https://ibee.ai/docs/api-reference/cloud-vms/detach-cloud-vm-volume
+last_updated: 2026-10-25
 ---
 
 # Detach a volume from a cloud VM
@@ -46219,6 +46417,7 @@ dataTask.resume()
 ---
 title: Acknowledge cloud VM mount guidance
 url: https://ibee.ai/docs/api-reference/cloud-vms/acknowledge-cloud-vm-mount-guidance
+last_updated: 2026-10-25
 ---
 
 # Acknowledge cloud VM mount guidance
@@ -46545,6 +46744,7 @@ dataTask.resume()
 ---
 title: List cloud VM events
 url: https://ibee.ai/docs/api-reference/cloud-vms/list-cloud-vm-events
+last_updated: 2026-10-25
 ---
 
 # List cloud VM events
@@ -46821,6 +47021,7 @@ dataTask.resume()
 ---
 title: Get cloud VM metric timeseries
 url: https://ibee.ai/docs/api-reference/cloud-vms/get-cloud-vm-metrics-timeseries
+last_updated: 2026-10-25
 ---
 
 # Get cloud VM metric timeseries
@@ -47094,6 +47295,7 @@ dataTask.resume()
 ---
 title: Get cloud VM monthly bandwidth
 url: https://ibee.ai/docs/api-reference/cloud-vms/get-cloud-vm-bandwidth
+last_updated: 2026-10-25
 ---
 
 # Get cloud VM monthly bandwidth
@@ -47362,6 +47564,7 @@ dataTask.resume()
 ---
 title: List cloud VM snapshots
 url: https://ibee.ai/docs/api-reference/cloud-vms/list-cloud-vm-snapshots
+last_updated: 2026-10-25
 ---
 
 # List cloud VM snapshots
@@ -47763,6 +47966,7 @@ dataTask.resume()
 ---
 title: Create a cloud VM snapshot
 url: https://ibee.ai/docs/api-reference/cloud-vms/create-cloud-vm-snapshot
+last_updated: 2026-10-25
 ---
 
 # Create a cloud VM snapshot
@@ -48332,6 +48536,7 @@ dataTask.resume()
 ---
 title: Restore a cloud VM snapshot
 url: https://ibee.ai/docs/api-reference/cloud-vms/restore-cloud-vm-snapshot
+last_updated: 2026-10-25
 ---
 
 # Restore a cloud VM snapshot
@@ -48737,6 +48942,7 @@ dataTask.resume()
 ---
 title: Get a cloud VM snapshot
 url: https://ibee.ai/docs/api-reference/cloud-vms/get-cloud-vm-snapshot
+last_updated: 2026-10-25
 ---
 
 # Get a cloud VM snapshot
@@ -49163,6 +49369,7 @@ dataTask.resume()
 ---
 title: Delete a cloud VM snapshot
 url: https://ibee.ai/docs/api-reference/cloud-vms/delete-cloud-vm-snapshot
+last_updated: 2026-10-25
 ---
 
 # Delete a cloud VM snapshot
@@ -49439,6 +49646,7 @@ dataTask.resume()
 ---
 title: Get a cloud VM snapshot restore
 url: https://ibee.ai/docs/api-reference/cloud-vms/get-cloud-vm-snapshot-restore
+last_updated: 2026-10-25
 ---
 
 # Get a cloud VM snapshot restore
@@ -49721,6 +49929,7 @@ dataTask.resume()
 ---
 title: Get a cloud VM backup policy
 url: https://ibee.ai/docs/api-reference/cloud-vms/get-cloud-vm-backup-policy
+last_updated: 2026-10-25
 ---
 
 # Get a cloud VM backup policy
@@ -50030,6 +50239,7 @@ dataTask.resume()
 ---
 title: Update a cloud VM backup policy
 url: https://ibee.ai/docs/api-reference/cloud-vms/update-cloud-vm-backup-policy
+last_updated: 2026-10-25
 ---
 
 # Update a cloud VM backup policy
@@ -50432,6 +50642,7 @@ dataTask.resume()
 ---
 title: Enable cloud VM backups
 url: https://ibee.ai/docs/api-reference/cloud-vms/enable-cloud-vm-backups
+last_updated: 2026-10-25
 ---
 
 # Enable cloud VM backups
@@ -50863,6 +51074,7 @@ dataTask.resume()
 ---
 title: Disable cloud VM backups
 url: https://ibee.ai/docs/api-reference/cloud-vms/disable-cloud-vm-backups
+last_updated: 2026-10-25
 ---
 
 # Disable cloud VM backups
@@ -51241,6 +51453,7 @@ dataTask.resume()
 ---
 title: Reschedule a cloud VM backup
 url: https://ibee.ai/docs/api-reference/cloud-vms/reschedule-cloud-vm-backup
+last_updated: 2026-10-25
 ---
 
 # Reschedule a cloud VM backup
@@ -51620,6 +51833,7 @@ dataTask.resume()
 ---
 title: List cloud VM recovery points
 url: https://ibee.ai/docs/api-reference/cloud-vms/list-cloud-vm-backup-runs
+last_updated: 2026-10-25
 ---
 
 # List cloud VM recovery points
@@ -52034,6 +52248,7 @@ dataTask.resume()
 ---
 title: Run a cloud VM backup
 url: https://ibee.ai/docs/api-reference/cloud-vms/create-cloud-vm-backup-run
+last_updated: 2026-10-25
 ---
 
 # Run a cloud VM backup
@@ -52592,6 +52807,7 @@ dataTask.resume()
 ---
 title: Restore a cloud VM backup
 url: https://ibee.ai/docs/api-reference/cloud-vms/restore-cloud-vm-backup
+last_updated: 2026-10-25
 ---
 
 # Restore a cloud VM backup
@@ -52989,6 +53205,7 @@ dataTask.resume()
 ---
 title: Get a cloud VM backup run
 url: https://ibee.ai/docs/api-reference/cloud-vms/get-cloud-vm-backup-run
+last_updated: 2026-10-25
 ---
 
 # Get a cloud VM backup run
@@ -53428,6 +53645,7 @@ dataTask.resume()
 ---
 title: Get a cloud VM backup restore
 url: https://ibee.ai/docs/api-reference/cloud-vms/get-cloud-vm-backup-restore
+last_updated: 2026-10-25
 ---
 
 # Get a cloud VM backup restore
@@ -53710,6 +53928,7 @@ dataTask.resume()
 ---
 title: Get operation status
 url: https://ibee.ai/docs/api-reference/cloud-vms/get-compute-operation
+last_updated: 2026-10-25
 ---
 
 # Get operation status
@@ -53977,6 +54196,7 @@ dataTask.resume()
 ---
 title: List GPU VMs
 url: https://ibee.ai/docs/api-reference/gpu-vms/list-gpu-vms
+last_updated: 2026-10-25
 ---
 
 # List GPU VMs
@@ -54252,6 +54472,7 @@ dataTask.resume()
 ---
 title: Create a GPU VM
 url: https://ibee.ai/docs/api-reference/gpu-vms/create-gpu-vm
+last_updated: 2026-10-25
 ---
 
 # Create a GPU VM
@@ -54662,6 +54883,7 @@ dataTask.resume()
 ---
 title: Get a GPU VM
 url: https://ibee.ai/docs/api-reference/gpu-vms/get-gpu-vm
+last_updated: 2026-10-25
 ---
 
 # Get a GPU VM
@@ -54944,6 +55166,7 @@ dataTask.resume()
 ---
 title: Delete a GPU VM
 url: https://ibee.ai/docs/api-reference/gpu-vms/delete-gpu-vm
+last_updated: 2026-10-25
 ---
 
 # Delete a GPU VM
@@ -55320,6 +55543,7 @@ dataTask.resume()
 ---
 title: Start a GPU VM
 url: https://ibee.ai/docs/api-reference/gpu-vms/start-gpu-vm
+last_updated: 2026-10-25
 ---
 
 # Start a GPU VM
@@ -55660,6 +55884,7 @@ dataTask.resume()
 ---
 title: Stop a GPU VM
 url: https://ibee.ai/docs/api-reference/gpu-vms/stop-gpu-vm
+last_updated: 2026-10-25
 ---
 
 # Stop a GPU VM
@@ -56000,6 +56225,7 @@ dataTask.resume()
 ---
 title: Reboot a GPU VM
 url: https://ibee.ai/docs/api-reference/gpu-vms/reboot-gpu-vm
+last_updated: 2026-10-25
 ---
 
 # Reboot a GPU VM
@@ -56340,6 +56566,7 @@ dataTask.resume()
 ---
 title: Get GPU VM metrics
 url: https://ibee.ai/docs/api-reference/gpu-vms/get-gpu-vm-metrics
+last_updated: 2026-10-25
 ---
 
 # Get GPU VM metrics
@@ -56629,6 +56856,7 @@ dataTask.resume()
 ---
 title: Update GPU VM access settings
 url: https://ibee.ai/docs/api-reference/gpu-vms/update-gpu-vm-access
+last_updated: 2026-10-25
 ---
 
 # Update GPU VM access settings
@@ -57006,6 +57234,7 @@ dataTask.resume()
 ---
 title: Precheck a GPU VM resize
 url: https://ibee.ai/docs/api-reference/gpu-vms/precheck-gpu-vm-resize
+last_updated: 2026-10-25
 ---
 
 # Precheck a GPU VM resize
@@ -57385,6 +57614,7 @@ dataTask.resume()
 ---
 title: Resize a GPU VM
 url: https://ibee.ai/docs/api-reference/gpu-vms/resize-gpu-vm
+last_updated: 2026-10-25
 ---
 
 # Resize a GPU VM
@@ -57748,6 +57978,7 @@ dataTask.resume()
 ---
 title: Resize a GPU VM plan
 url: https://ibee.ai/docs/api-reference/gpu-vms/resize-gpu-vm-plan
+last_updated: 2026-10-25
 ---
 
 # Resize a GPU VM plan
@@ -58137,6 +58368,7 @@ dataTask.resume()
 ---
 title: Resize a GPU VM root disk
 url: https://ibee.ai/docs/api-reference/gpu-vms/resize-gpu-vm-root-disk
+last_updated: 2026-10-25
 ---
 
 # Resize a GPU VM root disk
@@ -58516,6 +58748,7 @@ dataTask.resume()
 ---
 title: Attach a volume to a GPU VM
 url: https://ibee.ai/docs/api-reference/gpu-vms/attach-gpu-vm-volume
+last_updated: 2026-10-25
 ---
 
 # Attach a volume to a GPU VM
@@ -58916,6 +59149,7 @@ dataTask.resume()
 ---
 title: Detach a volume from a GPU VM
 url: https://ibee.ai/docs/api-reference/gpu-vms/detach-gpu-vm-volume
+last_updated: 2026-10-25
 ---
 
 # Detach a volume from a GPU VM
@@ -59271,6 +59505,7 @@ dataTask.resume()
 ---
 title: Acknowledge GPU VM mount guidance
 url: https://ibee.ai/docs/api-reference/gpu-vms/acknowledge-gpu-vm-mount-guidance
+last_updated: 2026-10-25
 ---
 
 # Acknowledge GPU VM mount guidance
@@ -59597,6 +59832,7 @@ dataTask.resume()
 ---
 title: List GPU VM events
 url: https://ibee.ai/docs/api-reference/gpu-vms/list-gpu-vm-events
+last_updated: 2026-10-25
 ---
 
 # List GPU VM events
@@ -59873,6 +60109,7 @@ dataTask.resume()
 ---
 title: Get GPU VM metric timeseries
 url: https://ibee.ai/docs/api-reference/gpu-vms/get-gpu-vm-metrics-timeseries
+last_updated: 2026-10-25
 ---
 
 # Get GPU VM metric timeseries
@@ -60146,6 +60383,7 @@ dataTask.resume()
 ---
 title: Get GPU VM monthly bandwidth
 url: https://ibee.ai/docs/api-reference/gpu-vms/get-gpu-vm-bandwidth
+last_updated: 2026-10-25
 ---
 
 # Get GPU VM monthly bandwidth
@@ -60414,6 +60652,7 @@ dataTask.resume()
 ---
 title: List GPU VM snapshots
 url: https://ibee.ai/docs/api-reference/gpu-vms/list-gpu-vm-snapshots
+last_updated: 2026-10-25
 ---
 
 # List GPU VM snapshots
@@ -60815,6 +61054,7 @@ dataTask.resume()
 ---
 title: Create a GPU VM snapshot
 url: https://ibee.ai/docs/api-reference/gpu-vms/create-gpu-vm-snapshot
+last_updated: 2026-10-25
 ---
 
 # Create a GPU VM snapshot
@@ -61384,6 +61624,7 @@ dataTask.resume()
 ---
 title: Restore a GPU VM snapshot
 url: https://ibee.ai/docs/api-reference/gpu-vms/restore-gpu-vm-snapshot
+last_updated: 2026-10-25
 ---
 
 # Restore a GPU VM snapshot
@@ -61789,6 +62030,7 @@ dataTask.resume()
 ---
 title: Get a GPU VM snapshot
 url: https://ibee.ai/docs/api-reference/gpu-vms/get-gpu-vm-snapshot
+last_updated: 2026-10-25
 ---
 
 # Get a GPU VM snapshot
@@ -62215,6 +62457,7 @@ dataTask.resume()
 ---
 title: Delete a GPU VM snapshot
 url: https://ibee.ai/docs/api-reference/gpu-vms/delete-gpu-vm-snapshot
+last_updated: 2026-10-25
 ---
 
 # Delete a GPU VM snapshot
@@ -62491,6 +62734,7 @@ dataTask.resume()
 ---
 title: Get a GPU VM snapshot restore
 url: https://ibee.ai/docs/api-reference/gpu-vms/get-gpu-vm-snapshot-restore
+last_updated: 2026-10-25
 ---
 
 # Get a GPU VM snapshot restore
@@ -62773,6 +63017,7 @@ dataTask.resume()
 ---
 title: Get a GPU VM backup policy
 url: https://ibee.ai/docs/api-reference/gpu-vms/get-gpu-vm-backup-policy
+last_updated: 2026-10-25
 ---
 
 # Get a GPU VM backup policy
@@ -63082,6 +63327,7 @@ dataTask.resume()
 ---
 title: Update a GPU VM backup policy
 url: https://ibee.ai/docs/api-reference/gpu-vms/update-gpu-vm-backup-policy
+last_updated: 2026-10-25
 ---
 
 # Update a GPU VM backup policy
@@ -63484,6 +63730,7 @@ dataTask.resume()
 ---
 title: Enable GPU VM backups
 url: https://ibee.ai/docs/api-reference/gpu-vms/enable-gpu-vm-backups
+last_updated: 2026-10-25
 ---
 
 # Enable GPU VM backups
@@ -63915,6 +64162,7 @@ dataTask.resume()
 ---
 title: Disable GPU VM backups
 url: https://ibee.ai/docs/api-reference/gpu-vms/disable-gpu-vm-backups
+last_updated: 2026-10-25
 ---
 
 # Disable GPU VM backups
@@ -64293,6 +64541,7 @@ dataTask.resume()
 ---
 title: Reschedule a GPU VM backup
 url: https://ibee.ai/docs/api-reference/gpu-vms/reschedule-gpu-vm-backup
+last_updated: 2026-10-25
 ---
 
 # Reschedule a GPU VM backup
@@ -64672,6 +64921,7 @@ dataTask.resume()
 ---
 title: List GPU VM recovery points
 url: https://ibee.ai/docs/api-reference/gpu-vms/list-gpu-vm-backup-runs
+last_updated: 2026-10-25
 ---
 
 # List GPU VM recovery points
@@ -65086,6 +65336,7 @@ dataTask.resume()
 ---
 title: Run a GPU VM backup
 url: https://ibee.ai/docs/api-reference/gpu-vms/create-gpu-vm-backup-run
+last_updated: 2026-10-25
 ---
 
 # Run a GPU VM backup
@@ -65644,6 +65895,7 @@ dataTask.resume()
 ---
 title: Restore a GPU VM backup
 url: https://ibee.ai/docs/api-reference/gpu-vms/restore-gpu-vm-backup
+last_updated: 2026-10-25
 ---
 
 # Restore a GPU VM backup
@@ -66041,6 +66293,7 @@ dataTask.resume()
 ---
 title: Get a GPU VM backup run
 url: https://ibee.ai/docs/api-reference/gpu-vms/get-gpu-vm-backup-run
+last_updated: 2026-10-25
 ---
 
 # Get a GPU VM backup run
@@ -66480,6 +66733,7 @@ dataTask.resume()
 ---
 title: Get a GPU VM backup restore
 url: https://ibee.ai/docs/api-reference/gpu-vms/get-gpu-vm-backup-restore
+last_updated: 2026-10-25
 ---
 
 # Get a GPU VM backup restore
@@ -66762,6 +67016,7 @@ dataTask.resume()
 ---
 title: Create a VM console session
 url: https://ibee.ai/docs/api-reference/vm-console/create-vm-console-session
+last_updated: 2026-10-25
 ---
 
 # Create a VM console session
@@ -67130,6 +67385,7 @@ dataTask.resume()
 ---
 title: Get a VM console session
 url: https://ibee.ai/docs/api-reference/vm-console/get-vm-console-session
+last_updated: 2026-10-25
 ---
 
 # Get a VM console session
@@ -67416,6 +67672,7 @@ dataTask.resume()
 ---
 title: Close a VM console session
 url: https://ibee.ai/docs/api-reference/vm-console/close-vm-console-session
+last_updated: 2026-10-25
 ---
 
 # Close a VM console session
@@ -67683,6 +67940,7 @@ dataTask.resume()
 ---
 title: Check resource billing eligibility
 url: https://ibee.ai/docs/api-reference/billing/check-resource-eligibility
+last_updated: 2026-10-25
 ---
 
 # Check resource billing eligibility
@@ -68053,6 +68311,7 @@ dataTask.resume()
 ---
 title: List block-storage volumes
 url: https://ibee.ai/docs/api-reference/block-storage/list-block-volumes
+last_updated: 2026-10-25
 ---
 
 # List block-storage volumes
@@ -68382,6 +68641,7 @@ dataTask.resume()
 ---
 title: Create block-storage volume
 url: https://ibee.ai/docs/api-reference/block-storage/create-block-volume
+last_updated: 2026-10-25
 ---
 
 # Create block-storage volume
@@ -68843,6 +69103,7 @@ dataTask.resume()
 ---
 title: Get block-storage volume
 url: https://ibee.ai/docs/api-reference/block-storage/get-block-volume
+last_updated: 2026-10-25
 ---
 
 # Get block-storage volume
@@ -69181,6 +69442,7 @@ dataTask.resume()
 ---
 title: Delete block-storage volume
 url: https://ibee.ai/docs/api-reference/block-storage/delete-block-volume
+last_updated: 2026-10-25
 ---
 
 # Delete block-storage volume
@@ -69460,6 +69722,7 @@ dataTask.resume()
 ---
 title: List block-volume operations
 url: https://ibee.ai/docs/api-reference/block-storage/list-block-volume-operations
+last_updated: 2026-10-25
 ---
 
 # List block-volume operations
@@ -69737,6 +70000,7 @@ dataTask.resume()
 ---
 title: Attach block-storage volume
 url: https://ibee.ai/docs/api-reference/block-storage/attach-block-volume
+last_updated: 2026-10-25
 ---
 
 # Attach block-storage volume
@@ -70192,6 +70456,7 @@ dataTask.resume()
 ---
 title: Detach block-storage volume
 url: https://ibee.ai/docs/api-reference/block-storage/detach-block-volume
+last_updated: 2026-10-25
 ---
 
 # Detach block-storage volume
@@ -70645,6 +70910,7 @@ dataTask.resume()
 ---
 title: Resize block-storage volume
 url: https://ibee.ai/docs/api-reference/block-storage/resize-block-volume
+last_updated: 2026-10-25
 ---
 
 # Resize block-storage volume
@@ -71094,6 +71360,7 @@ dataTask.resume()
 ---
 title: Generate CDN object URL
 url: https://ibee.ai/docs/api-reference/cdn/generate-cdn-url
+last_updated: 2026-10-25
 ---
 
 # Generate CDN object URL
@@ -71409,6 +71676,7 @@ dataTask.resume()
 ---
 title: List CDN distributions
 url: https://ibee.ai/docs/api-reference/cdn/list-cdn-distributions
+last_updated: 2026-10-25
 ---
 
 # List CDN distributions
@@ -71677,6 +71945,7 @@ dataTask.resume()
 ---
 title: Create CDN distribution
 url: https://ibee.ai/docs/api-reference/cdn/create-cdn-distribution
+last_updated: 2026-10-25
 ---
 
 # Create CDN distribution
@@ -72041,6 +72310,7 @@ dataTask.resume()
 ---
 title: Get CDN distribution
 url: https://ibee.ai/docs/api-reference/cdn/get-cdn-distribution
+last_updated: 2026-10-25
 ---
 
 # Get CDN distribution
@@ -72316,6 +72586,7 @@ dataTask.resume()
 ---
 title: Delete CDN distribution
 url: https://ibee.ai/docs/api-reference/cdn/delete-cdn-distribution
+last_updated: 2026-10-25
 ---
 
 # Delete CDN distribution
@@ -72567,6 +72838,7 @@ dataTask.resume()
 ---
 title: Update CDN distribution
 url: https://ibee.ai/docs/api-reference/cdn/update-cdn-distribution
+last_updated: 2026-10-25
 ---
 
 # Update CDN distribution
@@ -72910,6 +73182,7 @@ dataTask.resume()
 ---
 title: Get static website configuration
 url: https://ibee.ai/docs/api-reference/cdn/get-cdn-website-config
+last_updated: 2026-10-25
 ---
 
 # Get static website configuration
@@ -73167,6 +73440,7 @@ dataTask.resume()
 ---
 title: Enable or update static website configuration
 url: https://ibee.ai/docs/api-reference/cdn/update-cdn-website-config
+last_updated: 2026-10-25
 ---
 
 # Enable or update static website configuration
@@ -73481,6 +73755,7 @@ dataTask.resume()
 ---
 title: Disable static website configuration
 url: https://ibee.ai/docs/api-reference/cdn/delete-cdn-website-config
+last_updated: 2026-10-25
 ---
 
 # Disable static website configuration
@@ -73750,6 +74025,7 @@ dataTask.resume()
 ---
 title: List CDN custom domains
 url: https://ibee.ai/docs/api-reference/cdn/list-cdn-custom-domains
+last_updated: 2026-10-25
 ---
 
 # List CDN custom domains
@@ -74022,6 +74298,7 @@ dataTask.resume()
 ---
 title: Add CDN custom domain
 url: https://ibee.ai/docs/api-reference/cdn/create-cdn-custom-domain
+last_updated: 2026-10-25
 ---
 
 # Add CDN custom domain
@@ -74375,6 +74652,7 @@ dataTask.resume()
 ---
 title: Get CDN custom domain
 url: https://ibee.ai/docs/api-reference/cdn/get-cdn-custom-domain
+last_updated: 2026-10-25
 ---
 
 # Get CDN custom domain
@@ -74637,6 +74915,7 @@ dataTask.resume()
 ---
 title: Remove CDN custom domain
 url: https://ibee.ai/docs/api-reference/cdn/delete-cdn-custom-domain
+last_updated: 2026-10-25
 ---
 
 # Remove CDN custom domain
@@ -74890,6 +75169,7 @@ dataTask.resume()
 ---
 title: Verify CDN custom domain
 url: https://ibee.ai/docs/api-reference/cdn/verify-cdn-custom-domain
+last_updated: 2026-10-25
 ---
 
 # Verify CDN custom domain
@@ -75160,6 +75440,7 @@ dataTask.resume()
 ---
 title: Purge CDN cache
 url: https://ibee.ai/docs/api-reference/cdn/purge-cdn-cache
+last_updated: 2026-10-25
 ---
 
 # Purge CDN cache
@@ -75495,6 +75776,7 @@ dataTask.resume()
 ---
 title: Check registry name availability
 url: https://ibee.ai/docs/api-reference/container-registry/check-container-registry-name-availability
+last_updated: 2026-10-25
 ---
 
 # Check registry name availability
@@ -75750,6 +76032,7 @@ dataTask.resume()
 ---
 title: List registries
 url: https://ibee.ai/docs/api-reference/container-registry/list-container-registries
+last_updated: 2026-10-25
 ---
 
 # List registries
@@ -76051,6 +76334,7 @@ dataTask.resume()
 ---
 title: Create registry
 url: https://ibee.ai/docs/api-reference/container-registry/create-container-registry
+last_updated: 2026-10-25
 ---
 
 # Create registry
@@ -76460,6 +76744,7 @@ dataTask.resume()
 ---
 title: Get registry
 url: https://ibee.ai/docs/api-reference/container-registry/get-container-registry
+last_updated: 2026-10-25
 ---
 
 # Get registry
@@ -76760,6 +77045,7 @@ dataTask.resume()
 ---
 title: Delete registry
 url: https://ibee.ai/docs/api-reference/container-registry/delete-container-registry
+last_updated: 2026-10-25
 ---
 
 # Delete registry
@@ -77084,6 +77370,7 @@ dataTask.resume()
 ---
 title: Change registry visibility
 url: https://ibee.ai/docs/api-reference/container-registry/update-container-registry-visibility
+last_updated: 2026-10-25
 ---
 
 # Change registry visibility
@@ -77443,6 +77730,7 @@ dataTask.resume()
 ---
 title: Retry registry provisioning
 url: https://ibee.ai/docs/api-reference/container-registry/retry-container-registry-provisioning
+last_updated: 2026-10-25
 ---
 
 # Retry registry provisioning
@@ -77721,6 +78009,7 @@ dataTask.resume()
 ---
 title: Empty registry
 url: https://ibee.ai/docs/api-reference/container-registry/empty-container-registry
+last_updated: 2026-10-25
 ---
 
 # Empty registry
@@ -78010,6 +78299,7 @@ dataTask.resume()
 ---
 title: Get registry storage plan
 url: https://ibee.ai/docs/api-reference/container-registry/get-container-registry-package
+last_updated: 2026-10-25
 ---
 
 # Get registry storage plan
@@ -78324,6 +78614,7 @@ dataTask.resume()
 ---
 title: Upgrade registry storage plan
 url: https://ibee.ai/docs/api-reference/container-registry/upgrade-container-registry-package
+last_updated: 2026-10-25
 ---
 
 # Upgrade registry storage plan
@@ -78709,6 +79000,7 @@ dataTask.resume()
 ---
 title: List registry access tokens
 url: https://ibee.ai/docs/api-reference/container-registry/list-container-registry-access-tokens
+last_updated: 2026-10-25
 ---
 
 # List registry access tokens
@@ -79000,6 +79292,7 @@ dataTask.resume()
 ---
 title: Create registry access token
 url: https://ibee.ai/docs/api-reference/container-registry/create-container-registry-access-token
+last_updated: 2026-10-25
 ---
 
 # Create registry access token
@@ -79344,6 +79637,7 @@ dataTask.resume()
 ---
 title: Rotate registry access token
 url: https://ibee.ai/docs/api-reference/container-registry/rotate-container-registry-access-token
+last_updated: 2026-10-25
 ---
 
 # Rotate registry access token
@@ -79636,6 +79930,7 @@ dataTask.resume()
 ---
 title: Revoke registry access token
 url: https://ibee.ai/docs/api-reference/container-registry/revoke-container-registry-access-token
+last_updated: 2026-10-25
 ---
 
 # Revoke registry access token
@@ -79899,6 +80194,7 @@ dataTask.resume()
 ---
 title: List repositories
 url: https://ibee.ai/docs/api-reference/container-registry/list-container-registry-repositories
+last_updated: 2026-10-25
 ---
 
 # List repositories
@@ -80205,6 +80501,7 @@ dataTask.resume()
 ---
 title: Delete repository
 url: https://ibee.ai/docs/api-reference/container-registry/delete-container-registry-repository
+last_updated: 2026-10-25
 ---
 
 # Delete repository
@@ -80493,6 +80790,7 @@ dataTask.resume()
 ---
 title: List artifacts
 url: https://ibee.ai/docs/api-reference/container-registry/list-container-registry-artifacts
+last_updated: 2026-10-25
 ---
 
 # List artifacts
@@ -80810,6 +81108,7 @@ dataTask.resume()
 ---
 title: Delete artifact
 url: https://ibee.ai/docs/api-reference/container-registry/delete-container-registry-artifact
+last_updated: 2026-10-25
 ---
 
 # Delete artifact
@@ -81098,6 +81397,7 @@ dataTask.resume()
 ---
 title: Rescan artifact
 url: https://ibee.ai/docs/api-reference/container-registry/scan-container-registry-artifact
+last_updated: 2026-10-25
 ---
 
 # Rescan artifact
@@ -81373,6 +81673,7 @@ dataTask.resume()
 ---
 title: Get registry security settings
 url: https://ibee.ai/docs/api-reference/container-registry/get-container-registry-security-settings
+last_updated: 2026-10-25
 ---
 
 # Get registry security settings
@@ -81646,6 +81947,7 @@ dataTask.resume()
 ---
 title: Update registry security settings
 url: https://ibee.ai/docs/api-reference/container-registry/update-container-registry-security-settings
+last_updated: 2026-10-25
 ---
 
 # Update registry security settings
@@ -81977,6 +82279,7 @@ dataTask.resume()
 ---
 title: Get vulnerability summary
 url: https://ibee.ai/docs/api-reference/container-registry/get-container-registry-vulnerability-summary
+last_updated: 2026-10-25
 ---
 
 # Get vulnerability summary
@@ -82264,6 +82567,7 @@ dataTask.resume()
 ---
 title: List vulnerabilities
 url: https://ibee.ai/docs/api-reference/container-registry/list-container-registry-vulnerabilities
+last_updated: 2026-10-25
 ---
 
 # List vulnerabilities
@@ -82589,6 +82893,7 @@ dataTask.resume()
 ---
 title: List SBOMs
 url: https://ibee.ai/docs/api-reference/container-registry/list-container-registry-sboms
+last_updated: 2026-10-25
 ---
 
 # List SBOMs
@@ -82955,6 +83260,7 @@ dataTask.resume()
 ---
 title: Get SBOM
 url: https://ibee.ai/docs/api-reference/container-registry/get-container-registry-sbom
+last_updated: 2026-10-25
 ---
 
 # Get SBOM
@@ -83297,6 +83603,7 @@ dataTask.resume()
 ---
 title: Download SBOM
 url: https://ibee.ai/docs/api-reference/container-registry/download-container-registry-sbom
+last_updated: 2026-10-25
 ---
 
 # Download SBOM
@@ -83570,6 +83877,7 @@ dataTask.resume()
 ---
 title: Get registry metrics
 url: https://ibee.ai/docs/api-reference/container-registry/get-container-registry-metrics
+last_updated: 2026-10-25
 ---
 
 # Get registry metrics
@@ -84024,6 +84332,7 @@ At this time, no exploitation activity related to CVE-2026-31431 has been detect
 ---
 title: October 20, 2026
 url: https://ibee.ai/docs/2026-10-20-public-api-contract-0-5-0
+last_updated: 2026-10-20
 ---
 
 # October 20, 2026
@@ -84036,6 +84345,7 @@ The API reference adds **Container Registry**: 27 operations under `/v1/containe
 ---
 title: October 19, 2026
 url: https://ibee.ai/docs/2026-10-19-public-api-contract-0-4-0
+last_updated: 2026-10-19
 ---
 
 # October 19, 2026
@@ -84057,6 +84367,7 @@ The API reference now describes what the API already accepts and returns. No end
 ---
 title: May 1, 2026
 url: https://ibee.ai/docs/2026-05-01-cve-2026-31431-mitigation
+last_updated: 2026-05-01
 ---
 
 # May 1, 2026
