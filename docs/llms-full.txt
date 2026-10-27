@@ -5,7 +5,7 @@
 ---
 title: Infrastructure, engineered for builders.
 url: https://ibee.ai/docs
-last_updated: 2026-07-12
+last_updated: 2026-10-27
 ---
 
 # Infrastructure, engineered for builders.
@@ -16,7 +16,7 @@ Everything you need to learn, build, and stay up to date.
 
 → [Docs](/docs)
 
-→ [API Reference](/docs/api-reference)
+→ [API Reference](/docs/api-reference/introduction)
 
 → [Changelog](/docs/changelog)
 
@@ -32,7 +32,7 @@ Get up and running on IBEE Solutions in minutes.
 
 Automate everything — from a single VM to a full deployment pipeline.
 
-→ [API reference](/docs/api-reference)
+→ [API reference](/docs/api-reference/introduction)
 
 → [Authentication](/docs/api-reference/authentication)
 
@@ -74,7 +74,7 @@ Versioned secrets with AppRole and Kubernetes access.
 
 ## Quick links
 
-#### [API reference](/docs/api-reference)
+#### [API reference](/docs/api-reference/introduction)
 
 Endpoints, parameters, and example requests.
 
@@ -199,7 +199,7 @@ Disable browser extensions that block Cloudflare scripts and reload the page.
 title: Create an Organization
 url: https://ibee.ai/docs/getting-started/account-setup/create-an-organization
 description: Create an IBEE Solutions organization to manage resources, billing, and team members. Learn about country restrictions, geo-detection, currency assignment, tax invoices, and GST verification for Indian businesses.
-last_updated: 2026-09-28
+last_updated: 2026-10-27
 ---
 
 # Create an Organization
@@ -307,7 +307,7 @@ When all required fields are complete, click **Create Organization**.
 
 ## After creation
 
-The portal opens the new organization's **Workspaces** page. Every new organization starts with three workspaces — **production**, **dev**, and **stage** — which count toward the limit of 5 workspaces per organization. See [Dashboard & navigation](/docs/getting-started/overview/dashboard#workspaces-page).
+The portal opens the new organization's **Workspaces** page. Every new organization starts with three workspaces — **production**, **dev**, and **stage** — which count toward the limit of 5 workspaces per organization. See [Dashboard & navigation](/docs/getting-started/overview/dashboard-navigation#workspaces-page).
 
 If you haven't verified your identity yet, a banner prompts you to complete KYC. Click **Complete KYC** to [verify your identity](/docs/getting-started/account-setup/verify-your-identity). Full access to deploy servers and use all cloud services requires completed identity verification.
 
@@ -346,7 +346,7 @@ Ensure you are entering a valid, active 15-character GSTIN. Inactive or cancelle
 title: Restricted Countries
 url: https://ibee.ai/docs/getting-started/account-setup/restricted-countries
 description: IBEE Solutions does not offer services in certain countries due to U.S. export-control and trade-sanction regulations. Review the full list of restricted countries and the 26 countries where IBEE Solutions operates.
-last_updated: 2026-07-08
+last_updated: 2026-10-27
 ---
 
 # Restricted Countries
@@ -435,7 +435,7 @@ If your country is not listed above and is not restricted, you may still be able
 
 ## Related pages
 
-* [Create an organization](/docs/getting-started/account-setup/create-a-project)
+* [Create an organization](/docs/getting-started/account-setup/create-an-organization)
 * [Sign up](/docs/getting-started/account-setup/sign-up)
 
 
@@ -644,7 +644,7 @@ If the reset link has expired, the page shows **Request a new reset link**. Clic
 title: Add Billing
 url: https://ibee.ai/docs/getting-started/account-setup/add-billing
 description: Set up billing for your IBEE Solutions organization — purchase prepaid credits (online payment in India, card in other countries), redeem promo codes, save a card, upload TDS certificates, and apply for Invoice Billing.
-last_updated: 2026-10-19
+last_updated: 2026-10-27
 ---
 
 # Add Billing
@@ -759,7 +759,7 @@ Before creating a billable resource, the platform checks your organization's bil
 
 * [Billing and usage](/docs/platform-fundamentals/billing-and-usage)
 * [Create an organization](/docs/getting-started/account-setup/create-an-organization)
-* [Dashboard & navigation](/docs/getting-started/overview/dashboard)
+* [Dashboard & navigation](/docs/getting-started/overview/dashboard-navigation)
 
 
 ---
@@ -888,14 +888,14 @@ Organization-level pages (Billing, Team, API Tokens, Activity Logs) are accessib
 title: Regions & Locations
 url: https://ibee.ai/docs/getting-started/overview/regions-and-locations
 description: Where IBEE Solutions runs — data center locations, region codes, and availability for compute, storage, and networking resources.
-last_updated: 2026-09-28
+last_updated: 2026-10-27
 ---
 
 # Regions & Locations
 
 > Where IBEE Solutions runs — data center locations, region codes, and availability for compute, storage, and networking resources.
 
-IBEE Solutions resources are deployed into **regions** — isolated data center locations identified by a short region code. Use the region code when creating any resource on the platform.
+IBEE Solutions resources are deployed into **regions** — isolated data center locations identified by a short region code. The API takes a site ID, not the region code: list the sites with [List compute sites](/docs/api-reference/compute-catalog/list-compute-sites) and pass the `site_id` you choose.
 
 ## Asia
 
@@ -920,8 +920,8 @@ Pick the region closest to your end users or workload:
 
 ## Related pages
 
-* [Getting started](/docs/getting-started)
-* [Create a project](/docs/getting-started/account-setup/create-a-project)
+* [Getting started](/docs/getting-started/account-setup/sign-up)
+* [Create an organization](/docs/getting-started/account-setup/create-an-organization)
 * [Deploy your first resource](/docs/infrastructure/cloud-vms/create-a-vm)
 * [Billing and usage](/docs/platform-fundamentals/billing-and-usage)
 
@@ -930,7 +930,7 @@ Pick the region closest to your end users or workload:
 title: First resource
 url: https://ibee.ai/docs/getting-started/overview/first-resource
 description: Launch your first IBEE Solutions resource — a Cloud VM — in under 5 minutes.
-last_updated: 2026-09-28
+last_updated: 2026-10-27
 ---
 
 # First resource
@@ -975,14 +975,14 @@ ssh ubuntu@<public-ip>
 ## What to explore next
 
 * **Block Storage** — [Create a volume](/docs/infrastructure/block-storage/create-a-volume) and attach persistent storage to your VM.
-* **Object Storage** — [Upload your first object](/docs/infrastructure/object-storage/getting-started) to an S3-compatible bucket.
+* **Object Storage** — [Upload your first object](/docs/infrastructure/object-storage) to an S3-compatible bucket.
 * **Firewalls** — [Create firewall rules](/docs/network-security/firewalls/create-firewall-rules) to control inbound traffic.
 * **Backups** — [Enable backups](/docs/tools/backups/enable-backups) for automated recovery points.
 
 ## Related pages
 
 * [Launch your first VM](/docs/infrastructure/cloud-vms/launch-your-first-vm) (detailed 5-minute quickstart)
-* [Dashboard](/docs/getting-started/overview/dashboard)
+* [Dashboard](/docs/getting-started/overview/dashboard-navigation)
 * [Billing and usage](/docs/platform-fundamentals/billing-and-usage)
 
 
@@ -3332,7 +3332,7 @@ Open a bucket, click the **Settings** tab, then click the **Lifecycle Policies**
 
 Click **Add Rule**. A bucket with no rules shows **No lifecycle rules** until you add one.
 
-![IBEE Object Storage lifecycle policies](/docs/_fern-img/431d498cfc0e96e5b07511cb0995f4e534c60defd53657dcfd4bca50b90476ef.webp)![IBEE Object Storage lifecycle policies](/docs/_fern-img/5edd9199f5b605a169bc18480bcee7879919f263e876aab122939ddb74b63e60.webp)
+![IBEE Object Storage lifecycle policies](/docs/_fern-files/_img/431d498cfc0e96e5b07511cb0995f4e534c60defd53657dcfd4bca50b90476ef.webp)![IBEE Object Storage lifecycle policies](/docs/_fern-files/_img/5edd9199f5b605a169bc18480bcee7879919f263e876aab122939ddb74b63e60.webp)
 
 ### 3. Configure the rule
 
@@ -3723,7 +3723,7 @@ The **Objects** tab has two action buttons in the top right: **Create Folder** a
 
 Click **Upload** to pick files, or open the arrow next to it and choose **Upload files** or **Upload folder**. You can also drag and drop files onto the objects list.
 
-![IBEE Object Storage upload interface](/docs/_fern-img/26cf7d39d6bbb119085e427e20a67871cb3c0951093817daa1e14b51f48a409b.webp)![IBEE Object Storage upload interface](/docs/_fern-img/7ac84a1635f5813b67cd1c7a00161eebbe52055aa7eb989bcd852657e370341a.webp)
+![IBEE Object Storage upload interface](/docs/_fern-files/_img/26cf7d39d6bbb119085e427e20a67871cb3c0951093817daa1e14b51f48a409b.webp)![IBEE Object Storage upload interface](/docs/_fern-files/_img/7ac84a1635f5813b67cd1c7a00161eebbe52055aa7eb989bcd852657e370341a.webp)
 
 An empty bucket or folder shows **Upload Files** and **Upload Folder** buttons instead. Uploads run in an upload panel that shows each file's progress; you can cancel a running upload there.
 
@@ -4369,7 +4369,7 @@ endpoint = https://WORKSPACE-ID.blob.ibeestorage.com
 title: Hosting Static Sites and SPAs on Object Storage
 url: https://ibee.ai/docs/infrastructure/object-storage/static-site-hosting
 description: Complete guide to hosting static websites and single-page applications (React, Vue, Angular) on IBEE Object Storage with CDN, custom domains, and HTTPS.
-last_updated: 2026-10-19
+last_updated: 2026-10-27
 ---
 
 # Hosting Static Sites and SPAs on Object Storage
@@ -4380,7 +4380,7 @@ IBEE Object Storage can serve static websites and single-page applications (SPAs
 
 ## Before you begin
 
-* An active IBEE Solutions organization ([Create an organization](/docs/getting-started/account-setup/create-a-project))
+* An active IBEE Solutions organization ([Create an organization](/docs/getting-started/account-setup/create-an-organization))
 * A built static site or SPA (output folder containing `index.html`)
 * An S3 credential for the bucket's workspace ([API Credentials](/docs/infrastructure/object-storage/api-tokens))
 * AWS CLI or any S3-compatible tool installed locally
@@ -4530,7 +4530,7 @@ Configure CORS on the API or the bucket ([CORS](/docs/infrastructure/object-stor
 title: CDN Integration
 url: https://ibee.ai/docs/infrastructure/object-storage/cdn-integration
 description: Front an IBEE Object Storage bucket with the IBEE CDN to cache and deliver content globally with low latency.
-last_updated: 2026-10-19
+last_updated: 2026-10-27
 ---
 
 # CDN Integration
@@ -4543,7 +4543,7 @@ CDN distributions are managed under **Network & Security → CDN** in the portal
 
 ## Before you begin
 
-* An active IBEE Solutions organization ([Create an organization](/docs/getting-started/account-setup/create-a-project))
+* An active IBEE Solutions organization ([Create an organization](/docs/getting-started/account-setup/create-an-organization))
 * An Object Storage bucket with files to distribute ([Create a bucket](/docs/infrastructure/object-storage/buckets))
 
 ## Front a bucket with the CDN
@@ -4907,7 +4907,7 @@ You can increase a volume's size later, from the volume's page — see [Resize a
 title: Create a volume
 url: https://ibee.ai/docs/infrastructure/block-storage/create-a-volume
 description: Provision a new NVMe block storage volume on IBEE Solutions — pick storage type, location, size, and a label — then resize or delete it.
-last_updated: 2026-10-19
+last_updated: 2026-10-27
 ---
 
 # Create a volume
@@ -4918,7 +4918,7 @@ A Block Storage volume is a persistent NVMe disk that lives independently of you
 
 ## Before you begin
 
-* An active IBEE Solutions organization with a verified account ([Verify your account](/docs/getting-started/account-setup/verify-account))
+* An active IBEE Solutions organization with a verified account ([Verify your account](/docs/getting-started/account-setup/verify-your-identity))
 * KYC verification completed — Block Storage requires full account verification
 * Sufficient wallet credits — the platform checks your billing state before creating a volume ([Billing and usage](/docs/platform-fundamentals/billing-and-usage))
 
@@ -5609,7 +5609,7 @@ The portal does not support editing a load balancer after creation. To change ba
 title: Create a load balancer
 url: https://ibee.ai/docs/network-security/load-balancer/create-a-load-balancer
 description: Create an L4 or L7 load balancer on IBEE Solutions — choose a protocol, add backends, set the routing algorithm, and configure health checks.
-last_updated: 2026-10-26
+last_updated: 2026-10-27
 ---
 
 # Create a load balancer
@@ -5620,7 +5620,7 @@ Create a load balancer from the portal in a few minutes. Choose the layer and pr
 
 ## Before you begin
 
-* A verified IBEE Solutions organization — creation requires identity verification ([Verify your identity](/docs/getting-started/account-setup/verify-account))
+* A verified IBEE Solutions organization — creation requires identity verification ([Verify your identity](/docs/getting-started/account-setup/verify-your-identity))
 * The address and port of at least one backend (a Cloud VM private IP, a hostname, or a service name)
 
 > **Info**
@@ -6111,7 +6111,7 @@ The public API covers distributions (`GET /cdn/distributions`, `POST /cdn/distri
 title: Firewall as a Service
 url: https://ibee.ai/docs/network-security/firewalls
 description: Create reusable firewall groups with inbound rules to control traffic to your Cloud VMs and GPU VMs.
-last_updated: 2026-10-19
+last_updated: 2026-10-27
 ---
 
 # Firewall as a Service
@@ -6208,7 +6208,7 @@ In the API, a rule's `action` is `allow` or `drop` (the portal's **accept** is `
 ## Related pages
 
 * [Create firewall rules](/docs/network-security/firewalls/create-firewall-rules)
-* [VPC](/docs/network-security/vpc-and-ip-management)
+* [VPC](/docs/network-security/vpc-ip-management)
 * [Create a VM](/docs/infrastructure/cloud-vms/create-a-vm)
 
 
@@ -6314,7 +6314,7 @@ Enter valid CIDR notation (e.g. `10.0.0.0/8`) or a single IP address. At least o
 title: VPC
 url: https://ibee.ai/docs/network-security/vpc-ip-management
 description: Create isolated private networks, subnets, NAT gateways, port forwarding rules, and VM attachments on IBEE Solutions.
-last_updated: 2026-10-26
+last_updated: 2026-10-27
 ---
 
 # VPC
@@ -6341,7 +6341,7 @@ add a **Description**.
 
 | Option                       | Behavior                                                                                                                                                                    |
 | ---------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Private only** *(default)* | VMs receive private addresses only. To expose one specific VM, attach a [Reserved IP](/docs/network-security/vpc-and-ip-management/reserved-ips) to it later.               |
+| **Private only** *(default)* | VMs receive private addresses only. To expose one specific VM, attach a [Reserved IP](/docs/network-security/vpc-ip-management/reserved-ips) to it later.                   |
 | **Managed NAT Gateway**      | Private VMs share one public IPv4 address for outbound internet. Unsolicited inbound traffic is not accepted unless you add a [port forwarding rule](#nat-port-forwarding). |
 
 The VPC network and its default subnet are included at no extra charge. A
@@ -6522,16 +6522,16 @@ Forwarding** section of the **Overview** tab.
 
 ### Fill in the rule
 
-| Field                             | Description                                                                                                                                                             |
-| --------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Rule name**                     | e.g. `SSH access`                                                                                                                                                       |
-| **Protocol**                      | **TCP** or **UDP**                                                                                                                                                      |
-| **External port**                 | Public port on the NAT gateway, `1`–`65535`. Each protocol and external port can be used by only one rule.                                                              |
-| **Destination type**              | **Private VM** — one NAT-connected VM address, or **MetalLB VIP** — a [Virtual IP](/docs/network-security/vpc-and-ip-management/virtual-ips) announced by cluster nodes |
-| **Internal IP** / **MetalLB VIP** | The attached VM or reserved VIP to forward to                                                                                                                           |
-| **Internal port**                 | Port on the destination, `1`–`65535`                                                                                                                                    |
-| **Note**                          | Optional reason for the inbound access                                                                                                                                  |
-| **Enable this rule**              | The public endpoint accepts traffic once the rule is active                                                                                                             |
+| Field                             | Description                                                                                                                                                         |
+| --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Rule name**                     | e.g. `SSH access`                                                                                                                                                   |
+| **Protocol**                      | **TCP** or **UDP**                                                                                                                                                  |
+| **External port**                 | Public port on the NAT gateway, `1`–`65535`. Each protocol and external port can be used by only one rule.                                                          |
+| **Destination type**              | **Private VM** — one NAT-connected VM address, or **MetalLB VIP** — a [Virtual IP](/docs/network-security/vpc-ip-management/virtual-ips) announced by cluster nodes |
+| **Internal IP** / **MetalLB VIP** | The attached VM or reserved VIP to forward to                                                                                                                       |
+| **Internal port**                 | Port on the destination, `1`–`65535`                                                                                                                                |
+| **Note**                          | Optional reason for the inbound access                                                                                                                              |
+| **Enable this rule**              | The public endpoint accepts traffic once the rule is active                                                                                                         |
 
 The form previews the traffic path, for example
 `203.0.113.10:2222 → 10.10.0.5:22`.
@@ -6597,17 +6597,17 @@ dependencies remain.
 ## Related pages
 
 * [Networking for VMs](/docs/infrastructure/cloud-vms/networking-for-vms)
-* [Reserved IPs](/docs/network-security/vpc-and-ip-management/reserved-ips)
-* [Virtual IPs](/docs/network-security/vpc-and-ip-management/virtual-ips)
+* [Reserved IPs](/docs/network-security/vpc-ip-management/reserved-ips)
+* [Virtual IPs](/docs/network-security/vpc-ip-management/virtual-ips)
 * [Firewalls](/docs/network-security/firewalls)
-* [API reference](/docs/api-reference)
+* [API reference](/docs/api-reference/introduction)
 
 
 ---
 title: Reserved IPs
 url: https://ibee.ai/docs/network-security/vpc-ip-management/reserved-ips
 description: Reserve portable public IPv4 addresses and attach them to VMs, NAT gateways, and Virtual IPs.
-last_updated: 2026-10-26
+last_updated: 2026-10-27
 ---
 
 # Reserved IPs
@@ -6617,8 +6617,8 @@ last_updated: 2026-10-26
 Reserved IPs remain allocated to your workspace until you release them. You can
 detach an address from one VM and attach it to another for failover, maintenance,
 or a stable DNS endpoint. A Reserved IP can also serve as the public address of a
-[VPC NAT gateway](/docs/network-security/vpc-and-ip-management#nat-gateway) or
-give a [Virtual IP](/docs/network-security/vpc-and-ip-management/virtual-ips)
+[VPC NAT gateway](/docs/network-security/vpc-ip-management#nat-gateway) or
+give a [Virtual IP](/docs/network-security/vpc-ip-management/virtual-ips)
 public ingress.
 
 ## Reserve an address
@@ -6667,8 +6667,8 @@ address for its detail page.
   ingress to that Virtual IP stops.
 
 To use a Reserved IP on a NAT gateway or a Virtual IP, attach it from the VPC's
-detail page — see [Use a Reserved IP](/docs/network-security/vpc-and-ip-management#use-a-reserved-ip)
-and [Virtual IPs](/docs/network-security/vpc-and-ip-management/virtual-ips).
+detail page — see [Use a Reserved IP](/docs/network-security/vpc-ip-management#use-a-reserved-ip)
+and [Virtual IPs](/docs/network-security/vpc-ip-management/virtual-ips).
 
 ## Detail page
 
@@ -6745,17 +6745,17 @@ have no API operation; use the portal.
 
 ## Related pages
 
-* [VPC & IP management](/docs/network-security/vpc-and-ip-management)
-* [Virtual IPs](/docs/network-security/vpc-and-ip-management/virtual-ips)
+* [VPC & IP management](/docs/network-security/vpc-ip-management)
+* [Virtual IPs](/docs/network-security/vpc-ip-management/virtual-ips)
 * [Networking for VMs](/docs/infrastructure/cloud-vms/networking-for-vms)
-* [API reference](/docs/api-reference)
+* [API reference](/docs/api-reference/introduction)
 
 
 ---
 title: Virtual IPs
 url: https://ibee.ai/docs/network-security/vpc-ip-management/virtual-ips
 description: Reserve a specific private IP inside a VPC subnet for MetalLB and Kubernetes LoadBalancer services, announced by nodes you authorize.
-last_updated: 2026-10-26
+last_updated: 2026-10-27
 ---
 
 # Virtual IPs
@@ -6873,7 +6873,7 @@ Each Virtual IP reports its `private_ip`, `subnet_id`, `purpose`, and the
 ## Expose a Virtual IP publicly
 
 A Virtual IP is private by design. To make the service it fronts reachable from
-the internet, attach a [Reserved IP](/docs/network-security/vpc-and-ip-management/reserved-ips)
+the internet, attach a [Reserved IP](/docs/network-security/vpc-ip-management/reserved-ips)
 to it:
 
 1. On the **Reserved VIPs** tab, click **Attach** on the Virtual IP's row.
@@ -6888,7 +6888,7 @@ Reserved IP**. The Virtual IP stays reserved, and the Reserved IP returns to
 your workspace pool for reuse.
 
 On a NAT VPC you can instead forward a single NAT gateway port to the Virtual IP
-with a [port forwarding rule](/docs/network-security/vpc-and-ip-management#nat-port-forwarding)
+with a [port forwarding rule](/docs/network-security/vpc-ip-management#nat-port-forwarding)
 (destination type **MetalLB VIP**).
 
 ## Release a Virtual IP
@@ -6916,10 +6916,10 @@ curl -X DELETE \
 
 ## Related pages
 
-* [VPC](/docs/network-security/vpc-and-ip-management)
-* [Reserved IPs](/docs/network-security/vpc-and-ip-management/reserved-ips)
+* [VPC](/docs/network-security/vpc-ip-management)
+* [Reserved IPs](/docs/network-security/vpc-ip-management/reserved-ips)
 * [Networking for VMs](/docs/infrastructure/cloud-vms/networking-for-vms)
-* [API reference](/docs/api-reference)
+* [API reference](/docs/api-reference/introduction)
 
 
 ---
@@ -7979,7 +7979,7 @@ The private key can't be downloaded again. Delete the key and create a new key p
 title: API Tokens
 url: https://ibee.ai/docs/tools/api-tokens
 description: Create and manage organization-level API tokens for the IBEE public API, scoped to the entire organization or specific workspaces, and S3 credentials for Object Storage.
-last_updated: 2026-10-19
+last_updated: 2026-10-27
 ---
 
 # API Tokens
@@ -8001,8 +8001,8 @@ This page covers **API Tokens** and **S3 Credentials**.
 
 ## Before you begin
 
-* An active IBEE Solutions organization ([Create an organization](/docs/getting-started/account-setup/create-a-project))
-* A verified identity ([Verify your identity](/docs/getting-started/account-setup/verify-account))
+* An active IBEE Solutions organization ([Create an organization](/docs/getting-started/account-setup/create-an-organization))
+* A verified identity ([Verify your identity](/docs/getting-started/account-setup/verify-your-identity))
 
 > **Info**
 >
@@ -8146,7 +8146,7 @@ endpoint = https://WORKSPACE-ID.blob.ibeestorage.com
 ## Troubleshooting
 
 **Create API Token button shows "Verify Identity"**
-Complete [identity verification](/docs/getting-started/account-setup/verify-account) before creating tokens.
+Complete [identity verification](/docs/getting-started/account-setup/verify-your-identity) before creating tokens.
 
 **Create button is disabled**
 At least one permission must be selected. For Specific Workspaces, select at least one workspace. For S3, select a workspace.
@@ -8171,7 +8171,7 @@ Verify you are using:
 title: Secret Manager
 url: https://ibee.ai/docs/tools/secret-manager
 description: Store API keys, passwords, and other sensitive values in IBEE Solutions Secret Manager — versioned secrets grouped in stores, with AppRole and Kubernetes access for your apps.
-last_updated: 2026-10-19
+last_updated: 2026-10-27
 ---
 
 # Secret Manager
@@ -8285,7 +8285,7 @@ From the store detail **Actions** menu:
 
 * [API tokens](/docs/tools/api-tokens)
 * [Team members & access roles](/docs/platform-fundamentals/team-members-access-roles)
-* [Secret Store API reference](/docs/api-reference/secret-store)
+* [Secret Store API reference](/docs/api-reference/secret-store/list-secret-stores)
 
 
 ---
@@ -8898,7 +8898,7 @@ ibee --help
 title: Organizations and tenancy model
 url: https://ibee.ai/docs/platform-fundamentals/organizations-and-tenancy-model
 description: Understand organizations, workspaces, ownership boundaries, and how tenancy works in IBEE Solutions.
-last_updated: 2026-10-19
+last_updated: 2026-10-27
 ---
 
 # Organizations and tenancy model
@@ -8952,7 +8952,7 @@ Use the **organization switcher** dropdown in the top navigation bar to move bet
 
 When you open an organization, you land on the **Workspaces** page. Select a workspace to access its resources. Resources like VMs, storage, networking, and SSH keys are scoped to the active workspace.
 
-Every new organization starts with three workspaces — **production**, **dev**, and **stage**. An organization can have up to 5 workspaces; Admins can create more and rename them from the Workspaces page. See [Dashboard & navigation](/docs/getting-started/overview/dashboard#workspaces-page).
+Every new organization starts with three workspaces — **production**, **dev**, and **stage**. An organization can have up to 5 workspaces; Admins can create more and rename them from the Workspaces page. See [Dashboard & navigation](/docs/getting-started/overview/dashboard-navigation#workspaces-page).
 
 Organization-level concerns — billing, team, API tokens, and activity logs — are in the sidebar's **Organization** and **Billing** sections at the organization level. Inside a workspace, the sidebar shows only workspace resources; use **Workspace Details** or the organization switcher to go back.
 
@@ -8975,7 +8975,7 @@ Before creating any billable resource, the portal asks Billing whether the organ
 * [Organization settings](/docs/platform-fundamentals/organization-settings)
 * [Billing and usage](/docs/platform-fundamentals/billing-and-usage)
 * [Team members & access roles](/docs/platform-fundamentals/team-members-access-roles)
-* [Dashboard](/docs/getting-started/overview/dashboard)
+* [Dashboard](/docs/getting-started/overview/dashboard-navigation)
 
 
 ---
@@ -9065,7 +9065,7 @@ To take an address off the list, click **Remove** on its row. Only members who c
 title: Team Members & Access Roles
 url: https://ibee.ai/docs/platform-fundamentals/team-members-access-roles
 description: Invite team members to your IBEE Solutions organization, assign access roles (Admin, Technical, Collaborator, Billing), and control workspace-level permissions.
-last_updated: 2026-09-28
+last_updated: 2026-10-27
 ---
 
 # Team Members & Access Roles
@@ -9257,7 +9257,7 @@ No. Billing members see only billing pages (Summary, Usage, Invoices, Payment Me
 * [Organization settings](/docs/platform-fundamentals/organization-settings)
 * [Activity logs](/docs/platform-fundamentals/activity-logs)
 * [API Tokens](/docs/tools/api-tokens)
-* [Dashboard & Navigation](/docs/getting-started/overview/dashboard)
+* [Dashboard & Navigation](/docs/getting-started/overview/dashboard-navigation)
 
 
 ---
@@ -9351,7 +9351,7 @@ Your role does not include activity access — Billing members cannot view it. A
 title: Billing and usage
 url: https://ibee.ai/docs/platform-fundamentals/billing-and-usage
 description: Learn how billing works in IBEE Solutions — prepaid wallet credits or Invoice Billing, the billing summary, usage charts, invoices, billing checks before creation, and plan limits.
-last_updated: 2026-10-19
+last_updated: 2026-10-27
 ---
 
 # Billing and usage
@@ -9452,10 +9452,10 @@ Click **Go to billing** to pay (shown to members who can open billing), or **Con
 
 ## Related pages
 
-* [Organizations and tenancy model](/docs/platform-fundamentals/projects-and-tenancy-model)
+* [Organizations and tenancy model](/docs/platform-fundamentals/organizations-and-tenancy-model)
 * [Add billing](/docs/getting-started/account-setup/add-billing)
 * [Limits and quotas](/docs/platform-fundamentals/limits-and-quotas)
-* [Dashboard](/docs/getting-started/overview/dashboard)
+* [Dashboard](/docs/getting-started/overview/dashboard-navigation)
 
 
 ---
@@ -10376,7 +10376,7 @@ You can't reply to a request that is **Resolved** or **Closed**. Open it and cli
 title: Introduction
 url: https://ibee.ai/docs/api-reference/introduction
 description: Overview of the IBEE Solutions public API.
-last_updated: 2026-10-26
+last_updated: 2026-10-27
 ---
 
 # Introduction
@@ -10404,12 +10404,17 @@ curl https://api.ibee.ai/v1/object-storage/buckets?workspace_id=907479 \
 
 Workspaces isolate resources so that production, staging, and development environments stay separate. You choose which workspaces a token can access when you create it.
 
-## Billing admission before creation
+## Billing on create
 
 Public API integrations use the same centralized billing admission flow as the
-IBEE portal. Before sending a billable create request, call
-`POST /billing/resource-eligibility` for the same workspace and continue only
-when the response contains `"allowed": true`.
+IBEE portal. The gateway asks Billing before it forwards a billable create
+request to the product service, so you don't need a separate call first. When
+Billing refuses, the create returns `402` with `"error": "billing_denied"` and
+Billing's reason in `billing_reason`, and nothing is provisioned. A create
+needs only the product's write scope.
+
+To check ahead of time, for example to show the answer in your own interface,
+call `POST /billing/resource-eligibility` for the same workspace:
 
 ```bash
 curl -X POST \
@@ -10419,10 +10424,8 @@ curl -X POST \
   -d '{"sku_code":"OBJECTST-STD"}'
 ```
 
-The token needs `billing.read` in addition to the write scope for the product
-being created. Treat a denied, malformed, or unavailable decision as a blocked
-create; do not send the product request. The decision is point-in-time and does
-not reserve funds, so perform it immediately before creation.
+This check needs the `billing.read` scope. Its answer is point-in-time and
+reserves nothing, so the create itself can still be refused.
 
 To have Billing also check your plan's resource limits, add `resource_type`
 (for example `cpu_vm`, `block_volume` or `public_ipv4`), `quantity`, and
@@ -10437,18 +10440,22 @@ APIs.
 
 ## Available resources
 
-| Resource            | Description                                                                  |
-| ------------------- | ---------------------------------------------------------------------------- |
-| **Secret Store**    | Create stores, manage secrets, and retrieve values.                          |
-| **Object Storage**  | Create and manage S3-compatible storage buckets.                             |
-| **Compute catalog** | Discover placement sites, plans, and compatible OS images.                   |
-| **Cloud VMs**       | Deploy and manage cloud virtual machines.                                    |
-| **GPU VMs**         | Deploy and manage GPU-accelerated virtual machines for AI/ML workloads.      |
-| **VPC networking**  | Manage isolated networks, subnets, VM attachments, NAT, and port forwarding. |
-| **Reserved IPs**    | Reserve and move portable public IPv4 addresses.                             |
-| **Firewalls**       | Manage firewall groups, rules, and VM attachments.                           |
-| **Load balancers**  | Provision and manage L4 and L7 load balancers.                               |
-| **Billing**         | Run the resource eligibility preflight before billable creates.              |
+| Resource               | Description                                                                  |
+| ---------------------- | ---------------------------------------------------------------------------- |
+| **Secret Store**       | Create stores, manage secrets, and retrieve values.                          |
+| **Object Storage**     | Create and manage S3-compatible storage buckets.                             |
+| **Compute catalog**    | Discover placement sites, plans, and compatible OS images.                   |
+| **Cloud VMs**          | Deploy and manage cloud virtual machines.                                    |
+| **GPU VMs**            | Deploy and manage GPU-accelerated virtual machines for AI/ML workloads.      |
+| **VPC networking**     | Manage isolated networks, subnets, VM attachments, NAT, and port forwarding. |
+| **Reserved IPs**       | Reserve and move portable public IPv4 addresses.                             |
+| **Firewalls**          | Manage firewall groups, rules, and VM attachments.                           |
+| **Load balancers**     | Provision and manage L4 and L7 load balancers.                               |
+| **Block storage**      | Create, attach, detach, resize, and delete volumes.                          |
+| **CDN**                | Manage distributions, website settings, custom domains, and cache purges.    |
+| **Container Registry** | Manage registries, registry access tokens, repositories, and images.         |
+| **VM console**         | Open and close browser console sessions for VMs.                             |
+| **Billing**            | Check ahead of time whether a workspace may create a billable resource.      |
 
 ## Response format
 
@@ -10545,27 +10552,28 @@ with the same key. Other write operations do not currently require this header;
 follow the requirement shown on each endpoint.
 
 ```bash
-curl -X POST https://api.ibee.ai/v1/compute/cloud-vms?workspace_id=907479 \
+curl -X POST "https://api.ibee.ai/v1/compute/cloud-vms/vm_abc123/actions/reboot?workspace_id=907479" \
   -H "Authorization: Bearer YOUR_API_TOKEN" \
-  -H "X-Idempotency-Key: unique-request-id-123" \
-  -H "Content-Type: application/json" \
-  -d '{"name":"web-server-01","plan_id":"plan_standard_2c_4g","template_id":"tmpl_ubuntu_2204","os_distro":"ubuntu","os_type":"linux","cpu":2,"ram_mb":4096}'
+  -H "X-Idempotency-Key: reboot-vm-abc123-1"
 ```
+
+For a VM create, see [Create a cloud VM](/docs/api-reference/cloud-vms/create-cloud-vm):
+its body takes `site_id` from `GET /compute/sites`, and `plan_id` with the
+plan's `billing_catalog` object, unchanged, from `GET /compute/plans`.
 
 ## Machine-readable access
 
 Everything in this reference is also available as data, for code generators
 and AI agents:
 
-| What                                                                                                             | Where                                                                                                                      |
-| ---------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
-| OpenAPI 3.1 specification, as served by the docs                                                                 | [openapi.yaml](https://ibee.ai/docs/openapi.yaml) · [openapi.json](https://ibee.ai/docs/openapi.json)                      |
-| The complete specification, with the API title, version, introduction and tag descriptions the served copy omits | [/docs/openapi/ibee-cloud.yaml](https://ibee.ai/docs/openapi/ibee-cloud.yaml)                                              |
-| API catalog ([RFC 9727](https://www.rfc-editor.org/rfc/rfc9727))                                                 | [/.well-known/api-catalog](https://ibee.ai/.well-known/api-catalog)                                                        |
-| Index of every docs page, one line each                                                                          | [/docs/llms.txt](https://ibee.ai/docs/llms.txt)                                                                            |
-| Full text of every docs page in one file                                                                         | [/docs/llms-full.txt](https://ibee.ai/docs/llms-full.txt)                                                                  |
-| Markdown of any page                                                                                             | append `.md` to its URL, for example [create-cloud-vm.md](https://ibee.ai/docs/api-reference/cloud-vms/create-cloud-vm.md) |
-| MCP server for AI clients (Claude Code, Cursor and others)                                                       | `https://ibee.ai/docs/_mcp/server`                                                                                         |
+| What                                                                | Where                                                                                                                                                                                 |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| OpenAPI 3.1 specification, complete (the same file at each address) | [openapi.yaml](https://ibee.ai/docs/openapi.yaml) · [openapi.json](https://ibee.ai/docs/openapi.json) · [/docs/openapi/ibee-cloud.yaml](https://ibee.ai/docs/openapi/ibee-cloud.yaml) |
+| API catalog ([RFC 9727](https://www.rfc-editor.org/rfc/rfc9727))    | [/.well-known/api-catalog](https://ibee.ai/.well-known/api-catalog)                                                                                                                   |
+| Index of every docs page, one line each                             | [/docs/llms.txt](https://ibee.ai/docs/llms.txt)                                                                                                                                       |
+| Full text of every docs page in one file                            | [/docs/llms-full.txt](https://ibee.ai/docs/llms-full.txt)                                                                                                                             |
+| Markdown of any page                                                | append `.md` to its URL, for example [create-cloud-vm.md](https://ibee.ai/docs/api-reference/cloud-vms/create-cloud-vm.md)                                                            |
+| MCP server for AI clients (Claude Code, Cursor and others)          | `https://ibee.ai/docs/_mcp/server`                                                                                                                                                    |
 
 ```bash
 claude mcp add --transport http ibee-docs https://ibee.ai/docs/_mcp/server
@@ -10583,7 +10591,7 @@ claude mcp add --transport http ibee-docs https://ibee.ai/docs/_mcp/server
 title: Authentication
 url: https://ibee.ai/docs/api-reference/authentication
 description: Learn how to create API tokens and authenticate your requests.
-last_updated: 2026-10-20
+last_updated: 2026-10-27
 ---
 
 # Authentication
@@ -10595,7 +10603,7 @@ Every API request must include a valid platform API token. Tokens use Bearer aut
 ## Create an API token
 
 1. Log in to the [IBEE portal](https://portal.ibee.ai).
-2. Go to **Settings → API Tokens**.
+2. Go to **Organization → API Tokens**.
 3. Click **Create Token**.
 4. Give the token a name, select the scopes it needs, and choose a workspace policy.
 5. Click **Create**. Copy the token immediately — it is shown only once.
@@ -10668,7 +10676,7 @@ Use **Specific workspaces** when you want to limit a CI/CD pipeline or integrati
 
 To revoke a token:
 
-1. Go to **Settings → API Tokens** in the portal.
+1. Go to **Organization → API Tokens** in the portal.
 2. Find the token and click **Revoke**.
 
 Revoked tokens are rejected immediately on all subsequent requests.
@@ -10731,7 +10739,7 @@ If your integration needs higher rate limits, contact [IBEE support](https://ibe
 title: SDKs
 url: https://ibee.ai/docs/api-reference/sdk-overview
 description: Official Python and TypeScript SDKs for the IBEE Solutions API.
-last_updated: 2026-10-19
+last_updated: 2026-10-27
 ---
 
 # SDKs
@@ -10753,7 +10761,7 @@ states are decided by the API, not by the client.
 
 ## Configure
 
-Create an API token in the portal under **Settings → API Tokens**. Pass the
+Create an API token in the portal under **Organization → API Tokens**. Pass the
 token and workspace to the client, or set them in the environment:
 
 | Setting     | Environment variable                                                    |
@@ -10921,7 +10929,7 @@ See also the [CLI](/docs/api-reference/cli), the
 title: CLI
 url: https://ibee.ai/docs/api-reference/cli
 description: Manage compute, networking, storage, and secrets from your terminal.
-last_updated: 2026-10-19
+last_updated: 2026-10-27
 ---
 
 # CLI
@@ -10942,7 +10950,7 @@ Requires Python 3.10+. This installs the `ibee` command.
 
 ## Authenticate
 
-Create an API token in the portal under **Settings → API Tokens**, then set:
+Create an API token in the portal under **Organization → API Tokens**, then set:
 
 ```bash
 export IBEE_TOKEN="ibee_prod_key_xxxxxxxxxxxx"   # or IBEE_API_TOKEN
@@ -11071,7 +11079,7 @@ for the full list.
 title: Terraform
 url: https://ibee.ai/docs/api-reference/terraform
 description: Install the IBEE Terraform provider, authenticate to a workspace, and manage infrastructure as code.
-last_updated: 2026-10-19
+last_updated: 2026-10-27
 ---
 
 # Terraform
@@ -11087,7 +11095,7 @@ and covers compute, networking, storage, secrets, and CDN.
 
 * Install [Terraform](https://developer.hashicorp.com/terraform/install) 1.11 or
   later (1.14 or later for Terraform actions).
-* In the portal, open **Settings → API Tokens** and create a token for the
+* In the portal, open **Organization → API Tokens** and create a token for the
   workspace you want Terraform to manage, with the permissions your resources
   need. Add **Billing: Read** only if you use the `ibee_billing_eligibility`
   data source. See [API Tokens](/docs/tools/api-tokens).
@@ -11191,7 +11199,7 @@ for details.
 title: Examples
 url: https://ibee.ai/docs/api-reference/examples
 description: Short, runnable examples for IBEE products with the Python SDK, TypeScript SDK, CLI, and Terraform provider.
-last_updated: 2026-10-19
+last_updated: 2026-10-27
 ---
 
 # Examples
@@ -11290,13 +11298,13 @@ A load-balanced web app, a private network, a static site on the CDN, and storag
 
 ## Interfaces
 
-| Interface      | Install                                      | Reference                                  |
-| -------------- | -------------------------------------------- | ------------------------------------------ |
-| Python SDK     | `pip install ibee`                           | [SDKs](/docs/api-reference/sdk-overview)   |
-| TypeScript SDK | `npm install ibee-sdk`                       | [SDKs](/docs/api-reference/sdk-overview)   |
-| CLI            | `pip install ibee-cli`                       | [CLI](/docs/api-reference/cli)             |
-| HTTP           | `curl` and `jq`                              | [API Reference](/docs/api-reference)       |
-| Terraform      | `devs-ibee/ibee` from the Terraform Registry | [Terraform](/docs/api-reference/terraform) |
+| Interface      | Install                                      | Reference                                         |
+| -------------- | -------------------------------------------- | ------------------------------------------------- |
+| Python SDK     | `pip install ibee`                           | [SDKs](/docs/api-reference/sdk-overview)          |
+| TypeScript SDK | `npm install ibee-sdk`                       | [SDKs](/docs/api-reference/sdk-overview)          |
+| CLI            | `pip install ibee-cli`                       | [CLI](/docs/api-reference/cli)                    |
+| HTTP           | `curl` and `jq`                              | [API Reference](/docs/api-reference/introduction) |
+| Terraform      | `devs-ibee/ibee` from the Terraform Registry | [Terraform](/docs/api-reference/terraform)        |
 
 Most examples create billable resources for a few minutes and delete them at the
 end. Virtual IPs, Bare Metal Servers, SSH Keys, ISOs, and Email Service are
@@ -84242,9 +84250,13 @@ New features, fixes, and security notices for IBEE Cloud, newest first. Filter b
 
 ## Public API reference 0.5.0: Container Registry
 
-The API reference adds **Container Registry**: 27 operations under `/v1/container-registry` for registries, storage plans, registry access tokens, repositories, images, vulnerability findings, SBOMs, and metrics. They need the new `container-registry.read` and `container-registry.write` scopes. See [Use the API](/docs/tools/container-registry#use-the-api).
+The API reference adds **Container Registry**: 27 operations under `/v1/container-registry` for registries, storage plans, registry access tokens, repositories, images, vulnerability findings, SBOMs, and metrics. They need the new `container-registry.read` and `container-registry.write` scopes. See [Use the API](/docs/infrastructure/container-registry#use-the-api).
 
 ## October 19, 2026
+
+## Public API reference 0.4.1
+
+VM create now lists `site_id` as required (the API already refused a create without it), VM plan and root-disk resizes accept an optional `billing_catalog`, and block-storage volumes show the `metadata.billing_catalog` that volume attach needs.
 
 ## Public API reference 0.4.0
 
@@ -84258,12 +84270,6 @@ The API reference now describes what the API already accepts and returns. No end
 * **Billing eligibility** accepts `resource_type`, `quantity`, `size_gb` and `operation`, and returns `resource_limits` and, when a plan limit refuses, `resource_limit_key`, `resource_limit` and `resource_usage`.
 * **Secret Store** `GET /secret-store/identities/{identity_id}/access` is listed under `secret-store.write`, the scope the gateway already requires, because each call mints a new credential.
 * **Errors** share one documented body (`error`, `required_scope`, `billing_reason`, `billing_sku_code`, `admission_context_id`), and operations now list the 402, 423, 429 and 503 responses they can return.
-
-## October 19, 2026
-
-## Public API reference 0.4.1
-
-VM create now lists `site_id` as required (the API already refused a create without it), VM plan and root-disk resizes accept an optional `billing_catalog`, and block-storage volumes show the `metadata.billing_catalog` that volume attach needs.
 
 ## May 1, 2026
 
@@ -84340,7 +84346,7 @@ last_updated: 2026-10-20
 
 ## Public API reference 0.5.0: Container Registry
 
-The API reference adds **Container Registry**: 27 operations under `/v1/container-registry` for registries, storage plans, registry access tokens, repositories, images, vulnerability findings, SBOMs, and metrics. They need the new `container-registry.read` and `container-registry.write` scopes. See [Use the API](/docs/tools/container-registry#use-the-api).
+The API reference adds **Container Registry**: 27 operations under `/v1/container-registry` for registries, storage plans, registry access tokens, repositories, images, vulnerability findings, SBOMs, and metrics. They need the new `container-registry.read` and `container-registry.write` scopes. See [Use the API](/docs/infrastructure/container-registry#use-the-api).
 
 
 ---
@@ -84350,6 +84356,10 @@ last_updated: 2026-10-19
 ---
 
 # October 19, 2026
+
+## Public API reference 0.4.1
+
+VM create now lists `site_id` as required (the API already refused a create without it), VM plan and root-disk resizes accept an optional `billing_catalog`, and block-storage volumes show the `metadata.billing_catalog` that volume attach needs.
 
 ## Public API reference 0.4.0
 
