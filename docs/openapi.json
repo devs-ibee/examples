@@ -2,7 +2,7 @@
  "openapi": "3.1.0",
  "info": {
   "title": "IBEE Solutions API",
-  "version": "0.5.0",
+  "version": "0.7.0",
   "description": "Public API reference for IBEE Solutions.\n\nAuthenticate with a platform API token and pass a `workspace_id` query\nparameter to scope requests to a specific workspace.\n"
  },
  "servers": [
@@ -55,10 +55,6 @@
    "x-displayName": "Compute Catalog"
   },
   {
-   "name": "Billing",
-   "description": "Check current billing eligibility for a billable resource."
-  },
-  {
    "name": "BlockStorage",
    "description": "Manage standalone persistent block-storage volumes using the same product flow as the portal.",
    "x-fern-display-name": "Block Storage",
@@ -87,12 +83,6 @@
    "description": "Deploy and manage GPU-accelerated virtual machines.",
    "x-fern-display-name": "GPU VMs",
    "x-displayName": "GPU VMs"
-  },
-  {
-   "name": "VmConsole",
-   "description": "Create and manage short-lived graphical VM console sessions.",
-   "x-fern-display-name": "VM Console",
-   "x-displayName": "VM Console"
   }
  ],
  "security": [
@@ -221,7 +211,7 @@
      "Secret Store"
     ],
     "summary": "Get secret store",
-    "description": "Gets one secret store. Requires scope: secret-store.read.",
+    "description": "Gets one secret store. A permanently deleted store answers 403, not 404. Requires scope: secret-store.read.",
     "operationId": "getSecretStore",
     "x-ibee-required-scope": "secret-store.read",
     "parameters": [
@@ -251,63 +241,6 @@
      },
      "404": {
       "$ref": "#/components/responses/NotFound"
-     },
-     "503": {
-      "$ref": "#/components/responses/ServiceUnavailable"
-     }
-    }
-   },
-   "patch": {
-    "tags": [
-     "Secret Store"
-    ],
-    "summary": "Update secret store",
-    "description": "Updates store name or description. Requires scope: secret-store.write.",
-    "operationId": "updateSecretStore",
-    "x-ibee-required-scope": "secret-store.write",
-    "parameters": [
-     {
-      "$ref": "#/components/parameters/WorkspaceId"
-     },
-     {
-      "$ref": "#/components/parameters/StoreId"
-     }
-    ],
-    "requestBody": {
-     "required": true,
-     "content": {
-      "application/json": {
-       "schema": {
-        "$ref": "#/components/schemas/UpdateSecretStoreRequest"
-       }
-      }
-     }
-    },
-    "responses": {
-     "200": {
-      "description": "Store updated successfully.",
-      "content": {
-       "application/json": {
-        "schema": {
-         "$ref": "#/components/schemas/SecretStore"
-        }
-       }
-      }
-     },
-     "400": {
-      "$ref": "#/components/responses/BadRequest"
-     },
-     "401": {
-      "$ref": "#/components/responses/Unauthorized"
-     },
-     "403": {
-      "$ref": "#/components/responses/Forbidden"
-     },
-     "404": {
-      "$ref": "#/components/responses/NotFound"
-     },
-     "423": {
-      "$ref": "#/components/responses/Locked"
      },
      "503": {
       "$ref": "#/components/responses/ServiceUnavailable"
@@ -413,7 +346,7 @@
      "Secret Store"
     ],
     "summary": "Permanently delete secret store",
-    "description": "Irreversibly deletes a store and all store-scoped secrets, versions, identities, and policies. Requires scope: secret-store.write.",
+    "description": "Irreversibly deletes a store and all store-scoped secrets, versions, identities, and policies. Afterwards, reads of the store answer 403. Requires scope: secret-store.write.",
     "operationId": "permanentlyDeleteSecretStore",
     "x-ibee-required-scope": "secret-store.write",
     "parameters": [
@@ -662,7 +595,7 @@
      "Secret Store"
     ],
     "summary": "Get secret metadata",
-    "description": "Gets one secret metadata record. Secret value is not returned. Requires scope: secret-store.read.",
+    "description": "Gets one secret metadata record. Secret value is not returned. A permanently deleted secret answers 403, not 404. Requires scope: secret-store.read.",
     "operationId": "getSecret",
     "x-ibee-required-scope": "secret-store.read",
     "parameters": [
@@ -847,68 +780,6 @@
       "$ref": "#/components/responses/ServiceUnavailable"
      }
     }
-   },
-   "patch": {
-    "tags": [
-     "Secret Store"
-    ],
-    "summary": "Patch secret value",
-    "description": "Merges the supplied keys into the current value and creates a new version. Requires scope: secret-store.write.",
-    "operationId": "patchSecretValue",
-    "x-ibee-required-scope": "secret-store.write",
-    "parameters": [
-     {
-      "$ref": "#/components/parameters/WorkspaceId"
-     },
-     {
-      "$ref": "#/components/parameters/SecretId"
-     }
-    ],
-    "requestBody": {
-     "required": true,
-     "content": {
-      "application/json": {
-       "schema": {
-        "$ref": "#/components/schemas/PatchSecretValueRequest"
-       },
-       "example": {
-        "value": {
-         "username": "rotated-user"
-        }
-       }
-      }
-     }
-    },
-    "responses": {
-     "200": {
-      "description": "Secret value patched successfully.",
-      "content": {
-       "application/json": {
-        "schema": {
-         "$ref": "#/components/schemas/SecretValue"
-        }
-       }
-      }
-     },
-     "400": {
-      "$ref": "#/components/responses/BadRequest"
-     },
-     "401": {
-      "$ref": "#/components/responses/Unauthorized"
-     },
-     "403": {
-      "$ref": "#/components/responses/Forbidden"
-     },
-     "404": {
-      "$ref": "#/components/responses/NotFound"
-     },
-     "423": {
-      "$ref": "#/components/responses/Locked"
-     },
-     "503": {
-      "$ref": "#/components/responses/ServiceUnavailable"
-     }
-    }
    }
   },
   "/secret-store/secrets/{secret_id}/undelete": {
@@ -1045,7 +916,7 @@
      "Secret Store"
     ],
     "summary": "Permanently delete secret",
-    "description": "Irreversibly deletes all versions and metadata for a secret. Requires scope: secret-store.write.",
+    "description": "Irreversibly deletes all versions and metadata for a secret. Afterwards, reads of the secret answer 403. Requires scope: secret-store.write.",
     "operationId": "permanentlyDeleteSecret",
     "x-ibee-required-scope": "secret-store.write",
     "parameters": [
@@ -1395,66 +1266,6 @@
      },
      "404": {
       "$ref": "#/components/responses/NotFound"
-     },
-     "503": {
-      "$ref": "#/components/responses/ServiceUnavailable"
-     }
-    }
-   },
-   "patch": {
-    "tags": [
-     "Secret Store"
-    ],
-    "summary": "Update application identity",
-    "description": "Updates the token policy mode. Identity names cannot be changed after creation. Requires scope: secret-store.write.",
-    "operationId": "updateSecretIdentity",
-    "x-ibee-required-scope": "secret-store.write",
-    "parameters": [
-     {
-      "$ref": "#/components/parameters/WorkspaceId"
-     },
-     {
-      "$ref": "#/components/parameters/IdentityId"
-     }
-    ],
-    "requestBody": {
-     "required": true,
-     "content": {
-      "application/json": {
-       "schema": {
-        "$ref": "#/components/schemas/UpdateSecretIdentityRequest"
-       },
-       "example": {
-        "token_policy_mode": "read_write"
-       }
-      }
-     }
-    },
-    "responses": {
-     "200": {
-      "description": "Identity updated successfully.",
-      "content": {
-       "application/json": {
-        "schema": {
-         "$ref": "#/components/schemas/SecretIdentity"
-        }
-       }
-      }
-     },
-     "400": {
-      "$ref": "#/components/responses/BadRequest"
-     },
-     "401": {
-      "$ref": "#/components/responses/Unauthorized"
-     },
-     "403": {
-      "$ref": "#/components/responses/Forbidden"
-     },
-     "404": {
-      "$ref": "#/components/responses/NotFound"
-     },
-     "423": {
-      "$ref": "#/components/responses/Locked"
      },
      "503": {
       "$ref": "#/components/responses/ServiceUnavailable"
@@ -1847,69 +1658,6 @@
    }
   },
   "/secret-store/scopes/{scope_id}": {
-   "patch": {
-    "tags": [
-     "Secret Store"
-    ],
-    "summary": "Update application identity scope",
-    "description": "Updates store access and version permissions for a scope. Requires scope: secret-store.write.",
-    "operationId": "updateSecretIdentityScope",
-    "x-ibee-required-scope": "secret-store.write",
-    "parameters": [
-     {
-      "$ref": "#/components/parameters/WorkspaceId"
-     },
-     {
-      "$ref": "#/components/parameters/ScopeId"
-     }
-    ],
-    "requestBody": {
-     "required": true,
-     "content": {
-      "application/json": {
-       "schema": {
-        "$ref": "#/components/schemas/UpdateSecretIdentityScopeRequest"
-       },
-       "example": {
-        "access_mode": "read_write",
-        "allow_version_read": true,
-        "allow_rollback": true,
-        "allow_destroy": false
-       }
-      }
-     }
-    },
-    "responses": {
-     "200": {
-      "description": "Scope updated successfully.",
-      "content": {
-       "application/json": {
-        "schema": {
-         "$ref": "#/components/schemas/SecretIdentityScope"
-        }
-       }
-      }
-     },
-     "400": {
-      "$ref": "#/components/responses/BadRequest"
-     },
-     "401": {
-      "$ref": "#/components/responses/Unauthorized"
-     },
-     "403": {
-      "$ref": "#/components/responses/Forbidden"
-     },
-     "404": {
-      "$ref": "#/components/responses/NotFound"
-     },
-     "423": {
-      "$ref": "#/components/responses/Locked"
-     },
-     "503": {
-      "$ref": "#/components/responses/ServiceUnavailable"
-     }
-    }
-   },
    "delete": {
     "tags": [
      "Secret Store"
@@ -2219,6 +1967,747 @@
     }
    }
   },
+  "/object-storage/buckets/{bucket_name}/lifecycle": {
+   "get": {
+    "tags": [
+     "Object Storage"
+    ],
+    "summary": "Get bucket lifecycle rules",
+    "description": "Returns the bucket's lifecycle rules, as the portal's Settings › Lifecycle tab shows them. Requires scope: object-storage.read.",
+    "operationId": "getBucketLifecycle",
+    "x-ibee-required-scope": "object-storage.read",
+    "parameters": [
+     {
+      "$ref": "#/components/parameters/WorkspaceId"
+     },
+     {
+      "$ref": "#/components/parameters/BucketName"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Get bucket lifecycle rules succeeded.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/BucketLifecycleConfiguration"
+        }
+       }
+      }
+     },
+     "401": {
+      "$ref": "#/components/responses/Unauthorized"
+     },
+     "403": {
+      "$ref": "#/components/responses/Forbidden"
+     },
+     "404": {
+      "$ref": "#/components/responses/NotFound"
+     },
+     "503": {
+      "$ref": "#/components/responses/ServiceUnavailable"
+     }
+    }
+   },
+   "put": {
+    "tags": [
+     "Object Storage"
+    ],
+    "summary": "Set bucket lifecycle rules",
+    "description": "Replaces every lifecycle rule of the bucket. Each rule expires objects after a number of days or on a date, optionally only under a prefix. Requires scope: object-storage.write.",
+    "operationId": "setBucketLifecycle",
+    "x-ibee-required-scope": "object-storage.write",
+    "parameters": [
+     {
+      "$ref": "#/components/parameters/WorkspaceId"
+     },
+     {
+      "$ref": "#/components/parameters/BucketName"
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/BucketLifecycleConfiguration"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Set bucket lifecycle rules succeeded.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/DeleteResponse"
+        }
+       }
+      }
+     },
+     "401": {
+      "$ref": "#/components/responses/Unauthorized"
+     },
+     "403": {
+      "$ref": "#/components/responses/Forbidden"
+     },
+     "404": {
+      "$ref": "#/components/responses/NotFound"
+     },
+     "423": {
+      "$ref": "#/components/responses/Locked"
+     },
+     "503": {
+      "$ref": "#/components/responses/ServiceUnavailable"
+     }
+    }
+   },
+   "delete": {
+    "tags": [
+     "Object Storage"
+    ],
+    "summary": "Delete bucket lifecycle rules",
+    "description": "Removes every lifecycle rule from the bucket. Requires scope: object-storage.write.",
+    "operationId": "deleteBucketLifecycle",
+    "x-ibee-required-scope": "object-storage.write",
+    "parameters": [
+     {
+      "$ref": "#/components/parameters/WorkspaceId"
+     },
+     {
+      "$ref": "#/components/parameters/BucketName"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Delete bucket lifecycle rules succeeded.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/DeleteResponse"
+        }
+       }
+      }
+     },
+     "401": {
+      "$ref": "#/components/responses/Unauthorized"
+     },
+     "403": {
+      "$ref": "#/components/responses/Forbidden"
+     },
+     "404": {
+      "$ref": "#/components/responses/NotFound"
+     },
+     "423": {
+      "$ref": "#/components/responses/Locked"
+     },
+     "503": {
+      "$ref": "#/components/responses/ServiceUnavailable"
+     }
+    }
+   }
+  },
+  "/object-storage/buckets/{bucket_name}/cors": {
+   "get": {
+    "tags": [
+     "Object Storage"
+    ],
+    "summary": "Get bucket CORS rules",
+    "description": "Returns the bucket's CORS rules, as the portal's Settings › CORS tab shows them. Requires scope: object-storage.read.",
+    "operationId": "getBucketCors",
+    "x-ibee-required-scope": "object-storage.read",
+    "parameters": [
+     {
+      "$ref": "#/components/parameters/WorkspaceId"
+     },
+     {
+      "$ref": "#/components/parameters/BucketName"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Get bucket CORS rules succeeded.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/BucketCorsConfiguration"
+        }
+       }
+      }
+     },
+     "401": {
+      "$ref": "#/components/responses/Unauthorized"
+     },
+     "403": {
+      "$ref": "#/components/responses/Forbidden"
+     },
+     "404": {
+      "$ref": "#/components/responses/NotFound"
+     },
+     "503": {
+      "$ref": "#/components/responses/ServiceUnavailable"
+     }
+    }
+   },
+   "put": {
+    "tags": [
+     "Object Storage"
+    ],
+    "summary": "Set bucket CORS rules",
+    "description": "Replaces every CORS rule of the bucket. Requires scope: object-storage.write.",
+    "operationId": "setBucketCors",
+    "x-ibee-required-scope": "object-storage.write",
+    "parameters": [
+     {
+      "$ref": "#/components/parameters/WorkspaceId"
+     },
+     {
+      "$ref": "#/components/parameters/BucketName"
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/BucketCorsConfiguration"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Set bucket CORS rules succeeded.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/DeleteResponse"
+        }
+       }
+      }
+     },
+     "401": {
+      "$ref": "#/components/responses/Unauthorized"
+     },
+     "403": {
+      "$ref": "#/components/responses/Forbidden"
+     },
+     "404": {
+      "$ref": "#/components/responses/NotFound"
+     },
+     "423": {
+      "$ref": "#/components/responses/Locked"
+     },
+     "503": {
+      "$ref": "#/components/responses/ServiceUnavailable"
+     }
+    }
+   },
+   "delete": {
+    "tags": [
+     "Object Storage"
+    ],
+    "summary": "Delete bucket CORS rules",
+    "description": "Removes every CORS rule from the bucket. Requires scope: object-storage.write.",
+    "operationId": "deleteBucketCors",
+    "x-ibee-required-scope": "object-storage.write",
+    "parameters": [
+     {
+      "$ref": "#/components/parameters/WorkspaceId"
+     },
+     {
+      "$ref": "#/components/parameters/BucketName"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Delete bucket CORS rules succeeded.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/DeleteResponse"
+        }
+       }
+      }
+     },
+     "401": {
+      "$ref": "#/components/responses/Unauthorized"
+     },
+     "403": {
+      "$ref": "#/components/responses/Forbidden"
+     },
+     "404": {
+      "$ref": "#/components/responses/NotFound"
+     },
+     "423": {
+      "$ref": "#/components/responses/Locked"
+     },
+     "503": {
+      "$ref": "#/components/responses/ServiceUnavailable"
+     }
+    }
+   }
+  },
+  "/object-storage/buckets/{bucket_name}/object-lock": {
+   "get": {
+    "tags": [
+     "Object Storage"
+    ],
+    "summary": "Get bucket object lock configuration",
+    "description": "Returns the default retention of a bucket created with object lock, as the portal's Settings › Lock tab shows it. Answers 404 when the bucket has no object lock. Requires scope: object-storage.read.",
+    "operationId": "getBucketObjectLock",
+    "x-ibee-required-scope": "object-storage.read",
+    "parameters": [
+     {
+      "$ref": "#/components/parameters/WorkspaceId"
+     },
+     {
+      "$ref": "#/components/parameters/BucketName"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Get bucket object lock configuration succeeded.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/BucketObjectLockConfiguration"
+        }
+       }
+      }
+     },
+     "401": {
+      "$ref": "#/components/responses/Unauthorized"
+     },
+     "403": {
+      "$ref": "#/components/responses/Forbidden"
+     },
+     "404": {
+      "$ref": "#/components/responses/NotFound"
+     },
+     "503": {
+      "$ref": "#/components/responses/ServiceUnavailable"
+     }
+    }
+   },
+   "put": {
+    "tags": [
+     "Object Storage"
+    ],
+    "summary": "Set bucket default retention",
+    "description": "Changes the default retention applied to new objects in a bucket that has object lock. Send `rule: null` to remove the default. Requires scope: object-storage.write.",
+    "operationId": "setBucketObjectLock",
+    "x-ibee-required-scope": "object-storage.write",
+    "parameters": [
+     {
+      "$ref": "#/components/parameters/WorkspaceId"
+     },
+     {
+      "$ref": "#/components/parameters/BucketName"
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/BucketObjectLockUpdateRequest"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Set bucket default retention succeeded.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/DeleteResponse"
+        }
+       }
+      }
+     },
+     "400": {
+      "$ref": "#/components/responses/BadRequest"
+     },
+     "401": {
+      "$ref": "#/components/responses/Unauthorized"
+     },
+     "403": {
+      "$ref": "#/components/responses/Forbidden"
+     },
+     "404": {
+      "$ref": "#/components/responses/NotFound"
+     },
+     "423": {
+      "$ref": "#/components/responses/Locked"
+     },
+     "503": {
+      "$ref": "#/components/responses/ServiceUnavailable"
+     }
+    }
+   }
+  },
+  "/object-storage/buckets/{bucket_name}/notifications": {
+   "get": {
+    "tags": [
+     "Object Storage"
+    ],
+    "summary": "Get bucket event notifications",
+    "description": "Returns the webhook notification rules of the bucket, as the portal's Settings › Event notifications tab shows them. Requires scope: object-storage.read.",
+    "operationId": "getBucketNotifications",
+    "x-ibee-required-scope": "object-storage.read",
+    "parameters": [
+     {
+      "$ref": "#/components/parameters/WorkspaceId"
+     },
+     {
+      "$ref": "#/components/parameters/BucketName"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Get bucket event notifications succeeded.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/BucketNotificationConfiguration"
+        }
+       }
+      }
+     },
+     "401": {
+      "$ref": "#/components/responses/Unauthorized"
+     },
+     "403": {
+      "$ref": "#/components/responses/Forbidden"
+     },
+     "404": {
+      "$ref": "#/components/responses/NotFound"
+     },
+     "503": {
+      "$ref": "#/components/responses/ServiceUnavailable"
+     }
+    }
+   },
+   "put": {
+    "tags": [
+     "Object Storage"
+    ],
+    "summary": "Set bucket event notifications",
+    "description": "Replaces every notification rule of the bucket. Each rule posts `upload` or `delete` events, optionally filtered by prefix or suffix, to a webhook URL. Requires scope: object-storage.write.",
+    "operationId": "setBucketNotifications",
+    "x-ibee-required-scope": "object-storage.write",
+    "parameters": [
+     {
+      "$ref": "#/components/parameters/WorkspaceId"
+     },
+     {
+      "$ref": "#/components/parameters/BucketName"
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/BucketNotificationConfiguration"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Set bucket event notifications succeeded.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/DeleteResponse"
+        }
+       }
+      }
+     },
+     "401": {
+      "$ref": "#/components/responses/Unauthorized"
+     },
+     "403": {
+      "$ref": "#/components/responses/Forbidden"
+     },
+     "404": {
+      "$ref": "#/components/responses/NotFound"
+     },
+     "423": {
+      "$ref": "#/components/responses/Locked"
+     },
+     "503": {
+      "$ref": "#/components/responses/ServiceUnavailable"
+     }
+    }
+   },
+   "delete": {
+    "tags": [
+     "Object Storage"
+    ],
+    "summary": "Delete bucket event notifications",
+    "description": "Removes every notification rule from the bucket. Requires scope: object-storage.write.",
+    "operationId": "deleteBucketNotifications",
+    "x-ibee-required-scope": "object-storage.write",
+    "parameters": [
+     {
+      "$ref": "#/components/parameters/WorkspaceId"
+     },
+     {
+      "$ref": "#/components/parameters/BucketName"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Delete bucket event notifications succeeded.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/DeleteResponse"
+        }
+       }
+      }
+     },
+     "401": {
+      "$ref": "#/components/responses/Unauthorized"
+     },
+     "403": {
+      "$ref": "#/components/responses/Forbidden"
+     },
+     "404": {
+      "$ref": "#/components/responses/NotFound"
+     },
+     "423": {
+      "$ref": "#/components/responses/Locked"
+     },
+     "503": {
+      "$ref": "#/components/responses/ServiceUnavailable"
+     }
+    }
+   }
+  },
+  "/object-storage/buckets/{bucket_name}/custom-domains": {
+   "get": {
+    "tags": [
+     "Object Storage"
+    ],
+    "summary": "Get bucket custom domains",
+    "description": "Returns the bucket's custom domains with their status and the CNAME target to point them at, as the portal's Settings › Custom domains tab shows. Answers 404 when the bucket has no custom domain. Requires scope: object-storage.read.",
+    "operationId": "getBucketCustomDomains",
+    "x-ibee-required-scope": "object-storage.read",
+    "parameters": [
+     {
+      "$ref": "#/components/parameters/WorkspaceId"
+     },
+     {
+      "$ref": "#/components/parameters/BucketName"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Get bucket custom domains succeeded.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/BucketCustomDomainConfig"
+        }
+       }
+      }
+     },
+     "401": {
+      "$ref": "#/components/responses/Unauthorized"
+     },
+     "403": {
+      "$ref": "#/components/responses/Forbidden"
+     },
+     "404": {
+      "$ref": "#/components/responses/NotFound"
+     },
+     "503": {
+      "$ref": "#/components/responses/ServiceUnavailable"
+     }
+    }
+   },
+   "post": {
+    "tags": [
+     "Object Storage"
+    ],
+    "summary": "Add a bucket custom domain",
+    "description": "Adds a custom hostname that serves the bucket. Create the CNAME record shown in `cname_target`, then check `status` on the list. Requires scope: object-storage.write.",
+    "operationId": "addBucketCustomDomain",
+    "x-ibee-required-scope": "object-storage.write",
+    "parameters": [
+     {
+      "$ref": "#/components/parameters/WorkspaceId"
+     },
+     {
+      "$ref": "#/components/parameters/BucketName"
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/AddBucketCustomDomainRequest"
+       }
+      }
+     }
+    },
+    "responses": {
+     "201": {
+      "description": "Add a bucket custom domain succeeded.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/BucketCustomDomain"
+        }
+       }
+      }
+     },
+     "400": {
+      "$ref": "#/components/responses/BadRequest"
+     },
+     "401": {
+      "$ref": "#/components/responses/Unauthorized"
+     },
+     "403": {
+      "$ref": "#/components/responses/Forbidden"
+     },
+     "404": {
+      "$ref": "#/components/responses/NotFound"
+     },
+     "409": {
+      "$ref": "#/components/responses/Conflict"
+     },
+     "423": {
+      "$ref": "#/components/responses/Locked"
+     },
+     "503": {
+      "$ref": "#/components/responses/ServiceUnavailable"
+     }
+    }
+   }
+  },
+  "/object-storage/buckets/{bucket_name}/custom-domains/{domain}": {
+   "delete": {
+    "tags": [
+     "Object Storage"
+    ],
+    "summary": "Remove a bucket custom domain",
+    "description": "Removes a custom hostname from the bucket. Answers 400 when the bucket has no custom domain. Requires scope: object-storage.write.",
+    "operationId": "removeBucketCustomDomain",
+    "x-ibee-required-scope": "object-storage.write",
+    "parameters": [
+     {
+      "$ref": "#/components/parameters/WorkspaceId"
+     },
+     {
+      "$ref": "#/components/parameters/BucketName"
+     },
+     {
+      "name": "domain",
+      "in": "path",
+      "required": true,
+      "description": "Hostname to remove.",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Remove a bucket custom domain succeeded.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/BucketCustomDomainRemoved"
+        }
+       }
+      }
+     },
+     "400": {
+      "$ref": "#/components/responses/BadRequest"
+     },
+     "401": {
+      "$ref": "#/components/responses/Unauthorized"
+     },
+     "403": {
+      "$ref": "#/components/responses/Forbidden"
+     },
+     "404": {
+      "$ref": "#/components/responses/NotFound"
+     },
+     "423": {
+      "$ref": "#/components/responses/Locked"
+     },
+     "503": {
+      "$ref": "#/components/responses/ServiceUnavailable"
+     }
+    }
+   }
+  },
+  "/object-storage/buckets/{bucket_name}/metrics": {
+   "get": {
+    "tags": [
+     "Object Storage"
+    ],
+    "summary": "Get bucket metrics",
+    "description": "Returns request and storage metrics of the bucket for the last 24 hours or 7 days, as the portal's Metrics tab shows them. Requires scope: object-storage.read.",
+    "operationId": "getBucketMetrics",
+    "x-ibee-required-scope": "object-storage.read",
+    "parameters": [
+     {
+      "$ref": "#/components/parameters/WorkspaceId"
+     },
+     {
+      "$ref": "#/components/parameters/BucketName"
+     },
+     {
+      "name": "range",
+      "description": "Time range. Default `24h`.",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "string",
+       "enum": [
+        "24h",
+        "7d"
+       ],
+       "default": "24h"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Get bucket metrics succeeded.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/BucketMetrics"
+        }
+       }
+      }
+     },
+     "401": {
+      "$ref": "#/components/responses/Unauthorized"
+     },
+     "403": {
+      "$ref": "#/components/responses/Forbidden"
+     },
+     "404": {
+      "$ref": "#/components/responses/NotFound"
+     },
+     "503": {
+      "$ref": "#/components/responses/ServiceUnavailable"
+     }
+    }
+   }
+  },
   "/object-storage/credentials": {
    "get": {
     "tags": [
@@ -2359,8 +2848,54 @@
     "tags": [
      "Object Storage"
     ],
+    "summary": "Delete S3 credential",
+    "description": "Deletes a credential record permanently. Revoke it first with POST /object-storage/credentials/{access_key_id}/revoke; the portal deletes revoked credentials only. Requires scope: object-storage.write.",
+    "operationId": "deleteS3Credential",
+    "x-ibee-required-scope": "object-storage.write",
+    "parameters": [
+     {
+      "$ref": "#/components/parameters/WorkspaceId"
+     },
+     {
+      "$ref": "#/components/parameters/AccessKeyId"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Credential revoked successfully.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/S3CredentialRevoked"
+        }
+       }
+      }
+     },
+     "401": {
+      "$ref": "#/components/responses/Unauthorized"
+     },
+     "403": {
+      "$ref": "#/components/responses/Forbidden"
+     },
+     "404": {
+      "$ref": "#/components/responses/NotFound"
+     },
+     "423": {
+      "$ref": "#/components/responses/Locked"
+     },
+     "503": {
+      "$ref": "#/components/responses/ServiceUnavailable"
+     }
+    }
+   }
+  },
+  "/object-storage/credentials/{access_key_id}/revoke": {
+   "post": {
+    "tags": [
+     "Object Storage"
+    ],
     "summary": "Revoke S3 credential",
-    "description": "Revokes a credential so it can no longer authenticate S3 requests. Requires scope: object-storage.write.",
+    "description": "Revokes a credential so it can no longer authenticate S3 requests. The record stays listed as revoked, as in the portal; delete it afterwards with DELETE /object-storage/credentials/{access_key_id}. Requires scope: object-storage.write.",
     "operationId": "revokeS3Credential",
     "x-ibee-required-scope": "object-storage.write",
     "parameters": [
@@ -2837,66 +3372,6 @@
      }
     }
    },
-   "patch": {
-    "tags": [
-     "Vpcs"
-    ],
-    "summary": "Update a VPC subnet",
-    "description": "Renames a VPC subnet or changes its DNS settings. Requires scope: network.write.",
-    "operationId": "updateVpcSubnet",
-    "x-ibee-required-scope": "network.write",
-    "parameters": [
-     {
-      "$ref": "#/components/parameters/WorkspaceId"
-     },
-     {
-      "$ref": "#/components/parameters/VpcId"
-     },
-     {
-      "$ref": "#/components/parameters/SubnetId"
-     }
-    ],
-    "requestBody": {
-     "required": true,
-     "content": {
-      "application/json": {
-       "schema": {
-        "$ref": "#/components/schemas/UpdateSubnetRequest"
-       }
-      }
-     }
-    },
-    "responses": {
-     "200": {
-      "description": "Subnet updated successfully.",
-      "content": {
-       "application/json": {
-        "schema": {
-         "$ref": "#/components/schemas/Subnet"
-        }
-       }
-      }
-     },
-     "400": {
-      "$ref": "#/components/responses/BadRequest"
-     },
-     "401": {
-      "$ref": "#/components/responses/Unauthorized"
-     },
-     "403": {
-      "$ref": "#/components/responses/Forbidden"
-     },
-     "404": {
-      "$ref": "#/components/responses/NotFound"
-     },
-     "423": {
-      "$ref": "#/components/responses/Locked"
-     },
-     "503": {
-      "$ref": "#/components/responses/ServiceUnavailable"
-     }
-    }
-   },
    "delete": {
     "tags": [
      "Vpcs"
@@ -3215,9 +3690,81 @@
       "$ref": "#/components/parameters/NatGatewayId"
      }
     ],
+    "requestBody": {
+     "required": false,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/NatGatewayDeleteRequest"
+       }
+      }
+     }
+    },
     "responses": {
      "204": {
       "description": "NAT gateway deleted successfully."
+     },
+     "401": {
+      "$ref": "#/components/responses/Unauthorized"
+     },
+     "403": {
+      "$ref": "#/components/responses/Forbidden"
+     },
+     "404": {
+      "$ref": "#/components/responses/NotFound"
+     },
+     "409": {
+      "$ref": "#/components/responses/Conflict"
+     },
+     "423": {
+      "$ref": "#/components/responses/Locked"
+     },
+     "503": {
+      "$ref": "#/components/responses/ServiceUnavailable"
+     }
+    }
+   }
+  },
+  "/networking/vpcs/{vpc_id}/nat-gateways/{nat_gateway_id}/public-ip": {
+   "put": {
+    "tags": [
+     "Vpcs"
+    ],
+    "summary": "Swap the NAT gateway public IP",
+    "description": "Replaces the NAT gateway's public IP with a Reserved IP, keeping the port-forwarding rules, as the portal's NAT card does. Requires scope: network.write.",
+    "operationId": "updateNatGatewayPublicIp",
+    "x-ibee-required-scope": "network.write",
+    "parameters": [
+     {
+      "$ref": "#/components/parameters/WorkspaceId"
+     },
+     {
+      "$ref": "#/components/parameters/VpcId"
+     },
+     {
+      "$ref": "#/components/parameters/NatGatewayId"
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/UpdateNatGatewayPublicIpRequest"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "NAT gateway updated.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/NatGateway"
+        }
+       }
+      }
      },
      "401": {
       "$ref": "#/components/responses/Unauthorized"
@@ -3572,6 +4119,68 @@
     }
    }
   },
+  "/networking/reserved-ips/convert": {
+   "post": {
+    "tags": [
+     "ReservedIps"
+    ],
+    "summary": "Convert a VM public IP to a Reserved IP",
+    "description": "Turns the automatically assigned public IPv4 of a VM into a Reserved IP that survives the VM, as the portal's Convert Existing IP does. The address stays on the VM. Billing for the Reserved IP starts now. Requires scope: network.write.",
+    "operationId": "convertReservedIp",
+    "x-ibee-required-scope": "network.write",
+    "x-ibee-billing-admission": "required",
+    "x-ibee-billing-sku-source": "product-catalog",
+    "x-ibee-billing-sku": "reserved-ip",
+    "parameters": [
+     {
+      "$ref": "#/components/parameters/WorkspaceId"
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/ConvertReservedIpRequest"
+       }
+      }
+     }
+    },
+    "responses": {
+     "201": {
+      "description": "Reserved IP created.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ReservedIp"
+        }
+       }
+      }
+     },
+     "401": {
+      "$ref": "#/components/responses/Unauthorized"
+     },
+     "402": {
+      "$ref": "#/components/responses/PaymentRequired"
+     },
+     "403": {
+      "$ref": "#/components/responses/Forbidden"
+     },
+     "404": {
+      "$ref": "#/components/responses/NotFound"
+     },
+     "422": {
+      "$ref": "#/components/responses/BadRequest"
+     },
+     "423": {
+      "$ref": "#/components/responses/Locked"
+     },
+     "503": {
+      "$ref": "#/components/responses/ServiceUnavailable"
+     }
+    }
+   }
+  },
   "/networking/reserved-ips/{reserved_ip_id}": {
    "get": {
     "tags": [
@@ -3752,6 +4361,65 @@
      },
      "400": {
       "$ref": "#/components/responses/BadRequest"
+     },
+     "401": {
+      "$ref": "#/components/responses/Unauthorized"
+     },
+     "403": {
+      "$ref": "#/components/responses/Forbidden"
+     },
+     "404": {
+      "$ref": "#/components/responses/NotFound"
+     },
+     "409": {
+      "$ref": "#/components/responses/Conflict"
+     },
+     "423": {
+      "$ref": "#/components/responses/Locked"
+     },
+     "503": {
+      "$ref": "#/components/responses/ServiceUnavailable"
+     }
+    }
+   }
+  },
+  "/networking/reserved-ips/{reserved_ip_id}/attach-direct": {
+   "post": {
+    "tags": [
+     "ReservedIps"
+    ],
+    "summary": "Attach a Reserved IP to a VM without a VPC",
+    "description": "Attaches the Reserved IP to the VM's direct public interface, for VMs that are not in a VPC. Use `attach` for VMs with a VPC interface. Requires scope: network.write.",
+    "operationId": "attachReservedIpDirect",
+    "x-ibee-required-scope": "network.write",
+    "parameters": [
+     {
+      "$ref": "#/components/parameters/WorkspaceId"
+     },
+     {
+      "$ref": "#/components/parameters/ReservedIpId"
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/AttachReservedIpDirectRequest"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Reserved IP attached.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ReservedIp"
+        }
+       }
+      }
      },
      "401": {
       "$ref": "#/components/responses/Unauthorized"
@@ -4955,6 +5623,37 @@
       "schema": {
        "$ref": "#/components/schemas/BillingInterval"
       }
+     },
+     {
+      "name": "include_availability",
+      "in": "query",
+      "description": "Include an advisory placement check. Requires site_id. This does not reserve stock.",
+      "schema": {
+       "type": "boolean",
+       "default": false
+      }
+     },
+     {
+      "name": "os_type",
+      "in": "query",
+      "description": "OS pool to check when include_availability is true.",
+      "schema": {
+       "type": "string",
+       "enum": [
+        "linux",
+        "windows"
+       ],
+       "default": "linux"
+      }
+     },
+     {
+      "name": "requires_public_ip",
+      "in": "query",
+      "description": "Include public IPv4 capacity in the advisory placement check.",
+      "schema": {
+       "type": "boolean",
+       "default": true
+      }
      }
     ],
     "responses": {
@@ -5049,6 +5748,136 @@
     }
    }
   },
+  "/compute/plans/snapshot-storage": {
+   "get": {
+    "tags": [
+     "ComputeCatalog"
+    ],
+    "summary": "List snapshot storage SKUs",
+    "description": "Select a priced item and send its billing_catalog unchanged when creating a snapshot. Discovery does not reserve capacity or create a resource.",
+    "operationId": "listSnapshotStoragePlans",
+    "x-ibee-required-scope": "vm.read",
+    "x-ibee-gateway-status": "ready",
+    "parameters": [
+     {
+      "$ref": "#/components/parameters/WorkspaceId"
+     },
+     {
+      "name": "site_id",
+      "in": "query",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "currency",
+      "in": "query",
+      "schema": {
+       "type": "string",
+       "default": "INR"
+      }
+     },
+     {
+      "name": "billing_interval",
+      "in": "query",
+      "schema": {
+       "type": "string",
+       "enum": [
+        "HOURLY",
+        "MONTHLY"
+       ],
+       "default": "MONTHLY"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Canonical snapshot storage catalog.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/RecoveryStoragePlanList"
+        }
+       }
+      }
+     },
+     "401": {
+      "$ref": "#/components/responses/Unauthorized"
+     },
+     "403": {
+      "$ref": "#/components/responses/Forbidden"
+     },
+     "503": {
+      "$ref": "#/components/responses/ServiceUnavailable"
+     }
+    }
+   }
+  },
+  "/compute/plans/backup-storage": {
+   "get": {
+    "tags": [
+     "ComputeCatalog"
+    ],
+    "summary": "List backup storage SKUs",
+    "description": "Select a priced item and send its billing_catalog unchanged when enabling backups or creating a manual backup run.",
+    "operationId": "listBackupStoragePlans",
+    "x-ibee-required-scope": "vm.read",
+    "x-ibee-gateway-status": "ready",
+    "parameters": [
+     {
+      "$ref": "#/components/parameters/WorkspaceId"
+     },
+     {
+      "name": "site_id",
+      "in": "query",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "currency",
+      "in": "query",
+      "schema": {
+       "type": "string",
+       "default": "INR"
+      }
+     },
+     {
+      "name": "billing_interval",
+      "in": "query",
+      "schema": {
+       "type": "string",
+       "enum": [
+        "HOURLY",
+        "MONTHLY"
+       ],
+       "default": "MONTHLY"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Canonical backup storage catalog.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/RecoveryStoragePlanList"
+        }
+       }
+      }
+     },
+     "401": {
+      "$ref": "#/components/responses/Unauthorized"
+     },
+     "403": {
+      "$ref": "#/components/responses/Forbidden"
+     },
+     "503": {
+      "$ref": "#/components/responses/ServiceUnavailable"
+     }
+    }
+   }
+  },
   "/compute/cloud-vms": {
    "get": {
     "tags": [
@@ -5068,6 +5897,69 @@
      },
      {
       "$ref": "#/components/parameters/ListOffset"
+     },
+     {
+      "name": "search",
+      "description": "Return only VMs whose name, IP address, OS or plan contains this text.",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "string",
+       "minLength": 1,
+       "maxLength": 120
+      }
+     },
+     {
+      "name": "sort_by",
+      "description": "Field to sort by. Default `created_at`.",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "string",
+       "enum": [
+        "created_at",
+        "name",
+        "status",
+        "os_type"
+       ],
+       "default": "created_at"
+      }
+     },
+     {
+      "name": "sort_direction",
+      "description": "Sort direction. Default `desc`.",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "string",
+       "enum": [
+        "asc",
+        "desc"
+       ],
+       "default": "desc"
+      }
+     },
+     {
+      "name": "status",
+      "description": "Send `all` to include VMs deleted in the selected month (see `date`).",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "string",
+       "enum": [
+        "all"
+       ]
+      }
+     },
+     {
+      "name": "date",
+      "description": "Calendar month `YYYY-MM` for the deleted-VM history returned with `status=all`.",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "string",
+       "pattern": "^[0-9]{4}-[0-9]{2}$"
+      }
      }
     ],
     "responses": {
@@ -5100,7 +5992,7 @@
      "CloudVms"
     ],
     "summary": "Create a cloud VM",
-    "description": "Creates a cloud VM. Returns an operation you can poll for status. Requires scope: vm.write.",
+    "description": "Creates a cloud VM. Returns an operation you can poll for status. Asynchronous: the response carries `operation_id`; poll `GET /compute/operations/{operation_id}` until `status` is `succeeded`, `failed`, `cancelled` or `timed_out`. If your client times out, read the status; never resubmit the request. Requires scope: vm.write.",
     "operationId": "createCloudVm",
     "x-ibee-required-scope": "vm.write",
     "x-ibee-billing-admission": "required",
@@ -5208,7 +6100,7 @@
      "CloudVms"
     ],
     "summary": "Delete a cloud VM",
-    "description": "Deletes a cloud VM. Returns an operation you can poll for status. A VM with an automatically assigned public IP needs `public_ip_action` in the body. Requires scope: vm.write.",
+    "description": "Deletes a cloud VM. Returns an operation you can poll for status. A VM with an automatically assigned public IP needs `public_ip_action` in the body. Asynchronous: the response carries `operation_id`; poll `GET /compute/operations/{operation_id}` until `status` is `succeeded`, `failed`, `cancelled` or `timed_out`. If your client times out, read the status; never resubmit the request. Requires scope: vm.write.",
     "operationId": "deleteCloudVm",
     "x-ibee-required-scope": "vm.write",
     "x-ibee-gateway-status": "ready",
@@ -5277,7 +6169,7 @@
      "CloudVms"
     ],
     "summary": "Start a cloud VM",
-    "description": "Starts a stopped cloud VM. Requires scope: vm.write.",
+    "description": "Starts a stopped cloud VM. Asynchronous: the response carries `operation_id`; poll `GET /compute/operations/{operation_id}` until `status` is `succeeded`, `failed`, `cancelled` or `timed_out`. If your client times out, read the status; never resubmit the request. Requires scope: vm.write.",
     "operationId": "startCloudVm",
     "x-ibee-required-scope": "vm.write",
     "x-ibee-gateway-status": "ready",
@@ -5340,7 +6232,7 @@
      "CloudVms"
     ],
     "summary": "Stop a cloud VM",
-    "description": "Stops a running cloud VM. Requires scope: vm.write.",
+    "description": "Stops a running cloud VM. Asynchronous: the response carries `operation_id`; poll `GET /compute/operations/{operation_id}` until `status` is `succeeded`, `failed`, `cancelled` or `timed_out`. If your client times out, read the status; never resubmit the request. Requires scope: vm.write.",
     "operationId": "stopCloudVm",
     "x-ibee-required-scope": "vm.write",
     "x-ibee-gateway-status": "ready",
@@ -5403,7 +6295,7 @@
      "CloudVms"
     ],
     "summary": "Reboot a cloud VM",
-    "description": "Reboots a cloud VM. Requires scope: vm.write.",
+    "description": "Reboots a cloud VM. Asynchronous: the response carries `operation_id`; poll `GET /compute/operations/{operation_id}` until `status` is `succeeded`, `failed`, `cancelled` or `timed_out`. If your client times out, read the status; never resubmit the request. Requires scope: vm.write.",
     "operationId": "rebootCloudVm",
     "x-ibee-required-scope": "vm.write",
     "x-ibee-gateway-status": "ready",
@@ -5510,7 +6402,7 @@
      "CloudVms"
     ],
     "summary": "Update cloud VM access settings",
-    "description": "Adds or removes SSH keys, resets the Linux user password, or changes SSH password authentication on a cloud VM without rebooting it. Requires scope: vm.write.",
+    "description": "Adds or removes SSH keys, resets the Linux user password, or changes SSH password authentication on a cloud VM without rebooting it. Asynchronous: the response carries `operation_id`; poll `GET /compute/operations/{operation_id}` until `status` is `succeeded`, `failed`, `cancelled` or `timed_out`. If your client times out, read the status; never resubmit the request. Requires scope: vm.write.",
     "operationId": "updateCloudVmAccess",
     "x-ibee-required-scope": "vm.write",
     "x-ibee-gateway-status": "ready",
@@ -5636,7 +6528,7 @@
      "CloudVms"
     ],
     "summary": "Resize a cloud VM",
-    "description": "Changes a cloud VM's CPU and memory, and optionally grows its root disk, after the same precheck the portal runs. Requires scope: vm.write.",
+    "description": "Changes a cloud VM's CPU and memory, and optionally grows its root disk, after the same precheck the portal runs. Asynchronous: the response carries `operation_id`; poll `GET /compute/operations/{operation_id}` until `status` is `succeeded`, `failed`, `cancelled` or `timed_out`. If your client times out, read the status; never resubmit the request. Requires scope: vm.write.",
     "operationId": "resizeCloudVm",
     "x-ibee-required-scope": "vm.write",
     "x-ibee-gateway-status": "ready",
@@ -5696,145 +6588,13 @@
     }
    }
   },
-  "/compute/cloud-vms/{vm_id}/actions/resize-plan": {
-   "patch": {
-    "tags": [
-     "CloudVms"
-    ],
-    "summary": "Resize a cloud VM plan",
-    "description": "Moves a cloud VM to a different CPU and memory plan. Downgrades require explicit confirmation. Requires scope: vm.write.",
-    "operationId": "resizeCloudVmPlan",
-    "x-ibee-required-scope": "vm.write",
-    "x-ibee-gateway-status": "ready",
-    "parameters": [
-     {
-      "$ref": "#/components/parameters/WorkspaceId"
-     },
-     {
-      "$ref": "#/components/parameters/VmId"
-     },
-     {
-      "$ref": "#/components/parameters/IdempotencyKey"
-     }
-    ],
-    "requestBody": {
-     "required": true,
-     "content": {
-      "application/json": {
-       "schema": {
-        "$ref": "#/components/schemas/VmResizePlanRequest"
-       }
-      }
-     }
-    },
-    "responses": {
-     "202": {
-      "description": "Plan resize accepted.",
-      "content": {
-       "application/json": {
-        "schema": {
-         "$ref": "#/components/schemas/OperationAccepted"
-        }
-       }
-      }
-     },
-     "400": {
-      "$ref": "#/components/responses/BadRequest"
-     },
-     "401": {
-      "$ref": "#/components/responses/Unauthorized"
-     },
-     "403": {
-      "$ref": "#/components/responses/Forbidden"
-     },
-     "404": {
-      "$ref": "#/components/responses/NotFound"
-     },
-     "409": {
-      "$ref": "#/components/responses/Conflict"
-     },
-     "423": {
-      "$ref": "#/components/responses/Locked"
-     },
-     "503": {
-      "$ref": "#/components/responses/ServiceUnavailable"
-     }
-    }
-   }
-  },
-  "/compute/cloud-vms/{vm_id}/actions/resize-root-disk": {
-   "patch": {
-    "tags": [
-     "CloudVms"
-    ],
-    "summary": "Resize a cloud VM root disk",
-    "description": "Increases a cloud VM's root disk size. Shrinking a root disk is not supported. Requires scope: vm.write.",
-    "operationId": "resizeCloudVmRootDisk",
-    "x-ibee-required-scope": "vm.write",
-    "x-ibee-gateway-status": "ready",
-    "parameters": [
-     {
-      "$ref": "#/components/parameters/WorkspaceId"
-     },
-     {
-      "$ref": "#/components/parameters/VmId"
-     },
-     {
-      "$ref": "#/components/parameters/IdempotencyKey"
-     }
-    ],
-    "requestBody": {
-     "required": true,
-     "content": {
-      "application/json": {
-       "schema": {
-        "$ref": "#/components/schemas/VmResizeRootDiskRequest"
-       }
-      }
-     }
-    },
-    "responses": {
-     "202": {
-      "description": "Root-disk resize accepted.",
-      "content": {
-       "application/json": {
-        "schema": {
-         "$ref": "#/components/schemas/OperationAccepted"
-        }
-       }
-      }
-     },
-     "400": {
-      "$ref": "#/components/responses/BadRequest"
-     },
-     "401": {
-      "$ref": "#/components/responses/Unauthorized"
-     },
-     "403": {
-      "$ref": "#/components/responses/Forbidden"
-     },
-     "404": {
-      "$ref": "#/components/responses/NotFound"
-     },
-     "409": {
-      "$ref": "#/components/responses/Conflict"
-     },
-     "423": {
-      "$ref": "#/components/responses/Locked"
-     },
-     "503": {
-      "$ref": "#/components/responses/ServiceUnavailable"
-     }
-    }
-   }
-  },
   "/compute/cloud-vms/{vm_id}/actions/attach-volume": {
    "post": {
     "tags": [
      "CloudVms"
     ],
     "summary": "Attach a volume to a cloud VM",
-    "description": "Attaches a persistent block storage volume to a cloud VM. Requires scope: vm.write.",
+    "description": "Attaches a persistent block storage volume to a cloud VM. Asynchronous: the response carries `operation_id`; poll `GET /compute/operations/{operation_id}` until `status` is `succeeded`, `failed`, `cancelled` or `timed_out`. If your client times out, read the status; never resubmit the request. Requires scope: vm.write.",
     "operationId": "attachCloudVmVolume",
     "x-ibee-required-scope": "vm.write",
     "x-ibee-gateway-status": "ready",
@@ -5900,7 +6660,7 @@
      "CloudVms"
     ],
     "summary": "Detach a volume from a cloud VM",
-    "description": "Detaches a persistent block storage volume from a cloud VM. Unmount its filesystem in the guest first unless force is used. Requires scope: vm.write.",
+    "description": "Detaches a persistent block storage volume from a cloud VM. Unmount its filesystem in the guest first unless force is used. Asynchronous: the response carries `operation_id`; poll `GET /compute/operations/{operation_id}` until `status` is `succeeded`, `failed`, `cancelled` or `timed_out`. If your client times out, read the status; never resubmit the request. Requires scope: vm.write.",
     "operationId": "detachCloudVmVolume",
     "x-ibee-required-scope": "vm.write",
     "x-ibee-gateway-status": "ready",
@@ -5950,66 +6710,6 @@
      },
      "409": {
       "$ref": "#/components/responses/Conflict"
-     },
-     "423": {
-      "$ref": "#/components/responses/Locked"
-     },
-     "503": {
-      "$ref": "#/components/responses/ServiceUnavailable"
-     }
-    }
-   }
-  },
-  "/compute/cloud-vms/{vm_id}/mount-guidance/acknowledge": {
-   "post": {
-    "tags": [
-     "CloudVms"
-    ],
-    "summary": "Acknowledge cloud VM mount guidance",
-    "description": "Records that you have reviewed the guest mount instructions for a data volume attached to a cloud VM. Requires scope: vm.write.",
-    "operationId": "acknowledgeCloudVmMountGuidance",
-    "x-ibee-required-scope": "vm.write",
-    "x-ibee-gateway-status": "ready",
-    "parameters": [
-     {
-      "$ref": "#/components/parameters/WorkspaceId"
-     },
-     {
-      "$ref": "#/components/parameters/VmId"
-     }
-    ],
-    "requestBody": {
-     "required": true,
-     "content": {
-      "application/json": {
-       "schema": {
-        "$ref": "#/components/schemas/MountGuidanceAcknowledgeRequest"
-       }
-      }
-     }
-    },
-    "responses": {
-     "200": {
-      "description": "Mount guidance acknowledged successfully.",
-      "content": {
-       "application/json": {
-        "schema": {
-         "$ref": "#/components/schemas/MountGuidanceAcknowledge"
-        }
-       }
-      }
-     },
-     "400": {
-      "$ref": "#/components/responses/BadRequest"
-     },
-     "401": {
-      "$ref": "#/components/responses/Unauthorized"
-     },
-     "403": {
-      "$ref": "#/components/responses/Forbidden"
-     },
-     "404": {
-      "$ref": "#/components/responses/NotFound"
      },
      "423": {
       "$ref": "#/components/responses/Locked"
@@ -6339,7 +7039,7 @@
      "CloudVms"
     ],
     "summary": "Restore a cloud VM snapshot",
-    "description": "Restores a cloud VM snapshot by replacing the VM, creating a new VM, or restoring a single volume. Requires scope: vm.write.",
+    "description": "Restores a cloud VM snapshot by replacing the VM, creating a new VM, or restoring a single volume. Asynchronous: the response carries `restore_id`; poll the restore status read until `status` is `succeeded`, `failed` or `cancelled`. If your client times out, read the status; never resubmit. Requires scope: vm.write.",
     "operationId": "restoreCloudVmSnapshot",
     "x-ibee-required-scope": "vm.write",
     "x-ibee-gateway-status": "ready",
@@ -6366,7 +7066,7 @@
      "content": {
       "application/json": {
        "schema": {
-        "$ref": "#/components/schemas/RecoveryRestoreRequest"
+        "$ref": "#/components/schemas/SnapshotRestoreRequest"
        }
       }
      }
@@ -6399,6 +7099,77 @@
      },
      "423": {
       "$ref": "#/components/responses/Locked"
+     },
+     "503": {
+      "$ref": "#/components/responses/ServiceUnavailable"
+     }
+    }
+   }
+  },
+  "/compute/cloud-vm-snapshots": {
+   "get": {
+    "tags": [
+     "CloudVms"
+    ],
+    "summary": "List Cloud VM snapshots in the workspace",
+    "description": "Lists snapshot sets of every Cloud VM in the workspace, as the portal's Snapshots page does. Requires scope: vm.read.",
+    "operationId": "listAllCloudVmSnapshots",
+    "x-ibee-required-scope": "vm.read",
+    "x-ibee-gateway-status": "ready",
+    "parameters": [
+     {
+      "$ref": "#/components/parameters/WorkspaceId"
+     },
+     {
+      "name": "limit",
+      "description": "Maximum number of snapshot sets to return (1-500). Default 100.",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "minimum": 1,
+       "maximum": 500,
+       "default": 100
+      }
+     },
+     {
+      "name": "offset",
+      "description": "Number of items to skip before the first returned item. Default 0.",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "minimum": 0,
+       "default": 0
+      }
+     },
+     {
+      "name": "search",
+      "description": "Return only snapshot sets whose fields contain this text.",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "string",
+       "minLength": 1
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Snapshot sets returned successfully.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/SnapshotSetList"
+        }
+       }
+      }
+     },
+     "401": {
+      "$ref": "#/components/responses/Unauthorized"
+     },
+     "403": {
+      "$ref": "#/components/responses/Forbidden"
      },
      "503": {
       "$ref": "#/components/responses/ServiceUnavailable"
@@ -6713,8 +7484,35 @@
      "CloudVms"
     ],
     "summary": "Disable cloud VM backups",
-    "description": "Stops future automated backups for a cloud VM without deleting existing recovery points. Requires scope: vm.write.",
+    "description": "Stops future automated backups for a cloud VM without deleting existing recovery points. Send an empty JSON object body (`{}`); the virtualization engine rejects a request with no body. Requires scope: vm.write.",
     "operationId": "disableCloudVmBackups",
+    "x-fern-examples": [
+     {
+      "request": {},
+      "response": {
+       "body": {
+        "organization_id": "org-4f2a9c1b",
+        "workspace_id": "710995",
+        "policy_id": "bkp-pol-1c9e4a2d",
+        "vm_id": "vm-7f3c2d1e",
+        "enabled": false,
+        "schedule": {
+         "frequency": "daily",
+         "timezone": "Asia/Kolkata",
+         "hour": 2,
+         "minute": 0,
+         "window_minutes": 60
+        },
+        "retention_days": 7,
+        "full_backup_interval_days": 7,
+        "incremental_enabled": true,
+        "storage_backend": "BACKUP-STD",
+        "created_at": "2026-10-01T02:00:00Z",
+        "updated_at": "2026-10-29T09:15:00Z"
+       }
+      }
+     }
+    ],
     "x-ibee-required-scope": "vm.write",
     "x-ibee-gateway-status": "ready",
     "parameters": [
@@ -6726,11 +7524,13 @@
      }
     ],
     "requestBody": {
-     "required": true,
+     "description": "Optional. Send an empty JSON object; the virtualization engine rejects a request with no body.",
+     "required": false,
      "content": {
       "application/json": {
        "schema": {
-        "$ref": "#/components/schemas/BackupPolicyDisableRequest"
+        "type": "object",
+        "additionalProperties": false
        }
       }
      }
@@ -6767,128 +7567,7 @@
     }
    }
   },
-  "/compute/cloud-vms/{vm_id}/backups/policy/next-run-at": {
-   "patch": {
-    "tags": [
-     "CloudVms"
-    ],
-    "summary": "Reschedule a cloud VM backup",
-    "description": "Sets when a cloud VM's next automated backup runs. Requires scope: vm.write.",
-    "operationId": "rescheduleCloudVmBackup",
-    "x-ibee-required-scope": "vm.write",
-    "x-ibee-gateway-status": "ready",
-    "parameters": [
-     {
-      "$ref": "#/components/parameters/WorkspaceId"
-     },
-     {
-      "$ref": "#/components/parameters/VmId"
-     }
-    ],
-    "requestBody": {
-     "required": true,
-     "content": {
-      "application/json": {
-       "schema": {
-        "$ref": "#/components/schemas/BackupPolicyNextRunRequest"
-       }
-      }
-     }
-    },
-    "responses": {
-     "200": {
-      "description": "Next backup execution rescheduled successfully.",
-      "content": {
-       "application/json": {
-        "schema": {
-         "$ref": "#/components/schemas/BackupPolicy"
-        }
-       }
-      }
-     },
-     "400": {
-      "$ref": "#/components/responses/BadRequest"
-     },
-     "401": {
-      "$ref": "#/components/responses/Unauthorized"
-     },
-     "403": {
-      "$ref": "#/components/responses/Forbidden"
-     },
-     "404": {
-      "$ref": "#/components/responses/NotFound"
-     },
-     "423": {
-      "$ref": "#/components/responses/Locked"
-     },
-     "503": {
-      "$ref": "#/components/responses/ServiceUnavailable"
-     }
-    }
-   }
-  },
   "/compute/cloud-vms/{vm_id}/backups/runs": {
-   "post": {
-    "tags": [
-     "CloudVms"
-    ],
-    "summary": "Run a cloud VM backup",
-    "description": "Queues a manual backup of a cloud VM using its backup configuration. Requires scope: vm.write.",
-    "operationId": "createCloudVmBackupRun",
-    "x-ibee-required-scope": "vm.write",
-    "x-ibee-gateway-status": "ready",
-    "parameters": [
-     {
-      "$ref": "#/components/parameters/WorkspaceId"
-     },
-     {
-      "$ref": "#/components/parameters/VmId"
-     }
-    ],
-    "requestBody": {
-     "required": true,
-     "content": {
-      "application/json": {
-       "schema": {
-        "$ref": "#/components/schemas/ManualBackupRunRequest"
-       }
-      }
-     }
-    },
-    "responses": {
-     "200": {
-      "description": "Backup run queued successfully.",
-      "content": {
-       "application/json": {
-        "schema": {
-         "$ref": "#/components/schemas/BackupRun"
-        }
-       }
-      }
-     },
-     "400": {
-      "$ref": "#/components/responses/BadRequest"
-     },
-     "401": {
-      "$ref": "#/components/responses/Unauthorized"
-     },
-     "403": {
-      "$ref": "#/components/responses/Forbidden"
-     },
-     "404": {
-      "$ref": "#/components/responses/NotFound"
-     },
-     "409": {
-      "$ref": "#/components/responses/Conflict"
-     },
-     "423": {
-      "$ref": "#/components/responses/Locked"
-     },
-     "503": {
-      "$ref": "#/components/responses/ServiceUnavailable"
-     }
-    }
-   },
    "get": {
     "tags": [
      "CloudVms"
@@ -6962,7 +7641,7 @@
      "CloudVms"
     ],
     "summary": "Restore a cloud VM backup",
-    "description": "Restores a cloud VM backup recovery point by replacing the VM, creating a new VM, or restoring a single volume. Requires scope: vm.write.",
+    "description": "Restores a cloud VM backup recovery point by replacing the VM, creating a new VM, or restoring a single volume. Asynchronous: the response carries `restore_id`; poll the restore status read until `status` is `succeeded`, `failed` or `cancelled`. If your client times out, read the status; never resubmit. Requires scope: vm.write.",
     "operationId": "restoreCloudVmBackup",
     "x-ibee-required-scope": "vm.write",
     "x-ibee-gateway-status": "ready",
@@ -7019,6 +7698,92 @@
     }
    }
   },
+  "/compute/cloud-vm-backups/runs": {
+   "get": {
+    "tags": [
+     "CloudVms"
+    ],
+    "summary": "List Cloud VM backup runs in the workspace",
+    "description": "Lists backup runs and recovery points of every Cloud VM in the workspace, as the portal's Backups page does. Filter by `vm_id` or `status`. Requires scope: vm.read.",
+    "operationId": "listAllCloudVmBackupRuns",
+    "x-ibee-required-scope": "vm.read",
+    "x-ibee-gateway-status": "ready",
+    "parameters": [
+     {
+      "$ref": "#/components/parameters/WorkspaceId"
+     },
+     {
+      "name": "vm_id",
+      "description": "Return only runs of this VM.",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "string",
+       "minLength": 1
+      }
+     },
+     {
+      "name": "status",
+      "description": "Return only runs in these states. Repeat the parameter for several states.",
+      "in": "query",
+      "required": false,
+      "style": "form",
+      "explode": true,
+      "schema": {
+       "type": "array",
+       "items": {
+        "$ref": "#/components/schemas/BackupStatus"
+       }
+      }
+     },
+     {
+      "$ref": "#/components/parameters/Limit"
+     },
+     {
+      "name": "offset",
+      "description": "Number of items to skip before the first returned item. Default 0.",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "minimum": 0,
+       "default": 0
+      }
+     },
+     {
+      "name": "search",
+      "description": "Return only backup runs whose fields contain this text.",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "string",
+       "minLength": 1
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Backup runs returned successfully.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/BackupRunList"
+        }
+       }
+      }
+     },
+     "401": {
+      "$ref": "#/components/responses/Unauthorized"
+     },
+     "403": {
+      "$ref": "#/components/responses/Forbidden"
+     },
+     "503": {
+      "$ref": "#/components/responses/ServiceUnavailable"
+     }
+    }
+   }
+  },
   "/compute/cloud-vm-backups/runs/{run_id}": {
    "get": {
     "tags": [
@@ -7056,6 +7821,47 @@
      },
      "404": {
       "$ref": "#/components/responses/NotFound"
+     },
+     "503": {
+      "$ref": "#/components/responses/ServiceUnavailable"
+     }
+    }
+   },
+   "delete": {
+    "tags": [
+     "CloudVms"
+    ],
+    "summary": "Delete a Cloud VM backup run",
+    "description": "Deletes one backup run and its recovery point, as the portal's Backups page does. Requires scope: vm.write.",
+    "operationId": "deleteCloudVmBackupRun",
+    "x-ibee-required-scope": "vm.write",
+    "x-ibee-gateway-status": "ready",
+    "parameters": [
+     {
+      "$ref": "#/components/parameters/WorkspaceId"
+     },
+     {
+      "$ref": "#/components/parameters/BackupRunId"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Backup run deleted."
+     },
+     "401": {
+      "$ref": "#/components/responses/Unauthorized"
+     },
+     "403": {
+      "$ref": "#/components/responses/Forbidden"
+     },
+     "404": {
+      "$ref": "#/components/responses/NotFound"
+     },
+     "409": {
+      "$ref": "#/components/responses/Conflict"
+     },
+     "423": {
+      "$ref": "#/components/responses/Locked"
      },
      "503": {
       "$ref": "#/components/responses/ServiceUnavailable"
@@ -7126,6 +7932,47 @@
      },
      {
       "$ref": "#/components/parameters/ListOffset"
+     },
+     {
+      "name": "search",
+      "description": "Return only VMs whose name, IP address, OS or plan contains this text.",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "string",
+       "minLength": 1,
+       "maxLength": 120
+      }
+     },
+     {
+      "name": "sort_by",
+      "description": "Field to sort by. Default `created_at`.",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "string",
+       "enum": [
+        "created_at",
+        "name",
+        "status",
+        "os_type"
+       ],
+       "default": "created_at"
+      }
+     },
+     {
+      "name": "sort_direction",
+      "description": "Sort direction. Default `desc`.",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "string",
+       "enum": [
+        "asc",
+        "desc"
+       ],
+       "default": "desc"
+      }
      }
     ],
     "responses": {
@@ -7158,7 +8005,7 @@
      "GpuVms"
     ],
     "summary": "Create a GPU VM",
-    "description": "Creates a GPU VM. Returns an operation you can poll for status. Requires scope: vm.write.",
+    "description": "Creates a GPU VM. Returns an operation you can poll for status. Asynchronous: the response carries `operation_id`; poll `GET /compute/operations/{operation_id}` until `status` is `succeeded`, `failed`, `cancelled` or `timed_out`. If your client times out, read the status; never resubmit the request. Requires scope: vm.write.",
     "operationId": "createGpuVm",
     "x-ibee-required-scope": "vm.write",
     "x-ibee-billing-admission": "required",
@@ -7266,7 +8113,7 @@
      "GpuVms"
     ],
     "summary": "Delete a GPU VM",
-    "description": "Deletes a GPU VM. Returns an operation you can poll for status. A VM with an automatically assigned public IP needs `public_ip_action` in the body. Requires scope: vm.write.",
+    "description": "Deletes a GPU VM. Returns an operation you can poll for status. A VM with an automatically assigned public IP needs `public_ip_action` in the body. Asynchronous: the response carries `operation_id`; poll `GET /compute/operations/{operation_id}` until `status` is `succeeded`, `failed`, `cancelled` or `timed_out`. If your client times out, read the status; never resubmit the request. Requires scope: vm.write.",
     "operationId": "deleteGpuVm",
     "x-ibee-required-scope": "vm.write",
     "x-ibee-gateway-status": "ready",
@@ -7335,7 +8182,7 @@
      "GpuVms"
     ],
     "summary": "Start a GPU VM",
-    "description": "Starts a stopped GPU VM. Requires scope: vm.write.",
+    "description": "Starts a stopped GPU VM. Asynchronous: the response carries `operation_id`; poll `GET /compute/operations/{operation_id}` until `status` is `succeeded`, `failed`, `cancelled` or `timed_out`. If your client times out, read the status; never resubmit the request. Requires scope: vm.write.",
     "operationId": "startGpuVm",
     "x-ibee-required-scope": "vm.write",
     "x-ibee-gateway-status": "ready",
@@ -7398,7 +8245,7 @@
      "GpuVms"
     ],
     "summary": "Stop a GPU VM",
-    "description": "Stops a running GPU VM. Requires scope: vm.write.",
+    "description": "Stops a running GPU VM. Asynchronous: the response carries `operation_id`; poll `GET /compute/operations/{operation_id}` until `status` is `succeeded`, `failed`, `cancelled` or `timed_out`. If your client times out, read the status; never resubmit the request. Requires scope: vm.write.",
     "operationId": "stopGpuVm",
     "x-ibee-required-scope": "vm.write",
     "x-ibee-gateway-status": "ready",
@@ -7461,7 +8308,7 @@
      "GpuVms"
     ],
     "summary": "Reboot a GPU VM",
-    "description": "Reboots a GPU VM. Requires scope: vm.write.",
+    "description": "Reboots a GPU VM. Asynchronous: the response carries `operation_id`; poll `GET /compute/operations/{operation_id}` until `status` is `succeeded`, `failed`, `cancelled` or `timed_out`. If your client times out, read the status; never resubmit the request. Requires scope: vm.write.",
     "operationId": "rebootGpuVm",
     "x-ibee-required-scope": "vm.write",
     "x-ibee-gateway-status": "ready",
@@ -7568,7 +8415,7 @@
      "GpuVms"
     ],
     "summary": "Update GPU VM access settings",
-    "description": "Adds or removes SSH keys, resets the Linux user password, or changes SSH password authentication on a GPU VM without rebooting it or interrupting running GPU workloads. Requires scope: vm.write.",
+    "description": "Adds or removes SSH keys, resets the Linux user password, or changes SSH password authentication on a GPU VM without rebooting it or interrupting running GPU workloads. Asynchronous: the response carries `operation_id`; poll `GET /compute/operations/{operation_id}` until `status` is `succeeded`, `failed`, `cancelled` or `timed_out`. If your client times out, read the status; never resubmit the request. Requires scope: vm.write.",
     "operationId": "updateGpuVmAccess",
     "x-ibee-required-scope": "vm.write",
     "x-ibee-gateway-status": "ready",
@@ -7694,7 +8541,7 @@
      "GpuVms"
     ],
     "summary": "Resize a GPU VM",
-    "description": "Changes a GPU VM's CPU and memory, and optionally grows its root disk, after the same precheck the portal runs. Requires scope: vm.write.",
+    "description": "Changes a GPU VM's CPU and memory, and optionally grows its root disk, after the same precheck the portal runs. Asynchronous: the response carries `operation_id`; poll `GET /compute/operations/{operation_id}` until `status` is `succeeded`, `failed`, `cancelled` or `timed_out`. If your client times out, read the status; never resubmit the request. Requires scope: vm.write.",
     "operationId": "resizeGpuVm",
     "x-ibee-required-scope": "vm.write",
     "x-ibee-gateway-status": "ready",
@@ -7754,145 +8601,13 @@
     }
    }
   },
-  "/compute/gpu-vms/{vm_id}/actions/resize-plan": {
-   "patch": {
-    "tags": [
-     "GpuVms"
-    ],
-    "summary": "Resize a GPU VM plan",
-    "description": "Moves a GPU VM to a different CPU and memory plan. Downgrades require explicit confirmation. Requires scope: vm.write.",
-    "operationId": "resizeGpuVmPlan",
-    "x-ibee-required-scope": "vm.write",
-    "x-ibee-gateway-status": "ready",
-    "parameters": [
-     {
-      "$ref": "#/components/parameters/WorkspaceId"
-     },
-     {
-      "$ref": "#/components/parameters/VmId"
-     },
-     {
-      "$ref": "#/components/parameters/IdempotencyKey"
-     }
-    ],
-    "requestBody": {
-     "required": true,
-     "content": {
-      "application/json": {
-       "schema": {
-        "$ref": "#/components/schemas/VmResizePlanRequest"
-       }
-      }
-     }
-    },
-    "responses": {
-     "202": {
-      "description": "Plan resize accepted.",
-      "content": {
-       "application/json": {
-        "schema": {
-         "$ref": "#/components/schemas/OperationAccepted"
-        }
-       }
-      }
-     },
-     "400": {
-      "$ref": "#/components/responses/BadRequest"
-     },
-     "401": {
-      "$ref": "#/components/responses/Unauthorized"
-     },
-     "403": {
-      "$ref": "#/components/responses/Forbidden"
-     },
-     "404": {
-      "$ref": "#/components/responses/NotFound"
-     },
-     "409": {
-      "$ref": "#/components/responses/Conflict"
-     },
-     "423": {
-      "$ref": "#/components/responses/Locked"
-     },
-     "503": {
-      "$ref": "#/components/responses/ServiceUnavailable"
-     }
-    }
-   }
-  },
-  "/compute/gpu-vms/{vm_id}/actions/resize-root-disk": {
-   "patch": {
-    "tags": [
-     "GpuVms"
-    ],
-    "summary": "Resize a GPU VM root disk",
-    "description": "Increases a GPU VM's root disk size, for example to fit larger models or datasets. Shrinking a root disk is not supported. Requires scope: vm.write.",
-    "operationId": "resizeGpuVmRootDisk",
-    "x-ibee-required-scope": "vm.write",
-    "x-ibee-gateway-status": "ready",
-    "parameters": [
-     {
-      "$ref": "#/components/parameters/WorkspaceId"
-     },
-     {
-      "$ref": "#/components/parameters/VmId"
-     },
-     {
-      "$ref": "#/components/parameters/IdempotencyKey"
-     }
-    ],
-    "requestBody": {
-     "required": true,
-     "content": {
-      "application/json": {
-       "schema": {
-        "$ref": "#/components/schemas/VmResizeRootDiskRequest"
-       }
-      }
-     }
-    },
-    "responses": {
-     "202": {
-      "description": "Root-disk resize accepted.",
-      "content": {
-       "application/json": {
-        "schema": {
-         "$ref": "#/components/schemas/OperationAccepted"
-        }
-       }
-      }
-     },
-     "400": {
-      "$ref": "#/components/responses/BadRequest"
-     },
-     "401": {
-      "$ref": "#/components/responses/Unauthorized"
-     },
-     "403": {
-      "$ref": "#/components/responses/Forbidden"
-     },
-     "404": {
-      "$ref": "#/components/responses/NotFound"
-     },
-     "409": {
-      "$ref": "#/components/responses/Conflict"
-     },
-     "423": {
-      "$ref": "#/components/responses/Locked"
-     },
-     "503": {
-      "$ref": "#/components/responses/ServiceUnavailable"
-     }
-    }
-   }
-  },
   "/compute/gpu-vms/{vm_id}/actions/attach-volume": {
    "post": {
     "tags": [
      "GpuVms"
     ],
     "summary": "Attach a volume to a GPU VM",
-    "description": "Attaches a persistent block storage volume to a GPU VM, for datasets, checkpoints, or model weights. Requires scope: vm.write.",
+    "description": "Attaches a persistent block storage volume to a GPU VM, for datasets, checkpoints, or model weights. Asynchronous: the response carries `operation_id`; poll `GET /compute/operations/{operation_id}` until `status` is `succeeded`, `failed`, `cancelled` or `timed_out`. If your client times out, read the status; never resubmit the request. Requires scope: vm.write.",
     "operationId": "attachGpuVmVolume",
     "x-ibee-required-scope": "vm.write",
     "x-ibee-gateway-status": "ready",
@@ -7958,7 +8673,7 @@
      "GpuVms"
     ],
     "summary": "Detach a volume from a GPU VM",
-    "description": "Detaches a persistent block storage volume from a GPU VM. Stop jobs using it and unmount its filesystem in the guest first unless force is used. Requires scope: vm.write.",
+    "description": "Detaches a persistent block storage volume from a GPU VM. Stop jobs using it and unmount its filesystem in the guest first unless force is used. Asynchronous: the response carries `operation_id`; poll `GET /compute/operations/{operation_id}` until `status` is `succeeded`, `failed`, `cancelled` or `timed_out`. If your client times out, read the status; never resubmit the request. Requires scope: vm.write.",
     "operationId": "detachGpuVmVolume",
     "x-ibee-required-scope": "vm.write",
     "x-ibee-gateway-status": "ready",
@@ -8008,66 +8723,6 @@
      },
      "409": {
       "$ref": "#/components/responses/Conflict"
-     },
-     "423": {
-      "$ref": "#/components/responses/Locked"
-     },
-     "503": {
-      "$ref": "#/components/responses/ServiceUnavailable"
-     }
-    }
-   }
-  },
-  "/compute/gpu-vms/{vm_id}/mount-guidance/acknowledge": {
-   "post": {
-    "tags": [
-     "GpuVms"
-    ],
-    "summary": "Acknowledge GPU VM mount guidance",
-    "description": "Records that you have reviewed the guest mount instructions for a data volume attached to a GPU VM. Requires scope: vm.write.",
-    "operationId": "acknowledgeGpuVmMountGuidance",
-    "x-ibee-required-scope": "vm.write",
-    "x-ibee-gateway-status": "ready",
-    "parameters": [
-     {
-      "$ref": "#/components/parameters/WorkspaceId"
-     },
-     {
-      "$ref": "#/components/parameters/VmId"
-     }
-    ],
-    "requestBody": {
-     "required": true,
-     "content": {
-      "application/json": {
-       "schema": {
-        "$ref": "#/components/schemas/MountGuidanceAcknowledgeRequest"
-       }
-      }
-     }
-    },
-    "responses": {
-     "200": {
-      "description": "Mount guidance acknowledged successfully.",
-      "content": {
-       "application/json": {
-        "schema": {
-         "$ref": "#/components/schemas/MountGuidanceAcknowledge"
-        }
-       }
-      }
-     },
-     "400": {
-      "$ref": "#/components/responses/BadRequest"
-     },
-     "401": {
-      "$ref": "#/components/responses/Unauthorized"
-     },
-     "403": {
-      "$ref": "#/components/responses/Forbidden"
-     },
-     "404": {
-      "$ref": "#/components/responses/NotFound"
      },
      "423": {
       "$ref": "#/components/responses/Locked"
@@ -8397,7 +9052,7 @@
      "GpuVms"
     ],
     "summary": "Restore a GPU VM snapshot",
-    "description": "Restores a GPU VM snapshot by replacing the VM, creating a new GPU VM, or restoring a single volume. Requires scope: vm.write.",
+    "description": "Restores a GPU VM snapshot by replacing the VM, creating a new GPU VM, or restoring a single volume. Asynchronous: the response carries `restore_id`; poll the restore status read until `status` is `succeeded`, `failed` or `cancelled`. If your client times out, read the status; never resubmit. Requires scope: vm.write.",
     "operationId": "restoreGpuVmSnapshot",
     "x-ibee-required-scope": "vm.write",
     "x-ibee-gateway-status": "ready",
@@ -8424,7 +9079,7 @@
      "content": {
       "application/json": {
        "schema": {
-        "$ref": "#/components/schemas/RecoveryRestoreRequest"
+        "$ref": "#/components/schemas/SnapshotRestoreRequest"
        }
       }
      }
@@ -8457,6 +9112,77 @@
      },
      "423": {
       "$ref": "#/components/responses/Locked"
+     },
+     "503": {
+      "$ref": "#/components/responses/ServiceUnavailable"
+     }
+    }
+   }
+  },
+  "/compute/gpu-vm-snapshots": {
+   "get": {
+    "tags": [
+     "GpuVms"
+    ],
+    "summary": "List Gpu VM snapshots in the workspace",
+    "description": "Lists snapshot sets of every Gpu VM in the workspace, as the portal's Snapshots page does. Requires scope: vm.read.",
+    "operationId": "listAllGpuVmSnapshots",
+    "x-ibee-required-scope": "vm.read",
+    "x-ibee-gateway-status": "ready",
+    "parameters": [
+     {
+      "$ref": "#/components/parameters/WorkspaceId"
+     },
+     {
+      "name": "limit",
+      "description": "Maximum number of snapshot sets to return (1-500). Default 100.",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "minimum": 1,
+       "maximum": 500,
+       "default": 100
+      }
+     },
+     {
+      "name": "offset",
+      "description": "Number of items to skip before the first returned item. Default 0.",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "minimum": 0,
+       "default": 0
+      }
+     },
+     {
+      "name": "search",
+      "description": "Return only snapshot sets whose fields contain this text.",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "string",
+       "minLength": 1
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Snapshot sets returned successfully.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/SnapshotSetList"
+        }
+       }
+      }
+     },
+     "401": {
+      "$ref": "#/components/responses/Unauthorized"
+     },
+     "403": {
+      "$ref": "#/components/responses/Forbidden"
      },
      "503": {
       "$ref": "#/components/responses/ServiceUnavailable"
@@ -8771,8 +9497,35 @@
      "GpuVms"
     ],
     "summary": "Disable GPU VM backups",
-    "description": "Stops future automated backups for a GPU VM without deleting existing recovery points. Requires scope: vm.write.",
+    "description": "Stops future automated backups for a GPU VM without deleting existing recovery points. Send an empty JSON object body (`{}`); the virtualization engine rejects a request with no body. Requires scope: vm.write.",
     "operationId": "disableGpuVmBackups",
+    "x-fern-examples": [
+     {
+      "request": {},
+      "response": {
+       "body": {
+        "organization_id": "org-4f2a9c1b",
+        "workspace_id": "710995",
+        "policy_id": "bkp-pol-1c9e4a2d",
+        "vm_id": "gpu-7f3c2d1e",
+        "enabled": false,
+        "schedule": {
+         "frequency": "daily",
+         "timezone": "Asia/Kolkata",
+         "hour": 2,
+         "minute": 0,
+         "window_minutes": 60
+        },
+        "retention_days": 7,
+        "full_backup_interval_days": 7,
+        "incremental_enabled": true,
+        "storage_backend": "BACKUP-STD",
+        "created_at": "2026-10-01T02:00:00Z",
+        "updated_at": "2026-10-29T09:15:00Z"
+       }
+      }
+     }
+    ],
     "x-ibee-required-scope": "vm.write",
     "x-ibee-gateway-status": "ready",
     "parameters": [
@@ -8784,11 +9537,13 @@
      }
     ],
     "requestBody": {
-     "required": true,
+     "description": "Optional. Send an empty JSON object; the virtualization engine rejects a request with no body.",
+     "required": false,
      "content": {
       "application/json": {
        "schema": {
-        "$ref": "#/components/schemas/BackupPolicyDisableRequest"
+        "type": "object",
+        "additionalProperties": false
        }
       }
      }
@@ -8825,128 +9580,7 @@
     }
    }
   },
-  "/compute/gpu-vms/{vm_id}/backups/policy/next-run-at": {
-   "patch": {
-    "tags": [
-     "GpuVms"
-    ],
-    "summary": "Reschedule a GPU VM backup",
-    "description": "Sets when a GPU VM's next automated backup runs. Requires scope: vm.write.",
-    "operationId": "rescheduleGpuVmBackup",
-    "x-ibee-required-scope": "vm.write",
-    "x-ibee-gateway-status": "ready",
-    "parameters": [
-     {
-      "$ref": "#/components/parameters/WorkspaceId"
-     },
-     {
-      "$ref": "#/components/parameters/VmId"
-     }
-    ],
-    "requestBody": {
-     "required": true,
-     "content": {
-      "application/json": {
-       "schema": {
-        "$ref": "#/components/schemas/BackupPolicyNextRunRequest"
-       }
-      }
-     }
-    },
-    "responses": {
-     "200": {
-      "description": "Next backup execution rescheduled successfully.",
-      "content": {
-       "application/json": {
-        "schema": {
-         "$ref": "#/components/schemas/BackupPolicy"
-        }
-       }
-      }
-     },
-     "400": {
-      "$ref": "#/components/responses/BadRequest"
-     },
-     "401": {
-      "$ref": "#/components/responses/Unauthorized"
-     },
-     "403": {
-      "$ref": "#/components/responses/Forbidden"
-     },
-     "404": {
-      "$ref": "#/components/responses/NotFound"
-     },
-     "423": {
-      "$ref": "#/components/responses/Locked"
-     },
-     "503": {
-      "$ref": "#/components/responses/ServiceUnavailable"
-     }
-    }
-   }
-  },
   "/compute/gpu-vms/{vm_id}/backups/runs": {
-   "post": {
-    "tags": [
-     "GpuVms"
-    ],
-    "summary": "Run a GPU VM backup",
-    "description": "Queues a manual backup of a GPU VM using its backup configuration. Requires scope: vm.write.",
-    "operationId": "createGpuVmBackupRun",
-    "x-ibee-required-scope": "vm.write",
-    "x-ibee-gateway-status": "ready",
-    "parameters": [
-     {
-      "$ref": "#/components/parameters/WorkspaceId"
-     },
-     {
-      "$ref": "#/components/parameters/VmId"
-     }
-    ],
-    "requestBody": {
-     "required": true,
-     "content": {
-      "application/json": {
-       "schema": {
-        "$ref": "#/components/schemas/ManualBackupRunRequest"
-       }
-      }
-     }
-    },
-    "responses": {
-     "200": {
-      "description": "Backup run queued successfully.",
-      "content": {
-       "application/json": {
-        "schema": {
-         "$ref": "#/components/schemas/BackupRun"
-        }
-       }
-      }
-     },
-     "400": {
-      "$ref": "#/components/responses/BadRequest"
-     },
-     "401": {
-      "$ref": "#/components/responses/Unauthorized"
-     },
-     "403": {
-      "$ref": "#/components/responses/Forbidden"
-     },
-     "404": {
-      "$ref": "#/components/responses/NotFound"
-     },
-     "409": {
-      "$ref": "#/components/responses/Conflict"
-     },
-     "423": {
-      "$ref": "#/components/responses/Locked"
-     },
-     "503": {
-      "$ref": "#/components/responses/ServiceUnavailable"
-     }
-    }
-   },
    "get": {
     "tags": [
      "GpuVms"
@@ -9020,7 +9654,7 @@
      "GpuVms"
     ],
     "summary": "Restore a GPU VM backup",
-    "description": "Restores a GPU VM backup recovery point by replacing the VM, creating a new GPU VM, or restoring a single volume. Requires scope: vm.write.",
+    "description": "Restores a GPU VM backup recovery point by replacing the VM, creating a new GPU VM, or restoring a single volume. Asynchronous: the response carries `restore_id`; poll the restore status read until `status` is `succeeded`, `failed` or `cancelled`. If your client times out, read the status; never resubmit. Requires scope: vm.write.",
     "operationId": "restoreGpuVmBackup",
     "x-ibee-required-scope": "vm.write",
     "x-ibee-gateway-status": "ready",
@@ -9077,6 +9711,92 @@
     }
    }
   },
+  "/compute/gpu-vm-backups/runs": {
+   "get": {
+    "tags": [
+     "GpuVms"
+    ],
+    "summary": "List Gpu VM backup runs in the workspace",
+    "description": "Lists backup runs and recovery points of every Gpu VM in the workspace, as the portal's Backups page does. Filter by `vm_id` or `status`. Requires scope: vm.read.",
+    "operationId": "listAllGpuVmBackupRuns",
+    "x-ibee-required-scope": "vm.read",
+    "x-ibee-gateway-status": "ready",
+    "parameters": [
+     {
+      "$ref": "#/components/parameters/WorkspaceId"
+     },
+     {
+      "name": "vm_id",
+      "description": "Return only runs of this VM.",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "string",
+       "minLength": 1
+      }
+     },
+     {
+      "name": "status",
+      "description": "Return only runs in these states. Repeat the parameter for several states.",
+      "in": "query",
+      "required": false,
+      "style": "form",
+      "explode": true,
+      "schema": {
+       "type": "array",
+       "items": {
+        "$ref": "#/components/schemas/BackupStatus"
+       }
+      }
+     },
+     {
+      "$ref": "#/components/parameters/Limit"
+     },
+     {
+      "name": "offset",
+      "description": "Number of items to skip before the first returned item. Default 0.",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "minimum": 0,
+       "default": 0
+      }
+     },
+     {
+      "name": "search",
+      "description": "Return only backup runs whose fields contain this text.",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "string",
+       "minLength": 1
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Backup runs returned successfully.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/BackupRunList"
+        }
+       }
+      }
+     },
+     "401": {
+      "$ref": "#/components/responses/Unauthorized"
+     },
+     "403": {
+      "$ref": "#/components/responses/Forbidden"
+     },
+     "503": {
+      "$ref": "#/components/responses/ServiceUnavailable"
+     }
+    }
+   }
+  },
   "/compute/gpu-vm-backups/runs/{run_id}": {
    "get": {
     "tags": [
@@ -9114,6 +9834,47 @@
      },
      "404": {
       "$ref": "#/components/responses/NotFound"
+     },
+     "503": {
+      "$ref": "#/components/responses/ServiceUnavailable"
+     }
+    }
+   },
+   "delete": {
+    "tags": [
+     "GpuVms"
+    ],
+    "summary": "Delete a Gpu VM backup run",
+    "description": "Deletes one backup run and its recovery point, as the portal's Backups page does. Requires scope: vm.write.",
+    "operationId": "deleteGpuVmBackupRun",
+    "x-ibee-required-scope": "vm.write",
+    "x-ibee-gateway-status": "ready",
+    "parameters": [
+     {
+      "$ref": "#/components/parameters/WorkspaceId"
+     },
+     {
+      "$ref": "#/components/parameters/BackupRunId"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Backup run deleted."
+     },
+     "401": {
+      "$ref": "#/components/responses/Unauthorized"
+     },
+     "403": {
+      "$ref": "#/components/responses/Forbidden"
+     },
+     "404": {
+      "$ref": "#/components/responses/NotFound"
+     },
+     "409": {
+      "$ref": "#/components/responses/Conflict"
+     },
+     "423": {
+      "$ref": "#/components/responses/Locked"
      },
      "503": {
       "$ref": "#/components/responses/ServiceUnavailable"
@@ -9158,168 +9919,6 @@
      },
      "404": {
       "$ref": "#/components/responses/NotFound"
-     },
-     "503": {
-      "$ref": "#/components/responses/ServiceUnavailable"
-     }
-    }
-   }
-  },
-  "/compute/console/sessions": {
-   "post": {
-    "tags": [
-     "VmConsole"
-    ],
-    "summary": "Create a VM console session",
-    "description": "Creates a short-lived graphical console session for a cloud or GPU VM. The returned connect URL contains an expiring token; do not log or persist it. Requires scope: vm.write.",
-    "operationId": "createVmConsoleSession",
-    "x-ibee-required-scope": "vm.write",
-    "x-ibee-gateway-status": "ready",
-    "parameters": [
-     {
-      "$ref": "#/components/parameters/WorkspaceId"
-     }
-    ],
-    "requestBody": {
-     "required": true,
-     "content": {
-      "application/json": {
-       "schema": {
-        "$ref": "#/components/schemas/VmConsoleSessionCreateRequest"
-       }
-      }
-     }
-    },
-    "responses": {
-     "200": {
-      "description": "Console session created successfully.",
-      "content": {
-       "application/json": {
-        "schema": {
-         "$ref": "#/components/schemas/VmConsoleSession"
-        }
-       }
-      }
-     },
-     "400": {
-      "$ref": "#/components/responses/BadRequest"
-     },
-     "401": {
-      "$ref": "#/components/responses/Unauthorized"
-     },
-     "403": {
-      "$ref": "#/components/responses/Forbidden"
-     },
-     "404": {
-      "$ref": "#/components/responses/NotFound"
-     },
-     "409": {
-      "$ref": "#/components/responses/Conflict"
-     },
-     "423": {
-      "$ref": "#/components/responses/Locked"
-     },
-     "429": {
-      "$ref": "#/components/responses/TooManyRequests"
-     },
-     "503": {
-      "$ref": "#/components/responses/ServiceUnavailable"
-     }
-    }
-   }
-  },
-  "/compute/console/sessions/{session_id}": {
-   "get": {
-    "tags": [
-     "VmConsole"
-    ],
-    "summary": "Get a VM console session",
-    "description": "Returns the status of a workspace-owned console session. Requires scope: vm.read.",
-    "operationId": "getVmConsoleSession",
-    "x-ibee-required-scope": "vm.read",
-    "x-ibee-gateway-status": "ready",
-    "parameters": [
-     {
-      "$ref": "#/components/parameters/WorkspaceId"
-     },
-     {
-      "$ref": "#/components/parameters/ConsoleSessionId"
-     }
-    ],
-    "responses": {
-     "200": {
-      "description": "Console session status returned successfully.",
-      "content": {
-       "application/json": {
-        "schema": {
-         "$ref": "#/components/schemas/VmConsoleSessionStatus"
-        }
-       }
-      }
-     },
-     "401": {
-      "$ref": "#/components/responses/Unauthorized"
-     },
-     "403": {
-      "$ref": "#/components/responses/Forbidden"
-     },
-     "404": {
-      "$ref": "#/components/responses/NotFound"
-     },
-     "503": {
-      "$ref": "#/components/responses/ServiceUnavailable"
-     }
-    }
-   },
-   "delete": {
-    "tags": [
-     "VmConsole"
-    ],
-    "summary": "Close a VM console session",
-    "description": "Closes a workspace-owned console session and invalidates its connection token. Requires scope: vm.write.",
-    "operationId": "closeVmConsoleSession",
-    "x-ibee-required-scope": "vm.write",
-    "x-ibee-gateway-status": "ready",
-    "parameters": [
-     {
-      "$ref": "#/components/parameters/WorkspaceId"
-     },
-     {
-      "$ref": "#/components/parameters/ConsoleSessionId"
-     },
-     {
-      "name": "reason",
-      "description": "Reason recorded as the session's `close_reason`. Default `closed_by_user`.",
-      "in": "query",
-      "required": false,
-      "schema": {
-       "type": "string",
-       "default": "closed_by_user"
-      }
-     }
-    ],
-    "responses": {
-     "200": {
-      "description": "Console session closed successfully.",
-      "content": {
-       "application/json": {
-        "schema": {
-         "$ref": "#/components/schemas/VmConsoleClose"
-        }
-       }
-      }
-     },
-     "401": {
-      "$ref": "#/components/responses/Unauthorized"
-     },
-     "403": {
-      "$ref": "#/components/responses/Forbidden"
-     },
-     "404": {
-      "$ref": "#/components/responses/NotFound"
-     },
-     "423": {
-      "$ref": "#/components/responses/Locked"
      },
      "503": {
       "$ref": "#/components/responses/ServiceUnavailable"
@@ -9377,47 +9976,63 @@
     }
    }
   },
-  "/billing/resource-eligibility": {
-   "post": {
+  "/block-storage/plans": {
+   "get": {
     "tags": [
-     "Billing"
+     "BlockStorage"
     ],
-    "summary": "Check resource billing eligibility",
-    "description": "Returns a point-in-time eligibility decision from the same existing billing service used by the portal. Call it before a billable create and continue only when `allowed` is exactly `true`. This check does not reserve funds, create a resource, or guarantee that a later product operation will succeed. Requires scope: billing.read.",
-    "operationId": "checkResourceEligibility",
-    "x-ibee-required-scope": "billing.read",
-    "x-ibee-gateway-status": "ready",
+    "summary": "List block storage plans",
+    "description": "Returns the block storage plans with their sizes, performance and prices, as the portal's Create Volume page shows them. Pick a `sku_code` for createBlockVolume. Requires scope: block-storage.read.",
+    "operationId": "listBlockStoragePlans",
+    "x-ibee-required-scope": "block-storage.read",
     "parameters": [
      {
       "$ref": "#/components/parameters/WorkspaceId"
-     }
-    ],
-    "requestBody": {
-     "required": true,
-     "content": {
-      "application/json": {
-       "schema": {
-        "$ref": "#/components/schemas/BillingEligibilityRequest"
-       },
-       "example": {
-        "sku_code": "STANDARD-2-8-50"
-       }
+     },
+     {
+      "name": "site_id",
+      "description": "Return only plans offered at this site.",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "currency",
+      "description": "Price currency. Default `INR`.",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "string",
+       "default": "INR"
+      }
+     },
+     {
+      "name": "billing_interval",
+      "description": "Billing interval of the listed prices. Default `MONTHLY`.",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "string",
+       "enum": [
+        "HOURLY",
+        "MONTHLY"
+       ],
+       "default": "MONTHLY"
       }
      }
-    },
+    ],
     "responses": {
      "200": {
-      "description": "Billing eligibility decision returned successfully.",
+      "description": "Plans returned successfully.",
       "content": {
        "application/json": {
         "schema": {
-         "$ref": "#/components/schemas/BillingEligibility"
+         "$ref": "#/components/schemas/BlockStoragePlanList"
         }
        }
       }
-     },
-     "400": {
-      "$ref": "#/components/responses/BadRequest"
      },
      "401": {
       "$ref": "#/components/responses/Unauthorized"
@@ -9425,38 +10040,8 @@
      "403": {
       "$ref": "#/components/responses/Forbidden"
      },
-     "422": {
-      "description": "The eligibility request is invalid.",
-      "content": {
-       "application/json": {
-        "schema": {
-         "$ref": "#/components/schemas/Error"
-        }
-       }
-      }
-     },
-     "502": {
-      "description": "Billing returned an invalid or unavailable decision.",
-      "content": {
-       "application/json": {
-        "schema": {
-         "$ref": "#/components/schemas/Error"
-        }
-       }
-      }
-     },
      "503": {
       "$ref": "#/components/responses/ServiceUnavailable"
-     },
-     "504": {
-      "description": "The billing eligibility request timed out.",
-      "content": {
-       "application/json": {
-        "schema": {
-         "$ref": "#/components/schemas/Error"
-        }
-       }
-      }
      }
     }
    }
@@ -9505,7 +10090,7 @@
      "BlockStorage"
     ],
     "summary": "Create block-storage volume",
-    "description": "The public edge resolves authoritative pricing from the server-owned product catalog and validates billing before forwarding this request to the existing portal volume flow. Client-supplied price or billing catalog objects are not accepted.",
+    "description": "The public edge resolves authoritative pricing from the server-owned product catalog and validates billing before forwarding this request to the existing portal volume flow. Client-supplied price or billing catalog objects are not accepted. Asynchronous: the response carries the volume operation; poll `GET /block-storage/volumes/{volume_id}/operations` until its `status` is `succeeded` or `failed`.",
     "operationId": "createBlockVolume",
     "x-ibee-required-scope": "block-storage.write",
     "x-ibee-billing-admission": "required",
@@ -9600,7 +10185,7 @@
      "BlockStorage"
     ],
     "summary": "Delete block-storage volume",
-    "description": "Permanently deletes a block storage volume and its data. Requires scope: block-storage.write.",
+    "description": "Permanently deletes a block storage volume and its data. Asynchronous: the response carries the volume operation; poll `GET /block-storage/volumes/{volume_id}/operations` until its `status` is `succeeded` or `failed`. Requires scope: block-storage.write.",
     "operationId": "deleteBlockVolume",
     "x-ibee-required-scope": "block-storage.write",
     "parameters": [
@@ -9692,124 +10277,6 @@
     }
    }
   },
-  "/block-storage/volumes/{volume_id}/attachments": {
-   "parameters": [
-    {
-     "$ref": "#/components/parameters/WorkspaceId"
-    },
-    {
-     "$ref": "#/components/parameters/BlockVolumeId"
-    }
-   ],
-   "post": {
-    "tags": [
-     "BlockStorage"
-    ],
-    "summary": "Attach block-storage volume",
-    "description": "Attaches a block storage volume to a VM so it can be mounted in the guest. Requires scope: block-storage.write.",
-    "operationId": "attachBlockVolume",
-    "x-ibee-required-scope": "block-storage.write",
-    "requestBody": {
-     "required": true,
-     "content": {
-      "application/json": {
-       "schema": {
-        "$ref": "#/components/schemas/AttachBlockVolumeRequest"
-       }
-      }
-     }
-    },
-    "responses": {
-     "200": {
-      "description": "Volume attached successfully.",
-      "content": {
-       "application/json": {
-        "schema": {
-         "$ref": "#/components/schemas/BlockVolumeAction"
-        }
-       }
-      }
-     },
-     "401": {
-      "$ref": "#/components/responses/Unauthorized"
-     },
-     "403": {
-      "$ref": "#/components/responses/Forbidden"
-     },
-     "404": {
-      "$ref": "#/components/responses/NotFound"
-     },
-     "409": {
-      "$ref": "#/components/responses/Conflict"
-     },
-     "423": {
-      "$ref": "#/components/responses/Locked"
-     },
-     "503": {
-      "$ref": "#/components/responses/ServiceUnavailable"
-     }
-    }
-   }
-  },
-  "/block-storage/volumes/{volume_id}/detach": {
-   "parameters": [
-    {
-     "$ref": "#/components/parameters/WorkspaceId"
-    },
-    {
-     "$ref": "#/components/parameters/BlockVolumeId"
-    }
-   ],
-   "post": {
-    "tags": [
-     "BlockStorage"
-    ],
-    "summary": "Detach block-storage volume",
-    "description": "Detaches a block storage volume from its VM. Unmount it in the guest first. Requires scope: block-storage.write.",
-    "operationId": "detachBlockVolume",
-    "x-ibee-required-scope": "block-storage.write",
-    "requestBody": {
-     "required": true,
-     "content": {
-      "application/json": {
-       "schema": {
-        "$ref": "#/components/schemas/DetachBlockVolumeRequest"
-       }
-      }
-     }
-    },
-    "responses": {
-     "200": {
-      "description": "Volume detached successfully.",
-      "content": {
-       "application/json": {
-        "schema": {
-         "$ref": "#/components/schemas/BlockVolumeAction"
-        }
-       }
-      }
-     },
-     "401": {
-      "$ref": "#/components/responses/Unauthorized"
-     },
-     "403": {
-      "$ref": "#/components/responses/Forbidden"
-     },
-     "404": {
-      "$ref": "#/components/responses/NotFound"
-     },
-     "409": {
-      "$ref": "#/components/responses/Conflict"
-     },
-     "423": {
-      "$ref": "#/components/responses/Locked"
-     },
-     "503": {
-      "$ref": "#/components/responses/ServiceUnavailable"
-     }
-    }
-   }
-  },
   "/block-storage/volumes/{volume_id}/resize": {
    "parameters": [
     {
@@ -9824,7 +10291,7 @@
      "BlockStorage"
     ],
     "summary": "Resize block-storage volume",
-    "description": "Block volumes can only be increased in size.",
+    "description": "Block volumes can only be increased in size. Asynchronous: the response carries the volume operation; poll `GET /block-storage/volumes/{volume_id}/operations` until its `status` is `succeeded` or `failed`.",
     "operationId": "resizeBlockVolume",
     "x-ibee-required-scope": "block-storage.write",
     "requestBody": {
@@ -9859,59 +10326,6 @@
      },
      "409": {
       "$ref": "#/components/responses/Conflict"
-     },
-     "423": {
-      "$ref": "#/components/responses/Locked"
-     },
-     "503": {
-      "$ref": "#/components/responses/ServiceUnavailable"
-     }
-    }
-   }
-  },
-  "/cdn/generate-url": {
-   "parameters": [
-    {
-     "$ref": "#/components/parameters/WorkspaceId"
-    }
-   ],
-   "post": {
-    "tags": [
-     "Cdn"
-    ],
-    "summary": "Generate CDN object URL",
-    "description": "Generates a time-limited CDN URL for an object in an object storage bucket, with optional download disposition. Requires scope: cdn.write.",
-    "operationId": "generateCdnUrl",
-    "x-ibee-required-scope": "cdn.write",
-    "requestBody": {
-     "required": true,
-     "content": {
-      "application/json": {
-       "schema": {
-        "$ref": "#/components/schemas/GenerateCdnUrlRequest"
-       }
-      }
-     }
-    },
-    "responses": {
-     "200": {
-      "description": "CDN URL generated successfully.",
-      "content": {
-       "application/json": {
-        "schema": {
-         "$ref": "#/components/schemas/GeneratedCdnUrl"
-        }
-       }
-      }
-     },
-     "401": {
-      "$ref": "#/components/responses/Unauthorized"
-     },
-     "403": {
-      "$ref": "#/components/responses/Forbidden"
-     },
-     "404": {
-      "$ref": "#/components/responses/NotFound"
      },
      "423": {
       "$ref": "#/components/responses/Locked"
@@ -10125,6 +10539,64 @@
      },
      "423": {
       "$ref": "#/components/responses/Locked"
+     },
+     "503": {
+      "$ref": "#/components/responses/ServiceUnavailable"
+     }
+    }
+   }
+  },
+  "/cdn/distributions/{distribution_id}/metrics": {
+   "get": {
+    "tags": [
+     "Cdn"
+    ],
+    "summary": "Get CDN distribution metrics",
+    "description": "Returns traffic, cache and origin metrics of the distribution for the last 24 hours, 7 days or 30 days, as the portal's Metrics tab shows them. Requires scope: cdn.read.",
+    "operationId": "getCdnDistributionMetrics",
+    "x-ibee-required-scope": "cdn.read",
+    "parameters": [
+     {
+      "$ref": "#/components/parameters/WorkspaceId"
+     },
+     {
+      "$ref": "#/components/parameters/CdnDistributionId"
+     },
+     {
+      "name": "range",
+      "description": "Time range. Default `24h`.",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "string",
+       "enum": [
+        "24h",
+        "7d",
+        "30d"
+       ],
+       "default": "24h"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Metrics returned successfully.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/CdnDistributionMetrics"
+        }
+       }
+      }
+     },
+     "401": {
+      "$ref": "#/components/responses/Unauthorized"
+     },
+     "403": {
+      "$ref": "#/components/responses/Forbidden"
+     },
+     "404": {
+      "$ref": "#/components/responses/NotFound"
      },
      "503": {
       "$ref": "#/components/responses/ServiceUnavailable"
@@ -10648,7 +11120,7 @@
      "ContainerRegistry"
     ],
     "summary": "Create registry",
-    "description": "Creates a registry with a storage plan (`billing_catalog.sku_code`).\nThe registry service asks Billing whether the workspace may buy that\nplan and refuses with 403 `billing_resource_not_eligible` (and a\n`reason`) when it may not. Returns 201 when the registry is active, or\n202 while provisioning finishes in the background; poll the registry\nuntil `observed_state` is `ACTIVE`. Requires scope:\ncontainer-registry.write.\n",
+    "description": "Creates a registry with a storage plan (`billing_catalog.sku_code`).\nThe registry service asks Billing whether the workspace may buy that\nplan and refuses with 403 `billing_resource_not_eligible` (and a\n`reason`) when it may not. Returns 201 when the registry is active, or\n202 while provisioning finishes in the background; poll the registry\nuntil `observed_state` is `ACTIVE`. Requires scope:\ncontainer-registry.write.\n\nAsynchronous: `observed_state` moves from `PROVISIONING` to `ACTIVE` or `ERROR`; poll `GET /container-registry/registries/{registry_id}`.\n",
     "operationId": "createContainerRegistry",
     "x-ibee-required-scope": "container-registry.write",
     "requestBody": {
@@ -10764,7 +11236,7 @@
      "ContainerRegistry"
     ],
     "summary": "Delete registry",
-    "description": "Starts deleting a registry; returns 202 with `observed_state: DELETING`. The registry must be empty: 409 with `detail.code: registry_not_empty` otherwise (see Empty registry). The name is never reused. Requires scope: container-registry.write.",
+    "description": "Starts deleting a registry; returns 202 with `observed_state: DELETING`. The registry must be empty: 409 with `detail.code: registry_not_empty` otherwise (see Empty registry). The name is never reused. Asynchronous: `observed_state` moves through `DELETING` to `DELETED`; poll `GET /container-registry/registries/{registry_id}` until it answers 404 or `DELETED`. Requires scope: container-registry.write.",
     "operationId": "deleteContainerRegistry",
     "x-ibee-required-scope": "container-registry.write",
     "parameters": [
@@ -10919,63 +11391,6 @@
     }
    }
   },
-  "/container-registry/registries/{registry_id}/empty": {
-   "parameters": [
-    {
-     "$ref": "#/components/parameters/WorkspaceId"
-    },
-    {
-     "$ref": "#/components/parameters/ContainerRegistryId"
-    }
-   ],
-   "post": {
-    "tags": [
-     "ContainerRegistry"
-    ],
-    "summary": "Empty registry",
-    "description": "Permanently deletes every repository and image in a registry, so it can be deleted. A bounded run can stop early with 409 `detail.code: registry_empty_incomplete` (`retryable: true`); pause pushes and call again. Requires scope: container-registry.write.",
-    "operationId": "emptyContainerRegistry",
-    "x-ibee-required-scope": "container-registry.write",
-    "parameters": [
-     {
-      "$ref": "#/components/parameters/ContainerRegistryConfirmName"
-     }
-    ],
-    "responses": {
-     "200": {
-      "description": "Registry emptied.",
-      "content": {
-       "application/json": {
-        "schema": {
-         "$ref": "#/components/schemas/ContainerRegistryEmptyResult"
-        }
-       }
-      }
-     },
-     "400": {
-      "$ref": "#/components/responses/BadRequest"
-     },
-     "401": {
-      "$ref": "#/components/responses/Unauthorized"
-     },
-     "403": {
-      "$ref": "#/components/responses/Forbidden"
-     },
-     "404": {
-      "$ref": "#/components/responses/NotFound"
-     },
-     "409": {
-      "$ref": "#/components/responses/Conflict"
-     },
-     "422": {
-      "$ref": "#/components/responses/ContainerRegistryValidationError"
-     },
-     "503": {
-      "$ref": "#/components/responses/ServiceUnavailable"
-     }
-    }
-   }
-  },
   "/container-registry/registries/{registry_id}/package": {
    "parameters": [
     {
@@ -11036,7 +11451,7 @@
      "ContainerRegistry"
     ],
     "summary": "Upgrade registry storage plan",
-    "description": "Moves an active registry to a larger storage plan. Only larger quotas\nare accepted and only one change can be pending (409 otherwise). The\nregistry service asks Billing first and refuses with 403\n`billing_resource_not_eligible` when the plan is not allowed. Send an\n`Idempotency-Key` header: a retry with the same key and plan returns\nthe original operation (202 while pending, 200 once applied); the same\nkey with a different plan returns 409. Requires scope:\ncontainer-registry.write.\n",
+    "description": "Moves an active registry to a larger storage plan. Only larger quotas\nare accepted and only one change can be pending (409 otherwise). The\nregistry service asks Billing first and refuses with 403\n`billing_resource_not_eligible` when the plan is not allowed. Send an\n`Idempotency-Key` header: a retry with the same key and plan returns\nthe original operation (202 while pending, 200 once applied); the same\nkey with a different plan returns 409. Requires scope:\ncontainer-registry.write.\n\nAsynchronous: the package operation moves from `PENDING` to `APPLIED` or `CANCELLED`; read `GET /container-registry/registries/{registry_id}/package`.\n",
     "operationId": "upgradeContainerRegistryPackage",
     "x-ibee-required-scope": "container-registry.write",
     "parameters": [
@@ -11429,7 +11844,7 @@
      "ContainerRegistry"
     ],
     "summary": "Delete repository",
-    "description": "Permanently deletes a repository and all of its images. Requires `confirm=true`. Requires scope: container-registry.write.",
+    "description": "Permanently deletes a repository and all of its images. Requires `confirm=true`. Deleting a repository that does not exist answers 200. Requires scope: container-registry.write.",
     "operationId": "deleteContainerRegistryRepository",
     "x-ibee-required-scope": "container-registry.write",
     "parameters": [
@@ -11549,7 +11964,7 @@
      "ContainerRegistry"
     ],
     "summary": "Delete artifact",
-    "description": "Permanently deletes one image and every tag that points to it. Requires `confirm=true`. Requires scope: container-registry.write.",
+    "description": "Permanently deletes one image and every tag that points to it. Requires `confirm=true`. Deleting an artifact that does not exist answers 200. Requires scope: container-registry.write.",
     "operationId": "deleteContainerRegistryArtifact",
     "x-ibee-required-scope": "container-registry.write",
     "parameters": [
@@ -12630,7 +13045,7 @@
     }
    },
    "Forbidden": {
-    "description": "The token may not make this call. Gateway codes: `insufficient_scope` (with `required_scope`), `key_revoked`, `key_disabled`, `key_inactive`, `key_expired`, `unknown_route`, `workspace_not_allowed`, `principal_inactive`, `principal_not_member` and `principal_permission_denied`. On writes, also `organization_restricted` (an admin restricted the organization) and `verification_required` (the token's user has not completed identity verification). A product service may also refuse with `detail`.",
+    "description": "The token may not make this call. Gateway codes: `insufficient_scope` (with `required_scope`), `key_revoked`, `key_disabled`, `key_inactive`, `key_expired`, `unknown_route`, `workspace_not_allowed`, `principal_inactive`, `principal_not_member` and `principal_permission_denied`. `product_not_enabled` when the product is not enabled for the organization (IBEE turns some products on per organization; ask support for access). On writes, also `organization_restricted` (an admin restricted the organization) and `verification_required` (the token's user has not completed identity verification). A product service may also refuse with `detail`.",
     "content": {
      "application/json": {
       "schema": {
@@ -12690,7 +13105,7 @@
     }
    },
    "ServiceUnavailable": {
-    "description": "A service the request depends on did not answer. Gateway codes: `workspace_verification_unavailable`, `principal_verification_unavailable` and `principal_authorization_unavailable`; on billable creates also `billing_admission_timeout`, `billing_admission_unavailable`, `billing_admission_disabled`, `billing_admission_not_configured` and the catalog codes `compute_catalog_unavailable`, `compute_catalog_not_configured`, `product_catalog_timeout`, `product_catalog_unavailable`, `product_catalog_not_configured` and `unsupported_product_quote`. Otherwise the product service's `detail`.",
+    "description": "A service the request depends on did not answer. Gateway codes: `workspace_verification_unavailable`, `principal_verification_unavailable`, `principal_authorization_unavailable` and `product_check_unavailable` (whether the organization has the product could not be checked; retry later); on billable creates also `billing_admission_timeout`, `billing_admission_unavailable`, `billing_admission_disabled`, `billing_admission_not_configured` and the catalog codes `compute_catalog_unavailable`, `compute_catalog_not_configured`, `product_catalog_timeout`, `product_catalog_unavailable`, `product_catalog_not_configured` and `unsupported_product_quote`. Otherwise the product service's `detail`.",
     "content": {
      "application/json": {
       "schema": {
@@ -12860,8 +13275,38 @@
       "nullable": true
      },
      "selectable": {
-      "description": "Whether the plan can be chosen for a new VM right now.",
+      "description": "Whether the catalog has a usable price. This does not indicate available compute or GPU capacity; inspect availability separately.",
       "type": "boolean"
+     },
+     "availability": {
+      "type": "string",
+      "enum": [
+       "available",
+       "unavailable",
+       "unknown"
+      ],
+      "description": "Advisory placement result when include_availability=true. Unknown when not requested, unavailable to query, or not verifiable. Creation can still lose a capacity race."
+     },
+     "available": {
+      "type": "boolean",
+      "nullable": true,
+      "description": "Whether the requested OS, plan and public-IP requirements currently fit. Null when unknown."
+     },
+     "max_creatable": {
+      "type": "integer",
+      "minimum": 0,
+      "nullable": true,
+      "description": "Advisory maximum under the requested placement conditions, capped by the engine's batch limit."
+     },
+     "availability_reason": {
+      "type": "string",
+      "nullable": true,
+      "enum": [
+       "out_of_stock",
+       "compute_capacity_unavailable",
+       "public_ip_unavailable",
+       "lookup_unavailable"
+      ]
      },
      "pricing_status": {
       "description": "- `priced`: the catalog has a price and the plan can be quoted.\n- `unpriced`: no catalog price; the plan cannot be used to create a VM.",
@@ -12899,7 +13344,7 @@
       "type": "object",
       "additionalProperties": true,
       "nullable": true,
-      "description": "Canonical billing SKU reference for this plan. Pass this object unmodified as `billing_catalog` when creating a VM with this plan — the same flow the portal uses. Treat it as opaque; its fields may grow over time. Billing charges are always computed server-side from `plan_id`, not from this echoed copy."
+      "description": "Canonical billing SKU reference and billing_options for this plan. Choose a supported HOURLY or MONTHLY billing_options entry and merge that complete entry into a copy of this object for VM create; its fields may grow over time. Billing charges are always computed server-side from `plan_id`, not from this echoed copy."
      }
     }
    },
@@ -13355,27 +13800,6 @@
      }
     }
    },
-   "UpdateSubnetRequest": {
-    "description": "Body for renaming a subnet or changing its DNS resolvers.",
-    "type": "object",
-    "minProperties": 1,
-    "properties": {
-     "name": {
-      "description": "New display name.",
-      "type": "string",
-      "minLength": 1,
-      "maxLength": 80
-     },
-     "dns": {
-      "description": "New DNS resolvers handed to instances in the subnet.",
-      "type": "array",
-      "minItems": 1,
-      "items": {
-       "type": "string"
-      }
-     }
-    }
-   },
    "Subnet": {
     "description": "A subnet of a VPC.",
     "type": "object",
@@ -13476,6 +13900,10 @@
        "nat"
       ],
       "default": "private"
+     },
+     "requested_private_ip": {
+      "type": "string",
+      "description": "Private IPv4 address to give the VM in the subnet. Chosen automatically when omitted."
      },
      "reserved_public_ip_id": {
       "description": "Reserved IP to attach to the VM. Only valid with `public_ip` connectivity.",
@@ -13737,6 +14165,33 @@
      }
     }
    },
+   "NatGatewayDeleteRequest": {
+    "description": "Optional body for deleting a NAT gateway, as the portal's Delete NAT Gateway dialog does.",
+    "type": "object",
+    "properties": {
+     "public_ip_action": {
+      "type": "string",
+      "enum": [
+       "reserve",
+       "release"
+      ],
+      "description": "What to do with the gateway's public IP.\n- `release`: give the address back.\n- `reserve`: keep it as a Reserved IP in the workspace.\nOmitted: platform-assigned addresses are released; customer Reserved IPs are detached and kept."
+     }
+    }
+   },
+   "UpdateNatGatewayPublicIpRequest": {
+    "description": "Body for swapping the NAT gateway's public IP.",
+    "type": "object",
+    "required": [
+     "reserved_public_ip_id"
+    ],
+    "properties": {
+     "reserved_public_ip_id": {
+      "type": "string",
+      "description": "Reserved IP to put on the gateway. Port-forwarding rules are preserved."
+     }
+    }
+   },
    "CreateNatPortForwardingRuleRequest": {
     "description": "Body for forwarding a port on the NAT gateway's public address to a VM in the VPC.",
     "type": "object",
@@ -13777,6 +14232,23 @@
       "type": "integer",
       "minimum": 1,
       "maximum": 65535
+     },
+     "target_type": {
+      "type": "string",
+      "enum": [
+       "vm",
+       "vip"
+      ],
+      "default": "vm",
+      "description": "`vm`: forward to one VM's private IP. `vip`: forward to a Virtual IP announced by the VMs in `target_vm_ids`."
+     },
+     "target_vm_ids": {
+      "type": "array",
+      "items": {
+       "type": "string"
+      },
+      "maxItems": 32,
+      "description": "VMs that announce the Virtual IP. Required with `vip`, must be empty with `vm`."
      },
      "note": {
       "description": "Free-text note stored with the rule. Default empty.",
@@ -13825,6 +14297,23 @@
       "type": "integer",
       "minimum": 1,
       "maximum": 65535
+     },
+     "target_type": {
+      "type": "string",
+      "enum": [
+       "vm",
+       "vip"
+      ],
+      "default": "vm",
+      "description": "`vm`: forward to one VM's private IP. `vip`: forward to a Virtual IP announced by the VMs in `target_vm_ids`."
+     },
+     "target_vm_ids": {
+      "type": "array",
+      "items": {
+       "type": "string"
+      },
+      "maxItems": 32,
+      "description": "VMs that announce the Virtual IP. Required with `vip`, must be empty with `vm`."
      },
      "note": {
       "description": "Free-text note stored with the rule.",
@@ -13917,6 +14406,52 @@
       "type": "string",
       "maxLength": 120,
       "default": ""
+     }
+    }
+   },
+   "ConvertReservedIpRequest": {
+    "description": "Body for converting a VM's automatically assigned public IP into a Reserved IP.",
+    "type": "object",
+    "required": [
+     "vm_id",
+     "site_id"
+    ],
+    "properties": {
+     "vm_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 160,
+      "description": "VM whose current public IPv4 becomes a Reserved IP."
+     },
+     "site_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 120,
+      "description": "The VM's site, from `GET /networking/sites`."
+     },
+     "label": {
+      "type": "string",
+      "maxLength": 120,
+      "description": "Optional label for the Reserved IP."
+     }
+    }
+   },
+   "AttachReservedIpDirectRequest": {
+    "description": "Body for attaching a Reserved IP to a VM that has no VPC interface.",
+    "type": "object",
+    "required": [
+     "vm_id"
+    ],
+    "properties": {
+     "vm_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 160,
+      "description": "VM to attach the address to, on its direct public interface."
+     },
+     "network_id": {
+      "type": "string",
+      "description": "Provider network of the VM. Resolved automatically when the VM has one."
      }
     }
    },
@@ -14406,6 +14941,158 @@
      }
     }
    },
+   "LoadBalancerActiveHealthCheck": {
+    "description": "Active probes the load balancer sends to every backend.",
+    "type": "object",
+    "properties": {
+     "type": {
+      "type": "string",
+      "enum": [
+       "http",
+       "https",
+       "tcp"
+      ],
+      "default": "http",
+      "description": "Probe type. `path` applies to `http` and `https` only."
+     },
+     "path": {
+      "type": "string",
+      "description": "HTTP path to probe. Default `/health`."
+     },
+     "interval_ms": {
+      "type": "integer",
+      "minimum": 100,
+      "maximum": 120000,
+      "default": 10000,
+      "description": "Time between probes in milliseconds."
+     },
+     "timeout_ms": {
+      "type": "integer",
+      "minimum": 100,
+      "maximum": 120000,
+      "default": 2000,
+      "description": "Probe timeout in milliseconds."
+     },
+     "healthy_threshold": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 20,
+      "default": 2,
+      "description": "Consecutive successes before a backend is healthy."
+     },
+     "unhealthy_threshold": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 20,
+      "default": 3,
+      "description": "Consecutive failures before a backend is unhealthy."
+     }
+    }
+   },
+   "LoadBalancerPassiveHealthCheck": {
+    "description": "Outlier detection from real traffic.",
+    "type": "object",
+    "properties": {
+     "enabled": {
+      "type": "boolean",
+      "default": true
+     },
+     "consecutive_5xx": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 100,
+      "default": 5,
+      "description": "Consecutive 5xx answers that eject a backend."
+     },
+     "interval_ms": {
+      "type": "integer",
+      "minimum": 100,
+      "maximum": 120000,
+      "default": 10000
+     },
+     "base_ejection_time_ms": {
+      "type": "integer",
+      "minimum": 1000,
+      "maximum": 600000,
+      "default": 30000,
+      "description": "How long an ejected backend stays out, in milliseconds."
+     }
+    }
+   },
+   "LoadBalancerHealthCheck": {
+    "description": "Health checking for the backends.",
+    "type": "object",
+    "properties": {
+     "active": {
+      "$ref": "#/components/schemas/LoadBalancerActiveHealthCheck"
+     },
+     "passive": {
+      "$ref": "#/components/schemas/LoadBalancerPassiveHealthCheck"
+     }
+    }
+   },
+   "LoadBalancerRetryPolicy": {
+    "description": "Retries towards the backends.",
+    "type": "object",
+    "properties": {
+     "attempts": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 10,
+      "default": 3
+     },
+     "on": {
+      "type": "array",
+      "items": {
+       "type": "string"
+      },
+      "default": [
+       "5xx",
+       "reset",
+       "connect-failure"
+      ],
+      "description": "Conditions that trigger a retry."
+     },
+     "per_retry_timeout_ms": {
+      "type": "integer",
+      "minimum": 100,
+      "maximum": 120000,
+      "default": 5000
+     }
+    }
+   },
+   "LoadBalancerPolicy": {
+    "description": "Timeouts, retries and proxy protocol.",
+    "type": "object",
+    "properties": {
+     "timeout_ms": {
+      "type": "integer",
+      "minimum": 100,
+      "maximum": 300000,
+      "default": 30000,
+      "description": "Request timeout in milliseconds."
+     },
+     "retries": {
+      "$ref": "#/components/schemas/LoadBalancerRetryPolicy"
+     },
+     "proxy_protocol_enabled": {
+      "type": "boolean",
+      "default": false,
+      "description": "Send PROXY protocol headers to the backends."
+     }
+    }
+   },
+   "LoadBalancerObservability": {
+    "description": "Observability settings.",
+    "type": "object",
+    "properties": {
+     "logs_enabled": {
+      "type": "boolean",
+      "default": false,
+      "description": "Keep access logs for the load balancer."
+     }
+    }
+   },
    "LoadBalancerTls": {
     "description": "TLS settings for the load balancer's listener.",
     "type": "object",
@@ -14505,6 +15192,15 @@
      "routing": {
       "$ref": "#/components/schemas/LoadBalancerRouting"
      },
+     "health_check": {
+      "$ref": "#/components/schemas/LoadBalancerHealthCheck"
+     },
+     "policy": {
+      "$ref": "#/components/schemas/LoadBalancerPolicy"
+     },
+     "observability": {
+      "$ref": "#/components/schemas/LoadBalancerObservability"
+     },
      "tls": {
       "$ref": "#/components/schemas/LoadBalancerTls"
      }
@@ -14543,6 +15239,15 @@
      },
      "routing": {
       "$ref": "#/components/schemas/LoadBalancerRouting"
+     },
+     "health_check": {
+      "$ref": "#/components/schemas/LoadBalancerHealthCheck"
+     },
+     "policy": {
+      "$ref": "#/components/schemas/LoadBalancerPolicy"
+     },
+     "observability": {
+      "$ref": "#/components/schemas/LoadBalancerObservability"
      },
      "tls": {
       "$ref": "#/components/schemas/LoadBalancerTls"
@@ -14589,6 +15294,15 @@
      "routing": {
       "$ref": "#/components/schemas/LoadBalancerRouting"
      },
+     "health_check": {
+      "$ref": "#/components/schemas/LoadBalancerHealthCheck"
+     },
+     "policy": {
+      "$ref": "#/components/schemas/LoadBalancerPolicy"
+     },
+     "observability": {
+      "$ref": "#/components/schemas/LoadBalancerObservability"
+     },
      "tls": {
       "$ref": "#/components/schemas/LoadBalancerTls"
      }
@@ -14615,6 +15329,15 @@
      },
      "routing": {
       "$ref": "#/components/schemas/LoadBalancerRouting"
+     },
+     "health_check": {
+      "$ref": "#/components/schemas/LoadBalancerHealthCheck"
+     },
+     "policy": {
+      "$ref": "#/components/schemas/LoadBalancerPolicy"
+     },
+     "observability": {
+      "$ref": "#/components/schemas/LoadBalancerObservability"
      },
      "tls": {
       "$ref": "#/components/schemas/LoadBalancerTls"
@@ -14823,24 +15546,6 @@
      }
     }
    },
-   "UpdateSecretStoreRequest": {
-    "description": "Body for renaming a store or changing its description.",
-    "type": "object",
-    "properties": {
-     "name": {
-      "description": "New display name.",
-      "type": "string",
-      "minLength": 1,
-      "maxLength": 128,
-      "example": "production-secrets"
-     },
-     "description": {
-      "description": "New description.",
-      "type": "string",
-      "example": "Updated description"
-     }
-    }
-   },
    "SecretStore": {
     "description": "A secret store: a named container for secrets inside a workspace.",
     "type": "object",
@@ -14967,20 +15672,6 @@
       "type": "integer",
       "nullable": true,
       "description": "Check-and-set: only update if the current version matches this number. Prevents overwriting concurrent changes."
-     }
-    }
-   },
-   "PatchSecretValueRequest": {
-    "description": "Body for merging keys into a secret's current value. Creates a new version.",
-    "type": "object",
-    "required": [
-     "value"
-    ],
-    "properties": {
-     "value": {
-      "type": "object",
-      "additionalProperties": true,
-      "description": "Key-value pairs to merge into the current value. Creates a new version."
      }
     }
    },
@@ -15400,20 +16091,6 @@
      }
     }
    },
-   "UpdateSecretIdentityRequest": {
-    "description": "Body for changing an identity.",
-    "type": "object",
-    "properties": {
-     "token_policy_mode": {
-      "type": "string",
-      "enum": [
-       "read_only",
-       "read_write"
-      ],
-      "description": "Updating the mode also aligns every existing scope and revokes active sessions."
-     }
-    }
-   },
    "SecretIdentity": {
     "description": "An application identity that authenticates to Secret Store with AppRole or Kubernetes credentials.",
     "type": "object",
@@ -15621,32 +16298,6 @@
       "description": "Whether the identity may destroy secret versions.",
       "type": "boolean",
       "default": false
-     }
-    }
-   },
-   "UpdateSecretIdentityScopeRequest": {
-    "description": "Body for changing a scope. Only the fields sent are changed.",
-    "type": "object",
-    "properties": {
-     "access_mode": {
-      "description": "- `read_only`: the identity can read secrets in the store.\n- `read_write`: the identity can also create and update them.",
-      "type": "string",
-      "enum": [
-       "read_only",
-       "read_write"
-      ]
-     },
-     "allow_version_read": {
-      "description": "Whether the identity may read non-current versions of a secret.",
-      "type": "boolean"
-     },
-     "allow_rollback": {
-      "description": "Whether the identity may roll a secret back to an earlier version.",
-      "type": "boolean"
-     },
-     "allow_destroy": {
-      "description": "Whether the identity may destroy secret versions.",
-      "type": "boolean"
      }
     }
    },
@@ -15951,8 +16602,14 @@
       "default": "Default Key"
      },
      "permission_type": {
-      "description": "Permission level: `admin_rw`, `admin_ro`, `object_rw` or `object_ro`. Default `admin_rw`.",
+      "description": "- `admin_rw`: manage buckets and read/write objects (default).\n- `admin_ro`: read buckets and objects.\n- `object_rw`: read and write objects only.\n- `object_ro`: read objects only.",
       "type": "string",
+      "enum": [
+       "admin_rw",
+       "admin_ro",
+       "object_rw",
+       "object_ro"
+      ],
       "default": "admin_rw"
      },
      "bucket_scope": {
@@ -16124,6 +16781,164 @@
      }
     }
    },
+   "RecoveryStoragePlanList": {
+    "type": "object",
+    "required": [
+     "items",
+     "source",
+     "product_code",
+     "plan_id",
+     "plan_version",
+     "billing_interval",
+     "currency"
+    ],
+    "properties": {
+     "items": {
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/RecoveryStoragePlan"
+      }
+     },
+     "source": {
+      "type": "string",
+      "enum": [
+       "billing_v2"
+      ]
+     },
+     "product_code": {
+      "type": "string",
+      "enum": [
+       "snapshot_storage",
+       "backup_storage"
+      ]
+     },
+     "plan_id": {
+      "type": "string"
+     },
+     "plan_version": {
+      "type": "integer"
+     },
+     "billing_interval": {
+      "type": "string"
+     },
+     "currency": {
+      "type": "string"
+     },
+     "site_filter_codes": {
+      "type": "array",
+      "items": {
+       "type": "string"
+      }
+     }
+    }
+   },
+   "RecoveryStoragePlan": {
+    "type": "object",
+    "required": [
+     "sku_id",
+     "sku_code",
+     "selectable",
+     "billing_catalog"
+    ],
+    "properties": {
+     "sku_id": {
+      "type": "string"
+     },
+     "sku_code": {
+      "type": "string"
+     },
+     "name": {
+      "type": "string"
+     },
+     "selectable": {
+      "type": "boolean",
+      "description": "Whether a published price is available for this SKU."
+     },
+     "pricing_status": {
+      "type": "string",
+      "enum": [
+       "priced",
+       "unpriced"
+      ]
+     },
+     "billing_catalog": {
+      "$ref": "#/components/schemas/BillingCatalogSelection"
+     }
+    }
+   },
+   "ComputeBillingSelection": {
+    "description": "Copy the selected plan's billing_catalog, choose one supported HOURLY or MONTHLY entry from its billing_options, and merge that complete entry into the copy. Send the result here, including the canonical price_currency. Hourly requests also require an explicit selected term. Do not invent prices, drop commitment fields from the selected option, or send only billing_interval and committed. Admission validates the selection against the server's current catalog. Amounts remain server-authoritative.",
+    "allOf": [
+     {
+      "$ref": "#/components/schemas/BillingCatalogSelection"
+     },
+     {
+      "type": "object",
+      "required": [
+       "billing_interval",
+       "committed",
+       "commitment_period",
+       "unit_price_minor",
+       "price_currency"
+      ],
+      "properties": {
+       "billing_interval": {
+        "type": "string",
+        "enum": [
+         "HOURLY",
+         "MONTHLY"
+        ]
+       },
+       "committed": {
+        "type": "boolean",
+        "example": false,
+        "description": "Copy from the selected option; false for hourly pay-as-you-go."
+       },
+       "commitment_period": {
+        "type": "string",
+        "enum": [
+         "HOURLY",
+         "MONTHLY"
+        ]
+       },
+       "commitment_months": {
+        "type": "integer",
+        "minimum": 1,
+        "nullable": true
+       },
+       "committed_hours": {
+        "type": "integer",
+        "minimum": 1,
+        "nullable": true
+       },
+       "price_unit": {
+        "type": "string",
+        "enum": [
+         "HOUR",
+         "MONTH"
+        ],
+        "nullable": true
+       },
+       "unit_price_minor": {
+        "type": "integer",
+        "minimum": 0,
+        "description": "Copy the selected option's value exactly; it is verified server-side."
+       },
+       "price_currency": {
+        "type": "string",
+        "minLength": 3,
+        "maxLength": 3,
+        "example": "INR"
+       },
+       "currency": {
+        "type": "string",
+        "minLength": 3,
+        "maxLength": 3
+       }
+      }
+     }
+    ]
+   },
    "BillingCatalogSelection": {
     "type": "object",
     "description": "A Billing catalog SKU selection as the VM engine accepts it. `sku_id` and `sku_code` are required; other catalog fields are accepted and stored as sent.",
@@ -16174,7 +16989,7 @@
     }
    },
    "CreateCloudVmRequest": {
-    "description": "Body for creating a cloud VM. Take `site_id`, `plan_id` and `template_id` from the compute catalog and pass the plan's `billing_catalog` through unchanged.",
+    "description": "Body for creating a cloud VM. Take `site_id`, `plan_id` and `template_id` from the compute catalog and merge the chosen billing_options term into the plan's billing_catalog, including for hourly requests.",
     "type": "object",
     "required": [
      "name",
@@ -16244,9 +17059,7 @@
       "description": "Billable compute plan ID returned by the compute catalog."
      },
      "billing_catalog": {
-      "type": "object",
-      "additionalProperties": true,
-      "description": "The selected plan's `billing_catalog` object from `GET /compute/plans`, passed through unmodified — the same flow the portal uses. Treat it as opaque. Billing charges are always computed server-side from `plan_id`, not from this echoed copy."
+      "$ref": "#/components/schemas/ComputeBillingSelection"
      },
      "ssh_key_ids": {
       "type": "array",
@@ -16306,7 +17119,7 @@
     }
    },
    "CreateGpuVmRequest": {
-    "description": "Body for creating a GPU VM. Take `site_id`, `plan_id` and `template_id` from the compute catalog (`vm_type=gpu`) and pass the plan's `billing_catalog` through unchanged.",
+    "description": "Body for creating a GPU VM. Take `site_id`, `plan_id` and `template_id` from the compute catalog (`vm_type=gpu`) and merge the chosen billing_options term into the plan's billing_catalog, including for hourly requests.",
     "type": "object",
     "required": [
      "name",
@@ -16388,9 +17201,7 @@
       "description": "Billable GPU plan ID returned by the compute catalog."
      },
      "billing_catalog": {
-      "type": "object",
-      "additionalProperties": true,
-      "description": "The selected plan's `billing_catalog` object from `GET /compute/plans?vm_type=gpu`, passed through unmodified — the same flow the portal uses. Treat it as opaque. Billing charges are always computed server-side from `plan_id`, not from this echoed copy."
+      "$ref": "#/components/schemas/ComputeBillingSelection"
      },
      "ssh_key_ids": {
       "type": "array",
@@ -16449,8 +17260,9 @@
     }
    },
    "CloudVm": {
-    "description": "A cloud VM.",
+    "description": "A customer-facing cloud VM. Internal host, storage and OVN metadata are omitted. The VM identifier is returned as `id`.",
     "type": "object",
+    "additionalProperties": false,
     "properties": {
      "id": {
       "description": "Unique VM ID.",
@@ -16550,8 +17362,9 @@
     }
    },
    "GpuVm": {
-    "description": "A GPU VM.",
+    "description": "A customer-facing GPU VM. Internal host, storage and OVN metadata are omitted. The VM identifier is returned as `id`.",
     "type": "object",
+    "additionalProperties": false,
     "properties": {
      "id": {
       "description": "Unique VM ID.",
@@ -16675,16 +17488,6 @@
     "type": "object",
     "description": "At least one SSH-key, password, or password-authentication change is required.",
     "properties": {
-     "requested_by": {
-      "description": "Free-text label for who or what made the request, stored with the operation. Default `api`.",
-      "type": "string",
-      "default": "api"
-     },
-     "admin_username": {
-      "type": "string",
-      "nullable": true,
-      "description": "Linux account to update. Defaults to the VM admin user."
-     },
      "ssh_key_mode": {
       "description": "- `add`: install the given keys.\n- `remove`: remove the given keys.",
       "type": "string",
@@ -16710,14 +17513,6 @@
       "default": [],
       "description": "Secret Store SSH key IDs to add or remove."
      },
-     "ssh_key_secret_refs": {
-      "description": "SSH public keys kept in Secret Store, referenced by store key and secret name.",
-      "type": "array",
-      "default": [],
-      "items": {
-       "$ref": "#/components/schemas/SshKeySecretRef"
-      }
-     },
      "new_password": {
       "description": "New password for `admin_username`.",
       "type": "string",
@@ -16734,31 +17529,6 @@
       "description": "Must be `true` to remove the VM's last remaining SSH key.",
       "type": "boolean",
       "default": false
-     }
-    }
-   },
-   "SshKeySecretRef": {
-    "description": "Reference to an SSH public key kept in a Secret Store store.",
-    "type": "object",
-    "required": [
-     "ssh_key_id",
-     "secret_name"
-    ],
-    "properties": {
-     "ssh_key_id": {
-      "type": "string",
-      "minLength": 1,
-      "description": "ID of the SSH key."
-     },
-     "store_key": {
-      "type": "string",
-      "default": "ssh-keys",
-      "description": "Store key of the Secret Store store that holds the key. Default `ssh-keys`."
-     },
-     "secret_name": {
-      "type": "string",
-      "minLength": 1,
-      "description": "Name of the secret that holds the public key."
      }
     }
    },
@@ -16783,81 +17553,6 @@
       "minimum": 1,
       "maximum": 10000,
       "description": "Target root disk size in GB."
-     },
-     "requested_by": {
-      "type": "string",
-      "default": "api",
-      "description": "Free-text label for who or what made the request, stored with the operation. Default `api`."
-     }
-    }
-   },
-   "VmResizePlanRequest": {
-    "description": "Body for changing a VM's vCPUs and memory.",
-    "type": "object",
-    "required": [
-     "cpu",
-     "ram_mb"
-    ],
-    "properties": {
-     "cpu": {
-      "type": "integer",
-      "minimum": 1,
-      "maximum": 256,
-      "description": "Target vCPUs (1-256)."
-     },
-     "ram_mb": {
-      "type": "integer",
-      "minimum": 257,
-      "maximum": 2097152,
-      "description": "Target memory in MB."
-     },
-     "allow_online": {
-      "type": "boolean",
-      "default": false,
-      "description": "Permit the change while the VM is running. Default false."
-     },
-     "confirm_downgrade": {
-      "type": "boolean",
-      "default": false,
-      "description": "Must be `true` when the target shape is smaller than the current one."
-     },
-     "billing_catalog": {
-      "$ref": "#/components/schemas/BillingCatalogSelection",
-      "description": "Optional. The target plan's `billing_catalog` from `GET /compute/plans`. The VM engine records it with the resize."
-     },
-     "requested_by": {
-      "type": "string",
-      "default": "api",
-      "description": "Free-text label for who or what made the request, stored with the operation. Default `api`."
-     }
-    }
-   },
-   "VmResizeRootDiskRequest": {
-    "description": "Body for changing a VM's root disk size.",
-    "type": "object",
-    "required": [
-     "new_size_gb"
-    ],
-    "properties": {
-     "new_size_gb": {
-      "type": "integer",
-      "minimum": 1,
-      "maximum": 10000,
-      "description": "Target root disk size in GB."
-     },
-     "allow_online": {
-      "type": "boolean",
-      "default": false,
-      "description": "Permit the change while the VM is running. Default false."
-     },
-     "billing_catalog": {
-      "$ref": "#/components/schemas/BillingCatalogSelection",
-      "description": "Optional. A Billing catalog selection that the VM engine records with the resize."
-     },
-     "requested_by": {
-      "type": "string",
-      "default": "api",
-      "description": "Free-text label for who or what made the request, stored with the operation. Default `api`."
      }
     }
    },
@@ -16974,117 +17669,6 @@
      },
      "target": {
       "$ref": "#/components/schemas/VmResizeShape"
-     }
-    }
-   },
-   "VmAttachVolumeRequest": {
-    "description": "Body for attaching a block storage volume to a VM.",
-    "type": "object",
-    "required": [
-     "volume_id",
-     "billing_catalog"
-    ],
-    "properties": {
-     "volume_id": {
-      "type": "string",
-      "minLength": 1,
-      "description": "ID of the block storage volume to attach."
-     },
-     "mode": {
-      "type": "string",
-      "enum": [
-       "single-writer",
-       "multi-writer"
-      ],
-      "default": "single-writer",
-      "description": "- `single-writer`: only this VM may write to the volume (default).\n- `multi-writer`: the volume may be attached to several VMs."
-     },
-     "billing_catalog": {
-      "$ref": "#/components/schemas/BillingCatalogSelection",
-      "description": "Required. The Block Storage SKU from the Billing catalog that the VM engine records for this attachment. Copy it from the volume's `metadata.billing_catalog` (`GET /block-storage/volumes/{volume_id}`)."
-     },
-     "requested_by": {
-      "type": "string",
-      "default": "api",
-      "description": "Free-text label for who or what made the request, stored with the operation. Default `api`."
-     }
-    }
-   },
-   "VmDetachVolumeRequest": {
-    "description": "Body for detaching a block storage volume from a VM.",
-    "type": "object",
-    "required": [
-     "volume_id"
-    ],
-    "properties": {
-     "volume_id": {
-      "type": "string",
-      "minLength": 1,
-      "description": "ID of the block storage volume to detach."
-     },
-     "force": {
-      "type": "boolean",
-      "default": false,
-      "description": "Detach even if the volume still appears to be in use. Default false."
-     },
-     "confirm_unmounted": {
-      "type": "boolean",
-      "default": false,
-      "description": "Confirms the volume was unmounted inside the guest. Default false."
-     },
-     "requested_by": {
-      "type": "string",
-      "default": "api",
-      "description": "Free-text label for who or what made the request, stored with the operation. Default `api`."
-     }
-    }
-   },
-   "MountGuidanceAcknowledgeRequest": {
-    "description": "Body for recording that the mount instructions for an attached volume were followed.",
-    "type": "object",
-    "required": [
-     "volume_id"
-    ],
-    "properties": {
-     "volume_id": {
-      "type": "string",
-      "minLength": 1,
-      "description": "ID of the attached block storage volume."
-     }
-    }
-   },
-   "MountGuidanceAcknowledge": {
-    "description": "Result of acknowledging mount guidance.",
-    "type": "object",
-    "required": [
-     "status",
-     "vm_id",
-     "volume_id"
-    ],
-    "properties": {
-     "status": {
-      "type": "string",
-      "default": "ok",
-      "description": "Always `ok`."
-     },
-     "vm_id": {
-      "type": "string",
-      "description": "ID of the VM."
-     },
-     "volume_id": {
-      "type": "string",
-      "description": "ID of the volume."
-     },
-     "mount_state": {
-      "type": "string",
-      "nullable": true,
-      "description": "Mount state recorded after the acknowledgement, for example `instructions_acknowledged`."
-     },
-     "instructions_acknowledged_at": {
-      "type": "string",
-      "format": "date-time",
-      "nullable": true,
-      "description": "When the acknowledgement was recorded (ISO 8601)."
      }
     }
    },
@@ -17368,6 +17952,58 @@
      }
     }
    },
+   "VmAttachVolumeRequest": {
+    "description": "Body for attaching a block storage volume to a VM.",
+    "type": "object",
+    "required": [
+     "volume_id",
+     "billing_catalog"
+    ],
+    "properties": {
+     "volume_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "ID of the block storage volume to attach."
+     },
+     "mode": {
+      "type": "string",
+      "enum": [
+       "single-writer",
+       "multi-writer"
+      ],
+      "default": "single-writer",
+      "description": "- `single-writer`: only this VM may write to the volume (default).\n- `multi-writer`: the volume may be attached to several VMs."
+     },
+     "billing_catalog": {
+      "$ref": "#/components/schemas/BillingCatalogSelection",
+      "description": "Required. The Block Storage SKU from the Billing catalog that the VM engine records for this attachment. Copy it from the volume's `metadata.billing_catalog` (`GET /block-storage/volumes/{volume_id}`)."
+     }
+    }
+   },
+   "VmDetachVolumeRequest": {
+    "description": "Body for detaching a block storage volume from a VM.",
+    "type": "object",
+    "required": [
+     "volume_id"
+    ],
+    "properties": {
+     "volume_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "ID of the block storage volume to detach."
+     },
+     "force": {
+      "type": "boolean",
+      "default": false,
+      "description": "Detach even if the volume still appears to be in use. Default false."
+     },
+     "confirm_unmounted": {
+      "type": "boolean",
+      "default": false,
+      "description": "Confirms the volume was unmounted inside the guest. Default false."
+     }
+    }
+   },
    "SnapshotCreateRequest": {
     "description": "Body for creating a snapshot set of a VM.",
     "type": "object",
@@ -17409,13 +18045,6 @@
      "billing_catalog": {
       "$ref": "#/components/schemas/BillingCatalogSelection",
       "description": "Required. The snapshot storage SKU from the Billing catalog that the VM engine records for this snapshot. No public operation lists it yet."
-     },
-     "requested_by": {
-      "type": "string",
-      "minLength": 1,
-      "maxLength": 128,
-      "default": "api",
-      "description": "Free-text label for who or what made the request, stored with the record. Default `api`."
      }
     }
    },
@@ -17925,88 +18554,6 @@
       "nullable": true,
       "description": "Compute plan for the new VM, from `GET /compute/plans`."
      },
-     "target_plan_name": {
-      "type": "string",
-      "minLength": 1,
-      "maxLength": 255,
-      "nullable": true,
-      "description": "Name of that plan as listed in the compute catalog."
-     },
-     "target_plan_code": {
-      "type": "string",
-      "minLength": 1,
-      "maxLength": 255,
-      "nullable": true,
-      "description": "SKU code of that plan as listed in the compute catalog."
-     },
-     "target_plan_type": {
-      "type": "string",
-      "minLength": 1,
-      "maxLength": 128,
-      "nullable": true,
-      "description": "Plan type label as listed in the compute catalog."
-     },
-     "target_performance_category": {
-      "type": "string",
-      "minLength": 1,
-      "maxLength": 128,
-      "nullable": true,
-      "description": "Performance category of that plan as listed in the compute catalog."
-     },
-     "target_plan_monthly_rate": {
-      "type": "number",
-      "minimum": 0,
-      "nullable": true,
-      "description": "Monthly rate of that plan as listed in the compute catalog."
-     },
-     "target_plan_hourly_rate": {
-      "type": "number",
-      "minimum": 0,
-      "nullable": true,
-      "description": "Hourly rate of that plan as listed in the compute catalog."
-     },
-     "target_bandwidth_tb": {
-      "description": "Included bandwidth of that plan in TB, as a number or a display string.",
-      "anyOf": [
-       {
-        "type": "number"
-       },
-       {
-        "type": "string"
-       },
-       {
-        "type": "null"
-       }
-      ]
-     },
-     "target_bandwidth_display": {
-      "type": "string",
-      "minLength": 1,
-      "maxLength": 128,
-      "nullable": true,
-      "description": "Display label for the included bandwidth."
-     },
-     "target_network_bandwidth": {
-      "type": "string",
-      "minLength": 1,
-      "maxLength": 128,
-      "nullable": true,
-      "description": "Network bandwidth label of that plan."
-     },
-     "target_compute_node_id": {
-      "type": "string",
-      "minLength": 1,
-      "maxLength": 255,
-      "nullable": true,
-      "description": "Compute node to place the new VM on; omit to let the service choose."
-     },
-     "target_gpu_type": {
-      "type": "string",
-      "minLength": 1,
-      "maxLength": 128,
-      "nullable": true,
-      "description": "GPU type for a new GPU VM."
-     },
      "target_gpu_model": {
       "type": "string",
       "minLength": 1,
@@ -18021,19 +18568,6 @@
       "nullable": true,
       "description": "Number of GPUs for a new GPU VM (0-16)."
      },
-     "target_gpu_memory_gb": {
-      "type": "number",
-      "minimum": 0,
-      "nullable": true,
-      "description": "GPU memory for a new GPU VM in GB."
-     },
-     "target_gpu_memory_display": {
-      "type": "string",
-      "minLength": 1,
-      "maxLength": 128,
-      "nullable": true,
-      "description": "Display label for the GPU memory."
-     },
      "target_site_id": {
       "type": "string",
       "minLength": 1,
@@ -18041,12 +18575,13 @@
       "nullable": true,
       "description": "Site for the new VM, from `GET /compute/sites`."
      },
-     "target_site_name": {
-      "type": "string",
-      "minLength": 1,
-      "maxLength": 255,
-      "nullable": true,
-      "description": "Display name of that site."
+     "target_volume_names": {
+      "type": "object",
+      "additionalProperties": {
+       "type": "string",
+       "maxLength": 255
+      },
+      "description": "Names for the restored volumes, keyed by the source volume id. Volumes not listed keep their source name."
      },
      "selected_volume_id": {
       "type": "string",
@@ -18054,19 +18589,56 @@
       "nullable": true,
       "description": "Volume to restore in `volume_only` mode."
      },
-     "requested_by": {
-      "type": "string",
-      "minLength": 1,
-      "maxLength": 128,
-      "default": "api",
-      "description": "Free-text label for who or what made the request, stored with the record. Default `api`."
-     },
      "auto_start": {
       "type": "boolean",
       "default": true,
       "description": "Start the VM once the restore completes. Default true."
      }
     }
+   },
+   "SnapshotRestoreRequest": {
+    "description": "Body for restoring a VM from a snapshot set. In `new_vm` mode the new VM can be placed in a VPC and given SSH keys.",
+    "allOf": [
+     {
+      "$ref": "#/components/schemas/RecoveryRestoreRequest"
+     },
+     {
+      "type": "object",
+      "properties": {
+       "vpc_id": {
+        "type": "string",
+        "description": "VPC for the new VM (`new_vm` mode only). Send with `subnet_id`."
+       },
+       "subnet_id": {
+        "type": "string",
+        "description": "Subnet in `vpc_id` for the new VM."
+       },
+       "network_connectivity": {
+        "type": "string",
+        "enum": [
+         "private",
+         "nat",
+         "public_ip"
+        ],
+        "description": "Internet path of the new VM's VPC interface. Default `private` when `vpc_id` is set."
+       },
+       "ssh_key_ids": {
+        "type": "array",
+        "items": {
+         "type": "string"
+        },
+        "description": "Saved SSH key ids to install on the new VM."
+       },
+       "ssh_keys": {
+        "type": "array",
+        "items": {
+         "type": "string"
+        },
+        "description": "Public keys to install on the new VM."
+       }
+      }
+     }
+    ]
    },
    "BackupRestoreRequest": {
     "description": "Body for restoring a VM from a backup run.",
@@ -18185,13 +18757,6 @@
      "billing_catalog": {
       "$ref": "#/components/schemas/BillingCatalogSelection",
       "description": "Required. The backup storage SKU from the Billing catalog that the VM engine records for this policy's backups. No public operation lists it yet."
-     },
-     "requested_by": {
-      "type": "string",
-      "minLength": 1,
-      "maxLength": 128,
-      "default": "api",
-      "description": "Free-text label for who or what made the request, stored with the record. Default `api`."
      }
     }
    },
@@ -18220,47 +18785,6 @@
       "type": "boolean",
       "nullable": true,
       "description": "Whether runs between full backups capture only changes."
-     },
-     "requested_by": {
-      "type": "string",
-      "minLength": 1,
-      "maxLength": 128,
-      "default": "api",
-      "description": "Free-text label for who or what made the request, stored with the record. Default `api`."
-     }
-    }
-   },
-   "BackupPolicyDisableRequest": {
-    "description": "Optional body for disabling scheduled backups.",
-    "type": "object",
-    "properties": {
-     "requested_by": {
-      "type": "string",
-      "minLength": 1,
-      "maxLength": 128,
-      "default": "api",
-      "description": "Free-text label for who or what made the request, stored with the record. Default `api`."
-     }
-    }
-   },
-   "BackupPolicyNextRunRequest": {
-    "description": "Body for moving the policy's next scheduled run.",
-    "type": "object",
-    "required": [
-     "next_run_at"
-    ],
-    "properties": {
-     "next_run_at": {
-      "type": "string",
-      "format": "date-time",
-      "description": "New time for the next scheduled run (ISO 8601)."
-     },
-     "requested_by": {
-      "type": "string",
-      "minLength": 1,
-      "maxLength": 128,
-      "default": "api",
-      "description": "Free-text label for who or what made the request, stored with the record. Default `api`."
      }
     }
    },
@@ -18375,32 +18899,6 @@
       "type": "string",
       "format": "date-time",
       "description": "When the policy was last changed (ISO 8601)."
-     }
-    }
-   },
-   "ManualBackupRunRequest": {
-    "description": "Body for starting an on-demand backup run.",
-    "type": "object",
-    "required": [
-     "billing_catalog"
-    ],
-    "properties": {
-     "billing_catalog": {
-      "$ref": "#/components/schemas/BillingCatalogSelection",
-      "description": "Required. The backup storage SKU from the Billing catalog that the VM engine records for this backup. No public operation lists it yet."
-     },
-     "requested_by": {
-      "type": "string",
-      "minLength": 1,
-      "maxLength": 128,
-      "default": "api",
-      "description": "Free-text label for who or what made the request, stored with the record. Default `api`."
-     },
-     "reason": {
-      "type": "string",
-      "maxLength": 512,
-      "nullable": true,
-      "description": "Optional free-text reason recorded with the run (up to 512 characters)."
      }
     }
    },
@@ -18750,248 +19248,6 @@
       "type": "object",
       "additionalProperties": true,
       "description": "Additional service-specific key-value data."
-     }
-    }
-   },
-   "VmConsoleSessionCreateRequest": {
-    "description": "Body for opening a graphical console session on a VM.",
-    "type": "object",
-    "required": [
-     "vm_id"
-    ],
-    "properties": {
-     "vm_id": {
-      "type": "string",
-      "minLength": 1,
-      "description": "ID of the VM."
-     },
-     "vm_type": {
-      "$ref": "#/components/schemas/VmType"
-     },
-     "console_type": {
-      "type": "string",
-      "enum": [
-       "graphical"
-      ],
-      "default": "graphical",
-      "description": "`graphical` is the only console type."
-     },
-     "requested_by": {
-      "type": "string",
-      "nullable": true,
-      "default": "portal-client-ui",
-      "description": "Label for the client opening the session. Default `portal-client-ui`."
-     },
-     "user_id": {
-      "type": "string",
-      "nullable": true,
-      "description": "User the session is opened for, when the caller tracks one."
-     }
-    }
-   },
-   "VmConsoleSession": {
-    "description": "A newly created console session, including its one-time connection URL.",
-    "type": "object",
-    "required": [
-     "session_id",
-     "vm_id",
-     "vm_type",
-     "console_type",
-     "connect_url",
-     "token_expires_in_seconds",
-     "idle_timeout_seconds",
-     "max_duration_seconds",
-     "state"
-    ],
-    "properties": {
-     "session_id": {
-      "type": "string",
-      "description": "Unique ID of the session."
-     },
-     "vm_id": {
-      "type": "string",
-      "description": "ID of the VM."
-     },
-     "organization_id": {
-      "type": "string",
-      "nullable": true,
-      "description": "ID of the organization that owns the VM."
-     },
-     "workspace_id": {
-      "type": "string",
-      "nullable": true,
-      "description": "ID of the workspace the VM belongs to."
-     },
-     "workspace_name": {
-      "type": "string",
-      "nullable": true,
-      "description": "Display name of the workspace, when the service has it."
-     },
-     "vm_type": {
-      "$ref": "#/components/schemas/VmType"
-     },
-     "console_type": {
-      "type": "string",
-      "enum": [
-       "graphical"
-      ],
-      "description": "Always `graphical`."
-     },
-     "connect_url": {
-      "type": "string",
-      "format": "uri",
-      "description": "Sensitive, short-lived console connection URL. Do not log or persist it."
-     },
-     "token_expires_in_seconds": {
-      "type": "integer",
-      "description": "Seconds until the token embedded in `connect_url` expires."
-     },
-     "idle_timeout_seconds": {
-      "type": "integer",
-      "description": "Seconds of inactivity after which the session is closed."
-     },
-     "max_duration_seconds": {
-      "type": "integer",
-      "description": "Maximum lifetime of the session in seconds."
-     },
-     "state": {
-      "$ref": "#/components/schemas/VmConsoleState"
-     }
-    }
-   },
-   "VmConsoleSessionStatus": {
-    "description": "Current state of a console session.",
-    "type": "object",
-    "required": [
-     "session_id",
-     "vm_id",
-     "vm_type",
-     "console_type",
-     "state",
-     "host_id",
-     "host_mgmt_ip",
-     "socket_path",
-     "created_at",
-     "idle_timeout_seconds",
-     "max_duration_seconds"
-    ],
-    "properties": {
-     "session_id": {
-      "type": "string",
-      "description": "Unique ID of the session."
-     },
-     "vm_id": {
-      "type": "string",
-      "description": "ID of the VM."
-     },
-     "organization_id": {
-      "type": "string",
-      "nullable": true,
-      "description": "ID of the organization that owns the VM."
-     },
-     "workspace_id": {
-      "type": "string",
-      "nullable": true,
-      "description": "ID of the workspace the VM belongs to."
-     },
-     "workspace_name": {
-      "type": "string",
-      "nullable": true,
-      "description": "Display name of the workspace, when the service has it."
-     },
-     "vm_type": {
-      "$ref": "#/components/schemas/VmType"
-     },
-     "console_type": {
-      "type": "string",
-      "enum": [
-       "graphical"
-      ],
-      "description": "Always `graphical`."
-     },
-     "state": {
-      "$ref": "#/components/schemas/VmConsoleState"
-     },
-     "host_id": {
-      "type": "string",
-      "description": "ID of the host that serves the console."
-     },
-     "host_mgmt_ip": {
-      "type": "string",
-      "description": "Management IP address of that host."
-     },
-     "socket_path": {
-      "type": "string",
-      "description": "Console socket path on that host."
-     },
-     "created_at": {
-      "type": "string",
-      "format": "date-time",
-      "description": "When the session was created (ISO 8601)."
-     },
-     "connected_at": {
-      "type": "string",
-      "format": "date-time",
-      "nullable": true,
-      "description": "When the client connected (ISO 8601); null until it does."
-     },
-     "closed_at": {
-      "type": "string",
-      "format": "date-time",
-      "nullable": true,
-      "description": "When the session closed (ISO 8601); null while open."
-     },
-     "close_reason": {
-      "type": "string",
-      "nullable": true,
-      "description": "Why the session closed, for example `closed_by_user`; null while open."
-     },
-     "token_expires_at": {
-      "type": "string",
-      "format": "date-time",
-      "nullable": true,
-      "description": "When the connection token expires (ISO 8601)."
-     },
-     "idle_timeout_seconds": {
-      "type": "integer",
-      "description": "Seconds of inactivity after which the session is closed."
-     },
-     "max_duration_seconds": {
-      "type": "integer",
-      "description": "Maximum lifetime of the session in seconds."
-     }
-    }
-   },
-   "VmConsoleState": {
-    "description": "State of a console session.\n- `issued`: created; no client has connected yet.\n- `active`: a client is connected.\n- `closed`: closed by the client or the API.\n- `failed`: could not be established.\n- `expired`: the token or the maximum duration lapsed.",
-    "type": "string",
-    "enum": [
-     "issued",
-     "active",
-     "closed",
-     "failed",
-     "expired"
-    ]
-   },
-   "VmConsoleClose": {
-    "description": "Result of closing a console session.",
-    "type": "object",
-    "required": [
-     "session_id",
-     "state",
-     "close_reason"
-    ],
-    "properties": {
-     "session_id": {
-      "type": "string",
-      "description": "ID of the closed session."
-     },
-     "state": {
-      "$ref": "#/components/schemas/VmConsoleState"
-     },
-     "close_reason": {
-      "type": "string",
-      "description": "Reason recorded for the close."
      }
     }
    },
@@ -19446,121 +19702,6 @@
      }
     }
    },
-   "AttachBlockVolumeRequest": {
-    "description": "Body for attaching a volume to a compute node, optionally recording the VM it serves.",
-    "type": "object",
-    "required": [
-     "node_name"
-    ],
-    "properties": {
-     "node_name": {
-      "type": "string",
-      "minLength": 1,
-      "description": "Compute node to attach the volume to."
-     },
-     "mode": {
-      "type": "string",
-      "enum": [
-       "single-writer",
-       "multi-writer"
-      ],
-      "default": "single-writer",
-      "description": "- `single-writer`: only this node may write to the volume.\n- `multi-writer`: the volume may be attached to several nodes.\nDefault `single-writer`."
-     },
-     "vm_id": {
-      "type": "string",
-      "nullable": true,
-      "description": "ID of the VM that will use the volume."
-     },
-     "vm_name": {
-      "type": "string",
-      "nullable": true,
-      "description": "Display name of that VM."
-     },
-     "vm_state": {
-      "type": "string",
-      "enum": [
-       "running",
-       "stopped",
-       "suspended"
-      ],
-      "nullable": true,
-      "description": "Current power state of the VM, when the caller knows it.\n- `running`\n- `stopped`\n- `suspended`"
-     },
-     "vm_site_id": {
-      "type": "string",
-      "nullable": true,
-      "description": "Site of that VM."
-     },
-     "vm_type": {
-      "type": "string",
-      "enum": [
-       "cloud",
-       "gpu"
-      ],
-      "default": "cloud",
-      "description": "Kind of VM the volume is used with.\n- `cloud` (default)\n- `gpu`"
-     },
-     "idempotency_key": {
-      "type": "string",
-      "nullable": true,
-      "description": "Caller-chosen key that makes a retried request return the original operation instead of starting a new one."
-     }
-    }
-   },
-   "DetachBlockVolumeRequest": {
-    "description": "Body for detaching a volume from a compute node.",
-    "type": "object",
-    "required": [
-     "node_name"
-    ],
-    "properties": {
-     "node_name": {
-      "type": "string",
-      "minLength": 1,
-      "description": "Compute node to detach the volume from."
-     },
-     "force": {
-      "type": "boolean",
-      "default": false,
-      "description": "Detach even if the volume still appears to be in use. Default false."
-     },
-     "confirm_unmounted": {
-      "type": "boolean",
-      "default": false,
-      "description": "Confirms the volume was unmounted inside the guest. Default false."
-     },
-     "vm_state": {
-      "type": "string",
-      "enum": [
-       "running",
-       "stopped",
-       "suspended"
-      ],
-      "nullable": true,
-      "description": "Current power state of the VM, when the caller knows it.\n- `running`\n- `stopped`\n- `suspended`"
-     },
-     "vm_type": {
-      "type": "string",
-      "enum": [
-       "cloud",
-       "gpu"
-      ],
-      "default": "cloud",
-      "description": "Kind of VM the volume is used with.\n- `cloud` (default)\n- `gpu`"
-     },
-     "reason": {
-      "type": "string",
-      "nullable": true,
-      "description": "Optional free-text reason recorded with the operation."
-     },
-     "idempotency_key": {
-      "type": "string",
-      "nullable": true,
-      "description": "Caller-chosen key that makes a retried request return the original operation instead of starting a new one."
-     }
-    }
-   },
    "ResizeBlockVolumeRequest": {
     "description": "Body for growing a volume.",
     "type": "object",
@@ -19593,61 +19734,6 @@
       "type": "string",
       "nullable": true,
       "description": "Caller-chosen key that makes a retried request return the original operation instead of starting a new one."
-     }
-    }
-   },
-   "GenerateCdnUrlRequest": {
-    "description": "Body for generating a CDN URL for one object in a bucket.",
-    "type": "object",
-    "required": [
-     "bucket_name",
-     "object_key"
-    ],
-    "properties": {
-     "bucket_name": {
-      "type": "string",
-      "minLength": 1,
-      "description": "Name of the bucket."
-     },
-     "object_key": {
-      "type": "string",
-      "minLength": 1,
-      "description": "Object key (path) inside the bucket."
-     },
-     "expires_in": {
-      "type": "integer",
-      "minimum": 1,
-      "nullable": true,
-      "description": "Lifetime of the URL in seconds. Omit for a URL that does not expire."
-     },
-     "disposition": {
-      "type": "string",
-      "enum": [
-       "inline",
-       "attachment"
-      ],
-      "nullable": true,
-      "description": "- `inline`: the browser displays the object.\n- `attachment`: the browser downloads it."
-     }
-    }
-   },
-   "GeneratedCdnUrl": {
-    "description": "A CDN URL for an object.",
-    "type": "object",
-    "required": [
-     "cdn_url"
-    ],
-    "properties": {
-     "cdn_url": {
-      "type": "string",
-      "format": "uri",
-      "description": "The generated URL."
-     },
-     "expires_at": {
-      "type": "string",
-      "format": "date-time",
-      "nullable": true,
-      "description": "When the URL stops working (ISO 8601); null when it does not expire."
      }
     }
    },
@@ -20083,167 +20169,634 @@
      }
     }
    },
-   "BillingEligibilityRequest": {
-    "description": "Body for asking Billing whether the organization may perform an action, before you call the product endpoint.",
+   "BucketLifecycleRule": {
+    "description": "One lifecycle rule. Give exactly one of `expiration_days` and `expiration_date`.",
     "type": "object",
+    "required": [
+     "status"
+    ],
     "properties": {
-     "sku_code": {
-      "type": "string",
-      "minLength": 1,
-      "maxLength": 64,
-      "description": "Billing catalog SKU for the intended resource. Unknown or unavailable SKUs may be denied.",
-      "example": "STANDARD-2-8-50"
-     },
-     "estimated_cost_minor": {
-      "type": "integer",
-      "minimum": 0,
-      "description": "Optional estimated cost expressed in the organization's currency minor unit. Use a value from a trusted catalog.",
-      "example": 120000
-     },
-     "operation": {
+     "status": {
       "type": "string",
       "enum": [
-       "CREATE_RESOURCE",
-       "CREATE_CREDENTIAL",
-       "INCREASE_CAPACITY",
-       "MUTATE_RESOURCE",
-       "READ_RESOURCE",
-       "DELETE_RESOURCE",
-       "REVOKE_CREDENTIAL",
-       "SECURITY_RECOVERY"
+       "Enabled",
+       "Disabled"
       ],
-      "default": "CREATE_RESOURCE",
-      "description": "The kind of action Billing should decide on."
+      "description": "Whether the rule is applied."
      },
-     "resource_type": {
+     "prefix": {
       "type": "string",
-      "enum": [
-       "cpu_vm",
-       "gpu_vm",
-       "block_volume",
-       "snapshot",
-       "cdn_zone",
-       "load_balancer",
-       "public_ipv4",
-       "bucket",
-       "secret_store",
-       "secret"
-      ],
       "nullable": true,
-      "description": "What the request would create, so Billing also checks the plan's resource limit for it. Omit it for a money check only. `bucket`, `secret_store` and `secret` have no limit and get the money check only."
+      "description": "Apply only to object keys starting with this prefix."
      },
-     "quantity": {
+     "expiration_days": {
       "type": "integer",
-      "minimum": 0,
-      "maximum": 100000,
-      "default": 1,
-      "description": "How many resources would be created at once; 0 for a resize, which adds size only."
+      "minimum": 1,
+      "description": "Delete objects this many days after they were written."
      },
-     "size_gb": {
-      "type": "integer",
-      "minimum": 0,
-      "maximum": 1000000000,
-      "nullable": true,
-      "description": "GiB being added (a new volume's size, a resize's increase, or the disks a snapshot will capture), checked against the size limit of that kind."
+     "expiration_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Delete matching objects on this date."
      }
     }
    },
-   "BillingEligibility": {
-    "description": "Billing's decision for the requested action. The same check runs at the gateway on every billable request.",
+   "BucketLifecycleConfiguration": {
+    "description": "The lifecycle rules of a bucket.",
     "type": "object",
     "required": [
-     "organization_id",
-     "allowed",
-     "reason",
-     "billing_mode",
-     "billing_state",
-     "currency",
-     "evaluated_at"
+     "rules"
     ],
     "properties": {
-     "organization_id": {
-      "description": "Organization the decision is for.",
+     "rules": {
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/BucketLifecycleRule"
+      }
+     }
+    }
+   },
+   "BucketCorsRule": {
+    "description": "One CORS rule.",
+    "type": "object",
+    "required": [
+     "allowed_origins",
+     "allowed_methods"
+    ],
+    "properties": {
+     "id": {
+      "type": "string",
+      "description": "Optional rule id."
+     },
+     "allowed_origins": {
+      "type": "array",
+      "items": {
+       "type": "string"
+      },
+      "description": "`*` or origins starting with `http://` or `https://`."
+     },
+     "allowed_methods": {
+      "type": "array",
+      "items": {
+       "type": "string",
+       "enum": [
+        "GET",
+        "PUT",
+        "POST",
+        "DELETE",
+        "HEAD"
+       ]
+      }
+     },
+     "allowed_headers": {
+      "type": "array",
+      "items": {
+       "type": "string"
+      }
+     },
+     "expose_headers": {
+      "type": "array",
+      "items": {
+       "type": "string"
+      }
+     },
+     "max_age_seconds": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "How long browsers may cache the preflight answer."
+     }
+    }
+   },
+   "BucketCorsConfiguration": {
+    "description": "The CORS rules of a bucket.",
+    "type": "object",
+    "required": [
+     "rules"
+    ],
+    "properties": {
+     "rules": {
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/BucketCorsRule"
+      }
+     }
+    }
+   },
+   "BucketObjectLockConfiguration": {
+    "description": "Object lock state of a bucket.",
+    "type": "object",
+    "required": [
+     "object_lock_enabled"
+    ],
+    "properties": {
+     "object_lock_enabled": {
+      "type": "string",
+      "description": "`Enabled` when the bucket was created with object lock."
+     },
+     "rule": {
+      "nullable": true,
+      "allOf": [
+       {
+        "$ref": "#/components/schemas/DefaultRetention"
+       }
+      ],
+      "description": "Default retention applied to new objects, or null."
+     }
+    }
+   },
+   "BucketObjectLockUpdateRequest": {
+    "description": "Body for changing the default retention of a locked bucket.",
+    "type": "object",
+    "properties": {
+     "rule": {
+      "nullable": true,
+      "allOf": [
+       {
+        "$ref": "#/components/schemas/DefaultRetention"
+       }
+      ],
+      "description": "New default retention, or null to remove it."
+     }
+    }
+   },
+   "BucketNotificationFilter": {
+    "type": "object",
+    "properties": {
+     "prefix": {
+      "type": "string",
+      "description": "Only objects whose key starts with this prefix."
+     },
+     "suffix": {
+      "type": "string",
+      "description": "Only objects whose key ends with this suffix."
+     }
+    }
+   },
+   "BucketNotificationConfig": {
+    "description": "One webhook notification rule.",
+    "type": "object",
+    "required": [
+     "events"
+    ],
+    "properties": {
+     "id": {
+      "type": "string",
+      "description": "Optional rule id."
+     },
+     "events": {
+      "type": "array",
+      "items": {
+       "type": "string",
+       "enum": [
+        "upload",
+        "delete"
+       ]
+      },
+      "description": "Event categories to send."
+     },
+     "filter": {
+      "$ref": "#/components/schemas/BucketNotificationFilter"
+     },
+     "webhook_url": {
+      "type": "string",
+      "format": "uri",
+      "description": "HTTPS endpoint that receives the events."
+     }
+    }
+   },
+   "BucketNotificationConfiguration": {
+    "description": "The notification rules of a bucket.",
+    "type": "object",
+    "required": [
+     "configs"
+    ],
+    "properties": {
+     "configs": {
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/BucketNotificationConfig"
+      }
+     }
+    }
+   },
+   "AddBucketCustomDomainRequest": {
+    "type": "object",
+    "required": [
+     "domain"
+    ],
+    "properties": {
+     "domain": {
+      "type": "string",
+      "description": "Hostname to serve the bucket from, for example `assets.example.com`."
+     }
+    }
+   },
+   "BucketCustomDomain": {
+    "description": "A custom hostname attached to a bucket.",
+    "type": "object",
+    "required": [
+     "domain",
+     "status"
+    ],
+    "properties": {
+     "domain": {
       "type": "string"
      },
-     "allowed": {
-      "type": "boolean",
-      "description": "Continue only when this value is exactly true."
-     },
-     "reason": {
+     "cname_target": {
       "type": "string",
-      "description": "Machine-readable decision reason. A refusal for a plan limit is `resource_limit_reached`, with the `resource_limit_*` fields set; `resource_usage_unavailable` means Billing could not count usage.",
-      "example": "ok"
+      "description": "Hostname the CNAME record must point at."
      },
-     "billing_mode": {
-      "description": "- `PREPAID`: usage is paid from a wallet balance.\n- `POSTPAID`: usage is invoiced against a credit limit.",
+     "status": {
       "type": "string",
-      "enum": [
-       "PREPAID",
-       "POSTPAID"
-      ]
+      "description": "Current state of the hostname (DNS check and TLS)."
      },
-     "billing_state": {
-      "description": "Payment standing of the organization.\n- `CURRENT`: in good standing.\n- `PAYMENT_DUE`: an invoice is open.\n- `PAST_DUE`: an invoice is overdue.\n- `SOFT_SUSPENDED`: new purchases are blocked.\n- `HARD_SUSPENDED`: service is suspended.",
+     "created_at": {
       "type": "string",
-      "enum": [
-       "CURRENT",
-       "PAYMENT_DUE",
-       "PAST_DUE",
-       "SOFT_SUSPENDED",
-       "HARD_SUSPENDED"
-      ]
-     },
-     "currency": {
-      "description": "ISO 4217 code of the organization's billing currency; the `*_minor` amounts are in its minor unit.",
-      "type": "string",
-      "example": "INR"
-     },
-     "sku_code": {
-      "description": "SKU the decision was evaluated for, when one was given.",
+      "format": "date-time",
+      "nullable": true
+     }
+    }
+   },
+   "BucketCustomDomainConfig": {
+    "description": "Custom-domain configuration of a bucket.",
+    "type": "object",
+    "required": [
+     "cname_target",
+     "custom_domains"
+    ],
+    "properties": {
+     "id": {
       "type": "string",
       "nullable": true
      },
-     "estimated_cost_minor": {
-      "description": "Estimated cost that was evaluated, in the currency's minor unit.",
-      "type": "integer",
-      "nullable": true
-     },
-     "effective_balance_minor": {
-      "description": "Balance available to spend, in the currency's minor unit; null when not applicable.",
-      "type": "integer",
-      "nullable": true
-     },
-     "credit_headroom_minor": {
-      "description": "Remaining credit before the organization's limit, in the currency's minor unit; null when not applicable.",
-      "type": "integer",
-      "nullable": true
-     },
-     "resource_limits": {
-      "type": "object",
-      "additionalProperties": {
-       "type": "integer"
-      },
-      "description": "How many of each resource the organization's plan allows, keyed by limit (for example `cpu_vm` or `block_storage_gb`). A missing key or `-1` means unlimited."
-     },
-     "resource_limit_key": {
+     "cname_target": {
       "type": "string",
-      "nullable": true,
-      "description": "The limit that refused the request, when a resource limit decided it."
+      "description": "Hostname every custom domain must CNAME to."
      },
-     "resource_limit": {
-      "type": "integer",
-      "nullable": true,
-      "description": "The value of that limit."
+     "custom_domains": {
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/BucketCustomDomain"
+      }
+     }
+    }
+   },
+   "BucketCustomDomainRemoved": {
+    "type": "object",
+    "required": [
+     "domain"
+    ],
+    "properties": {
+     "message": {
+      "type": "string"
      },
-     "resource_usage": {
-      "type": "number",
-      "nullable": true,
-      "description": "Current usage counted against that limit (a count, or GiB for a size limit)."
+     "domain": {
+      "type": "string"
+     }
+    }
+   },
+   "BucketMetricsTotals": {
+    "type": "object",
+    "additionalProperties": true,
+    "properties": {
+     "current_storage_bytes": {
+      "type": "integer"
      },
-     "evaluated_at": {
-      "description": "When Billing made the decision (ISO 8601).",
+     "object_count": {
+      "type": "integer"
+     },
+     "data_retrieved_bytes": {
+      "type": "integer"
+     },
+     "class_a_operations": {
+      "type": "integer"
+     },
+     "class_b_operations": {
+      "type": "integer"
+     },
+     "total_operations": {
+      "type": "integer"
+     },
+     "successful_requests": {
+      "type": "integer"
+     },
+     "failed_requests": {
+      "type": "integer"
+     }
+    }
+   },
+   "BucketMetricsPoint": {
+    "type": "object",
+    "additionalProperties": true,
+    "required": [
+     "timestamp"
+    ],
+    "properties": {
+     "timestamp": {
       "type": "string",
       "format": "date-time"
+     },
+     "data_retrieved_bytes": {
+      "type": "integer"
+     },
+     "class_a_operations": {
+      "type": "integer"
+     },
+     "class_b_operations": {
+      "type": "integer"
+     },
+     "total_operations": {
+      "type": "integer"
+     },
+     "successful_requests": {
+      "type": "integer"
+     },
+     "failed_requests": {
+      "type": "integer"
+     },
+     "coverage_complete": {
+      "type": "boolean"
+     }
+    }
+   },
+   "BucketMetrics": {
+    "description": "Request and storage metrics of a bucket over a time range.",
+    "type": "object",
+    "additionalProperties": true,
+    "required": [
+     "bucket_name",
+     "range",
+     "range_start",
+     "range_end",
+     "totals",
+     "points"
+    ],
+    "properties": {
+     "bucket_name": {
+      "type": "string"
+     },
+     "range": {
+      "type": "string",
+      "enum": [
+       "24h",
+       "7d"
+      ]
+     },
+     "range_start": {
+      "type": "string",
+      "format": "date-time"
+     },
+     "range_end": {
+      "type": "string",
+      "format": "date-time"
+     },
+     "generated_at": {
+      "type": "string",
+      "format": "date-time"
+     },
+     "coverage_complete": {
+      "type": "boolean"
+     },
+     "totals": {
+      "$ref": "#/components/schemas/BucketMetricsTotals"
+     },
+     "points": {
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/BucketMetricsPoint"
+      }
+     }
+    }
+   },
+   "CdnMetricsTraffic": {
+    "type": "object",
+    "additionalProperties": true,
+    "properties": {
+     "requests": {
+      "type": "integer"
+     },
+     "data_served_bytes": {
+      "type": "integer"
+     },
+     "response_body_bytes": {
+      "type": "integer"
+     },
+     "request_bytes": {
+      "type": "integer"
+     }
+    }
+   },
+   "CdnMetricsCache": {
+    "type": "object",
+    "additionalProperties": true,
+    "properties": {
+     "hit_requests": {
+      "type": "integer"
+     },
+     "miss_requests": {
+      "type": "integer"
+     },
+     "bypass_requests": {
+      "type": "integer"
+     },
+     "dynamic_requests": {
+      "type": "integer"
+     },
+     "hit_percentage": {
+      "type": "number"
+     },
+     "data_served_percentage": {
+      "type": "number"
+     }
+    }
+   },
+   "CdnMetricsOrigin": {
+    "type": "object",
+    "additionalProperties": true,
+    "properties": {
+     "fetch_requests": {
+      "type": "integer"
+     },
+     "fetch_bytes": {
+      "type": "integer"
+     },
+     "average_response_time_ms": {
+      "type": "number"
+     },
+     "request_offload_percentage": {
+      "type": "number"
+     }
+    }
+   },
+   "CdnDistributionMetrics": {
+    "description": "Traffic, cache and origin metrics of a distribution over a time range. Nested breakdown objects carry further keys.",
+    "type": "object",
+    "additionalProperties": true,
+    "required": [
+     "distribution_id",
+     "range",
+     "granularity",
+     "range_start",
+     "range_end",
+     "traffic",
+     "cache",
+     "points"
+    ],
+    "properties": {
+     "distribution_id": {
+      "type": "string"
+     },
+     "distribution_name": {
+      "type": "string"
+     },
+     "range": {
+      "type": "string",
+      "enum": [
+       "24h",
+       "7d",
+       "30d"
+      ]
+     },
+     "granularity": {
+      "type": "string",
+      "enum": [
+       "15m",
+       "1h",
+       "1d"
+      ]
+     },
+     "range_start": {
+      "type": "string",
+      "format": "date-time"
+     },
+     "range_end": {
+      "type": "string",
+      "format": "date-time"
+     },
+     "generated_at": {
+      "type": "string",
+      "format": "date-time"
+     },
+     "coverage_complete": {
+      "type": "boolean"
+     },
+     "traffic": {
+      "$ref": "#/components/schemas/CdnMetricsTraffic"
+     },
+     "cache": {
+      "$ref": "#/components/schemas/CdnMetricsCache"
+     },
+     "origin": {
+      "$ref": "#/components/schemas/CdnMetricsOrigin"
+     },
+     "points": {
+      "type": "array",
+      "items": {
+       "type": "object",
+       "additionalProperties": true,
+       "required": [
+        "timestamp"
+       ],
+       "properties": {
+        "timestamp": {
+         "type": "string",
+         "format": "date-time"
+        }
+       }
+      }
+     }
+    }
+   },
+   "BlockStoragePlanUsage": {
+    "type": "object",
+    "additionalProperties": true,
+    "properties": {
+     "min_size_gb": {
+      "type": "integer"
+     },
+     "max_size_gb": {
+      "type": "integer"
+     },
+     "allowed_sizes_gb": {
+      "type": "array",
+      "items": {
+       "type": "integer"
+      }
+     },
+     "price_per_gb_month": {
+      "type": "number"
+     },
+     "price_per_gb_month_minor": {
+      "type": "integer"
+     },
+     "iops": {
+      "type": "string",
+      "description": "Display text from the catalog, for example `Up to 10K`."
+     },
+     "throughput": {
+      "type": "string",
+      "description": "Display text from the catalog, for example `Up to 400 MiB/s`."
+     }
+    }
+   },
+   "BlockStoragePlan": {
+    "description": "A block storage plan.",
+    "type": "object",
+    "additionalProperties": true,
+    "required": [
+     "sku_code",
+     "name"
+    ],
+    "properties": {
+     "id": {
+      "type": "string"
+     },
+     "sku_code": {
+      "type": "string",
+      "description": "Send as `sku_code` in createBlockVolume."
+     },
+     "plan_code": {
+      "type": "string"
+     },
+     "name": {
+      "type": "string"
+     },
+     "description": {
+      "type": "string",
+      "nullable": true
+     },
+     "storage_type": {
+      "type": "string",
+      "nullable": true
+     },
+     "status": {
+      "type": "string"
+     },
+     "selectable": {
+      "type": "boolean"
+     },
+     "included_usage": {
+      "$ref": "#/components/schemas/BlockStoragePlanUsage"
+     }
+    }
+   },
+   "BlockStoragePlanList": {
+    "type": "object",
+    "required": [
+     "items"
+    ],
+    "properties": {
+     "items": {
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/BlockStoragePlan"
+      }
+     },
+     "currency": {
+      "type": "string"
+     },
+     "billing_interval": {
+      "type": "string"
      }
     }
    },
@@ -20254,7 +20807,7 @@
      "error": {
       "type": "string",
       "nullable": true,
-      "description": "Machine-readable code from the gateway's authorization step, for example `invalid_api_key`, `insufficient_scope`, `organization_restricted`, `organization_suspended`, `verification_required` or `billing_denied`. The response descriptions list the codes for each status.",
+      "description": "Machine-readable code from the gateway's authorization step, for example `invalid_api_key`, `insufficient_scope`, `organization_restricted`, `organization_suspended`, `verification_required`, `product_not_enabled` or `billing_denied`. The response descriptions list the codes for each status.",
       "example": "insufficient_scope"
      },
      "required_scope": {
@@ -20601,30 +21154,6 @@
      },
      "status": {
       "$ref": "#/components/schemas/ContainerRegistryJobStatus"
-     }
-    }
-   },
-   "ContainerRegistryEmptyResult": {
-    "description": "Result of emptying a registry.",
-    "type": "object",
-    "required": [
-     "registry_id",
-     "registry_name",
-     "deleted_repository_count"
-    ],
-    "properties": {
-     "registry_id": {
-      "type": "string",
-      "format": "uuid",
-      "description": "ID of the registry."
-     },
-     "registry_name": {
-      "type": "string",
-      "description": "Name of the registry."
-     },
-     "deleted_repository_count": {
-      "type": "integer",
-      "description": "Number of repositories that were deleted."
      }
     }
    },
