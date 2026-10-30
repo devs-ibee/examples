@@ -2,9 +2,9 @@
 # Create a private bucket and an S3 access key for it, then delete both, with the ibee CLI.
 set -euo pipefail
 
-ibee buckets create "$IBEE_BUCKET_NAME" --region "$IBEE_STORAGE_REGION"
+ibee buckets create --name "$IBEE_BUCKET_NAME" --region "$IBEE_STORAGE_REGION"
 KEY_ID=$(ibee --json buckets credentials create --name "$IBEE_BUCKET_NAME-app" \
-  --permission-type object_rw --bucket-scope specific --allowed-bucket "$IBEE_BUCKET_NAME" | jq -r .access_key_id)
+  --permission-type object_rw --bucket-scope specific --allowed-buckets "$IBEE_BUCKET_NAME" | jq -r .access_key_id)
 
 ibee buckets list
 ibee buckets credentials revoke "$KEY_ID" --yes

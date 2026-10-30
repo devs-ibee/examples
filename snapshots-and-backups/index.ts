@@ -4,13 +4,13 @@ import { Ibee } from "ibee-sdk";
 const ibee = new Ibee(); // reads IBEE_TOKEN, IBEE_WORKSPACE_ID and IBEE_ENV
 const vm_id = process.env.IBEE_VM_ID!;
 
+// A snapshot is billed for its storage: send a snapshot storage plan's billing_catalog unchanged.
+const { items } = await ibee.computeCatalog.listSnapshotStoragePlans();
+const storagePlan = items.find((p) => p.selectable)!;
+
 const snapshot = await ibee.cloudVms.createCloudVmSnapshot({
   vm_id,
-  body: {
-    name: "before-upgrade",
-    mode: "root_only",
-    billing_catalog: { sku_id: process.env.IBEE_SNAPSHOT_SKU_ID!, sku_code: process.env.IBEE_SNAPSHOT_SKU_CODE! },
-  },
+  body: { name: "before-upgrade", mode: "root_only", billing_catalog: storagePlan.billing_catalog },
 });
 console.log(`Snapshot ${snapshot.snapshot_set_id} is ${snapshot.status}`);
 

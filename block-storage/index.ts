@@ -30,7 +30,9 @@ while (volume.state !== "ready") {
 }
 console.log(`Volume ${volume.name} is ${volume.state}, ${volume.size_gb} GB`);
 
-await wait(await ibee.cloudVms.attachCloudVmVolume({ vm_id, body: { volume_id } }));
+// The attachment is billed under the volume's Block Storage SKU, from the volume's metadata.
+const billing_catalog = volume.metadata!.billing_catalog!;
+await wait(await ibee.cloudVms.attachCloudVmVolume({ vm_id, body: { volume_id, billing_catalog } }));
 // Format and mount it inside the VM now (see README.md). Unmount before detaching.
 await wait(await ibee.cloudVms.detachCloudVmVolume({ vm_id, body: { volume_id, confirm_unmounted: true } }));
 

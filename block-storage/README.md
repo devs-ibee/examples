@@ -5,7 +5,7 @@ Create a 20 GB volume at a VM's site, attach it to the VM, then detach and delet
 ```bash
 export IBEE_VM_ID=...      # a Cloud VM
 export IBEE_SITE_ID=...    # that VM's site; volumes attach only within a site
-export IBEE_BLOCK_SKU=...  # a Block Storage SKU code from the portal
+export IBEE_BLOCK_SKU=...  # a sku_code from: ibee block-storage plans
 
 python3 main.py      # Python SDK
 npx tsx index.ts     # TypeScript SDK
@@ -18,6 +18,6 @@ Inside the VM, format and mount a new volume (check the device name with `lsblk`
 sudo mkfs.ext4 /dev/vdb && sudo mkdir -p /mnt/data && sudo mount /dev/vdb /mnt/data
 ```
 
-Run `sudo umount /mnt/data` before you detach; `confirm_unmounted` records that you did. Grow a volume with `resize_block_volume` (`ibee block-storage resize`).
+Attaching sends the volume's `metadata.billing_catalog` as `billing_catalog`: the Block Storage SKU the attachment is billed under. Run `sudo umount /mnt/data` before you detach; `confirm_unmounted` records that you did. Grow a volume with `resize_block_volume` (`ibee block-storage resize`).
 
 Token scopes: `block-storage.read`, `block-storage.write`, `vm.read`, `vm.write`.

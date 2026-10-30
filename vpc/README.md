@@ -12,6 +12,6 @@ bash cli.sh          # ibee CLI
 ```
 
 - `connectivity` on attach is `private` (the default), `nat` or `public_ip`.
-- For managed outbound NAT, create the VPC with `connectivity_type="nat_gateway"` (`--connectivity nat_gateway`); NAT gateways and port forwarding have their own calls (`ibee vpcs nat`, `ibee vpcs forwarding`).
+- For managed outbound NAT, create the VPC with `connectivity_type="nat_gateway"` (`--connectivity-type nat_gateway`); NAT gateways and port forwarding have their own calls (`ibee vpcs nat`, `ibee vpcs forwarding`).
 
 Token scopes: `network.read`, `network.write`.

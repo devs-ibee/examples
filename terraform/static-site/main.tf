@@ -3,7 +3,7 @@
 terraform {
   required_version = ">= 1.11.0"
   required_providers {
-    ibee = { source = "devs-ibee/ibee", version = "~> 0.5.0" }
+    ibee = { source = "devs-ibee/ibee", version = "~> 0.7.0" }
   }
 }
 
