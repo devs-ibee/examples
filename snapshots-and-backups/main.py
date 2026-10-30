@@ -2,19 +2,18 @@
 
 import os
 
-from ibee import BillingCatalogSelection, Ibee
+from ibee import Ibee
 
 client = Ibee()  # reads IBEE_TOKEN, IBEE_WORKSPACE_ID and IBEE_ENV
 vms = client.cloud_vms
 VM_ID = os.environ["IBEE_VM_ID"]
 
+# A snapshot is billed for its storage: send a snapshot storage plan's billing_catalog unchanged.
+storage_plans = client.compute_catalog.list_snapshot_storage_plans().items
+storage_plan = next(p for p in storage_plans if p.selectable)
+
 snapshot = vms.create_cloud_vm_snapshot(
-    VM_ID,
-    name="before-upgrade",
-    mode="root_only",
-    billing_catalog=BillingCatalogSelection(
-        sku_id=os.environ["IBEE_SNAPSHOT_SKU_ID"], sku_code=os.environ["IBEE_SNAPSHOT_SKU_CODE"]
-    ),
+    VM_ID, name="before-upgrade", mode="root_only", billing_catalog=storage_plan.billing_catalog
 )
 print(f"Snapshot {snapshot.snapshot_set_id} is {snapshot.status}")
 

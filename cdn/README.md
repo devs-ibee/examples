@@ -10,6 +10,6 @@ npx tsx index.ts     # TypeScript SDK
 bash cli.sh          # ibee CLI
 ```
 
-Add your own domain with `create_cdn_custom_domain` and `verify_cdn_custom_domain` (`ibee cdn domains create`, `ibee cdn domains verify`), and sign links to private objects with `generate_cdn_url` (`ibee cdn generate-url`).
+Add your own domain with `create_cdn_custom_domain` and `verify_cdn_custom_domain` (`ibee cdn domains create`, `ibee cdn domains verify`).
 
 Token scopes: `cdn.read`, `cdn.write`.

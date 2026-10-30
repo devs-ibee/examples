@@ -3,7 +3,7 @@
 terraform {
   required_version = ">= 1.11.0"
   required_providers {
-    ibee = { source = "devs-ibee/ibee", version = "~> 0.5.0" }
+    ibee = { source = "devs-ibee/ibee", version = "~> 0.7.0" }
   }
 }
 
@@ -28,6 +28,12 @@ variable "os_distro" {
   description = "The image's os_distro."
 }
 
+variable "os_type" {
+  type        = string
+  default     = "linux"
+  description = "The image's os_type."
+}
+
 variable "ssh_key_ids" {
   type    = set(string)
   default = []
@@ -41,8 +47,12 @@ resource "ibee_cloud_vm" "web" {
   plan_id          = var.plan_id
   template_id      = var.template_id
   os_distro        = var.os_distro
+  os_type          = var.os_type
   billing_interval = "HOURLY"
   ssh_key_ids      = var.ssh_key_ids
+
+  # The API needs this to destroy a VM with an automatically assigned public IP.
+  delete_public_ip_action = "release"
 }
 
 resource "ibee_firewall_group" "web" {
