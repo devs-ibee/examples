@@ -1,4 +1,4 @@
-"""Day-2 operations on a Cloud VM: metrics, events, and a resize to another plan."""
+"""Day-2 operations on a Cloud VM: metrics, events, and a resize."""
 
 import os
 import time
@@ -28,7 +28,7 @@ print(f"CPU {metrics.cpu_percent}%, memory {metrics.memory_used_percent}%")
 for event in vms.list_cloud_vm_events(VM_ID, limit=5):
     print(f"{event.created_at}  {event.event_type}  {event.message}")
 
-# Move the VM to another plan. Stop it first; start it again afterwards.
+# Resize CPU and memory. Stop the VM first; start it again afterwards.
 wait(vms.stop_cloud_vm(VM_ID))
-wait(vms.resize_cloud_vm_plan(VM_ID, plan_id=os.environ["IBEE_NEW_PLAN_ID"], billing_term="HOURLY"))
+wait(vms.resize_cloud_vm(VM_ID, cpu=int(os.environ["IBEE_NEW_CPU"]), ram_mb=int(os.environ["IBEE_NEW_RAM_MB"])))
 wait(vms.start_cloud_vm(VM_ID))

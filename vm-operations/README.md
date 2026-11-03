@@ -1,10 +1,10 @@
 # VM operations
 
-Day-2 work on an existing Cloud VM: read its metrics and recent events, then move it to another plan (stop, resize, start).
+Day-2 work on an existing Cloud VM: read its metrics and recent events, then resize its CPU and memory (stop, resize, start).
 
 ```bash
 export IBEE_VM_ID=...         # a Cloud VM, for example from cloud-vms with the delete step removed
-export IBEE_NEW_PLAN_ID=...   # the plan to move to, from getting-started
+export IBEE_NEW_CPU=2 IBEE_NEW_RAM_MB=4096   # the CPU and memory to resize to
 
 python3 main.py      # Python SDK
 npx tsx index.ts     # TypeScript SDK

@@ -1,4 +1,4 @@
-// Day-2 operations on a Cloud VM: metrics, events, and a resize to another plan.
+// Day-2 operations on a Cloud VM: metrics, events, and a resize.
 import { Ibee } from "ibee-sdk";
 
 const ibee = new Ibee(); // reads IBEE_TOKEN, IBEE_WORKSPACE_ID and IBEE_ENV
@@ -24,12 +24,12 @@ for (const event of await ibee.cloudVms.listCloudVmEvents({ vm_id, limit: 5 })) 
   console.log(`${event.created_at}  ${event.event_type}  ${event.message}`);
 }
 
-// Move the VM to another plan. Stop it first; start it again afterwards.
+// Resize CPU and memory. Stop the VM first; start it again afterwards.
 await wait(await ibee.cloudVms.stopCloudVm({ vm_id, body: {} }));
 await wait(
-  await ibee.cloudVms.resizeCloudVmPlan({
+  await ibee.cloudVms.resizeCloudVm({
     vm_id,
-    body: { plan_id: process.env.IBEE_NEW_PLAN_ID!, billing_term: "HOURLY" },
+    body: { cpu: Number(process.env.IBEE_NEW_CPU), ram_mb: Number(process.env.IBEE_NEW_RAM_MB) },
   }),
 );
 await wait(await ibee.cloudVms.startCloudVm({ vm_id, body: {} }));

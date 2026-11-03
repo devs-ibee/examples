@@ -30,7 +30,9 @@ while (volume := client.block_storage.get_block_volume(volume_id)).state != "rea
     time.sleep(5)
 print(f"Volume {volume.name} is {volume.state}, {volume.size_gb} GB")
 
-wait(client.cloud_vms.attach_cloud_vm_volume(VM_ID, volume_id=volume_id))
+# The attachment is billed under the volume's Block Storage SKU, from the volume's metadata.
+catalog = volume.metadata.billing_catalog
+wait(client.cloud_vms.attach_cloud_vm_volume(VM_ID, volume_id=volume_id, billing_catalog=catalog))
 # Format and mount it inside the VM now (see README.md). Unmount before detaching.
 wait(client.cloud_vms.detach_cloud_vm_volume(VM_ID, volume_id=volume_id, confirm_unmounted=True))
 
