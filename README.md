@@ -19,7 +19,12 @@ Short, runnable examples for [IBEE](https://ibee.ai) cloud products with the Pyt
 | [Secret Manager](secret-manager/) | ✓ | ✓ | ✓ | [storage-and-secrets](terraform/storage-and-secrets/) |
 | [Container Registry](container-registry/) | Docker | | | |
 
-Portal only, with no public API yet: Virtual IPs, Bare Metal, SSH keys, ISOs, Email, and creating Container Registries and their tokens.
+Object Storage and Container Registry public management APIs are temporarily paused.
+The examples remain available for use when these APIs resume; an empty 404 from
+these routes does not prove an existing resource was deleted. Existing S3 and Docker
+data access use their own endpoints. CDN remains available.
+
+Portal only, with no public API yet: Virtual IPs, Bare Metal, SSH keys, ISOs and Email.
 
 ## Install
 

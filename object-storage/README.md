@@ -1,5 +1,9 @@
 # Object Storage
 
+The public bucket and credential management APIs used below are temporarily
+paused and return an empty 404. The examples are retained for when these APIs
+resume. Existing S3 credentials use the separate S3 endpoint.
+
 `main.py`, `index.ts` and `cli.sh` create a private bucket and an access key that can only read and write that bucket, list your buckets, then delete both. `s3_quickstart.py` uploads, lists, shares and downloads objects with boto3.
 
 ```bash
