@@ -11,7 +11,7 @@ s3 = boto3.client(
     endpoint_url=f"https://{os.environ['IBEE_WORKSPACE_ID']}.blob.ibeestorage.com",
     aws_access_key_id=os.environ["IBEE_S3_ACCESS_KEY_ID"],
     aws_secret_access_key=os.environ["IBEE_S3_SECRET_ACCESS_KEY"],
-    region_name="us-east-1",  # boto3 needs a value; IBEE ignores it
+    region_name="auto",  # sign with "auto" (or the bucket region); the AWS default us-east-1 is refused: Invalid region scope
     config=Config(s3={"addressing_style": "path"}),
 )
 

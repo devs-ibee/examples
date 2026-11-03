@@ -10,8 +10,15 @@ npx tsx index.ts     # TypeScript SDK
 bash cli.sh          # ibee CLI
 ```
 
-- A snapshot is billed for its storage, so the request carries a snapshot storage plan's `billing_catalog`, unchanged. The example takes the first selectable plan from `list_snapshot_storage_plans` (`ibee compute snapshot-storage-plans`). A backup policy takes a backup storage plan the same way: `list_backup_storage_plans` and `enable_cloud_vm_backups` (`ibee compute backup-storage-plans`, then `ibee vms backup-policy enable VM_ID --billing-catalog @plan.json`).
+- A snapshot is billed for its storage, so the request carries a snapshot storage plan's `billing_catalog`, unchanged. The example takes the first selectable plan from `list_snapshot_storage_plans` (`ibee compute snapshot-storage-plans`). A backup policy takes a backup storage plan the same way: `list_backup_storage_plans` and `enable_cloud_vm_backups` (`ibee compute backup-storage-plans`, then `ibee vms backup-policy enable VM_ID --billing-catalog @plan.json`). Manual backup runs reuse the enabled policy's catalog.
 - Use `mode="all_attached"` to include the VM's data volumes.
 - Restore with `restore_cloud_vm_snapshot` or `restore_cloud_vm_backup` (`ibee vms snapshots restore SNAPSHOT_SET_ID --vm-id VM_ID`, `ibee vms backups restore VM_ID --recovery-point-id RECOVERY_POINT_ID`).
 
 Token scopes: `vm.read`, `vm.write`. Snapshots are billed for the storage they use.
+
+With the 0.7 clients, start a manual backup using `create_cloud_vm_backup_run(vm_id)`
+(Python), `cloudVms.createCloudVmBackupRun({vm_id})` (TypeScript), or
+`ibee vms backups create VM_ID`. Backups must be enabled first; a queued or
+running backup returns 409. Cancel a queued restore with
+`cancel_cloud_vm_backup_restore(restore_id)` or
+`ibee vms backups restore-cancel RESTORE_ID --yes`. GPU equivalents use `gpu_vms`/`gpuVms`/`gpus`.
