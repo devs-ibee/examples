@@ -33,6 +33,19 @@ pip install ibee ibee-cli boto3    # or: pip install -r requirements.txt
 npm install                        # ibee-sdk, tsx and TypeScript from package.json
 ```
 
+The new manual-backup and queued restore-cancel examples require Python SDK and
+CLI 0.7.0, or TypeScript SDK 0.7.0. Publish the Python SDK before the CLI, then
+install `requirements.txt`. After `ibee-sdk@0.7.0` is published to npm, refresh the
+JavaScript dependency and its registry lock together:
+
+```bash
+npm install ibee-sdk@^0.7.0 --save
+npm run typecheck
+```
+
+The checked-in npm dependency and lock still resolve the published 0.5.0 package
+until that release exists; they do not yet provide the new backup methods.
+
 For Terraform, see [terraform/](terraform/).
 
 ## Configure
