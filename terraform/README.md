@@ -13,6 +13,8 @@ Small configurations for the IBEE Terraform provider. Each folder is independent
 
 Each setup pins `devs-ibee/ibee` to `~> 0.8.0` from the Terraform Registry, so `terraform init` installs it (Terraform 1.11 or later).
 
+The Object Storage management API is temporarily paused, so `static-site` and `storage-and-secrets` stop with a paused error until it resumes. The error does not change your Terraform state. The other two setups are not affected.
+
 ## Run
 
 ```bash

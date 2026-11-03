@@ -1,6 +1,6 @@
 # Container Registry
 
-Build an image, push it to your IBEE registry, and pull it back. The registry has no public API yet: create the registry and its access tokens in the portal, then use Docker.
+Build an image, push it to your IBEE registry, and pull it back. The public registry management API is temporarily paused: create the registry and its access tokens in the portal, then use Docker.
 
 1. In the [portal](https://portal.ibee.ai), open **Infrastructure → Container Registry** and create a registry, for example `acme-apps`.
 2. Create a registry access token (**Pull and push**) and save its username and token; the token is shown only once.
