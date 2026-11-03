@@ -11,7 +11,7 @@ Small configurations for the IBEE Terraform provider. Each folder is independent
 
 ## Install the provider
 
-Each setup pins `devs-ibee/ibee` to `~> 0.7.0` from the Terraform Registry, so `terraform init` installs it (Terraform 1.11 or later).
+Each setup pins `devs-ibee/ibee` to `~> 0.8.0` from the Terraform Registry, so `terraform init` installs it (Terraform 1.11 or later).
 
 ## Run
 
