@@ -1,5 +1,5 @@
 // Day-2 operations on a Cloud VM: metrics, events, and a resize.
-import { Ibee } from "ibee-sdk";
+import { Ibee, type ComputeBillingSelection } from "ibee-sdk";
 
 const ibee = new Ibee(); // reads IBEE_TOKEN, IBEE_WORKSPACE_ID and IBEE_ENV
 const vm_id = process.env.IBEE_VM_ID!;
@@ -24,12 +24,19 @@ for (const event of await ibee.cloudVms.listCloudVmEvents({ vm_id, limit: 5 })) 
   console.log(`${event.created_at}  ${event.event_type}  ${event.message}`);
 }
 
-// Resize CPU and memory. Stop the VM first; start it again afterwards.
+// Resize to another plan: send its exact size and its billing_catalog with one of its
+// billing_options merged in, as on create. Stop the VM first; start it again afterwards.
+const { plans } = await ibee.computeCatalog.listComputePlans({ vm_type: "cloud", site_id: process.env.IBEE_SITE_ID! });
+const plan = plans.find((p) => p.plan_id === process.env.IBEE_NEW_PLAN_ID)!;
+const catalog = plan.billing_catalog as Record<string, unknown>;
+const hourly = (catalog.billing_options as Record<string, unknown>[]).find((o) => o.billing_interval === "HOURLY");
+const billing_catalog = { ...catalog, ...hourly } as ComputeBillingSelection;
+
 await wait(await ibee.cloudVms.stopCloudVm({ vm_id, body: {} }));
 await wait(
   await ibee.cloudVms.resizeCloudVm({
     vm_id,
-    body: { cpu: Number(process.env.IBEE_NEW_CPU), ram_mb: Number(process.env.IBEE_NEW_RAM_MB) },
+    body: { cpu: plan.cpu, ram_mb: plan.ram_mb, disk_gb: plan.disk_gb, billing_catalog },
   }),
 );
 await wait(await ibee.cloudVms.startCloudVm({ vm_id, body: {} }));

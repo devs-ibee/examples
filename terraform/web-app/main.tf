@@ -1,9 +1,9 @@
-# Two Cloud VMs behind an L7 load balancer, with a firewall that allows HTTP.
+# Two Cloud VMs behind a regional HTTP load balancer, with a firewall that allows HTTP.
 
 terraform {
   required_version = ">= 1.11.0"
   required_providers {
-    ibee = { source = "devs-ibee/ibee", version = "~> 0.8.0" }
+    ibee = { source = "devs-ibee/ibee", version = "~> 0.11.0" }
   }
 }
 
@@ -77,14 +77,31 @@ resource "ibee_firewall_attachment" "web" {
   depends_on        = [ibee_firewall_rule.http]
 }
 
-resource "ibee_load_balancer_l7" "web" {
-  name     = "web"
-  protocol = "http"
-  backends = [for vm in ibee_cloud_vm.web : { type = "ip", target = vm.public_ip, port = 80 }]
+data "ibee_load_balancer_regions" "available" {}
+
+# Port 80 goes to both VMs, by VM ID. Each load balancer node is billed per hour.
+resource "ibee_load_balancer" "web" {
+  name         = "web"
+  region_id    = data.ibee_load_balancer_regions.available.ids[0]
+  traffic_type = "http"
+
+  listeners = [{
+    name         = "http"
+    protocol     = "HTTP"
+    port         = 80
+    target_group = "web"
+  }]
+
+  target_groups = [{
+    name         = "web"
+    protocol     = "HTTP"
+    targets      = [for vm in ibee_cloud_vm.web : { kind = "vm", resource_id = vm.id, port = 80 }]
+    health_check = { protocol = "HTTP", path = "/" }
+  }]
 }
 
-output "url" {
-  value = ibee_load_balancer_l7.web.endpoint_url
+output "load_balancer_id" {
+  value = ibee_load_balancer.web.id
 }
 
 output "vm_public_ips" {
