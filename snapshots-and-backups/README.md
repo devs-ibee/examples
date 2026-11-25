@@ -16,7 +16,7 @@ bash cli.sh          # ibee CLI
 
 Token scopes: `vm.read`, `vm.write`. Snapshots are billed for the storage they use.
 
-With the 0.7 clients, start a manual backup using `create_cloud_vm_backup_run(vm_id)`
+With the 0.7 clients and later, start a manual backup using `create_cloud_vm_backup_run(vm_id)`
 (Python), `cloudVms.createCloudVmBackupRun({vm_id})` (TypeScript), or
 `ibee vms backups create VM_ID`. Backups must be enabled first; a queued or
 running backup returns 409. Cancel a queued restore with

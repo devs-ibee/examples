@@ -28,7 +28,18 @@ print(f"CPU {metrics.cpu_percent}%, memory {metrics.memory_used_percent}%")
 for event in vms.list_cloud_vm_events(VM_ID, limit=5):
     print(f"{event.created_at}  {event.event_type}  {event.message}")
 
-# Resize CPU and memory. Stop the VM first; start it again afterwards.
+# Resize to another plan: send its exact size and its billing_catalog with one of its
+# billing_options merged in, as on create. Stop the VM first; start it again afterwards.
+plans = client.compute_catalog.list_compute_plans(vm_type="cloud", site_id=os.environ["IBEE_SITE_ID"]).plans
+plan = next(p for p in plans if p.plan_id == os.environ["IBEE_NEW_PLAN_ID"])
+hourly = next(o for o in plan.billing_catalog["billing_options"] if o["billing_interval"] == "HOURLY")
+
 wait(vms.stop_cloud_vm(VM_ID))
-wait(vms.resize_cloud_vm(VM_ID, cpu=int(os.environ["IBEE_NEW_CPU"]), ram_mb=int(os.environ["IBEE_NEW_RAM_MB"])))
+wait(vms.resize_cloud_vm(
+    VM_ID,
+    cpu=plan.cpu,
+    ram_mb=plan.ram_mb,
+    disk_gb=plan.disk_gb,
+    billing_catalog={**plan.billing_catalog, **hourly},
+))
 wait(vms.start_cloud_vm(VM_ID))

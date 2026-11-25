@@ -10,19 +10,19 @@ Short, runnable examples for [IBEE](https://ibee.ai) cloud products with the Pyt
 | [VM operations](vm-operations/) | ✓ | ✓ | ✓ | [web-app](terraform/web-app/) |
 | [Snapshots and backups](snapshots-and-backups/) | ✓ | ✓ | ✓ | |
 | [Block Storage](block-storage/) | ✓ | ✓ | ✓ | |
-| [Object Storage](object-storage/) (also boto3) | ✓ | ✓ | ✓ | [storage-and-secrets](terraform/storage-and-secrets/) |
+| [Object Storage](object-storage/) (also boto3) | ✓ | ✓ | ✓ | [private-bucket](terraform/private-bucket/) |
 | [CDN](cdn/) | ✓ | ✓ | ✓ | [static-site](terraform/static-site/) |
 | [VPC](vpc/) | ✓ | ✓ | ✓ | [private-network](terraform/private-network/) |
 | [Reserved IPs](reserved-ips/) | ✓ | ✓ | ✓ | |
 | [Firewalls](firewalls/) | ✓ | ✓ | ✓ | [web-app](terraform/web-app/) |
 | [Load Balancers](load-balancers/) | ✓ | ✓ | ✓ | [web-app](terraform/web-app/) |
-| [Secret Manager](secret-manager/) | ✓ | ✓ | ✓ | [storage-and-secrets](terraform/storage-and-secrets/) |
+| [Secret Manager](secret-manager/) | ✓ | ✓ | ✓ | |
 | [Container Registry](container-registry/) | Docker | | | |
 
-Object Storage and Container Registry public management APIs are temporarily paused.
-The examples remain available for use when these APIs resume; an empty 404 from
-these routes does not prove an existing resource was deleted. Existing S3 and Docker
-data access use their own endpoints. CDN remains available.
+Secret values never go through the IBEE API: `secret-manager/` also has `vault.sh` and
+`read_secret.py`, which read a secret over the Vault API at the workspace's address.
+Files and images stay on S3 and the registry; [private-bucket](terraform/private-bucket/)
+makes a bucket and an S3 key for it.
 
 Portal only, with no public API yet: Virtual IPs, Bare Metal, SSH keys, ISOs and Email.
 
@@ -33,7 +33,7 @@ pip install ibee ibee-cli boto3    # or: pip install -r requirements.txt
 npm install                        # ibee-sdk, tsx and TypeScript from package.json
 ```
 
-`requirements.txt` and `package.json` install the 0.7 clients, which include manual backups and queued restore cancellation.
+`requirements.txt` and `package.json` install the 0.10 clients, generated from public API contract 0.14.3. Terraform setups pin `devs-ibee/ibee` to `~> 0.11.0`.
 
 For Terraform, see [terraform/](terraform/).
 
